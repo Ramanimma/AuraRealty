@@ -26,25 +26,25 @@ const Index = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#111111" }}>
       <SEOHead
-        title="Texas Realty Hub | Homes for Sale in Austin & Central Texas"
-        description="Find homes for sale in Leander, Cedar Park, Georgetown, Round Rock, Liberty Hill, Hutto and Austin TX. Expert real estate agents serving Central Texas."
-        keywords="homes for sale Austin TX, real estate agent Leander TX, Cedar Park homes, Georgetown TX real estate, Round Rock homes for sale, Liberty Hill real estate"
-        ogUrl="https://texasrealtyhub.com"
+        title="Aura Realty | Homes for Sale in Austin & DFW"
+        description="Find homes for sale in Leander, Frisco, Georgetown, Round Rock, Liberty Hill, Hutto and Austin TX. Expert real estate agents serving DFW."
+        keywords="homes for sale Austin TX, real estate agent Leander TX, Frisco homes, Georgetown TX real estate, Round Rock homes for sale, Liberty Hill real estate"
+        ogUrl="https://aurarealty.com"
         schema={{
           "@context": "https://schema.org",
           "@type": "RealEstateAgent",
-          "name": "Texas Realty Hub",
-          "url": "https://texasrealtyhub.com",
+          "name": "Aura Realty",
+          "url": "https://aurarealty.com",
           "logo": "https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png",
           "telephone": "+17327402800",
-          "email": "ramanimma@texasrealtyhub.com",
+          "email": "agent1@aurarealty.com",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Cedar Park",
+            "addressLocality": "Frisco",
             "addressRegion": "TX",
             "addressCountry": "US"
           },
-          "areaServed": ["Leander", "Cedar Park", "Georgetown", "Round Rock", "Liberty Hill", "Hutto", "Austin"],
+          "areaServed": ["Leander", "Frisco", "Georgetown", "Round Rock", "Liberty Hill", "Hutto", "Austin"],
           "priceRange": "$$",
           "openingHours": "Mo-Su 08:00-20:00"
         }}

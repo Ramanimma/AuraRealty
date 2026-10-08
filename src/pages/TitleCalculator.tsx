@@ -107,7 +107,7 @@ const TitleCalculator = () => {
         title="Texas Title Premium Calculator | Official TDI Rates"
         description="Calculate Texas title insurance premiums based on official Texas Department of Insurance promulgated rates. Owner's policy, loan policy and endorsement costs."
         keywords="Texas title insurance calculator, title premium calculator Texas, owner title policy cost Texas, TDI title rates"
-        ogUrl="https://texasrealtyhub.com/title-calculator"
+        ogUrl="https://aurarealty.com/title-calculator"
       />
       <Navbar />
 

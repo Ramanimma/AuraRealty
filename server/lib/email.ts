@@ -4,10 +4,10 @@ import { buildHolidayGreetingEmail, getFestivalEmoji } from "./templates/holiday
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "ramanimma@texasrealtyhub.com";
-const FROM_NAME = process.env.RESEND_FROM_NAME || "Texas Realty Hub";
-const AGENT_EMAIL = "ramanimma@texasrealtyhub.com";
-const AGENT_EMAIL_2 = "swethanimma@texasrealtyhub.com";
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "agent1@aurarealty.com";
+const FROM_NAME = process.env.RESEND_FROM_NAME || "Aura Realty";
+const AGENT_EMAIL = "agent1@aurarealty.com";
+const AGENT_EMAIL_2 = "agent2@aurarealty.com";
 const SITE_URL = "https://444d061f-7f31-4310-9fe8-9530001c2ca3-00-2amm4076yk3sk.janeway.replit.dev";
 
 // ─── Shared HTML helpers ───────────────────────────────────────────────────────
@@ -18,7 +18,7 @@ function htmlWrapper(bodyContent: string): string {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Texas Realty Hub</title>
+<title>Aura Realty</title>
 </head>
 <body style="margin:0;padding:0;background:#F5F5F0;font-family:'Helvetica Neue',Arial,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F5F0;padding:32px 16px;">
@@ -34,7 +34,7 @@ function htmlWrapper(bodyContent: string): string {
 </html>`;
 }
 
-function header(title = "Texas Realty Hub"): string {
+function header(title = "Aura Realty"): string {
   return `<tr>
     <td style="background:#1C2B4A;padding:28px 40px;text-align:center;">
       <p style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:400;color:#ffffff;letter-spacing:0.04em;">${title}</p>
@@ -46,7 +46,7 @@ function footer(): string {
   return `<tr>
     <td style="background:#1C1C1C;padding:24px 40px;text-align:center;">
       <p style="margin:0 0 6px;font-size:12px;color:rgba(255,255,255,0.5);font-family:Arial,sans-serif;">
-        Texas Realty Hub &nbsp;|&nbsp; <a href="mailto:ramanimma@texasrealtyhub.com" style="color:rgba(255,255,255,0.5);text-decoration:none;">ramanimma@texasrealtyhub.com</a>
+        Aura Realty &nbsp;|&nbsp; <a href="mailto:agent1@aurarealty.com" style="color:rgba(255,255,255,0.5);text-decoration:none;">agent1@aurarealty.com</a>
       </p>
       <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.3);font-family:Arial,sans-serif;">
         TREC licensed real estate broker. This email and any attachments are confidential.
@@ -92,7 +92,7 @@ export function buildBirthdayEmailHtml(data: BirthdayEmailData): string {
     </p>
 
     <p style="margin:0 0 20px;font-size:15px;color:#444444;line-height:1.8;">
-      Wishing you a wonderful birthday from all of us at Texas Realty Hub.
+      Wishing you a wonderful birthday from all of us at Aura Realty.
     </p>
     <p style="margin:0 0 20px;font-size:15px;color:#444444;line-height:1.8;">
       We hope your day is filled with joy, good company, and everything that makes it special.
@@ -104,7 +104,7 @@ export function buildBirthdayEmailHtml(data: BirthdayEmailData): string {
     <p style="margin:0 0 16px;font-size:15px;color:#444444;line-height:1.8;">Warm wishes,</p>
     <p style="margin:0 0 2px;font-size:16px;font-weight:600;color:#1C1C1C;">${data.senderName}</p>
     <p style="margin:0 0 16px;font-size:12px;color:#888888;font-style:italic;letter-spacing:0.04em;">Licensed REALTOR&reg;</p>
-    <p style="margin:0;font-size:15px;font-weight:500;color:#1C1C1C;">Texas Realty Hub</p>
+    <p style="margin:0;font-size:15px;font-weight:500;color:#1C1C1C;">Aura Realty</p>
   `;
   return buildBrandedEmail({
     contentHtml,
@@ -118,7 +118,7 @@ export function buildBirthdayEmailHtml(data: BirthdayEmailData): string {
 export async function sendBirthdayEmail(data: BirthdayEmailData): Promise<void> {
   const html = buildBirthdayEmailHtml(data);
   await resend.emails.send({
-    from: `Texas Realty Hub <${data.senderEmail}>`,
+    from: `Aura Realty <${data.senderEmail}>`,
     to: data.toEmail,
     subject: `Happy Birthday, ${data.firstName}! 🎉`,
     html,
@@ -147,7 +147,7 @@ export async function sendLeaseRenewalEmail(
 ): Promise<LeaseRenewalSendResult> {
   try {
     await resend.emails.send({
-      from: `Texas Realty Hub <${fromEmail}>`,
+      from: `Aura Realty <${fromEmail}>`,
       to: recipient.email,
       subject,
       html,
@@ -199,7 +199,7 @@ export async function sendTourRequestToAgent(data: TourRequestData): Promise<voi
   `);
 
   await resend.emails.send({
-    from: `Texas Realty Hub <ramanimma@texasrealtyhub.com>`,
+    from: `Aura Realty <agent1@aurarealty.com>`,
     to: [AGENT_EMAIL, AGENT_EMAIL_2],
     subject: `🏠 New Tour Request — ${data.full_name}`,
     html: body,
@@ -227,9 +227,9 @@ export async function sendTourConfirmationToVisitor(data: TourRequestData): Prom
         </div>` : ""}
         <div style="background:#1C2B4A;padding:24px;margin-bottom:28px;">
           <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:#C9A84C;letter-spacing:0.08em;text-transform:uppercase;">Your Agent</p>
-          <p style="margin:0 0 2px;font-size:16px;font-weight:400;color:#ffffff;font-family:Georgia,serif;">Rama Nimma</p>
+          <p style="margin:0 0 2px;font-size:16px;font-weight:400;color:#ffffff;font-family:Georgia,serif;">Agent 1</p>
           <p style="margin:6px 0 2px;font-size:13px;color:rgba(255,255,255,0.7);">📞 732-740-2800</p>
-          <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.7);">✉️ ramanimma@texasrealtyhub.com</p>
+          <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.7);">✉️ agent1@aurarealty.com</p>
         </div>
         <div style="text-align:center;">
           ${goldButton("Browse More Properties", SITE_URL)}
@@ -240,9 +240,9 @@ export async function sendTourConfirmationToVisitor(data: TourRequestData): Prom
   `);
 
   await resend.emails.send({
-    from: `Texas Realty Hub <ramanimma@texasrealtyhub.com>`,
+    from: `Aura Realty <agent1@aurarealty.com>`,
     to: data.email,
-    subject: "We received your tour request — Texas Realty Hub",
+    subject: "We received your tour request — Aura Realty",
     html: body,
   });
 }
@@ -308,7 +308,7 @@ export async function sendValuationRequestToAgent(data: ValuationData): Promise<
   `);
 
   await resend.emails.send({
-    from: `Texas Realty Hub <ramanimma@texasrealtyhub.com>`,
+    from: `Aura Realty <agent1@aurarealty.com>`,
     to: [AGENT_EMAIL, AGENT_EMAIL_2],
     subject: `📊 New Valuation Request — ${data.full_name} — ${addressLine || "No address"}`,
     html: body,
@@ -336,9 +336,9 @@ export async function sendValuationConfirmationToVisitor(data: ValuationData): P
         </div>
         <div style="background:#1C2B4A;padding:24px;margin-bottom:28px;">
           <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:#C9A84C;letter-spacing:0.08em;text-transform:uppercase;">Your Agent</p>
-          <p style="margin:0 0 2px;font-size:16px;font-weight:400;color:#ffffff;font-family:Georgia,serif;">Rama Nimma</p>
+          <p style="margin:0 0 2px;font-size:16px;font-weight:400;color:#ffffff;font-family:Georgia,serif;">Agent 1</p>
           <p style="margin:6px 0 2px;font-size:13px;color:rgba(255,255,255,0.7);">📞 732-740-2800</p>
-          <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.7);">✉️ ramanimma@texasrealtyhub.com</p>
+          <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.7);">✉️ agent1@aurarealty.com</p>
         </div>
         <div style="text-align:center;">
           ${goldButton("Learn More About Selling", `${SITE_URL}/home-valuation`)}
@@ -349,9 +349,9 @@ export async function sendValuationConfirmationToVisitor(data: ValuationData): P
   `);
 
   await resend.emails.send({
-    from: `Texas Realty Hub <ramanimma@texasrealtyhub.com>`,
+    from: `Aura Realty <agent1@aurarealty.com>`,
     to: data.email,
-    subject: "Your free home valuation request — Texas Realty Hub",
+    subject: "Your free home valuation request — Aura Realty",
     html: body,
   });
 }
@@ -389,9 +389,9 @@ export async function sendNewsletterWelcome(data: NewsletterData): Promise<void>
   `);
 
   await resend.emails.send({
-    from: `Texas Realty Hub <ramanimma@texasrealtyhub.com>`,
+    from: `Aura Realty <agent1@aurarealty.com>`,
     to: data.email,
-    subject: "Welcome to Texas Realty Hub Insider Updates",
+    subject: "Welcome to Aura Realty Insider Updates",
     html: body,
   });
 }
@@ -418,9 +418,9 @@ export async function sendHolidayGreetingEmail(data: HolidayGreetingData): Promi
     data.flyerUrl
   );
   await resend.emails.send({
-    from: `Texas Realty Hub <${data.senderEmail}>`,
+    from: `Aura Realty <${data.senderEmail}>`,
     to: data.toEmail,
-    subject: `Happy ${data.holidayName} from Texas Realty Hub! ${getFestivalEmoji(data.holidayName)}`,
+    subject: `Happy ${data.holidayName} from Aura Realty! ${getFestivalEmoji(data.holidayName)}`,
     html,
   });
 }
@@ -460,7 +460,7 @@ export async function sendNewLeadToAgent(data: LeadData): Promise<void> {
   `);
 
   await resend.emails.send({
-    from: `Texas Realty Hub <ramanimma@texasrealtyhub.com>`,
+    from: `Aura Realty <agent1@aurarealty.com>`,
     to: AGENT_EMAIL,
     subject: `👤 New Lead — ${data.full_name} from ${data.source || "Website"}`,
     html: body,

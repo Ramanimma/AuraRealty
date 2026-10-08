@@ -57,11 +57,11 @@ export default function AdminSidebar({ open, onClose, user, signOut }: Props) {
         >
           <img
             src="https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png"
-            alt="Texas Realty Hub"
+            alt="Aura Realty"
             className="h-8 w-8 object-contain"
           />
           <span className="font-serif text-lg font-bold text-primary-foreground leading-tight">
-            Texas Realty Hub
+            Aura Realty
           </span>
         </a>
         <button

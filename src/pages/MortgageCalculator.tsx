@@ -156,7 +156,7 @@ export default function MortgageCalculator() {
         title="Mortgage Calculator | Texas Home Payment Estimator"
         description="Calculate your monthly mortgage payment including taxes, insurance, PMI and HOA. FHA, VA, USDA and Conventional loan calculators for Texas home buyers."
         keywords="mortgage calculator Texas, FHA loan calculator Austin, VA loan calculator, USDA loan Texas, home payment calculator Central Texas"
-        ogUrl="https://texasrealtyhub.com/mortgage-calculator"
+        ogUrl="https://aurarealty.com/mortgage-calculator"
       />
       <Navbar />
 

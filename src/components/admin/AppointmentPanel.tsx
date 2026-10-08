@@ -65,7 +65,7 @@ export default function AppointmentPanel({ existing, onClose, onSaved }: Props) 
     client_phone: existing?.client_phone ?? "",
     client_email: existing?.client_email ?? "",
     master_client_id: existing?.master_client_id ?? "",
-    agent: existing?.agent ?? "Rama Nimma",
+    agent: existing?.agent ?? "Agent 1",
     appointment_type: existing?.appointment_type ?? "Showing",
     status: existing?.status ?? "Scheduled",
     notes: existing?.notes ?? "",
@@ -458,8 +458,8 @@ export default function AppointmentPanel({ existing, onClose, onSaved }: Props) 
                 className={selectCls}
                 data-testid="select-agent"
               >
-                <option value="Rama Nimma">Rama Nimma</option>
-                <option value="Swetha Nimma">Swetha Nimma</option>
+                <option value="Agent 1">Agent 1</option>
+                <option value="Agent 2">Agent 2</option>
               </select>
             </Field>
             <Field label="Type">

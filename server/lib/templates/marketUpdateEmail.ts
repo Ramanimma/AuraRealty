@@ -89,7 +89,7 @@ export function buildMarketUpdateEmail(data: MarketUpdateData): string {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Austin Market Report — ${month} | Texas Realty Hub</title>
+  <title>DFW Market Report — ${month} | Aura Realty</title>
 </head>
 <body style="margin:0;padding:0;background-color:#F5F3EF;font-family:'Helvetica Neue',Arial,sans-serif;">
 
@@ -112,12 +112,12 @@ export function buildMarketUpdateEmail(data: MarketUpdateData): string {
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                       <tr>
                         <td style="vertical-align:middle;padding-right:14px;">
-                          <img src="${LOGO_URL}" alt="Texas Realty Hub" width="54" height="54"
+                          <img src="${LOGO_URL}" alt="Aura Realty" width="54" height="54"
                                style="width:54px;height:54px;border-radius:50%;display:block;" />
                         </td>
                         <td style="vertical-align:middle;">
                           <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;font-weight:700;color:#FFFFFF;line-height:1.2;margin:0 0 4px 0;">
-                            Texas Realty Hub
+                            Aura Realty
                           </div>
                           <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:400;color:#D1D5DB;line-height:1.3;margin:0;">
                             Premium real estate in Austin &amp; Central Texas
@@ -148,10 +148,10 @@ export function buildMarketUpdateEmail(data: MarketUpdateData): string {
                 <tr>
                   <td style="text-align:center;padding:0;">
                     <p style="color:#C9A84C;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px 0;font-family:'Helvetica Neue',Arial,sans-serif;">
-                      Texas Realty Hub
+                      Aura Realty
                     </p>
                     <h1 style="color:#FFFFFF;font-size:28px;font-weight:700;font-family:Georgia,serif;margin:0 0 8px 0;text-shadow:0 2px 8px rgba(0,0,0,0.6);">
-                      Austin Market Report
+                      DFW Market Report
                     </h1>
                     <p style="color:#E5E7EB;font-size:16px;margin:0;font-family:'Helvetica Neue',Arial,sans-serif;text-shadow:0 1px 4px rgba(0,0,0,0.5);">
                       ${month}
@@ -275,13 +275,13 @@ export function buildMarketUpdateEmail(data: MarketUpdateData): string {
               <p style="margin:0 0 3px 0;"><a href="tel:${agent.phoneTel}" style="${footerLink}">&#128222; ${agent.phone}</a></p>
               <p style="margin:0 0 10px 0;"><a href="mailto:${agent.email}" style="${footerLink}">&#9993; ${agent.email}</a></p>
 
-              <p style="margin:0 0 3px 0;"><a href="${SITE_URL}" target="_blank" style="${footerLink}">&#127760; texasrealtyhub.com</a></p>
+              <p style="margin:0 0 3px 0;"><a href="${SITE_URL}" target="_blank" style="${footerLink}">&#127760; aurarealty.com</a></p>
               <p style="margin:0 0 20px 0;font-style:italic;font-size:11px;color:#999999;">Full Circle Real Estate</p>
 
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td style="border-top:1px solid #C9A84C;padding-top:16px;font-size:11px;color:#999999;">
-                    You are receiving this email because you are a client of Texas Realty Hub.<br />
+                    You are receiving this email because you are a client of Aura Realty.<br />
                     ${unsubscribeSection}
                   </td>
                 </tr>
@@ -362,7 +362,7 @@ export function buildMarketUpdateNewsletterHtml(data: MarketUpdateNewsletterData
     <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0;text-align:center;">
       <strong>Thinking About Buying or Selling?</strong><br/>
       Contact us today to schedule a free consultation.<br/>
-      <a href="https://texasrealtyhub.com/contact" style="color:#C9A84C;">texasrealtyhub.com/contact</a>
+      <a href="https://aurarealty.com/contact" style="color:#C9A84C;">aurarealty.com/contact</a>
     </p>
   `;
 }

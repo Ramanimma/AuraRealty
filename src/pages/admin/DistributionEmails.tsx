@@ -214,7 +214,7 @@ export default function DistributionEmails() {
   const [showTestEmailDialog, setShowTestEmailDialog] = useState(false);
   const [showAutomationConfirm, setShowAutomationConfirm] = useState(false);
   const [triggeringAutomation, setTriggeringAutomation] = useState(false);
-  const [testRecipientEmail, setTestRecipientEmail] = useState("ramanimma@texasrealtyhub.com");
+  const [testRecipientEmail, setTestRecipientEmail] = useState("agent1@aurarealty.com");
   const [campaignResult, setCampaignResult] = useState<{
     sentCount: number;
     failedCount: number;
@@ -577,7 +577,7 @@ export default function DistributionEmails() {
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           contentHtml,
-          subjectLine: campaignTitle || "Test Email — Texas Realty Hub",
+          subjectLine: campaignTitle || "Test Email — Aura Realty",
           testRecipientEmail: testRecipientEmail.trim(),
         }),
       });
@@ -798,7 +798,7 @@ export default function DistributionEmails() {
                 allowImageUpload={campaignType === "general_update"}
               />
               <p className="text-xs text-muted-foreground">
-                The branded Texas Realty Hub shell (logo, footer, unsubscribe link) will be added automatically at send time.
+                The branded Aura Realty shell (logo, footer, unsubscribe link) will be added automatically at send time.
               </p>
             </div>
 

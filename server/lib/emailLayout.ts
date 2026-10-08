@@ -1,31 +1,31 @@
 export const LOGO_URL =
   "https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png";
-export const SITE_URL = "https://texasrealtyhub.com";
+export const SITE_URL = "https://aurarealty.com";
 
 const AGENTS = {
   swetha: {
-    name: "Swetha Nimma",
+    name: "Agent 2",
     phone: "(512) 900-1897",
     phoneTel: "+15129001897",
-    email: "swethanimma@texasrealtyhub.com",
+    email: "agent2@aurarealty.com",
   },
   rama: {
-    name: "Rama Nimma",
+    name: "Agent 1",
     phone: "(732) 740-2800",
     phoneTel: "+17327402800",
-    email: "ramanimma@texasrealtyhub.com",
+    email: "agent1@aurarealty.com",
   },
 };
 
 export function getAgent(senderEmail: string) {
-  return senderEmail.includes("swetha") ? AGENTS.swetha : AGENTS.rama;
+  return senderEmail.includes("agent2") ? AGENTS.swetha : AGENTS.rama;
 }
 
 export function buildBrandedEmail({
   contentHtml,
   recipientName,
   unsubscribeToken,
-  senderEmail = "ramanimma@texasrealtyhub.com",
+  senderEmail = "agent1@aurarealty.com",
   isPreview = false,
 }: {
   contentHtml: string;
@@ -54,7 +54,7 @@ export function buildBrandedEmail({
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Texas Realty Hub</title>
+  <title>Aura Realty</title>
 </head>
 <body style="margin:0;padding:0;background-color:#F5F3EF;font-family:'Helvetica Neue',Arial,sans-serif;">
 
@@ -75,7 +75,7 @@ export function buildBrandedEmail({
               <a href="${SITE_URL}" target="_blank" style="display:inline-block;text-decoration:none;">
                 <img
                   src="${LOGO_URL}"
-                  alt="Texas Realty Hub"
+                  alt="Aura Realty"
                   width="160"
                   style="max-height:60px;width:auto;display:block;border:0;outline:none;"
                 />
@@ -113,7 +113,7 @@ export function buildBrandedEmail({
               </p>
 
               <p style="margin:0 0 3px 0;">
-                <a href="${SITE_URL}" target="_blank" style="${footerLink}">&#127760; texasrealtyhub.com</a>
+                <a href="${SITE_URL}" target="_blank" style="${footerLink}">&#127760; aurarealty.com</a>
               </p>
               <p style="margin:0 0 20px 0;font-style:italic;font-size:11px;color:#999999;">
                 Full Circle Real Estate
@@ -123,7 +123,7 @@ export function buildBrandedEmail({
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td style="border-top:1px solid #C9A84C;padding-top:16px;font-size:11px;color:#999999;">
-                    You are receiving this email because you are a client of Texas Realty Hub.<br />
+                    You are receiving this email because you are a client of Aura Realty.<br />
                     ${unsubscribeSection}
                   </td>
                 </tr>
@@ -150,7 +150,7 @@ export function buildHolidayBrandedEmail({
   contentHtml,
   recipientName,
   unsubscribeToken,
-  senderEmail = "ramanimma@texasrealtyhub.com",
+  senderEmail = "agent1@aurarealty.com",
   isPreview = false,
 }: {
   contentHtml: string;
@@ -179,7 +179,7 @@ export function buildHolidayBrandedEmail({
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Texas Realty Hub</title>
+  <title>Aura Realty</title>
 </head>
 <body style="margin:0;padding:0;background-color:#F5F3EF;font-family:'Helvetica Neue',Arial,sans-serif;">
 
@@ -204,7 +204,7 @@ export function buildHolidayBrandedEmail({
                         <!-- Logo — left aligned, 46px -->
                         <td style="vertical-align: middle; padding-right: 14px;">
                           <img src="${LOGO_URL}"
-                               alt="Texas Realty Hub"
+                               alt="Aura Realty"
                                width="46"
                                height="46"
                                style="width:54px;height:54px;border-radius:50%;display:block;" />
@@ -217,7 +217,7 @@ export function buildHolidayBrandedEmail({
                                        color: #FFFFFF;
                                        line-height: 1.2;
                                        margin: 0 0 4px 0;">
-                            Texas Realty Hub
+                            Aura Realty
                           </div>
                           <div style="font-family: 'Helvetica Neue', Arial, sans-serif;
                                        font-size: 14px;
@@ -276,7 +276,7 @@ export function buildHolidayBrandedEmail({
               </p>
 
               <p style="margin:0 0 3px 0;">
-                <a href="${SITE_URL}" target="_blank" style="${footerLink}">&#127760; texasrealtyhub.com</a>
+                <a href="${SITE_URL}" target="_blank" style="${footerLink}">&#127760; aurarealty.com</a>
               </p>
               <p style="margin:0 0 20px 0;font-style:italic;font-size:11px;color:#999999;">
                 Full Circle Real Estate
@@ -286,7 +286,7 @@ export function buildHolidayBrandedEmail({
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td style="border-top:1px solid #C9A84C;padding-top:16px;font-size:11px;color:#999999;">
-                    You are receiving this email because you are a client of Texas Realty Hub.<br />
+                    You are receiving this email because you are a client of Aura Realty.<br />
                     ${unsubscribeSection}
                   </td>
                 </tr>

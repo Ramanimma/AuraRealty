@@ -35,7 +35,7 @@ export default function Unsubscribe() {
       <div className="max-w-md w-full bg-white rounded-lg shadow-sm border border-border p-10 text-center">
         <img
           src="https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png"
-          alt="Texas Realty Hub"
+          alt="Aura Realty"
           className="h-12 mx-auto mb-8 object-contain"
         />
 
@@ -52,7 +52,7 @@ export default function Unsubscribe() {
               You've been unsubscribed
             </h1>
             <p className="text-muted-foreground text-sm font-sans mb-6">
-              You will no longer receive marketing emails from Texas Realty Hub.
+              You will no longer receive marketing emails from Aura Realty.
               If this was a mistake, please contact us directly.
             </p>
             <p className="text-xs text-muted-foreground font-sans">
@@ -71,7 +71,7 @@ export default function Unsubscribe() {
             </h1>
             <p className="text-muted-foreground text-sm font-sans mb-4">{errorMsg}</p>
             <Link to="/" className="text-sm text-accent hover:underline font-sans">
-              Return to Texas Realty Hub
+              Return to Aura Realty
             </Link>
           </>
         )}
@@ -86,7 +86,7 @@ export default function Unsubscribe() {
               from your email.
             </p>
             <Link to="/" className="text-sm text-accent hover:underline font-sans">
-              Return to Texas Realty Hub
+              Return to Aura Realty
             </Link>
           </>
         )}

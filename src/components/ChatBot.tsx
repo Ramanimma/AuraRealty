@@ -17,7 +17,7 @@ const WELCOME: ChatMessage = {
   role: "assistant",
   intent: "greeting",
   content:
-    "Hi! I'm your Texas Realty Hub assistant. I can help you find properties. Try asking: \"Show me 4 bed homes in Leander\" or \"Homes under $500k in Cedar Park\"",
+    "Hi! I'm your Aura Realty assistant. I can help you find properties. Try asking: \"Show me 4 bed homes in Leander\" or \"Homes under $500k in Frisco\"",
 };
 
 const STORAGE_MESSAGES = "trh_chat_messages";
@@ -50,13 +50,13 @@ function buildBotMessage(
       return {
         intent,
         content:
-          "Hello! Welcome to Texas Realty Hub. I can help you find properties in the Austin area. What are you looking for?",
+          "Hello! Welcome to Aura Realty. I can help you find properties in the DFW area. What are you looking for?",
       };
     case "help":
       return {
         intent,
         content:
-          "Here's what I can do:\n• Find homes by beds, baths, city & price\n• Search Leander, Liberty Hill, Georgetown, Round Rock, Cedar Park, Hutto & Austin\n• Filter by property type (single family, condo, townhouse)\n\nTry: \"Show me 3 bed homes in Round Rock under $400k\"",
+          "Here's what I can do:\n• Find homes by beds, baths, city & price\n• Search Leander, Liberty Hill, Georgetown, Round Rock, Frisco, Hutto & Austin\n• Filter by property type (single family, condo, townhouse)\n\nTry: \"Show me 3 bed homes in Round Rock under $400k\"",
       };
     case "contact":
       return {
@@ -244,7 +244,7 @@ export default function ChatBot() {
               <Home className="w-4 h-4 text-white" />
             </div>
             <div>
-              <p className="text-white font-semibold text-sm leading-tight">Texas Realty Hub Assistant</p>
+              <p className="text-white font-semibold text-sm leading-tight">Aura Realty Assistant</p>
               <p className="text-xs" style={{ color: "#C9A84C" }}>Here to help you find your home</p>
             </div>
           </div>

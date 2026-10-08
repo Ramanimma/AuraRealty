@@ -33,7 +33,7 @@ export function buildTenantLeaseRenewalEmail(
     contentHtml,
     recipientName: tenantName,
     unsubscribeToken: "n/a",
-    senderEmail: senderName.toLowerCase().includes("swetha") ? "swethanimma@texasrealtyhub.com" : "ramanimma@texasrealtyhub.com",
+    senderEmail: senderName.toLowerCase().includes("agent2") ? "agent2@aurarealty.com" : "agent1@aurarealty.com",
     isPreview,
   });
 }
@@ -64,7 +64,7 @@ export function buildOwnerLeaseRenewalEmail(
     contentHtml,
     recipientName: ownerName,
     unsubscribeToken: "n/a",
-    senderEmail: senderName.toLowerCase().includes("swetha") ? "swethanimma@texasrealtyhub.com" : "ramanimma@texasrealtyhub.com",
+    senderEmail: senderName.toLowerCase().includes("agent2") ? "agent2@aurarealty.com" : "agent1@aurarealty.com",
     isPreview,
   });
 }
@@ -101,13 +101,13 @@ export function buildAgentLeaseRenewalNotificationEmail(
     ${nl2p(
       `Both the tenant and owner have been notified. Please follow up with the tenant if needed to discuss renewal options or next steps.`
     )}
-    <p style="margin:24px 0 0;font-size:15px;font-weight:500;color:#1C1C1C;">Texas Realty Hub</p>
+    <p style="margin:24px 0 0;font-size:15px;font-weight:500;color:#1C1C1C;">Aura Realty</p>
   `;
   return buildBrandedEmail({
     contentHtml,
     recipientName: "Agent",
     unsubscribeToken: "n/a",
-    senderEmail: "ramanimma@texasrealtyhub.com",
+    senderEmail: "agent1@aurarealty.com",
     isPreview,
   });
 }

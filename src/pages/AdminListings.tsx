@@ -1,6 +1,11 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { adminApi, type Listing, type Agent, type Neighborhood } from "@/lib/api";
+import {
+  adminApi,
+  type Listing,
+  type Agent,
+  type Neighborhood,
+} from "@/lib/api";
 import { supabase } from "@/integrations/supabase/client";
 import AdminLayout from "@/components/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,18 +13,39 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
 import { Plus, Pencil, Trash2, X, Home, Upload, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { uploadPropertyImages } from "@/lib/uploadPropertyImages";
 
 const EMPTY: Partial<Listing> = {
-  title: "", address: "", city: "", zip_code: "", price: "",
-  property_type: "Single Family", listing_type: "sale", status: "active",
-  beds: 0, baths: 0, sqft: 0, year_built: undefined, garage_spaces: 0,
-  has_pool: false, is_featured: false, description: "", main_image: "",
-  agent_id: "", neighborhood_id: "", mls_number: "", virtual_tour_url: "",
+  title: "",
+  address: "",
+  city: "",
+  zip_code: "",
+  price: "",
+  property_type: "Single Family",
+  listing_type: "sale",
+  status: "active",
+  beds: 0,
+  baths: 0,
+  sqft: 0,
+  year_built: undefined,
+  garage_spaces: 0,
+  has_pool: false,
+  is_featured: false,
+  description: "",
+  main_image: "",
+  agent_id: "",
+  neighborhood_id: "",
+  mls_number: "",
+  virtual_tour_url: "",
   images: [],
 };
 
@@ -31,10 +57,18 @@ const STATUS_COLORS: Record<string, string> = {
   off_market: "bg-red-100 text-red-700",
 };
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="space-y-1">
-      <label className="text-xs font-medium text-muted-foreground font-sans">{label}</label>
+      <label className="text-xs font-medium text-muted-foreground font-sans">
+        {label}
+      </label>
       {children}
     </div>
   );
@@ -56,21 +90,31 @@ export default function AdminListings() {
   const addImageUrl = () => {
     const url = newImageUrl.trim();
     if (!url) return;
-    if (currentImages.length >= MAX_IMAGES) { toast.error(`Max ${MAX_IMAGES} images allowed`); return; }
+    if (currentImages.length >= MAX_IMAGES) {
+      toast.error(`Max ${MAX_IMAGES} images allowed`);
+      return;
+    }
     set("images", [...currentImages, url]);
     setNewImageUrl("");
   };
 
   const removeImage = (idx: number) => {
-    set("images", currentImages.filter((_, i) => i !== idx));
+    set(
+      "images",
+      currentImages.filter((_, i) => i !== idx),
+    );
   };
 
-  const handleMainImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMainImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setIsUploadingMain(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       const token = session?.access_token ?? "";
       const fd = new FormData();
       fd.append("image", file);
@@ -97,14 +141,19 @@ export default function AdminListings() {
     const files = e.target.files;
     if (!files || files.length === 0) return;
     const remaining = MAX_IMAGES - currentImages.length;
-    if (remaining <= 0) { toast.error(`Max ${MAX_IMAGES} images allowed`); return; }
+    if (remaining <= 0) {
+      toast.error(`Max ${MAX_IMAGES} images allowed`);
+      return;
+    }
     setUploadingImages(true);
     try {
       const listingId = form.id ?? `new-${Date.now()}`;
       const urls = await uploadPropertyImages(files, listingId);
       const toAdd = urls.slice(0, remaining);
       set("images", [...currentImages, ...toAdd]);
-      toast.success(`${toAdd.length} image${toAdd.length !== 1 ? "s" : ""} uploaded`);
+      toast.success(
+        `${toAdd.length} image${toAdd.length !== 1 ? "s" : ""} uploaded`,
+      );
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : "Upload failed");
     } finally {
@@ -136,6 +185,8 @@ export default function AdminListings() {
         ...data,
         listing_type: data.listing_type || "sale",
         status: data.status || "active",
+        agent_id: data.agent_id || null,
+        neighborhood_id: data.neighborhood_id || null,
       };
       if (payload.id) {
         const { id, created_at, ...rest } = payload as Listing;
@@ -162,14 +213,22 @@ export default function AdminListings() {
     onError: (e: Error) => toast.error(e.message),
   });
 
-  const openAdd = () => { setForm(EMPTY); setShowForm(true); };
-  const openEdit = (l: Listing) => { setForm({ ...l }); setShowForm(true); };
+  const openAdd = () => {
+    setForm(EMPTY);
+    setShowForm(true);
+  };
+  const openEdit = (l: Listing) => {
+    setForm({ ...l });
+    setShowForm(true);
+  };
 
   return (
     <AdminLayout>
       <div className="space-y-5">
         <div className="flex items-center justify-between">
-          <h1 className="font-serif text-2xl font-bold text-primary">Listings</h1>
+          <h1 className="font-serif text-2xl font-bold text-primary">
+            Listings
+          </h1>
           <Button
             onClick={openAdd}
             data-testid="button-add-listing"
@@ -181,9 +240,13 @@ export default function AdminListings() {
 
         <Card className="border border-border/60 overflow-hidden">
           {isLoading ? (
-            <div className="p-10 text-center text-muted-foreground animate-pulse font-sans">Loading…</div>
+            <div className="p-10 text-center text-muted-foreground animate-pulse font-sans">
+              Loading…
+            </div>
           ) : listings.length === 0 ? (
-            <div className="p-10 text-center text-muted-foreground font-sans">No listings yet.</div>
+            <div className="p-10 text-center text-muted-foreground font-sans">
+              No listings yet.
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <Table>
@@ -228,13 +291,16 @@ export default function AdminListings() {
                       <TableCell>
                         <span
                           className={`text-xs px-2 py-0.5 rounded-full font-medium font-sans ${
-                            STATUS_COLORS[l.status ?? "Active"] ?? "bg-gray-100 text-gray-700"
+                            STATUS_COLORS[l.status ?? "Active"] ??
+                            "bg-gray-100 text-gray-700"
                           }`}
                         >
                           {l.status ?? "Active"}
                         </span>
                       </TableCell>
-                      <TableCell className="text-sm text-muted-foreground">{l.city ?? "—"}</TableCell>
+                      <TableCell className="text-sm text-muted-foreground">
+                        {l.city ?? "—"}
+                      </TableCell>
                       <TableCell className="text-sm">{l.beds}</TableCell>
                       <TableCell className="text-sm">{l.baths}</TableCell>
                       <TableCell className="text-right">
@@ -286,22 +352,46 @@ export default function AdminListings() {
             <div className="p-6 space-y-5 font-sans flex-1">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="Title *">
-                  <Input value={form.title ?? ""} onChange={(e) => set("title", e.target.value)} placeholder="Property title" />
+                  <Input
+                    value={form.title ?? ""}
+                    onChange={(e) => set("title", e.target.value)}
+                    placeholder="Property title"
+                  />
                 </Field>
                 <Field label="Price *">
-                  <Input value={form.price ?? ""} onChange={(e) => set("price", e.target.value)} placeholder="e.g. 450000" />
+                  <Input
+                    value={form.price ?? ""}
+                    onChange={(e) => set("price", e.target.value)}
+                    placeholder="e.g. 450000"
+                  />
                 </Field>
                 <Field label="Address *">
-                  <Input value={form.address ?? ""} onChange={(e) => set("address", e.target.value)} placeholder="Street address" />
+                  <Input
+                    value={form.address ?? ""}
+                    onChange={(e) => set("address", e.target.value)}
+                    placeholder="Street address"
+                  />
                 </Field>
                 <Field label="City">
-                  <Input value={form.city ?? ""} onChange={(e) => set("city", e.target.value)} placeholder="Austin" />
+                  <Input
+                    value={form.city ?? ""}
+                    onChange={(e) => set("city", e.target.value)}
+                    placeholder="Austin"
+                  />
                 </Field>
                 <Field label="ZIP Code">
-                  <Input value={form.zip_code ?? ""} onChange={(e) => set("zip_code", e.target.value)} placeholder="78701" />
+                  <Input
+                    value={form.zip_code ?? ""}
+                    onChange={(e) => set("zip_code", e.target.value)}
+                    placeholder="78701"
+                  />
                 </Field>
                 <Field label="MLS Number">
-                  <Input value={form.mls_number ?? ""} onChange={(e) => set("mls_number", e.target.value)} placeholder="MLS #" />
+                  <Input
+                    value={form.mls_number ?? ""}
+                    onChange={(e) => set("mls_number", e.target.value)}
+                    placeholder="MLS #"
+                  />
                 </Field>
               </div>
 
@@ -312,7 +402,14 @@ export default function AdminListings() {
                     value={form.property_type ?? "Single Family"}
                     onChange={(e) => set("property_type", e.target.value)}
                   >
-                    {["Single Family", "Condo", "Townhouse", "Multi-Family", "Land", "Commercial"].map((t) => (
+                    {[
+                      "Single Family",
+                      "Condo",
+                      "Townhouse",
+                      "Multi-Family",
+                      "Land",
+                      "Commercial",
+                    ].map((t) => (
                       <option key={t}>{t}</option>
                     ))}
                   </select>
@@ -345,40 +442,75 @@ export default function AdminListings() {
 
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
                 <Field label="Beds">
-                  <Input type="number" value={form.beds ?? 0} onChange={(e) => set("beds", Number(e.target.value))} />
+                  <Input
+                    type="number"
+                    value={form.beds ?? 0}
+                    onChange={(e) => set("beds", Number(e.target.value))}
+                  />
                 </Field>
                 <Field label="Baths">
-                  <Input type="number" value={form.baths ?? 0} onChange={(e) => set("baths", Number(e.target.value))} />
+                  <Input
+                    type="number"
+                    value={form.baths ?? 0}
+                    onChange={(e) => set("baths", Number(e.target.value))}
+                  />
                 </Field>
                 <Field label="Sqft">
-                  <Input type="number" value={form.sqft ?? 0} onChange={(e) => set("sqft", Number(e.target.value))} />
+                  <Input
+                    type="number"
+                    value={form.sqft ?? 0}
+                    onChange={(e) => set("sqft", Number(e.target.value))}
+                  />
                 </Field>
                 <Field label="Year Built">
                   <Input
                     type="number"
                     value={form.year_built ?? ""}
-                    onChange={(e) => set("year_built", e.target.value ? Number(e.target.value) : null)}
+                    onChange={(e) =>
+                      set(
+                        "year_built",
+                        e.target.value ? Number(e.target.value) : null,
+                      )
+                    }
                     placeholder="2020"
                   />
                 </Field>
                 <Field label="Garage">
-                  <Input type="number" value={form.garage_spaces ?? 0} onChange={(e) => set("garage_spaces", Number(e.target.value))} />
+                  <Input
+                    type="number"
+                    value={form.garage_spaces ?? 0}
+                    onChange={(e) =>
+                      set("garage_spaces", Number(e.target.value))
+                    }
+                  />
                 </Field>
               </div>
 
               <div className="flex gap-6">
                 <label className="flex items-center gap-2 text-sm cursor-pointer">
-                  <input type="checkbox" checked={!!form.has_pool} onChange={(e) => set("has_pool", e.target.checked)} className="rounded" />
+                  <input
+                    type="checkbox"
+                    checked={!!form.has_pool}
+                    onChange={(e) => set("has_pool", e.target.checked)}
+                    className="rounded"
+                  />
                   Has Pool
                 </label>
                 <label className="flex items-center gap-2 text-sm cursor-pointer">
-                  <input type="checkbox" checked={!!form.is_featured} onChange={(e) => set("is_featured", e.target.checked)} className="rounded" />
+                  <input
+                    type="checkbox"
+                    checked={!!form.is_featured}
+                    onChange={(e) => set("is_featured", e.target.checked)}
+                    className="rounded"
+                  />
                   Featured
                 </label>
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-medium text-muted-foreground font-sans">Main Image</label>
+                <label className="text-xs font-medium text-muted-foreground font-sans">
+                  Main Image
+                </label>
                 <div className="flex items-center gap-3 flex-wrap">
                   {form.main_image && (
                     <img
@@ -400,7 +532,9 @@ export default function AdminListings() {
                   {isUploadingMain && (
                     <div className="flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                      <span className="text-xs text-muted-foreground">Uploading...</span>
+                      <span className="text-xs text-muted-foreground">
+                        Uploading...
+                      </span>
                     </div>
                   )}
                 </div>
@@ -422,7 +556,12 @@ export default function AdminListings() {
                   <Input
                     value={newImageUrl}
                     onChange={(e) => setNewImageUrl(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addImageUrl(); } }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        addImageUrl();
+                      }
+                    }}
                     placeholder="https://... paste image URL"
                     className="flex-1 text-sm"
                     data-testid="input-add-image-url"
@@ -432,7 +571,9 @@ export default function AdminListings() {
                     variant="outline"
                     size="sm"
                     onClick={addImageUrl}
-                    disabled={!newImageUrl.trim() || currentImages.length >= MAX_IMAGES}
+                    disabled={
+                      !newImageUrl.trim() || currentImages.length >= MAX_IMAGES
+                    }
                     data-testid="button-add-image-url"
                     className="shrink-0"
                   >
@@ -455,14 +596,22 @@ export default function AdminListings() {
                   variant="outline"
                   size="sm"
                   onClick={() => imageUploadRef.current?.click()}
-                  disabled={uploadingImages || currentImages.length >= MAX_IMAGES}
+                  disabled={
+                    uploadingImages || currentImages.length >= MAX_IMAGES
+                  }
                   data-testid="button-upload-images"
                   className="gap-2 text-xs"
                 >
                   {uploadingImages ? (
-                    <><Loader2 className="h-3.5 w-3.5 animate-spin" />Uploading…</>
+                    <>
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                      Uploading…
+                    </>
                   ) : (
-                    <><Upload className="h-3.5 w-3.5" />Upload Images</>
+                    <>
+                      <Upload className="h-3.5 w-3.5" />
+                      Upload Images
+                    </>
                   )}
                 </Button>
 
@@ -470,18 +619,41 @@ export default function AdminListings() {
                 {currentImages.length > 0 && (
                   <div className="flex flex-wrap gap-2 pt-1">
                     {currentImages.map((url, i) => (
-                      <div key={i} style={{ position: "relative", flexShrink: 0 }}>
+                      <div
+                        key={i}
+                        style={{ position: "relative", flexShrink: 0 }}
+                      >
                         <img
                           src={url}
                           alt={`Image ${i + 1}`}
                           data-testid={`thumbnail-image-${i}`}
-                          style={{ width: "72px", height: "54px", objectFit: "cover", display: "block" }}
+                          style={{
+                            width: "72px",
+                            height: "54px",
+                            objectFit: "cover",
+                            display: "block",
+                          }}
                         />
                         <button
                           type="button"
                           onClick={() => removeImage(i)}
                           data-testid={`button-remove-image-${i}`}
-                          style={{ position: "absolute", top: "2px", right: "2px", width: "18px", height: "18px", borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.7)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", padding: 0 }}
+                          style={{
+                            position: "absolute",
+                            top: "2px",
+                            right: "2px",
+                            width: "18px",
+                            height: "18px",
+                            borderRadius: "50%",
+                            backgroundColor: "rgba(0,0,0,0.7)",
+                            border: "none",
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "#fff",
+                            padding: 0,
+                          }}
                         >
                           <X style={{ width: "10px", height: "10px" }} />
                         </button>
@@ -489,11 +661,18 @@ export default function AdminListings() {
                     ))}
                   </div>
                 )}
-                <p className="text-[11px] text-muted-foreground">Max {MAX_IMAGES} images · 5 MB each. These appear in the property gallery.</p>
+                <p className="text-[11px] text-muted-foreground">
+                  Max {MAX_IMAGES} images · 5 MB each. These appear in the
+                  property gallery.
+                </p>
               </div>
 
               <Field label="Virtual Tour URL">
-                <Input value={form.virtual_tour_url ?? ""} onChange={(e) => set("virtual_tour_url", e.target.value)} placeholder="https://..." />
+                <Input
+                  value={form.virtual_tour_url ?? ""}
+                  onChange={(e) => set("virtual_tour_url", e.target.value)}
+                  placeholder="https://..."
+                />
               </Field>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -505,7 +684,9 @@ export default function AdminListings() {
                   >
                     <option value="">— Select Agent —</option>
                     {(agents as Agent[]).map((a) => (
-                      <option key={a.id} value={a.id}>{a.name}</option>
+                      <option key={a.id} value={a.id}>
+                        {a.name}
+                      </option>
                     ))}
                   </select>
                 </Field>
@@ -513,11 +694,15 @@ export default function AdminListings() {
                   <select
                     className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background"
                     value={form.neighborhood_id ?? ""}
-                    onChange={(e) => set("neighborhood_id", e.target.value || null)}
+                    onChange={(e) =>
+                      set("neighborhood_id", e.target.value || null)
+                    }
                   >
                     <option value="">— Select Neighborhood —</option>
                     {(neighborhoods as Neighborhood[]).map((n) => (
-                      <option key={n.id} value={n.id}>{n.name}</option>
+                      <option key={n.id} value={n.id}>
+                        {n.name}
+                      </option>
                     ))}
                   </select>
                 </Field>
@@ -533,13 +718,19 @@ export default function AdminListings() {
               </Field>
 
               <div className="flex justify-end gap-3 pt-2">
-                <Button variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
+                <Button variant="outline" onClick={() => setShowForm(false)}>
+                  Cancel
+                </Button>
                 <Button
                   className="bg-accent text-accent-foreground hover:bg-accent/90"
                   onClick={() => upsert.mutate(form)}
                   disabled={upsert.isPending}
                 >
-                  {upsert.isPending ? "Saving…" : form.id ? "Save Changes" : "Create Listing"}
+                  {upsert.isPending
+                    ? "Saving…"
+                    : form.id
+                      ? "Save Changes"
+                      : "Create Listing"}
                 </Button>
               </div>
             </div>
@@ -552,12 +743,18 @@ export default function AdminListings() {
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
           <Card className="w-full max-w-sm border border-border shadow-xl">
             <CardHeader>
-              <CardTitle className="font-serif text-lg text-primary">Delete Listing?</CardTitle>
+              <CardTitle className="font-serif text-lg text-primary">
+                Delete Listing?
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground font-sans">This action cannot be undone.</p>
+              <p className="text-sm text-muted-foreground font-sans">
+                This action cannot be undone.
+              </p>
               <div className="flex justify-end gap-3">
-                <Button variant="outline" onClick={() => setDeletingId(null)}>Cancel</Button>
+                <Button variant="outline" onClick={() => setDeletingId(null)}>
+                  Cancel
+                </Button>
                 <Button
                   variant="destructive"
                   onClick={() => deleteMut.mutate(deletingId!)}

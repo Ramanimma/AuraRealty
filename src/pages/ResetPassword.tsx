@@ -64,7 +64,7 @@ const ResetPassword = () => {
     <div className="min-h-screen flex items-center justify-center bg-secondary px-4">
       <Card className="w-full max-w-md border-border shadow-xl">
         <CardHeader className="text-center space-y-2">
-          <a href="/" className="font-serif text-2xl font-bold text-primary">Texas Realty Hub</a>
+          <a href="/" className="font-serif text-2xl font-bold text-primary">Aura Realty</a>
           <CardTitle className="font-serif text-xl">Reset Password</CardTitle>
           <CardDescription>Enter your new password below</CardDescription>
         </CardHeader>

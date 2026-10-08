@@ -120,7 +120,7 @@ export default function HomeValuation() {
         title="Free Home Valuation | What Is My Home Worth in Central Texas?"
         description="Get a free home valuation in Leander, Cedar Park, Georgetown, Round Rock, Liberty Hill and Austin TX. Expert market analysis within 24 hours. No obligation."
         keywords="home valuation Leander TX, what is my home worth Cedar Park, Georgetown TX home value, sell my home Round Rock, free home valuation Austin"
-        ogUrl="https://texasrealtyhub.com/home-valuation"
+        ogUrl="https://aurarealty.com/home-valuation"
       />
       <Navbar />
 

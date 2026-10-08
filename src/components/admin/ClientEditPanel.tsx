@@ -34,7 +34,7 @@ export default function ClientEditPanel({ existingClient, onClose, onSaved }: Pr
     phone_number: existingClient?.phone_number ?? "",
     email_address: existingClient?.email_address ?? "",
     birthdate: existingClient?.birthdate ?? "",
-    sender_email: existingClient?.sender_email ?? "ramanimma@texasrealtyhub.com",
+    sender_email: existingClient?.sender_email ?? "agent1@aurarealty.com",
     greeting_preference: existingClient?.greeting_preference ?? "us_only",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -171,8 +171,8 @@ export default function ClientEditPanel({ existingClient, onClose, onSaved }: Pr
               className="w-full border border-border rounded-md px-3 py-2 text-sm bg-background text-foreground font-sans focus:outline-none focus:ring-1 focus:ring-accent"
               data-testid="select-sender-email"
             >
-              <option value="ramanimma@texasrealtyhub.com">Rama Nimma (ramanimma@texasrealtyhub.com)</option>
-              <option value="swethanimma@texasrealtyhub.com">Swetha Nimma (swethanimma@texasrealtyhub.com)</option>
+              <option value="agent1@aurarealty.com">Agent 1 (agent1@aurarealty.com)</option>
+              <option value="agent2@aurarealty.com">Agent 2 (agent2@aurarealty.com)</option>
             </select>
           </Field>
 

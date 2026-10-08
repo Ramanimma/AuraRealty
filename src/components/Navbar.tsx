@@ -101,13 +101,13 @@ const Navbar = () => {
           >
             <img
               src="https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png"
-              alt="Texas Realty Hub"
+              alt="Aura Realty"
               style={{ height: "48px", width: "48px", objectFit: "contain" }}
             />
             <span
               style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, letterSpacing: "0.02em", whiteSpace: "nowrap", color: isHomepage ? "#ffffff" : "#1C1C1C" }}
             >
-              Texas Realty Hub
+              Aura Realty
             </span>
           </a>
 
@@ -208,9 +208,9 @@ const Navbar = () => {
               <Phone className="h-4 w-4" />
               (512) 900-1897
             </a>
-            <a href="mailto:ramanimma@texasrealtyhub.com" style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.6)", textDecoration: "none", letterSpacing: "0.02em" }}>
+            <a href="mailto:agent1@aurarealty.com" style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.6)", textDecoration: "none", letterSpacing: "0.02em" }}>
               <Mail className="h-4 w-4" />
-              ramanimma@texasrealtyhub.com
+              agent1@aurarealty.com
             </a>
           </div>
 

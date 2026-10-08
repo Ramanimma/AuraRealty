@@ -119,7 +119,7 @@ const campaignImageUpload = multer({
   },
 });
 
-const AGENT_EMAIL_CONST = "ramanimma@texasrealtyhub.com";
+const AGENT_EMAIL_CONST = "agent1@aurarealty.com";
 
 // Helper: log email attempts to email_log table (best-effort, never throws)
 async function logEmail(
@@ -958,7 +958,7 @@ app.post("/api/admin/master-clients", async (req, res) => {
     phone_number,
     email_address,
     birthdate: birthdate || null,
-    sender_email: sender_email || "ramanimma@texasrealtyhub.com",
+    sender_email: sender_email || "agent1@aurarealty.com",
     greeting_preference: greeting_preference || "us_only",
   });
   if (error) return res.status(500).json({ error: error.message });
@@ -987,7 +987,7 @@ app.put("/api/admin/master-clients/:id", async (req, res) => {
     phone_number,
     email_address,
     birthdate: birthdate || null,
-    sender_email: sender_email || "ramanimma@texasrealtyhub.com",
+    sender_email: sender_email || "agent1@aurarealty.com",
     greeting_preference: greeting_preference || "us_only",
   }).eq("id", req.params.id);
   if (error) return res.status(500).json({ error: error.message });
@@ -1067,8 +1067,8 @@ app.post("/api/admin/send-birthday-email", async (req, res) => {
 
   const clientName = client.full_name || "Friend";
   const firstName = clientName.split(" ")[0];
-  const senderEmail = client.sender_email || "ramanimma@texasrealtyhub.com";
-  const senderName = senderEmail.includes("swetha") ? "Swetha Nimma" : "Rama Nimma";
+  const senderEmail = client.sender_email || "agent1@aurarealty.com";
+  const senderName = senderEmail.includes("agent2") ? "Agent 2" : "Agent 1";
   const unsubscribeToken = client.unsubscribe_token || "unknown";
 
   try {
@@ -1174,8 +1174,8 @@ app.get("/api/admin/preview-birthday-email/:id", async (req, res) => {
   if (error || !client) return res.status(404).json({ error: "Client not found" });
 
   const firstName = (client.full_name || "Friend").split(" ")[0];
-  const senderEmail = client.sender_email || "ramanimma@texasrealtyhub.com";
-  const senderName = senderEmail.includes("swetha") ? "Swetha Nimma" : "Rama Nimma";
+  const senderEmail = client.sender_email || "agent1@aurarealty.com";
+  const senderName = senderEmail.includes("agent2") ? "Agent 2" : "Agent 1";
   const unsubscribeToken = client.unsubscribe_token || "preview-token";
 
   const html = buildBirthdayEmailHtml({ toEmail: client.email_address || "", firstName, senderName, senderEmail, unsubscribeToken, isPreview: true });
@@ -1221,7 +1221,7 @@ app.get("/api/admin/preview-lease-renewal-email/:id", async (req, res) => {
   const tenantName = lease.tenant1_name || lease.tenant2_name || "Tenant";
   const ownerName = lease.owner1_name || lease.owner2_name || "Owner";
 
-  let senderEmail = "ramanimma@texasrealtyhub.com";
+  let senderEmail = "agent1@aurarealty.com";
   if (lease.owner1_email) {
     const { data: ownerClient } = await supabaseAdmin
       .from("master_clients")
@@ -1230,7 +1230,7 @@ app.get("/api/admin/preview-lease-renewal-email/:id", async (req, res) => {
       .maybeSingle();
     if (ownerClient?.sender_email) senderEmail = ownerClient.sender_email;
   }
-  const senderName = senderEmail.includes("swetha") ? "Swetha Nimma" : "Rama Nimma";
+  const senderName = senderEmail.includes("agent2") ? "Agent 2" : "Agent 1";
 
   const role = typeof req.query.role === "string" ? req.query.role : "tenant";
 
@@ -1268,7 +1268,7 @@ app.post("/api/admin/generate-market-update-draft", async (req, res) => {
     const message = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 1500,
-      system: `You are a professional real estate email copywriter for Texas Realty Hub, a luxury real estate agency in Austin, TX.
+      system: `You are a professional real estate email copywriter for Aura Realty, a luxury real estate agency in Dallas-Fort Worth, TX.
 Write a warm, professional, locally-specific real estate market update email body in HTML format.
 Use ONLY these HTML tags: h2, h3, p, ul, li, strong, em, a. No inline styles, no divs, no spans, no tables.
 Structure the email loosely around these sections (adapt naturally based on the notes):
@@ -1471,8 +1471,8 @@ app.post("/api/admin/preview-market-update", async (req, res) => {
     tipOfTheMonth: data.tipOfTheMonth || "",
     marketSummary: data.marketSummary || "",
     recipientName: "Preview",
-    senderName: "Rama Nimma",
-    senderEmail: "ramanimma@texasrealtyhub.com",
+    senderName: "Agent 1",
+    senderEmail: "agent1@aurarealty.com",
     unsubscribeToken: "preview-token-00000000",
     isPreview: true,
   });
@@ -1514,7 +1514,7 @@ app.post("/api/admin/generate-market-update-section", async (req, res) => {
     const message = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 600,
-      system: `You are a professional real estate copywriter for Texas Realty Hub, a luxury real estate agency in Austin, TX.
+      system: `You are a professional real estate copywriter for Aura Realty, a luxury real estate agency in Dallas-Fort Worth, TX.
 Write warm, knowledgeable, locally-specific content.
 Use ONLY these HTML tags: h3, p, ul, li, strong, em. No inline styles, no divs, no spans, no tables.
 Return ONLY the HTML content — no markdown, no backticks, no explanation.`,
@@ -1574,7 +1574,7 @@ app.post("/api/admin/preview-campaign-email", async (req, res) => {
     contentHtml,
     recipientName: "Preview",
     unsubscribeToken: "preview-token-00000000",
-    senderEmail: "ramanimma@texasrealtyhub.com",
+    senderEmail: "agent1@aurarealty.com",
     isPreview: true,
   });
   res.setHeader("Content-Type", "text/html; charset=utf-8");
@@ -1595,8 +1595,8 @@ app.post("/api/admin/send-test-email", async (req, res) => {
     html = buildMarketUpdateEmail({
       ...marketUpdateData,
       recipientName: "Test Recipient",
-      senderName: "Rama Nimma",
-      senderEmail: "ramanimma@texasrealtyhub.com",
+      senderName: "Agent 1",
+      senderEmail: "agent1@aurarealty.com",
       unsubscribeToken: "test-token-00000000",
     });
   } else {
@@ -1605,13 +1605,13 @@ app.post("/api/admin/send-test-email", async (req, res) => {
       contentHtml,
       recipientName: "Test Recipient",
       unsubscribeToken: "test-token-00000000",
-      senderEmail: "ramanimma@texasrealtyhub.com",
+      senderEmail: "agent1@aurarealty.com",
     });
   }
 
   try {
     await resend.emails.send({
-      from: `Texas Realty Hub <ramanimma@texasrealtyhub.com>`,
+      from: `Aura Realty <agent1@aurarealty.com>`,
       to: testRecipientEmail,
       subject: `[TEST] ${subjectLine || "Campaign Preview"}`,
       html,
@@ -1894,7 +1894,7 @@ app.post("/api/admin/import-client-database", upload.single("file"), async (req,
 app.use("/api/chatbot", createChatbotRouter(supabaseAdmin, supabaseAnon));
 
 // ─── SITEMAP & ROBOTS ────────────────────────────────────────────────────────
-const BASE_URL = "https://texasrealtyhub.com";
+const BASE_URL = "https://aurarealty.com";
 
 app.get("/sitemap.xml", async (_req, res) => {
   const today = new Date().toISOString().split("T")[0];
@@ -2151,11 +2151,11 @@ app.get("/api/admin/preview-holiday-greeting/:id", async (req, res) => {
   }).length;
 
   const { buildHolidayGreetingEmail } = await import("./lib/templates/holidayGreetingEmail.js");
-  const html = buildHolidayGreetingEmail("Friend", holiday.name, holiday.type as "us" | "indian", "Rama Nimma", true, holiday.flyer_url);
+  const html = buildHolidayGreetingEmail("Friend", holiday.name, holiday.type as "us" | "indian", "Agent 1", true, holiday.flyer_url);
 
   res.json({
     html,
-    subject: `Happy ${holiday.name} from Texas Realty Hub! 🎉`,
+    subject: `Happy ${holiday.name} from Aura Realty! 🎉`,
     recipientCount,
   });
 });
@@ -2207,8 +2207,8 @@ app.post("/api/admin/send-holiday-greeting/:id", async (req, res) => {
   }> = [];
 
   for (const client of recipients) {
-    const senderEmail = client.sender_email || "ramanimma@texasrealtyhub.com";
-    const senderName = senderEmail.includes("swetha") ? "Swetha Nimma" : "Rama Nimma";
+    const senderEmail = client.sender_email || "agent1@aurarealty.com";
+    const senderName = senderEmail.includes("agent2") ? "Agent 2" : "Agent 1";
     const firstName = (client.full_name || "Friend").split(" ")[0];
 
     let status: "sent" | "failed" = "sent";

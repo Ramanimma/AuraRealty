@@ -42,10 +42,10 @@ const AboutSection = () => {
               Why Choose Us
             </p>
             <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "24px" }}>
-              Your Trusted Austin<br />Real Estate Partner
+              Your Trusted DFW<br />Real Estate Partner
             </h2>
             <p className="mb-12 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, lineHeight: 1.75, color: "rgba(255,255,255,0.60)" }}>
-              At Texas Realty Hub, we combine deep local knowledge with a commitment to exceptional service. Whether you're buying your first home or building an investment portfolio, our team delivers personalized guidance every step of the way.
+              At Aura Realty, we combine deep local knowledge with a commitment to exceptional service. Whether you're buying your first home or building an investment portfolio, our team delivers personalized guidance every step of the way.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-8">

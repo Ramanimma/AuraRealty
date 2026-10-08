@@ -22,7 +22,7 @@ function getDb() {
 
 function senderInfo(senderEmail: string): { name: string } {
   return {
-    name: senderEmail.includes("swetha") ? "Swetha Nimma" : "Rama Nimma",
+    name: senderEmail.includes("agent2") ? "Agent 2" : "Agent 1",
   };
 }
 
@@ -118,7 +118,7 @@ export async function sendCampaign(options: CampaignOptions): Promise<CampaignRe
       continue;
     }
 
-    const senderEmail: string = client.sender_email || "ramanimma@texasrealtyhub.com";
+    const senderEmail: string = client.sender_email || "agent1@aurarealty.com";
     const { name: senderName } = senderInfo(senderEmail);
     const unsubscribeToken: string = client.unsubscribe_token || "unknown";
 
@@ -139,7 +139,7 @@ export async function sendCampaign(options: CampaignOptions): Promise<CampaignRe
 
     try {
       await resend.emails.send({
-        from: `Texas Realty Hub <${senderEmail}>`,
+        from: `Aura Realty <${senderEmail}>`,
         to: client.email_address,
         subject: subjectLine,
         html,
@@ -174,8 +174,8 @@ export async function sendCampaign(options: CampaignOptions): Promise<CampaignRe
     ? buildMarketUpdateEmail({
         ...options.marketUpdateData,
         recipientName: "Homeowner",
-        senderName: "Rama Nimma",
-        senderEmail: "ramanimma@texasrealtyhub.com",
+        senderName: "Agent 1",
+        senderEmail: "agent1@aurarealty.com",
         unsubscribeToken: "preview",
         isPreview: true,
       })

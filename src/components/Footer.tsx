@@ -41,7 +41,7 @@ const Footer = () => {
   });
 
   const phone = profile?.phone ?? "(512) 900-1897";
-  const email = profile?.email ?? "info@texasrealtyhub.com";
+  const email = profile?.email ?? "info@aurarealty.com";
   const consumerNoticeUrl = profile?.consumer_notice_url ?? "/docs/Consumer.pdf";
   const iabsUrl = profile?.iabs_url ?? "/docs/Brokerage_Services.pdf";
 
@@ -85,7 +85,7 @@ const Footer = () => {
                 letterSpacing: "0.01em",
               }}
             >
-              Texas Realty Hub
+              Aura Realty
             </h3>
             <p
               style={{
@@ -181,12 +181,12 @@ const Footer = () => {
               <li className="flex items-center gap-2.5">
                 <Mail className="h-3.5 w-3.5 flex-shrink-0" style={{ color: GOLD }} />
                 <a
-                  href="mailto:ramanimma@texasrealtyhub.com"
+                  href="mailto:agent1@aurarealty.com"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)"; }}
                 >
-                  ramanimma@texasrealtyhub.com
+                  agent1@aurarealty.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
@@ -230,8 +230,8 @@ const Footer = () => {
             <div className="flex gap-3">
               {[
                 { icon: FacebookIcon, label: "Facebook", url: "https://www.facebook.com/Texasrealtyhub" },
-                { icon: InstagramIcon, label: "Instagram", url: "https://www.instagram.com/texasrealtyhub" },
-                { icon: YouTubeIcon, label: "YouTube", url: "https://www.youtube.com/@texasrealtyhub.s" },
+                { icon: InstagramIcon, label: "Instagram", url: "https://www.instagram.com/aurarealty" },
+                { icon: YouTubeIcon, label: "YouTube", url: "https://www.youtube.com/@aurarealty.s" },
               ].map(({ icon: Icon, label, url }) => (
                 <a
                   key={label}
@@ -297,7 +297,7 @@ const Footer = () => {
         </div>
 
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.25)", textAlign: "center" }}>
-          © {new Date().getFullYear()} Texas Realty Hub. All rights reserved.
+          © {new Date().getFullYear()} Aura Realty. All rights reserved.
         </p>
       </div>
     </footer>

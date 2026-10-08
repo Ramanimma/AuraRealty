@@ -20,7 +20,7 @@ const features = [
     icon: MapPin,
     title: "Local Expertise",
     description:
-      "Deep roots in the Austin market with neighborhood-level knowledge from Cedar Park to South Congress.",
+      "Deep roots in the Austin market with neighborhood-level knowledge across Dallas, Fort Worth, and surrounding communities.",
   },
   {
     icon: Heart,
@@ -32,7 +32,7 @@ const features = [
     icon: BookOpen,
     title: "Market Knowledge",
     description:
-      "We track Austin real estate data daily to give you an edge whether you're buying, selling, or investing.",
+      "We track DFW real estate data daily to give you an edge whether you're buying, selling, or investing.",
   },
   {
     icon: Trophy,
@@ -165,10 +165,10 @@ export default function About() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead
-        title="Meet Our Agents | Texas Realty Hub - Rama & Swetha Nimma"
-        description="Meet Rama Nimma and Swetha Nimma, licensed real estate agents serving Leander, Cedar Park, Georgetown, Round Rock and all of Central Texas."
-        keywords="Rama Nimma realtor, Swetha Nimma real estate, Texas Realty Hub agents, Central Texas realtor"
-        ogUrl="https://texasrealtyhub.com/about"
+        title="Meet Our Agents | Aura Realty"
+        description="Meet our licensed real estate agents serving the Dallas-Fort Worth metroplex and surrounding areas."
+        keywords="Aura Realty agents, DFW realtor, Dallas real estate, Fort Worth homes"
+        ogUrl="https://aurarealty.com/about"
       />
       <Navbar />
 
@@ -179,7 +179,7 @@ export default function About() {
             Our Team
           </p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-5">
-            Meet Your Austin Real Estate Team
+            Meet Your DFW Real Estate Team
           </h1>
           <p className="font-sans text-primary-foreground/75 text-lg md:text-xl leading-relaxed">
             Trusted advisors guiding families, investors, and first-time buyers
@@ -266,7 +266,7 @@ export default function About() {
           </h2>
           <p className="font-sans text-primary-foreground/75 mb-8 text-lg">
             Let's start the conversation. Our team is ready to help you buy,
-            sell, or invest in Austin real estate.
+            sell, or invest in DFW real estate.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button

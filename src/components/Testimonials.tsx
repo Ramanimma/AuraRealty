@@ -8,9 +8,9 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const GOLD = "#C9A84C";
 
 const staticTestimonials = [
-  { client_name: "Sarah & James Mitchell", comment: "Texas Realty Hub made our home-buying experience seamless. Their market knowledge in the Austin area is unmatched. We found our dream home in Westlake within weeks.", rating: 5 },
+  { client_name: "Sarah & James Mitchell", comment: "Aura Realty made our home-buying experience seamless. Their market knowledge in the DFW area is unmatched. We found our dream home in Westlake within weeks.", rating: 5 },
   { client_name: "David Chen", comment: "As an out-of-state investor, I needed a team I could trust. They guided me through every step and helped me build a profitable rental portfolio in East Austin.", rating: 5 },
-  { client_name: "Maria Gonzalez", comment: "Professional, responsive, and genuinely caring. They negotiated an incredible deal on our first home. I recommend Texas Realty Hub to everyone I know.", rating: 5 },
+  { client_name: "Maria Gonzalez", comment: "Professional, responsive, and genuinely caring. They negotiated an incredible deal on our first home. I recommend Aura Realty to everyone I know.", rating: 5 },
 ];
 
 const Testimonials = () => {

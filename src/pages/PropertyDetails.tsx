@@ -97,17 +97,17 @@ const PropertyDetails = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEOHead
-        title={`${property.address} | ${property.beds} bed ${property.baths} bath | Texas Realty Hub`}
-        description={`${property.beds} bedroom ${property.baths} bathroom home at ${property.address}. ${Number(property.sqft).toLocaleString()} sqft listed at ${property.price}. Contact Texas Realty Hub today.`}
+        title={`${property.address} | ${property.beds} bed ${property.baths} bath | Aura Realty`}
+        description={`${property.beds} bedroom ${property.baths} bathroom home at ${property.address}. ${Number(property.sqft).toLocaleString()} sqft listed at ${property.price}. Contact Aura Realty today.`}
         keywords={`${property.address}, homes for sale ${property.city} TX, ${property.beds} bedroom homes ${property.city}`}
-        ogUrl={`https://texasrealtyhub.com/property/${property.id}`}
+        ogUrl={`https://aurarealty.com/property/${property.id}`}
         ogImage={property.main_image || "https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png"}
         schema={{
           "@context": "https://schema.org",
           "@type": "RealEstateListing",
           name: property.address,
           description: property.description,
-          url: `https://texasrealtyhub.com/property/${property.id}`,
+          url: `https://aurarealty.com/property/${property.id}`,
           image: property.main_image,
           offers: { "@type": "Offer", price: property.price, priceCurrency: "USD" },
         }}

@@ -117,7 +117,7 @@ const SellersNetsheet = () => {
         title="Sellers Net Sheet Calculator | How Much Will I Make Selling My Home in Texas?"
         description="Calculate your estimated net proceeds from selling your home in Texas. Includes agent commission, title fees, closing costs and prorated taxes."
         keywords="sellers net sheet Texas, how much will I make selling my home, closing costs Texas seller, net proceeds home sale calculator"
-        ogUrl="https://texasrealtyhub.com/sellers-netsheet"
+        ogUrl="https://aurarealty.com/sellers-netsheet"
       />
       <Navbar />
 

@@ -24,9 +24,9 @@ export function buildHolidayGreetingEmail(
   isPreview = false,
   flyerUrl?: string
 ): string {
-  const senderEmail = senderName.toLowerCase().includes("swetha")
-    ? "swethanimma@texasrealtyhub.com"
-    : "ramanimma@texasrealtyhub.com";
+  const senderEmail = senderName.toLowerCase().includes("agent2")
+    ? "agent2@aurarealty.com"
+    : "agent1@aurarealty.com";
 
   const contentHtml = `
     <!-- Festival Flyer — full width, only if uploaded -->
@@ -34,7 +34,7 @@ export function buildHolidayGreetingEmail(
     <tr>
       <td style="padding:0;line-height:0;">
         <img src="${flyerUrl}"
-             alt="${holidayName} Greetings from Texas Realty Hub"
+             alt="${holidayName} Greetings from Aura Realty"
              width="600"
              style="width:100%;max-width:600px;height:auto;display:block;border:0;border-radius:8px;"
         />
@@ -85,7 +85,7 @@ export function buildHolidayGreetingEmail(
                    color: #666666;
                    line-height: 1.8;
                    margin: 0;">
-          From all of us at Texas Realty Hub, we are grateful to have you
+          From all of us at Aura Realty, we are grateful to have you
           as part of our community.
         </p>
       </td>

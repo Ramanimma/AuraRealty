@@ -207,15 +207,15 @@ const Properties = () => {
   return (
     <>
       <SEOHead
-        title="Properties | Texas Realty Hub – Greater Austin Homes"
-        description="Browse homes, condos, and luxury properties for sale, rent, and lease in Greater Austin and Central Texas. Find your perfect home with Texas Realty Hub."
+        title="Properties | Aura Realty – DFW Homes"
+        description="Browse homes, condos, and luxury properties for sale, rent, and lease in DFW and DFW. Find your perfect home with Aura Realty."
       />
       <Navbar />
 
       {/* Dark cinematic header */}
       <section style={{ backgroundColor: "#111111", paddingTop: "128px", paddingBottom: "48px", textAlign: "center" }}>
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "18px" }}>
-          Greater Austin &amp; Central Texas
+          DFW &amp; DFW
         </p>
         <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(40px,6vw,72px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em", margin: 0 }}>
           All Properties

@@ -96,7 +96,7 @@ const MailingList = () => {
                   lineHeight: 1.7,
                 }}
               >
-                Stay up-to-date with exclusive listings and market updates in Central Texas.
+                Stay up-to-date with exclusive listings and market updates in DFW.
               </p>
             </div>
 
@@ -194,7 +194,7 @@ const MailingList = () => {
                     letterSpacing: "0.02em",
                   }}
                 >
-                  I agree to be contacted by Texas Realty Hub via call, email, and text for real estate updates. Message and data rates may apply.
+                  I agree to be contacted by Aura Realty via call, email, and text for real estate updates. Message and data rates may apply.
                 </label>
               </div>
 

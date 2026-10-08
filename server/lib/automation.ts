@@ -62,8 +62,8 @@ export async function sendTodaysBirthdayEmails(): Promise<void> {
   for (const client of todaysClients) {
     const clientName = client.full_name || "Friend";
     const firstName = clientName.split(" ")[0];
-    const senderEmail = client.sender_email || "ramanimma@texasrealtyhub.com";
-    const senderName = senderEmail.includes("swetha") ? "Swetha Nimma" : "Rama Nimma";
+    const senderEmail = client.sender_email || "agent1@aurarealty.com";
+    const senderName = senderEmail.includes("agent2") ? "Agent 2" : "Agent 1";
     const unsubscribeToken = client.unsubscribe_token || "unknown";
 
     let status: "sent" | "failed" = "sent";
@@ -228,8 +228,8 @@ export async function sendTodaysHolidayGreetings(): Promise<void> {
     }> = [];
 
     for (const client of recipients) {
-      const senderEmail = client.sender_email || "ramanimma@texasrealtyhub.com";
-      const senderName = senderEmail.includes("swetha") ? "Swetha Nimma" : "Rama Nimma";
+      const senderEmail = client.sender_email || "agent1@aurarealty.com";
+      const senderName = senderEmail.includes("agent2") ? "Agent 2" : "Agent 1";
       const firstName = (client.full_name || "Friend").split(" ")[0];
 
       let status: "sent" | "failed" = "sent";

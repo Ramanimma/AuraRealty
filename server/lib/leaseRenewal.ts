@@ -37,7 +37,7 @@ export async function sendLeaseRenewalForLease(
     : "N/A";
 
   // Determine assigned sender based on owner1's master_clients record
-  let senderEmail = "ramanimma@texasrealtyhub.com";
+  let senderEmail = "agent1@aurarealty.com";
   if (lease.owner1_email) {
     const { data: ownerClient } = await supabaseAdmin
       .from("master_clients")
@@ -46,7 +46,7 @@ export async function sendLeaseRenewalForLease(
       .maybeSingle();
     if (ownerClient?.sender_email) senderEmail = ownerClient.sender_email;
   }
-  const senderName = senderEmail.includes("swetha") ? "Swetha Nimma" : "Rama Nimma";
+  const senderName = senderEmail.includes("agent2") ? "Agent 2" : "Agent 1";
 
   const recipients: LeaseRenewalRecipient[] = [];
   if (lease.owner1_email) recipients.push({ role: "owner", name: lease.owner1_name || "Owner", email: lease.owner1_email });
@@ -84,7 +84,7 @@ export async function sendLeaseRenewalForLease(
     } else {
       html = buildAgentLeaseRenewalNotificationEmail(propertyAddress, primaryTenantName, leaseEndDate, senderName);
       subject = `[Action Required] Lease Renewal Email Sent — ${propertyAddress}`;
-      fromEmail = "ramanimma@texasrealtyhub.com";
+      fromEmail = "agent1@aurarealty.com";
     }
 
     const result = await sendLeaseRenewalEmail(recipient, html, fromEmail, subject);

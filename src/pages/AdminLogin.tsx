@@ -103,7 +103,7 @@ const AdminLogin = () => {
       <Card className="w-full max-w-md border-border shadow-xl">
         <CardHeader className="text-center space-y-2">
           <a href="/" className="font-serif text-2xl font-bold text-primary">
-            Texas Realty Hub
+            Aura Realty
           </a>
           <CardTitle className="font-serif text-xl">Admin Portal</CardTitle>
           <CardDescription>

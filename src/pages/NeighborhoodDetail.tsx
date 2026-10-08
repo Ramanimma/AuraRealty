@@ -16,7 +16,7 @@ const CITY_IMAGES: Record<string, string> = {
   "Liberty Hill": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&h=600&fit=crop",
   "Georgetown": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=600&fit=crop",
   "Round Rock": "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200&h=600&fit=crop",
-  "Cedar Park": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=600&fit=crop",
+  "Frisco": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=600&fit=crop",
   "Hutto": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&h=600&fit=crop",
 };
 const DEFAULT_HERO = "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&h=600&fit=crop";
@@ -150,10 +150,10 @@ export default function NeighborhoodDetail() {
   return (
     <div className="min-h-screen">
       <SEOHead
-        title={`${neighborhood.name} TX Homes for Sale | Texas Realty Hub`}
-        description={`Find homes for sale in ${neighborhood.name}, TX. ${neighborhood.description?.slice(0, 120) ?? ""}. Expert real estate agents serving ${neighborhood.name} and Central Texas.`}
+        title={`${neighborhood.name} TX Homes for Sale | Aura Realty`}
+        description={`Find homes for sale in ${neighborhood.name}, TX. ${neighborhood.description?.slice(0, 120) ?? ""}. Expert real estate agents serving ${neighborhood.name} and DFW.`}
         keywords={`${neighborhood.name} TX homes for sale, ${neighborhood.name} real estate, homes in ${neighborhood.name} Texas, ${neighborhood.name} TX realtor`}
-        ogUrl={`https://texasrealtyhub.com/neighborhoods/${neighborhood.slug}`}
+        ogUrl={`https://aurarealty.com/neighborhoods/${neighborhood.slug}`}
       />
       <Navbar />
 
