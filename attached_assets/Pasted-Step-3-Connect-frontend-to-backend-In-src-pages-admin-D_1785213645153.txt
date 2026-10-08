@@ -1,0 +1,56 @@
+Step 3 — Connect frontend to backend.
+
+In src/pages/admin/DistributionEmails.tsx, connect the "Generate Newsletter with AI" button to the new backend endpoint:
+
+When "Generate Newsletter with AI" is clicked (Monthly Market Update mode with PDF selected):
+Show loading state on the button: "Generating newsletter..."
+Create FormData with the selected PDF file (field name: pdf)
+POST to /api/admin/generate-newsletter-from-pdf with admin Bearer token
+On success: populate the Quill rich text editor with data.newsletterHtml
+Show success toast: "Newsletter generated! Review and send when ready."
+On error: show descriptive error toast with the error message from the API
+Reset loading state when done
+Add a loading state variable:
+tsx
+const [generatingNewsletter, setGeneratingNewsletter] = useState(false);
+Update the "Generate Newsletter with AI" button:
+tsx
+<Button
+  disabled={!selectedPdf || generatingNewsletter}
+  onClick={handleGenerateNewsletter}
+  variant="outline"
+  className="gap-2"
+>
+  <Sparkles className="h-4 w-4" />
+  {generatingNewsletter ? "Generating newsletter..." : "✨ Generate Newsletter with AI"}
+</Button>
+Add the handler function:
+tsx
+const handleGenerateNewsletter = async () => {
+  if (!selectedPdf) return;
+  setGeneratingNewsletter(true);
+  try {
+    const formData = new FormData();
+    formData.append("pdf", selectedPdf);
+    const token = await getToken();
+    const res = await fetch("/api/admin/generate-newsletter-from-pdf", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+    const data = await res.json();
+    if (data.newsletterHtml) {
+      setContentHtml(data.newsletterHtml);
+      toast({ title: "Newsletter generated! Review and send when ready." });
+    } else {
+      toast({ title: data.error || "Generation failed", variant: "destructive" });
+    }
+  } catch {
+    toast({ title: "Failed to generate newsletter. Please try again.", variant: "destructive" });
+  } finally {
+    setGeneratingNewsletter(false);
+  }
+};
+After generation succeeds, enable Preview and Send Test buttons (remove any remaining disabled conditions tied to Monthly Market Update — content is now in the editor).
+
+Do not change General Update mode or anything else. Restart dev server cleanly after implementing.

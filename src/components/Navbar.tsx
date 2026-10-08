@@ -1,0 +1,232 @@
+import { useState, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Menu, X, Phone, Mail } from "lucide-react";
+
+const CHARCOAL = "#1C1C1C";
+const GOLD = "#C9A84C";
+
+const navLinks = [
+  { label: "Home", href: "/", path: "/" },
+  { label: "Properties", href: "/properties", path: "/properties" },
+  { label: "Neighborhoods", href: "/#neighborhoods", path: "/#neighborhoods" },
+  { label: "About", href: "/about", path: "/about" },
+  { label: "Home Valuation", href: "/home-valuation", path: "/home-valuation" },
+  { label: "Contact", href: "/contact", path: "/contact" },
+];
+
+const mobileLinks = [
+  { label: "Home", href: "/" },
+  { label: "Properties", href: "/properties" },
+  { label: "Neighborhoods", href: "/#neighborhoods" },
+  { label: "About", href: "/about" },
+  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Home Valuation", href: "/home-valuation" },
+  { label: "Contact Us", href: "/contact" },
+];
+
+function isLinkActive(path: string, href: string): boolean {
+  if (path === "/" && (href === "/" || href === "#hero")) return true;
+  if (href === "/about" && path === "/about") return true;
+  if (href === "/home-valuation" && path === "/home-valuation") return true;
+  if (href.startsWith("/neighborhoods") && path.startsWith("/neighborhoods")) return true;
+  return false;
+}
+
+const Navbar = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  const isHomepage = location.pathname === "/";
+  const textColor = isHomepage ? "rgba(255,255,255,0.85)" : CHARCOAL;
+
+  const openMenu = () => {
+    setMobileOpen(true);
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => setOverlayVisible(true));
+    });
+  };
+
+  const closeMenu = () => {
+    setOverlayVisible(false);
+    setTimeout(() => {
+      setMobileOpen(false);
+      document.body.style.overflow = "";
+    }, 320);
+  };
+
+  const handleMobileNav = (href: string) => {
+    closeMenu();
+    setTimeout(() => {
+      if (href.startsWith("/#")) {
+        const id = href.slice(2);
+        if (location.pathname !== "/") {
+          navigate("/");
+          setTimeout(() => {
+            document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+          }, 300);
+        } else {
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        navigate(href);
+      }
+    }, 50);
+  };
+
+  return (
+    <>
+      <header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          backgroundColor: isHomepage ? "#111111" : "#FFFFFF",
+          borderBottom: isHomepage ? "0.5px solid rgba(255,255,255,0.08)" : "0.5px solid #EFEFEB",
+        }}
+      >
+        <nav
+          className="container mx-auto flex items-center justify-between px-6"
+          style={{ height: "70px", whiteSpace: "nowrap", overflow: "visible" }}
+        >
+          {/* Logo */}
+          <a
+            href="/"
+            onClick={e => { e.preventDefault(); navigate("/"); }}
+            style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}
+          >
+            <img
+              src="https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png"
+              alt="Texas Realty Hub"
+              style={{ height: "48px", width: "48px", objectFit: "contain" }}
+            />
+            <span
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, letterSpacing: "0.02em", whiteSpace: "nowrap", color: isHomepage ? "#ffffff" : "#1C1C1C" }}
+            >
+              Texas Realty Hub
+            </span>
+          </a>
+
+          {/* Desktop links */}
+          <ul className="hidden lg:flex items-center gap-7">
+            {navLinks.map(link => {
+              const active = isLinkActive(location.pathname, link.path);
+              return (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    onClick={e => {
+                      if (link.href.startsWith("#")) {
+                        e.preventDefault();
+                        document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: "smooth" });
+                      } else if (link.href.startsWith("/")) {
+                        e.preventDefault();
+                        navigate(link.href);
+                      }
+                    }}
+                    style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: active ? GOLD : textColor, transition: "color 0.3s ease", textDecoration: "none" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = active ? GOLD : textColor; }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Desktop CTA */}
+          <div className="hidden lg:flex items-center gap-5">
+            <button
+              onClick={() => navigate("/home-valuation")}
+              data-testid="button-get-started"
+              style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "10px 24px", cursor: "pointer", transition: "all 0.3s ease", borderRadius: 0 }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#B8973B"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)"; }}
+            >
+              Get Started
+            </button>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden"
+            onClick={mobileOpen ? closeMenu : openMenu}
+            aria-label="Toggle navigation menu"
+            data-testid="button-hamburger"
+            style={{ color: isHomepage ? "#fff" : CHARCOAL, background: "none", border: "none", cursor: "pointer", padding: "4px" }}
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </nav>
+      </header>
+
+      {/* Full-screen mobile overlay */}
+      {mobileOpen && (
+        <div
+          ref={overlayRef}
+          onClick={e => { if (e.target === overlayRef.current) closeMenu(); }}
+          style={{ position: "fixed", inset: 0, zIndex: 99, backgroundColor: CHARCOAL, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", transform: overlayVisible ? "translateY(0)" : "translateY(-100%)", transition: "transform 0.32s cubic-bezier(0.4, 0, 0.2, 1)", overflowY: "auto", paddingTop: "80px", paddingBottom: "48px" }}
+        >
+          <button
+            onClick={closeMenu}
+            aria-label="Close menu"
+            data-testid="button-close-menu"
+            style={{ position: "absolute", top: "20px", right: "24px", background: "none", border: "none", cursor: "pointer", color: "#fff", padding: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            <X className="h-7 w-7" />
+          </button>
+
+          <nav style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", width: "100%" }}>
+            {mobileLinks.map(link => {
+              const active = isLinkActive(location.pathname, link.href);
+              const isHovered = hoveredLink === link.label;
+              return (
+                <button
+                  key={link.label}
+                  data-testid={`mobile-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                  onClick={() => handleMobileNav(link.href)}
+                  onMouseEnter={() => setHoveredLink(link.label)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                  style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontSize: "36px", fontWeight: 300, letterSpacing: "0.03em", color: active ? GOLD : "#fff", padding: "10px 24px", position: "relative", transition: "color 0.25s ease", textTransform: "uppercase" }}
+                >
+                  <span style={{ position: "relative", display: "inline-block" }}>
+                    {link.label}
+                    <span style={{ position: "absolute", bottom: "-4px", left: 0, right: 0, height: "1px", backgroundColor: GOLD, transform: `scaleX(${isHovered || active ? 1 : 0})`, transformOrigin: "left center", transition: "transform 0.3s ease" }} />
+                  </span>
+                </button>
+              );
+            })}
+          </nav>
+
+          <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
+            <a href="tel:5129001897" style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 400, color: GOLD, textDecoration: "none", letterSpacing: "0.04em" }}>
+              <Phone className="h-4 w-4" />
+              (512) 900-1897
+            </a>
+            <a href="mailto:ramanimma@texasrealtyhub.com" style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.6)", textDecoration: "none", letterSpacing: "0.02em" }}>
+              <Mail className="h-4 w-4" />
+              ramanimma@texasrealtyhub.com
+            </a>
+          </div>
+
+          <button
+            onClick={() => handleMobileNav("/home-valuation")}
+            data-testid="mobile-button-get-started"
+            style={{ marginTop: "36px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "16px 48px", cursor: "pointer", transition: "background-color 0.3s ease", borderRadius: 0 }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#B8973B"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
+          >
+            Get Started
+          </button>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Navbar;

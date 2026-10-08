@@ -1,0 +1,113 @@
+
+
+In the Admin Hero Videos page (src/pages/AdminHeroVideos.tsx) and the server upload endpoint, fix large file uploads with proper progress tracking. Here are all the changes needed:
+1. Server side — server/index.ts:
+
+Find the multer configuration and increase the file size limit:
+
+tsconst upload = multer({ 
+  storage: memoryStorage(),
+  limits: { fileSize: 200 * 1024 * 1024 } // 200MB max
+});
+
+On the POST /api/admin/upload-hero-video route, add timeout settings:
+
+tsreq.setTimeout(300000); // 5 minutes
+res.setTimeout(300000);
+
+Return descriptive error messages if upload fails:
+
+tsif (error) {
+  console.error('Supabase upload error:', error);
+  return res.status(500).json({ 
+    error: `Upload failed: ${error.message}. File may be too large or network timed out.` 
+  });
+}
+2. Frontend — src/pages/AdminHeroVideos.tsx:
+
+Add upload state variables:
+
+tsconst [uploadProgress, setUploadProgress] = useState<number>(0);
+const [isUploading, setIsUploading] = useState<boolean>(false);
+const [uploadError, setUploadError] = useState<string>('');
+
+Replace fetch with XMLHttpRequest for real progress tracking:
+
+tsconst uploadFile = (file: File, token: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('video', file);
+    xhr.upload.addEventListener('progress', (e) => {
+      if (e.lengthComputable) {
+        const percent = Math.round((e.loaded / e.total) * 100);
+        setUploadProgress(percent);
+      }
+    });
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText);
+        if (data.url) resolve(data.url);
+        else reject(new Error(data.error || 'Upload failed'));
+      } else {
+        try {
+          const data = JSON.parse(xhr.responseText);
+          reject(new Error(data.error || `Server error: ${xhr.status}`));
+        } catch {
+          reject(new Error(`Upload failed with status ${xhr.status}`));
+        }
+      }
+    });
+    xhr.addEventListener('error', () => reject(new Error('Network error — check your connection and try again')));
+    xhr.addEventListener('timeout', () => reject(new Error('Upload timed out — try a smaller file')));
+    xhr.timeout = 300000;
+    xhr.open('POST', '/api/admin/upload-hero-video');
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+    xhr.send(formData);
+  });
+};
+
+Wrap upload calls with progress state:
+
+tssetIsUploading(true);
+setUploadProgress(0);
+setUploadError('');
+try {
+  const url = await uploadFile(selectedFile, token);
+  // save to DB as before
+} catch (err: any) {
+  setUploadError(err.message);
+} finally {
+  setIsUploading(false);
+  setUploadProgress(0);
+}
+
+Show progress bar UI below the file input:
+
+tsx{isUploading && (
+  <div className="mt-2">
+    <div className="flex items-center gap-2 mb-1">
+      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-yellow-600" />
+      <span className="text-xs text-gray-600">Uploading... {uploadProgress}%</span>
+    </div>
+    <div className="w-full bg-gray-200 rounded-full h-2">
+      <div 
+        className="bg-yellow-600 h-2 rounded-full transition-all duration-300" 
+        style={{ width: `${uploadProgress}%` }}
+      />
+    </div>
+  </div>
+)}
+{uploadError && (
+  <p className="mt-2 text-xs text-red-600 font-medium">⚠️ {uploadError}</p>
+)}
+
+Disable Add Video button while uploading:
+
+tsx<button disabled={isUploading}>
+  {isUploading ? `Uploading ${uploadProgress}%...` : '+ Add Video'}
+</button>
+
+Apply the same progress tracking to the Replace button on each existing video row — use a separate replacingId state to track which row is currently uploading so rows don't interfere with each other
+
+Do not change anything else.

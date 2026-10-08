@@ -1,0 +1,60 @@
+Do two things in this task — wire the contact form to the database AND add a mailing list section:
+PART 1 — Wire Contact/Tour Form to Database:
+1. Update server/index.ts — add these routes:
+POST /api/inquiries — save tour/contact form submission to inquiries table
+  Body: { full_name, email, phone, message, preferred_date, preferred_time, type, listing_id? }
+  Also create or update a contact record in contacts table using the email as unique key
+  Set inquiry type = 'tour', status = 'new'
+  Return: { ok: true, id: inquiry_id }
+
+POST /api/newsletter — save newsletter signup to contacts table
+  Body: { full_name, email }
+  Upsert contact: if email exists update name, if new create with contact_type='lead', source='website'
+  Return: { ok: true }
+2. Update src/lib/api.ts — add:
+tsapi.inquiries.submit(data) → POST /api/inquiries
+api.newsletter.subscribe(data) → POST /api/newsletter
+3. Update src/components/ContactSection.tsx:
+
+Find the existing form submit handler
+Replace the current submission logic with a call to api.inquiries.submit()
+Pass all form fields: full_name, email, phone, message, preferred_date, type='tour'
+On success: show the existing Thank You message
+On error: show "Something went wrong. Please try again." in red below the button
+Add loading state to Submit button: show "Submitting..." and disable while pending
+
+PART 2 — Add Mailing List Section:
+4. Create src/components/MailingList.tsx:
+Design — full width section, very dark background (#0A0A0A or near black), matching the screenshot style:
+
+Large serif headline: "Join Our Exclusive Mailing List" in Cormorant Garamond, white, font-weight 300, large (60px desktop / 36px mobile)
+Subtitle: "Stay up-to-date with exclusive listings and market updates in Central Texas." Inter font, white/60%, letter-spacing 0.05em
+Form row: Name input + Email input + Submit button all on one line on desktop, stacked on mobile
+Inputs: dark background, no visible border except bottom underline (border-bottom only), white text, placeholder white/40%
+Submit button: white border outline, white uppercase text, black background, hover inverts to white background black text
+Consent checkbox below form: small Inter text white/50% saying "I agree to be contacted by Texas Realty Hub via call, email, and text for real estate updates. Message and data rates may apply."
+Success state: hide form, show "Thank you! You've been added to our list." in white Cormorant Garamond italic
+On submit: call api.newsletter.subscribe({ full_name, email })
+Validate email format before submitting
+Show error if submission fails
+
+5. Add MailingList to src/pages/Index.tsx:
+Place it between the ContactSection and Footer:
+tsx<ContactSection />
+<MailingList />
+<Footer />
+6. Also add MailingList to these pages so it appears site-wide above the footer:
+
+src/pages/About.tsx
+src/pages/MortgageCalculator.tsx
+src/pages/NeighborhoodDetail.tsx
+
+Design requirements for MailingList:
+
+Must feel like a luxury fashion/real estate brand — minimal, dramatic, high contrast
+No rounded corners anywhere
+Maximum whitespace
+The section should be at least 300px tall with generous padding
+Mobile: stack Name, Email, Button vertically with full width
+
+Do not modify any admin pages or other existing components. Confirm no TypeScript errors after building.

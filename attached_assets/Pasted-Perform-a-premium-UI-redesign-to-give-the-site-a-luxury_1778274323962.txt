@@ -1,0 +1,99 @@
+Perform a premium UI redesign to give the site a luxury real estate aesthetic similar to high-end real estate websites. Make these changes across the entire site:
+1. Update index.html — add Google Fonts:
+html<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+2. Update tailwind.config.ts — replace font families:
+tsfontFamily: {
+  serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+  sans: ['Inter', 'system-ui', 'sans-serif'],
+}
+3. Update src/index.css — replace the entire color scheme with luxury palette:
+css:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 8%;
+  --primary: 220 45% 20%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 97%;
+  --secondary-foreground: 0 0% 8%;
+  --accent: 42 65% 52%;
+  --accent-foreground: 0 0% 100%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --border: 0 0% 90%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 8%;
+}
+4. Update src/components/Navbar.tsx:
+
+White background with subtle bottom border
+Logo: "Texas Realty Hub" in Cormorant Garamond, navy, font-size 22px, font-weight 500
+Nav links: Inter, 13px, letter-spacing 0.08em, uppercase, font-weight 500
+Gold "Get Started" button with hover animation
+Navbar becomes sticky with subtle box-shadow on scroll (add scroll listener)
+Add smooth transition on scroll
+
+5. Update src/components/HeroSection.tsx:
+
+Headline: Cormorant Garamond, 80px desktop / 48px mobile, font-weight 300, letter-spacing -0.02em, white
+Subheadline: Inter, 16px, font-weight 300, letter-spacing 0.05em, white/80%
+Search bar: pure white background, no border-radius (sharp corners = luxury), subtle shadow
+Search button: solid gold, no rounded corners, uppercase Inter text
+
+6. Update src/components/FeaturedProperties.tsx:
+
+Section heading: Cormorant Garamond 48px, font-weight 300
+Section label above heading: Inter 11px, uppercase, letter-spacing 0.15em, gold color
+Property cards: white background, no border-radius (sharp corners), thin 1px border
+Price badge: gold background, sharp corners, Inter font
+Address: Cormorant Garamond 20px
+"View Details" button: outline style, sharp corners, full width, uppercase Inter
+Hover: card lifts with shadow, image zooms slightly
+
+7. Update src/components/Neighborhoods.tsx:
+
+Section heading: Cormorant Garamond 48px, font-weight 300
+Cards: sharp corners, image with dark gradient overlay
+Neighborhood name: Cormorant Garamond 28px italic white
+City + price: Inter 12px uppercase white/80%
+
+8. Update src/components/Testimonials.tsx:
+
+Dark navy background section
+Quote marks: Cormorant Garamond 80px gold opacity 30%
+Quote text: Cormorant Garamond 22px italic white
+Client name: Inter 12px uppercase letter-spacing gold
+
+9. Update src/components/Footer.tsx:
+
+Deep navy (#0F1F3D) background
+Logo in white Cormorant Garamond
+Links: Inter 12px uppercase letter-spacing white/60%
+Gold divider lines
+Generous padding and whitespace
+
+10. Update src/components/AboutSection.tsx:
+
+Stat numbers: Cormorant Garamond 64px gold
+Stat labels: Inter 11px uppercase letter-spacing
+Section heading: Cormorant Garamond 48px navy
+
+11. Global spacing improvements in src/index.css:
+cssh1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+body { font-family: 'Inter', sans-serif; letter-spacing: 0.01em; }
+.luxury-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: hsl(var(--accent));
+}
+Design principles to follow throughout:
+
+Sharp corners (border-radius: 0) on buttons and cards for luxury feel
+Generous whitespace — increase all section padding to py-32
+Thin borders (1px) instead of thick ones
+Uppercase + wide letter-spacing for labels and nav items
+Font weight 300 for large headlines (thin = luxury)
+Gold used sparingly as accent only
+Photography always full-bleed, never constrained
+
+Do not change any functionality, routing, or data fetching. Only visual/CSS changes. Confirm no errors after changes.

@@ -1,0 +1,52 @@
+Make these specific UI improvements:
+1. Fix broken listing images:
+In src/components/FeaturedProperties.tsx, the first two listings use /assets/property1.jpg and /assets/property2.jpeg which don't exist in the public folder. Replace these broken image src values with working Unsplash URLs for both listings directly in the component. Use these fallback images when main_image starts with /assets/:
+
+property1.jpg → https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&h=400&fit=crop
+property2.jpeg → https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&h=400&fit=crop
+Add this logic: if p.main_image starts with /assets/ or is empty, use a curated Unsplash fallback based on index position. Keep Unsplash URLs as-is.
+
+2. Fix orphaned 7th neighborhood card:
+In src/components/Neighborhoods.tsx, the 7th card (Austin) sits alone. Fix the grid so it always shows a clean layout — if there are 7 items, show the last row centered or add a CTA card as the 8th item saying "More Areas Coming Soon" with a navy background and gold text.
+3. Replace toy house image in AboutSection:
+In src/components/AboutSection.tsx, replace the current image with this Unsplash URL: https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop — a beautiful luxury home exterior.
+4. Add scroll fade-in animations:
+In src/index.css add these animation classes:
+css@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease forwards;
+}
+Then use Intersection Observer in a new src/hooks/useScrollAnimation.ts:
+tsimport { useEffect, useRef } from 'react';
+export const useScrollAnimation = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+};
+Apply useScrollAnimation ref to the main section container of: FeaturedProperties, AboutSection, Neighborhoods, Testimonials, and ContactSection. Start each section with opacity: 0 and let the observer trigger the animation.
+5. Improve property card spacing:
+In src/components/FeaturedProperties.tsx:
+
+Add py-6 padding inside card content area
+Add mb-3 below the address heading
+Make the price badge slightly larger: px-4 py-2 text-sm font-medium
+Add a thin gold bottom border on card hover: hover:border-b-2 hover:border-accent
+
+6. Fix hero background:
+In src/components/HeroSection.tsx, ensure the Austin skyline image (austin-skyline.jpg) is always the FIRST slide shown, not a random interior photo.
+Do not change any functionality. Confirm no errors after changes.

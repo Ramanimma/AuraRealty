@@ -1,0 +1,55 @@
+We're adding a Client Database feature for CRM and lease reminder tracking. Do the following:
+1. Create two tables in Supabase (run via SQL editor or migration):
+sqlCREATE TABLE master_clients (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  client_role text,
+  full_name text,
+  phone_number text,
+  email_address text,
+  birthdate date,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE lease_reminders (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  client_type text,
+  property_address text,
+  owner1_name text, owner1_phone text, owner1_email text,
+  owner2_name text, owner2_phone text, owner2_email text,
+  tenant1_name text, tenant1_phone text, tenant1_email text,
+  tenant2_name text, tenant2_phone text, tenant2_email text,
+  lease_start_date date,
+  lease_end_date date,
+  notice_reminder_date date,
+  last_reminder_sent_at timestamptz,
+  reminder_status text DEFAULT 'pending',
+  created_at timestamptz DEFAULT now()
+);
+
+ALTER TABLE master_clients ENABLE ROW LEVEL SECURITY;
+ALTER TABLE lease_reminders ENABLE ROW LEVEL SECURITY;
+No public policies needed — admin-only access via service role key, same pattern as other admin tables.
+2. Install the xlsx parsing package if not already installed: npm install xlsx
+3. Create an admin import endpoint POST /api/admin/import-client-database in server/index.ts:
+
+Protected by verifyAdmin
+Accepts a .xlsx file via multer (reuse existing multer config, memoryStorage)
+Parse the workbook using the xlsx package
+Read sheet named "Master Clients" — map columns: "Client Role / Type"→client_role, "Full Name"→full_name, "Phone Number"→phone_number, "Email Address"→email_address, "Birthdate"→birthdate
+Read sheet named "Lease Reminders" — map columns by position since headers repeat ("Phone", "Email" appear 4 times each): column 1→client_type, 2→property_address, 3→owner1_name, 4→owner1_phone, 5→owner1_email, 6→owner2_name, 7→owner2_phone, 8→owner2_email, 9→tenant1_name, 10→tenant1_phone, 11→tenant1_email, 12→tenant2_name, 13→tenant2_phone, 14→tenant2_email, 15→lease_start_date, 16→lease_end_date, 17→notice_reminder_date
+Before inserting, delete all existing rows in both tables first (since this is a full refresh/re-upload each time, not an incremental add) — use supabaseAdmin.from('master_clients').delete().neq('id', '00000000-0000-0000-0000-000000000000') pattern to clear, then insert fresh
+Use supabaseAdmin for all operations (bypasses RLS)
+Return { success: true, masterClientsCount: X, leaseRemindersCount: Y } on success, descriptive error on failure including which sheet/row failed if possible
+
+4. Create admin page src/pages/admin/ImportClientDatabase.tsx:
+
+Title: "Import Client Database"
+Explanation text: "Upload your Client Database Excel file (must contain 'Master Clients' and 'Lease Reminders' sheets). This will replace all existing client database records with the new file."
+A confirmation checkbox: "I understand this will replace all existing records" — must be checked before upload is allowed
+File upload button accepting .xlsx only
+Show upload progress (reuse the same XMLHttpRequest progress pattern from the hero video uploader)
+On success show: "Imported X master clients and Y lease reminders"
+On error show the descriptive error message
+
+5. Add to admin sidebar nav as "Client Database" and add route /admin/client-database in src/App.tsx
+Do not build any reminder/email sending logic yet — just the tables and import tool. Do not change anything else.

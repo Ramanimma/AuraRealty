@@ -1,0 +1,46 @@
+Build the Compose UI for Distribution Emails — a new admin page that lets the admin draft, edit, preview, test, and send campaign emails (starting with Market Update).
+1. Create src/pages/admin/DistributionEmails.tsx with two tabs: "Compose" and "History" (History tab can show "Coming soon" placeholder for now — we'll build it next).
+2. Compose tab fields, top to bottom:
+
+Campaign Type: dropdown, currently just one option "Market Update" (structured so more types can be added later easily)
+Campaign Title: text input (e.g. "June 2026 Market Update")
+Rough Notes: plain <textarea>, placeholder "Enter rough notes, stats, or key points..."
+"✨ Generate Draft with AI" button
+Rich text editor area below, for the actual email content
+
+3. Add the rich text editor. Use react-quill or a similarly lightweight library — check if it's already in package.json, if not run npm install react-quill. Configure the toolbar to show ONLY: Bold, Italic, Header (H1/H2), Bullet list, Numbered list, Link, Undo, Redo. Remove all other toolbar options (no font picker, no color picker, no image upload, no code blocks, no text alignment, no superscript/subscript, no clean formatting button — keep it minimal per the 7 items requested).
+4. "Generate Draft with AI" button logic:
+
+On click, send the Rough Notes text to a new backend endpoint
+Show a loading state on the button while waiting
+When the response comes back, populate the rich text editor with the generated HTML content
+The admin can then freely edit it in the rich text editor
+
+5. Add backend endpoint POST /api/admin/generate-market-update-draft in server/index.ts, protected by verifyAdmin:
+
+Accepts { roughNotes: string }
+Calls the Anthropic API (use the @anthropic-ai/sdk package — check if already installed, if not run npm install @anthropic-ai/sdk) with a system prompt instructing it to write a professional, warm, locally-specific real estate market update email body in HTML format (simple tags only: h2, h3, p, ul, li, strong, em, a — no inline styles, since the branded shell will handle overall styling), structured loosely around: Market Snapshot, Neighborhood Spotlight, Tip of the Month — but adapt based on what's actually in the rough notes
+Model: use claude-sonnet-4-6
+Returns { draftHtml: string }
+
+6. Below the editor, add three buttons in a row:
+
+"Save Draft" — just keeps the current state in the page (no need to persist to DB yet, this is just local component state for now)
+"Preview" — opens the rendered branded email in a new tab (reuse the same Blob + new-tab pattern from the Birthday preview feature), using the CURRENT content in the rich text editor wrapped in buildBrandedEmail
+"Send Test Email" — sends the current draft content to the LOGGED-IN ADMIN'S OWN EMAIL ONLY (not any real client), using the existing campaign sender but hardcoded to a single test recipient — add a small endpoint POST /api/admin/send-test-email that accepts { contentHtml, subjectLine } and sends ONLY to a hardcoded admin email address (use ramanimma@texasrealtyhub.com for now)
+
+7. Below that, add the recipient selector:
+
+Dropdown: "All Clients" / "Owners Only" / "Tenants Only" / "Buyers Only" / "Custom Selection"
+When "Custom Selection" is chosen, show a searchable multi-select list of clients (reuse data from the existing Master Clients fetch)
+Show a live count: "X recipients will receive this campaign" based on the current filter
+
+8. Add a final "📤 Send Campaign" button at the bottom:
+
+Shows a confirmation dialog first: "This will send to {X} recipients. Are you sure?"
+On confirm, calls POST /api/admin/send-campaign with the current content, title, campaign type, and recipient filter
+Shows a success summary after sending: "Sent: X, Failed: X, Skipped: X"
+
+9. Add this page to the admin sidebar as "Distribution Emails" and add the route /admin/distribution-emails in src/App.tsx
+Restart the dev server cleanly after implementing:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

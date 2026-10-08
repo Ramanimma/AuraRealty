@@ -1,0 +1,133 @@
+Completely rewrite server/lib/templates/marketUpdateEmail.ts from scratch. Delete all existing content and replace with this clean implementation:
+
+ts
+export interface MarketUpdateData {
+  month: string;
+  medianPrice: string; medianPriceTrend: string;
+  homesSold: string; homesSoldTrend: string;
+  daysOnMarket: string; daysOnMarketTrend: string;
+  soldListRatio: string; soldListRatioTrend: string;
+  pricePerSqFt: string; pricePerSqFtTrend: string;
+  inventory: string; inventoryTrend: string;
+  marketSummary: string;
+  neighborhoodSpotlight: string;
+  buyerInsights: string;
+  sellerInsights: string;
+  tipOfMonth: string;
+}
+
+export function buildMarketUpdateNewsletterHtml(data: MarketUpdateData): string {
+
+  function card(label: string, value: string, trend: string): string {
+    return `<td style="width:30%;padding:16px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:6px;text-align:center;vertical-align:top;">
+      <p style="margin:0 0 8px 0;font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;font-family:Arial,sans-serif;">${label}</p>
+      <p style="margin:0 0 4px 0;font-size:26px;font-weight:700;color:#111827;font-family:Georgia,serif;">${value || 'N/A'}</p>
+      ${trend ? `<p style="margin:0;font-size:12px;color:#6b7280;font-family:Arial,sans-serif;">${trend}</p>` : '<p style="margin:0;font-size:12px;color:transparent;">-</p>'}
+    </td>`;
+  }
+
+  function bullets(text: string): string {
+    if (!text) return '<li style="font-family:Arial,sans-serif;font-size:15px;color:#374151;margin-bottom:8px;">See report for details</li>';
+    return text.split('|').map(b => b.trim()).filter(Boolean)
+      .map(b => `<li style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.6;margin-bottom:8px;">${b}</li>`)
+      .join('');
+  }
+
+  function heading(emoji: string, title: string): string {
+    return `<p style="margin:0 0 16px 0;font-size:20px;font-weight:700;color:#111827;font-family:Georgia,serif;border-left:4px solid #C9A84C;padding-left:12px;">${emoji} ${title}</p>`;
+  }
+
+  function divider(): string {
+    return `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0;"><tr><td style="border-top:1px solid #e5e7eb;font-size:0;line-height:0;">&nbsp;</td></tr></table>`;
+  }
+
+  return `
+    <!-- INTRO -->
+    <p style="margin:0 0 8px 0;font-size:13px;color:#C9A84C;text-transform:uppercase;letter-spacing:2px;font-family:Arial,sans-serif;text-align:center;">Austin Real Estate Market Update</p>
+    <p style="margin:0 0 24px 0;font-size:22px;font-weight:700;color:#111827;font-family:Georgia,serif;text-align:center;">${data.month}</p>
+    <p style="margin:0 0 0 0;font-size:15px;color:#374151;line-height:1.7;font-family:Arial,sans-serif;">${data.marketSummary || ''}</p>
+
+    ${divider()}
+
+    <!-- MARKET SNAPSHOT -->
+    ${heading('📊', 'Market Snapshot')}
+
+    <!-- Row 1 -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate;border-spacing:8px 0;margin-bottom:8px;">
+      <tr>
+        ${card('Median Home Price', data.medianPrice, data.medianPriceTrend)}
+        <td width="3%" style="font-size:0;">&nbsp;</td>
+        ${card('Homes Sold', data.homesSold, data.homesSoldTrend)}
+        <td width="3%" style="font-size:0;">&nbsp;</td>
+        ${card('Days on Market', data.daysOnMarket, data.daysOnMarketTrend)}
+      </tr>
+    </table>
+
+    <!-- Row 2 -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate;border-spacing:8px 0;margin-bottom:28px;">
+      <tr>
+        ${card('Sold-to-List Ratio', data.soldListRatio, data.soldListRatioTrend)}
+        <td width="3%" style="font-size:0;">&nbsp;</td>
+        ${card('Price / Sq Ft', data.pricePerSqFt, data.pricePerSqFtTrend)}
+        <td width="3%" style="font-size:0;">&nbsp;</td>
+        ${card('Active Inventory', data.inventory, data.inventoryTrend)}
+      </tr>
+    </table>
+
+    ${divider()}
+
+    <!-- NEIGHBORHOOD SPOTLIGHT -->
+    ${heading('🏘️', 'Neighborhood Spotlight')}
+    <p style="margin:0 0 0 0;font-size:15px;color:#374151;line-height:1.7;font-family:Arial,sans-serif;">${data.neighborhoodSpotlight || ''}</p>
+
+    ${divider()}
+
+    <!-- BUYER INSIGHTS -->
+    ${heading('🏡', 'Buyer Insights')}
+    <ul style="margin:0;padding-left:20px;">
+      ${bullets(data.buyerInsights)}
+    </ul>
+
+    ${divider()}
+
+    <!-- SELLER INSIGHTS -->
+    ${heading('💰', 'Seller Insights')}
+    <ul style="margin:0;padding-left:20px;">
+      ${bullets(data.sellerInsights)}
+    </ul>
+
+    ${divider()}
+
+    <!-- TIP OF THE MONTH -->
+    ${heading('⭐', 'Tip of the Month')}
+    <p style="margin:0 0 0 0;font-size:15px;color:#374151;line-height:1.7;font-family:Arial,sans-serif;">${data.tipOfMonth || ''}</p>
+
+    ${divider()}
+
+    <!-- CALL TO ACTION -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td style="background-color:#f9f7f4;border-radius:8px;padding:28px;text-align:center;">
+          <p style="margin:0 0 8px 0;font-size:20px;font-weight:700;color:#111827;font-family:Georgia,serif;">Thinking About Buying or Selling?</p>
+          <p style="margin:0 0 20px 0;font-size:14px;color:#6b7280;line-height:1.6;font-family:Arial,sans-serif;">Whether you're buying your first home, upgrading, investing, or simply curious about your home's value, Texas Realty Hub is here to help.</p>
+          <a href="https://texasrealtyhub.com/contact" style="display:inline-block;background-color:#C9A84C;color:#000000;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;padding:14px 32px;">
+            Schedule a Free Consultation
+          </a>
+          <br/><br/>
+          <a href="https://texasrealtyhub.com/properties" style="font-size:13px;color:#C9A84C;font-family:Arial,sans-serif;text-decoration:underline;">Browse Current Listings →</a>
+        </td>
+      </tr>
+    </table>
+  `;
+}
+
+After rewriting the template file, also update the import in server/index.ts if needed — make sure it imports buildMarketUpdateNewsletterHtml from the correct path.
+
+Also update the Anthropic prompt in POST /api/admin/generate-newsletter-from-pdf to ensure buyerInsights and sellerInsights are always returned as pipe-separated bullet points. Add this explicit instruction to the prompt:
+
+IMPORTANT: buyerInsights and sellerInsights MUST always contain exactly 3 insights separated by the | character. Example format: "Homes are staying on market longer, giving buyers more time|Stable prices create better negotiating opportunities|Inventory has improved compared to earlier this year"
+Never return empty string for buyerInsights or sellerInsights.
+
+Restart dev server cleanly after implementing:
+
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

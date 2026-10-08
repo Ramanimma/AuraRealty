@@ -1,0 +1,48 @@
+Step 2 — Backend AI Integration only.
+
+Add a new endpoint POST /api/admin/generate-newsletter-from-pdf in server/index.ts, protected by verifyAdmin:
+
+Accept PDF file via multer (memoryStorage, 20MB max, field name: pdf)
+Check if pdf-parse is installed — if not run npm install pdf-parse
+Parse PDF text using pdf-parse
+Send extracted text to Anthropic API (claude-sonnet-4-6) with this system prompt:
+You are a professional real estate newsletter writer for Texas Realty Hub, a premium real estate agency serving Greater Austin and Central Texas (Leander, Cedar Park, Georgetown, Round Rock, Liberty Hill, Hutto, Austin).
+
+You will receive the text content of the official Austin Board of Realtors monthly market report. Extract key statistics and insights, then generate a complete monthly newsletter in HTML format using this exact structure:
+
+<h2>📈 Market Summary</h2>
+<p>2-3 sentence overview of the market this month with key highlights.</p>
+
+<h2>📊 Market Snapshot</h2>
+<p><strong>Median Home Price:</strong> $XXX,XXX (▲/▼ X% vs last month)</p>
+<p><strong>Days on Market:</strong> XX days (▲/▼ X days vs last month)</p>
+<p><strong>Homes Sold:</strong> XXX (▲/▼ XX vs last month)</p>
+<p><strong>Active Inventory:</strong> X.X months supply</p>
+
+<h2>🏘️ Neighborhood Spotlight</h2>
+<p>Highlight one specific area from the Greater Austin region with specific data points from the report.</p>
+
+<h2>🏡 For Buyers</h2>
+<p>2-3 practical insights for buyers based on current market conditions.</p>
+
+<h2>💰 For Sellers & Owners</h2>
+<p>2-3 practical insights for sellers and property owners.</p>
+
+<h2>📌 Tip of the Month</h2>
+<p>One practical, actionable real estate tip relevant to current market conditions.</p>
+
+Use specific numbers from the report wherever possible.
+Write in a warm, professional tone.
+Return ONLY valid HTML using these tags: h2, p, strong, ul, li.
+No markdown, no code blocks, no inline styles, no explanations.
+Return { newsletterHtml: string } on success
+Return descriptive error messages:
+If PDF parsing fails: { error: "Failed to read PDF. Please make sure it is a valid text-based PDF." }
+If AI fails: { error: "AI generation failed. Please try again." }
+If no text extracted: { error: "Could not extract text from PDF. The file may be a scanned image PDF." }
+
+Do not change anything on the frontend yet. Do not change any other endpoints.
+
+Restart dev server cleanly after implementing:
+
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

@@ -1,0 +1,252 @@
+Build the Monthly Market Update newsletter template for Texas Realty Hub. This is a premium, branded email template used specifically when "Monthly Market Update" is selected in the Campaigns tab.
+
+1. Create server/lib/templates/marketUpdateEmail.ts:
+
+ts
+export function buildMarketUpdateEmail(data: {
+  month: string;           // e.g. "July 2026"
+  bannerImageUrl?: string; // optional, falls back to default
+  medianPrice: string;     // e.g. "$485,000"
+  medianPriceTrend?: string; // e.g. "▲ 1.5%" or "▼ 2%"
+  daysOnMarket: string;    // e.g. "28"
+  daysOnMarketTrend?: string;
+  homesSold: string;       // e.g. "342"
+  homesSoldTrend?: string;
+  inventory: string;       // e.g. "2.1 months"
+  inventoryTrend?: string;
+  neighborhoodSpotlight: string;  // HTML content
+  buyerInsights: string;          // HTML content
+  sellerInsights: string;         // HTML content
+  tipOfTheMonth: string;          // HTML content
+  marketSummary: string;          // HTML content — 2-3 sentence overview
+  recipientName: string;
+  senderName: string;
+  unsubscribeToken: string;
+  senderEmail: string;
+  isPreview?: boolean;
+}): string
+
+Template HTML structure (table-based for email compatibility):
+
+A. Header — reuse buildHolidayBrandedEmail header style:
+
+Same dark gradient (
+#1E293B → 
+#111827)
+Logo left-aligned, "Texas Realty Hub" + tagline right
+2px gold divider (
+#D4AF37) below header
+
+B. Hero Banner:
+
+html
+<tr>
+  <td style="padding:0;position:relative;line-height:0;">
+    <!-- Background image -->
+    <img src="{bannerImageUrl || defaultBannerUrl}"
+         alt="Austin Market Report {month}"
+         width="600"
+         style="width:100%;max-width:600px;height:220px;object-fit:cover;display:block;" />
+    <!-- Dark overlay with text -->
+    <div style="position:absolute;top:0;left:0;right:0;bottom:0;
+                 background:rgba(0,0,0,0.55);
+                 display:flex;flex-direction:column;
+                 align-items:center;justify-content:center;
+                 padding:20px;text-align:center;">
+      <p style="color:#C9A84C;font-size:12px;letter-spacing:3px;
+                 text-transform:uppercase;margin:0 0 8px 0;
+                 font-family:'Helvetica Neue',Arial,sans-serif;">
+        Texas Realty Hub
+      </p>
+      <h1 style="color:#FFFFFF;font-size:28px;font-weight:700;
+                  font-family:Georgia,serif;margin:0 0 8px 0;">
+        Austin Market Report
+      </h1>
+      <p style="color:#E5E7EB;font-size:16px;margin:0;
+                 font-family:'Helvetica Neue',Arial,sans-serif;">
+        {month}
+      </p>
+    </div>
+  </td>
+</tr>
+
+Note: Since many email clients don't support position:absolute, use a VML/table fallback approach for the overlay — or use a single-cell table with background-image CSS and centered text as the overlay, which has better email client support.
+
+C. Greeting + Market Summary:
+
+html
+<tr><td style="padding:28px 32px 8px;background:#ffffff;">
+  <p style="font-size:16px;color:#333;font-family:'Helvetica Neue',Arial,sans-serif;
+             line-height:1.7;margin:0 0 12px 0;">
+    Dear {recipientName},
+  </p>
+  <p style="font-size:15px;color:#555;line-height:1.7;margin:0;">
+    {marketSummary}
+  </p>
+</td></tr>
+
+D. Section heading component (reuse for each section):
+
+html
+<tr><td style="padding:24px 32px 8px;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td style="border-left:3px solid #C9A84C;padding-left:12px;">
+        <p style="font-family:Georgia,serif;font-size:18px;font-weight:600;
+                   color:#1E293B;margin:0;">
+          📈 Market Summary
+        </p>
+      </td>
+    </tr>
+  </table>
+</td></tr>
+
+E. Stat Cards (2x2 grid using tables):
+
+html
+<tr><td style="padding:8px 24px 16px;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <!-- Card 1: Median Price -->
+      <td width="48%" style="background:#F8F9FA;border:1px solid #E5E7EB;
+                              border-radius:8px;padding:16px;text-align:center;
+                              vertical-align:top;">
+        <p style="font-size:11px;color:#6B7280;text-transform:uppercase;
+                   letter-spacing:1px;margin:0 0 8px;font-family:'Helvetica Neue',Arial,sans-serif;">
+          Median Home Price
+        </p>
+        <p style="font-size:24px;font-weight:700;color:#1E293B;margin:0 0 4px;
+                   font-family:Georgia,serif;">
+          {medianPrice}
+        </p>
+        <p style="font-size:12px;color:{trend > 0 ? #16A34A : #DC2626};margin:0;
+                   font-family:'Helvetica Neue',Arial,sans-serif;">
+          {medianPriceTrend || ''}
+        </p>
+      </td>
+      <td width="4%"></td>
+      <!-- Card 2: Days on Market -->
+      <td width="48%" style="background:#F8F9FA;border:1px solid #E5E7EB;
+                              border-radius:8px;padding:16px;text-align:center;">
+        <p style="font-size:11px;color:#6B7280;text-transform:uppercase;
+                   letter-spacing:1px;margin:0 0 8px;font-family:'Helvetica Neue',Arial,sans-serif;">
+          Days on Market
+        </p>
+        <p style="font-size:24px;font-weight:700;color:#1E293B;margin:0 0 4px;
+                   font-family:Georgia,serif;">
+          {daysOnMarket}
+        </p>
+        <p style="font-size:12px;color:#6B7280;margin:0;">
+          {daysOnMarketTrend || ''}
+        </p>
+      </td>
+    </tr>
+    <tr><td colspan="3" style="height:12px;"></td></tr>
+    <tr>
+      <!-- Card 3: Homes Sold -->
+      <td width="48%" style="background:#F8F9FA;border:1px solid #E5E7EB;
+                              border-radius:8px;padding:16px;text-align:center;">
+        <p style="font-size:11px;color:#6B7280;text-transform:uppercase;
+                   letter-spacing:1px;margin:0 0 8px;font-family:'Helvetica Neue',Arial,sans-serif;">
+          Homes Sold
+        </p>
+        <p style="font-size:24px;font-weight:700;color:#1E293B;margin:0 0 4px;
+                   font-family:Georgia,serif;">
+          {homesSold}
+        </p>
+        <p style="font-size:12px;color:#6B7280;margin:0;">
+          {homesSoldTrend || ''}
+        </p>
+      </td>
+      <td width="4%"></td>
+      <!-- Card 4: Inventory -->
+      <td width="48%" style="background:#F8F9FA;border:1px solid #E5E7EB;
+                              border-radius:8px;padding:16px;text-align:center;">
+        <p style="font-size:11px;color:#6B7280;text-transform:uppercase;
+                   letter-spacing:1px;margin:0 0 8px;font-family:'Helvetica Neue',Arial,sans-serif;">
+          Active Inventory
+        </p>
+        <p style="font-size:24px;font-weight:700;color:#1E293B;margin:0 0 4px;
+                   font-family:Georgia,serif;">
+          {inventory}
+        </p>
+        <p style="font-size:12px;color:#6B7280;margin:0;">
+          {inventoryTrend || ''}
+        </p>
+      </td>
+    </tr>
+  </table>
+</td></tr>
+
+F. Content sections (Neighborhood Spotlight, Buyer Insights, Seller Insights, Tip of the Month):
+Each follows the same pattern — section heading with gold left border, then content below:
+
+html
+<tr><td style="padding:0 32px 20px;">
+  {section HTML content injected here}
+</td></tr>
+
+Add a light gray divider <hr style="border:none;border-top:1px solid #E5E7EB;margin:0 32px;"> between sections.
+
+G. Call To Action:
+
+html
+<tr><td style="padding:24px 32px;text-align:center;background:#F8F9FA;">
+  <p style="font-family:Georgia,serif;font-size:18px;color:#1E293B;
+             font-weight:600;margin:0 0 8px;">
+    Ready to make your next move?
+  </p>
+  <p style="font-size:14px;color:#6B7280;margin:0 0 20px;
+             font-family:'Helvetica Neue',Arial,sans-serif;">
+    Let's discuss what these market trends mean for you personally.
+  </p>
+  <!-- Primary CTA button -->
+  <a href="https://texasrealtyhub.com/contact"
+     style="display:inline-block;background:#C9A84C;color:#000000;
+             font-family:'Helvetica Neue',Arial,sans-serif;
+             font-size:14px;font-weight:700;letter-spacing:1px;
+             text-transform:uppercase;text-decoration:none;
+             padding:14px 32px;border-radius:2px;">
+    Schedule a Free Consultation
+  </a>
+  <br/><br/>
+  <!-- Secondary text link -->
+  <a href="https://texasrealtyhub.com/properties"
+     style="font-size:13px;color:#C9A84C;font-family:'Helvetica Neue',Arial,sans-serif;
+             text-decoration:underline;">
+    Browse Current Listings →
+  </a>
+</td></tr>
+
+H. Footer: Use existing buildBrandedEmail footer logic (sender details, unsubscribe link, Full Circle Real Estate)
+
+2. Create a new preview endpoint POST /api/admin/preview-market-update in server/index.ts, protected by verifyAdmin:
+
+Accepts the full market update data object
+Returns rendered HTML with isPreview: true
+
+3. Update src/pages/admin/DistributionEmails.tsx when "Monthly Market Update" is selected:
+
+Replace the current rough notes + AI draft section with a structured form:
+Banner Image: file upload button (optional, stores temporarily in state as base64 or uploads to Supabase market-update-banners bucket)
+Market Stats section: 4 pairs of inputs (value + trend) for Median Price, Days on Market, Homes Sold, Inventory
+Market Summary: textarea (2-3 sentences, AI can help generate)
+Neighborhood Spotlight: rich text editor section
+Buyer Insights: rich text editor section
+Seller Insights: rich text editor section
+Tip of the Month: rich text editor section
+Add "✨ Fill with AI" button next to each text section that calls a new endpoint to generate just that section's content based on a brief prompt
+Keep the existing Preview + Send Test + Send Campaign buttons
+
+4. When "General Update" is selected: keep exactly the current behavior (rough notes + AI + free-form editor) — unchanged
+
+5. Add market-update-banners Supabase Storage bucket on server startup:
+
+ts
+await supabaseAdmin.storage.createBucket('market-update-banners', { public: true }).catch(() => {});
+
+Do not change Birthday, Lease Renewal, Holiday, or any other email templates.
+
+Restart dev server cleanly after implementing:
+
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

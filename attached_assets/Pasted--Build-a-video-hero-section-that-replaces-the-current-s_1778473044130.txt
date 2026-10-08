@@ -1,0 +1,110 @@
+
+
+Build a video hero section that replaces the current static dark hero. Full requirements:
+1. Add backend route to server/index.ts:
+GET /api/hero-videos — fetch all active hero videos ordered by display_order
+Query the hero_videos table where is_active = true, order by display_order ascending.
+2. Add to src/lib/api.ts:
+tsapi.heroVideos.list() → GET /api/hero-videos
+3. Rewrite src/components/HeroSection.tsx — full video hero:
+Video background:
+
+Fetch videos from api.heroVideos.list() using TanStack Query
+Auto-cycle through videos every 12 seconds with smooth crossfade transition (opacity 0→1 over 1.5 seconds)
+Each video: autoPlay muted loop playsInline — silent autoplay
+Video element: position: absolute, inset: 0, width: 100%, height: 100%, object-fit: cover
+Dark overlay on top of video: background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.75) 100%)
+Fallback: if no videos loaded yet, show dark charcoal #1A1A1A background
+
+Video transition logic:
+
+Keep TWO video elements mounted simultaneously
+Current video: opacity 1
+Next video: opacity 0, preloading
+On transition: fade next video to opacity 1, fade current to 0, then swap
+Use useRef for video elements and useEffect for the cycling timer
+
+Content overlay (centered):
+
+Position: absolute, centered both axes, z-index 10, text-align center
+Gold label: "AUSTIN & CENTRAL TEXAS", Inter 11px, letter-spacing 0.25em, uppercase, margin-bottom 20px
+Headline: Cormorant Garamond, 72px desktop / 42px mobile, font-weight 300, white, line-height 1.05
+
+Line 1: "Discover Your"
+Line 2: "Perfect " + <em style="color: #C9A84C; font-style: italic">Home</em>
+
+
+Subheadline: Inter, 15px, white/55%, letter-spacing 0.06em, max-width 380px, margin: 16px auto 40px
+
+Text: "Premium real estate in Austin & Central Texas"
+
+
+Two CTA buttons side by side:
+
+Primary: gold #C9A84C background, white text, "EXPLORE PROPERTIES", padding 16px 32px, no border radius, uppercase Inter 11px, letter-spacing 0.15em, onclick scrolls to #properties
+Secondary: transparent background, border: 1px solid rgba(255,255,255,0.4), white text, "FREE HOME VALUATION", same sizing, links to /home-valuation
+
+
+
+Video indicators (dots):
+
+Bottom center of hero, above scroll indicator
+Small dots showing which video is playing
+Active dot: gold #C9A84C, wider (24px wide, 3px tall)
+Inactive dots: white/30%, 8px × 3px
+Click dot to jump to that video
+
+Scroll indicator:
+
+Keep existing chevron down at bottom center
+White/40% color
+
+Section sizing:
+
+height: 100vh — full viewport height
+min-height: 600px
+position: relative
+overflow: hidden
+
+4. Add hero videos management to Admin Dashboard:
+Add a new section to src/pages/admin/AdminDashboard.tsx or create src/pages/admin/HeroVideos.tsx:
+
+List all hero videos from /api/admin/hero-videos
+Each row shows: Title, Cloudinary URL (truncated), Order, Active toggle, Delete button
+"Add Video" form: Title input + Cloudinary URL input + Order number
+Reorder by changing display_order number
+Toggle active/inactive per video
+This lets you swap videos without touching code
+
+5. Add admin routes to server/index.ts:
+GET /api/admin/hero-videos — list all hero videos
+POST /api/admin/hero-videos — add new video
+PATCH /api/admin/hero-videos/:id — update video (title, url, order, is_active)
+DELETE /api/admin/hero-videos/:id — delete video
+6. Add to admin sidebar in src/components/AdminSidebar.tsx:
+
+Add "Hero Videos" link pointing to /admin/hero-videos
+Use a video/film icon from lucide-react
+
+7. Update src/App.tsx:
+
+Add route /admin/hero-videos
+
+Performance notes:
+
+Add preload="none" to non-active video elements
+Only preload the next video: preload="auto" on the upcoming video
+This prevents loading all 3 videos simultaneously
+
+Remove from HeroSection:
+
+Remove the search bar completely
+Remove the sliding image background
+Remove onSearch prop — no longer needed
+
+Update src/pages/Index.tsx:
+
+Remove onSearch and filters state since search bar is gone from hero
+FeaturedProperties no longer needs filters prop — show all listings by default
+
+Do not modify any other pages or admin sections. Confirm no TypeScript errors after building

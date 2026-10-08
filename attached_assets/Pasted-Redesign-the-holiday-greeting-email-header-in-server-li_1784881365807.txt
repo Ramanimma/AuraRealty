@@ -1,0 +1,89 @@
+Redesign the holiday greeting email header in server/lib/templates/holidayGreetingEmail.ts and server/lib/emailLayout.ts.
+
+Important: This header redesign applies ONLY to the holiday greeting email template — do NOT change the existing buildBrandedEmail function used by Birthday, Lease Renewal, Campaign, and other emails. Create a new buildHolidayBrandedEmail function specifically for holiday emails.
+
+1. Create buildHolidayBrandedEmail in server/lib/emailLayout.ts:
+
+Same structure as buildBrandedEmail but with a redesigned header:
+
+html
+<!-- HOLIDAY EMAIL HEADER — replaces the plain dark header -->
+<tr>
+  <td style="background: linear-gradient(180deg, #1E293B 0%, #111827 100%);
+             padding: 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="padding: 20px 28px; vertical-align: middle;">
+          <table role="presentation" cellpadding="0" cellspacing="0">
+            <tr>
+              <!-- Logo — left aligned, 46px -->
+              <td style="vertical-align: middle; padding-right: 14px;">
+                <img src="https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png"
+                     alt="Texas Realty Hub"
+                     width="46"
+                     height="46"
+                     style="width:46px;height:46px;border-radius:50%;display:block;" />
+              </td>
+              <!-- Brand name + tagline -->
+              <td style="vertical-align: middle;">
+                <div style="font-family: 'Helvetica Neue', Arial, sans-serif;
+                             font-size: 24px;
+                             font-weight: 700;
+                             color: #FFFFFF;
+                             line-height: 1.2;
+                             margin: 0 0 4px 0;">
+                  Texas Realty Hub
+                </div>
+                <div style="font-family: 'Helvetica Neue', Arial, sans-serif;
+                             font-size: 14px;
+                             font-weight: 400;
+                             color: #D1D5DB;
+                             line-height: 1.3;
+                             margin: 0;">
+                  Premium real estate in Austin &amp; Central Texas
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<!-- Gold divider — 2px luxury gold -->
+<tr>
+  <td style="background-color: #D4AF37; height: 2px; font-size: 0; line-height: 0;">&nbsp;</td>
+</tr>
+
+<!-- 20px breathing space before flyer -->
+<tr>
+  <td style="height: 20px; font-size: 0; line-height: 0;">&nbsp;</td>
+</tr>
+
+Keep the footer, content area, and unsubscribe logic exactly the same as buildBrandedEmail.
+Accept same parameters: contentHtml, recipientName, unsubscribeToken, senderEmail, isPreview.
+
+2. Update server/lib/templates/holidayGreetingEmail.ts:
+
+Update the flyer section to add border-radius: 8px and overflow: hidden on the flyer image:
+html
+<img src="${flyerUrl}"
+     alt="${holidayName} Greetings from Texas Realty Hub"
+     width="600"
+     style="width:100%;max-width:600px;height:auto;display:block;border:0;border-radius:8px;"
+/>
+Remove the 20px top padding from the content section since the layout already provides breathing space via the header redesign
+
+3. Update all holiday sending/preview paths to use buildHolidayBrandedEmail instead of buildBrandedEmail:
+
+server/lib/email.ts sendHolidayGreetingEmail
+GET /api/admin/preview-holiday-greeting/:id
+POST /api/admin/send-holiday-greeting/:id
+server/lib/automation.ts sendTodaysHolidayGreetings
+
+4. Do NOT change buildBrandedEmail — Birthday, Lease Renewal, Campaign, and other emails must remain completely unchanged.
+
+Restart dev server cleanly:
+
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

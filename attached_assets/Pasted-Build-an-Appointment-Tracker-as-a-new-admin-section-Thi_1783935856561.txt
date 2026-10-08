@@ -1,0 +1,88 @@
+Build an Appointment Tracker as a new admin section. This is a new sidebar item and page for tracking property showings and client appointments.
+1. Create Supabase table — run this SQL:
+sqlCREATE TABLE appointments (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  appointment_date date NOT NULL,
+  appointment_time time NOT NULL,
+  property_address text NOT NULL,
+  listing_id uuid REFERENCES listings(id) ON DELETE SET NULL,
+  client_name text NOT NULL,
+  client_phone text,
+  client_email text,
+  master_client_id uuid REFERENCES master_clients(id) ON DELETE SET NULL,
+  agent text NOT NULL DEFAULT 'Rama Nimma',
+  appointment_type text NOT NULL DEFAULT 'Showing',
+  status text NOT NULL DEFAULT 'Scheduled',
+  notes text,
+  follow_up_date date,
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE appointments ENABLE ROW LEVEL SECURITY;
+2. Create backend endpoints in server/index.ts, all protected by verifyAdmin:
+
+GET /api/admin/appointments — accepts optional query params ?filter=today|upcoming|past|all, returns appointments ordered by date+time
+POST /api/admin/appointments — creates new appointment
+PUT /api/admin/appointments/:id — updates appointment (status, notes, follow_up_date, any field)
+DELETE /api/admin/appointments/:id — deletes appointment
+
+Filter logic:
+
+today — appointment_date = today
+upcoming — appointment_date > today AND appointment_date <= today + 7 days
+past — appointment_date < today
+all — no filter
+
+3. Create src/pages/admin/Appointments.tsx:
+Header: "Appointments" title + "+ New Appointment" button top right
+4 filter tabs: Today | Upcoming | Past | All (Today is default)
+Table columns: Date & Time | Property | Client | Agent | Type | Status | Actions
+Status badges:
+
+Scheduled — blue
+Completed — green
+Cancelled — gray
+No-show — red
+
+Actions per row: Edit button + Delete button (with confirmation dialog)
+Empty states:
+
+Today: "No appointments today"
+Upcoming: "No upcoming appointments in the next 7 days"
+Past: "No past appointments"
+
+4. New Appointment side panel src/components/admin/AppointmentPanel.tsx:
+Same responsive pattern as other panels (slides from right on desktop, full-screen on mobile)
+Form fields:
+
+Date (date picker, required)
+Time (time picker, required)
+Property: two options via toggle:
+
+"Select from listings" → searchable dropdown of active listings from GET /api/listings
+"Manual entry" → text input for address
+
+
+Client: two options via toggle:
+
+"Select existing client" → searchable dropdown from Master Clients, auto-fills name/phone/email
+"New client" → manual name/phone/email inputs
+
+
+Agent: dropdown — "Rama Nimma" / "Swetha Nimma"
+Appointment Type: dropdown — Showing / Consultation / Follow-up / Open House
+Status: dropdown — Scheduled (default) / Completed / Cancelled / No-show
+Notes: textarea (optional)
+Follow-up Date: date picker (optional, shown when status is Completed)
+
+Save button + Cancel button, loading spinner, success/error feedback, auto-refresh list on save
+5. Add to sidebar and routing:
+
+Add "Appointments" with a calendar icon to the admin sidebar
+Add route /admin/appointments in src/App.tsx
+
+6. Add to api.ts:
+
+Add adminApi.appointments.list(filter), .create(data), .update(id, data), .delete(id)
+
+Match existing admin panel visual style throughout. Restart dev server cleanly after implementing:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

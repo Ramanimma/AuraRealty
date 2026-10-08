@@ -1,0 +1,64 @@
+
+
+Fix the chatbot dual X button issue in src/components/ChatBot.tsx:
+Problem: There are two X buttons showing simultaneously:
+
+One in the chat panel header (good — keep this)
+One on the floating bottom button (remove this when chat is open)
+
+Fix 1 — Floating button: When chat is open, hide the floating button completely on mobile. On desktop keep it visible as a toggle.
+Find the floating button and update it:
+tsx<button
+  data-testid="chatbot-toggle"
+  onClick={() => setIsOpen((o) => !o)}
+  aria-label="Open chat assistant"
+  className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-transform duration-200 hover:scale-110 focus:outline-none
+    ${isOpen ? 'hidden sm:flex' : 'flex'}`}
+  style={{ backgroundColor: "#1B3A6B" }}
+>
+This hides the floating button on mobile when chat is open, but keeps it on desktop.
+Fix 2 — Header X button cut off on desktop:
+The header X button is cramped. Fix the header padding:
+tsx<div
+  className="flex items-center justify-between shrink-0"
+  style={{
+    backgroundColor: "#1B3A6B",
+    position: "sticky",
+    top: 0,
+    zIndex: 10,
+    minHeight: "64px",
+    padding: "0 16px",
+  }}
+>
+Also fix the X button size to ensure it doesn't bleed outside:
+tsx<button
+  onClick={() => setIsOpen(false)}
+  aria-label="Close chat"
+  style={{
+    width: "44px",
+    height: "44px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "rgba(255,255,255,0.1)",
+    border: "none",
+    borderRadius: "50%",
+    cursor: "pointer",
+    color: "#ffffff",
+    fontSize: "20px",
+    fontWeight: 300,
+    flexShrink: 0,
+  }}
+>
+  ✕
+</button>
+Fix 3 — Mobile chat panel bottom padding:
+Make sure the message input bar is not overlapped by anything:
+Add paddingBottom: '16px' to the input container at the bottom of the chat panel.
+Summary of changes:
+
+Floating button: hidden on mobile when chat is open (hidden sm:flex when isOpen)
+Header X: circular background, properly padded, not bleeding
+Input bar: properly padded at bottom on mobile
+
+Do not change any other functionality. Confirm no errors.

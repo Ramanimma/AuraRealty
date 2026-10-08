@@ -1,0 +1,58 @@
+Build the foundation for a generic, reusable Distribution Emails campaign system that will support Market Updates now, and Birthday Wishes, Holiday Greetings, Newsletters, and other campaign types later. This must NOT duplicate sender-routing logic — it reuses the existing per-client sender_email field and the existing buildBrandedEmail shell.
+1. Create two new Supabase tables:
+sqlCREATE TABLE email_campaigns (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  campaign_type text NOT NULL,
+  campaign_title text NOT NULL,
+  recipient_filter text NOT NULL,
+  total_recipients int DEFAULT 0,
+  sent_count int DEFAULT 0,
+  failed_count int DEFAULT 0,
+  skipped_count int DEFAULT 0,
+  sent_at timestamptz DEFAULT now(),
+  created_by text,
+  content_html text
+);
+
+CREATE TABLE email_campaign_recipients (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  campaign_id uuid REFERENCES email_campaigns(id) ON DELETE CASCADE,
+  client_id uuid,
+  client_name text,
+  client_email text,
+  sender_used text,
+  status text NOT NULL,
+  error_detail text,
+  sent_at timestamptz DEFAULT now()
+);
+
+ALTER TABLE email_campaigns ENABLE ROW LEVEL SECURITY;
+ALTER TABLE email_campaign_recipients ENABLE ROW LEVEL SECURITY;
+(Admin-only access via service role, no public policies — same pattern as other admin tables.)
+2. Create a generic, reusable sending engine in server/lib/campaignSender.ts:
+tsasync function sendCampaign({
+  campaignType, campaignTitle, recipientFilter, contentHtml, subjectLine
+}: { ... }): Promise<{ campaignId: string; sentCount: number; failedCount: number; skippedCount: number }>
+This function should:
+
+Query master_clients based on recipientFilter (values: "all", "owner", "tenant", "buyer", or a JSON array of specific client IDs for custom selection)
+Exclude any client where email_opted_out = true (count these as "skipped", log them in email_campaign_recipients with status "skipped")
+For each remaining client, determine their sender_email, build the final branded HTML using the EXISTING buildBrandedEmail function (passing the client's name, sender, unsubscribe token), and send via SendGrid
+On success: log status "sent" in email_campaign_recipients
+On failure: log status "failed" with the error message in error_detail
+After processing everyone, insert one row into email_campaigns with the final aggregate counts
+Return the campaign summary
+
+3. Add an admin endpoint POST /api/admin/send-campaign in server/index.ts, protected by verifyAdmin:
+
+Accepts { campaignType, campaignTitle, recipientFilter, contentHtml, subjectLine }
+Calls sendCampaign(...) and returns the result
+
+4. Add two read endpoints, both protected by verifyAdmin:
+
+GET /api/admin/email-campaigns — returns all rows from email_campaigns, ordered by sent_at descending
+GET /api/admin/email-campaigns/:id/recipients — returns all rows from email_campaign_recipients for that campaign
+
+5. Do NOT build the Compose UI or recipient-picker yet — just this backend foundation (tables, sending engine, endpoints). We'll build the admin UI as a separate next step once this is confirmed working.
+Restart the dev server cleanly after implementing:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

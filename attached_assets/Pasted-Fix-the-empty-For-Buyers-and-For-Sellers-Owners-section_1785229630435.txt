@@ -1,0 +1,60 @@
+Fix the empty "For Buyers" and "For Sellers & Owners" sections in POST /api/admin/generate-newsletter-from-pdf in server/index.ts.
+
+The current approach of detecting empty sections with regex is not working. Replace the entire newsletter generation logic with a simpler, more reliable approach:
+
+Make ONE single Anthropic API call that combines both the PDF text AND user notes, with a very direct prompt:
+
+ts
+const combinedContext = [
+  extractedText ? `MARKET REPORT:\n${extractedText}` : '',
+  userNotes ? `AGENT NOTES (use these for buyer/seller insights):\n${userNotes}` : ''
+].filter(Boolean).join('\n\n');
+
+const message = await anthropic.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 4000,
+  messages: [{
+    role: "user",
+    content: `You are writing a monthly real estate newsletter for Texas Realty Hub clients.
+
+Here is the source data:
+${combinedContext}
+
+Write a complete newsletter with ALL of these sections filled in. Do not leave any section empty:
+
+<h2>📈 Market Summary</h2>
+<p>Write 2-3 sentences summarizing the market using specific numbers from the data.</p>
+
+<h2>📊 Market Snapshot</h2>
+<p><strong>Median Home Price:</strong> Extract from data</p>
+<p><strong>Days on Market:</strong> Extract from data</p>
+<p><strong>Homes Sold:</strong> Extract from data</p>
+<p><strong>Active Inventory:</strong> Extract from data</p>
+
+<h2>🏘️ Neighborhood Spotlight</h2>
+<p>Write 2-3 sentences about one specific Greater Austin area with data points.</p>
+
+<h2>🏡 For Buyers</h2>
+<ul>
+<li>Write one buyer insight using numbers from the data or agent notes.</li>
+<li>Write one buyer insight about inventory or pricing trends.</li>
+<li>Write one actionable piece of advice for buyers.</li>
+</ul>
+
+<h2>💰 For Sellers & Owners</h2>
+<ul>
+<li>Write one seller insight using numbers from the data or agent notes.</li>
+<li>Write one seller insight about demand or timing.</li>
+<li>Write one actionable piece of advice for sellers.</li>
+</ul>
+
+<h2>📌 Tip of the Month</h2>
+<p>Write one practical real estate tip relevant to current market conditions.</p>
+
+IMPORTANT: Every section above must have real written content. Replace ALL placeholder instructions with actual sentences. Return ONLY the HTML.`
+  }]
+});
+
+Remove the second API call and the regex-based empty section detection entirely — they are no longer needed.
+
+Restart the dev server cleanly after implementing.

@@ -1,0 +1,65 @@
+In server/lib/templates/marketUpdateEmail.ts, simplify the buildMarketUpdateNewsletterHtml function completely. Remove all stat card tables, remove all box styling, remove the CTA table boxes. Replace everything with clean simple HTML using only headings and paragraphs:
+
+ts
+export function buildMarketUpdateNewsletterHtml(data: {
+  month: string;
+  medianPrice: string; medianPriceTrend: string;
+  homesSold: string; homesSoldTrend: string;
+  daysOnMarket: string; daysOnMarketTrend: string;
+  soldListRatio: string; soldListRatioTrend: string;
+  pricePerSqFt: string; pricePerSqFtTrend: string;
+  inventory: string; inventoryTrend: string;
+  marketSummary: string;
+  neighborhoodSpotlight: string;
+  buyerInsights: string;
+  sellerInsights: string;
+  tipOfMonth: string;
+}): string {
+
+  function bullets(text: string): string {
+    if (!text) return '<li>See full report for details.</li>';
+    return text.split('|').map(b => b.trim()).filter(Boolean)
+      .map(b => `<li style="margin-bottom:8px;">${b}</li>`).join('');
+  }
+
+  return `
+    <h2 style="font-family:Georgia,serif;font-size:13px;color:#C9A84C;text-transform:uppercase;letter-spacing:2px;margin:0 0 4px;text-align:center;">Austin Real Estate Market Update</h2>
+    <h1 style="font-family:Georgia,serif;font-size:24px;color:#111827;margin:0 0 20px;text-align:center;">${data.month}</h1>
+
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;">${data.marketSummary}</p>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">📊 Market Snapshot</h2>
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.9;margin:0 0 24px;">
+      <strong>Median Home Price:</strong> ${data.medianPrice} ${data.medianPriceTrend}<br/>
+      <strong>Homes Sold:</strong> ${data.homesSold} ${data.homesSoldTrend}<br/>
+      <strong>Days on Market:</strong> ${data.daysOnMarket} ${data.daysOnMarketTrend}<br/>
+      <strong>Sold-to-List Ratio:</strong> ${data.soldListRatio} ${data.soldListRatioTrend}<br/>
+      <strong>Price per Sq Ft:</strong> ${data.pricePerSqFt} ${data.pricePerSqFtTrend}<br/>
+      <strong>Active Inventory:</strong> ${data.inventory} ${data.inventoryTrend}
+    </p>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">🏘️ Neighborhood Spotlight</h2>
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;">${data.neighborhoodSpotlight}</p>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">🏡 For Buyers</h2>
+    <ul style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;padding-left:20px;">
+      ${bullets(data.buyerInsights)}
+    </ul>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">💰 For Sellers</h2>
+    <ul style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;padding-left:20px;">
+      ${bullets(data.sellerInsights)}
+    </ul>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">⭐ Tip of the Month</h2>
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;">${data.tipOfMonth}</p>
+
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0;text-align:center;">
+      <strong>Thinking About Buying or Selling?</strong><br/>
+      Contact us today to schedule a free consultation.<br/>
+      <a href="https://texasrealtyhub.com/contact" style="color:#C9A84C;">texasrealtyhub.com/contact</a>
+    </p>
+  `;
+}
+
+No tables, no boxes, no cards — just clean headings, paragraphs, and bullet lists. Do not change anything else. Restart dev server cleanly.

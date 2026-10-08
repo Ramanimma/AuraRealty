@@ -1,0 +1,64 @@
+Do three things together: fix the status badge, add duplicate protection, and build the automation cron job.
+Part 1 — Fix "Due Today" badge in src/pages/admin/ClientDatabase.tsx:
+Add "Due Today" as the highest priority status badge:
+
+Due Today (gold/amber #C9A84C) — trigger date = today exactly
+Overdue (red) — trigger date before today
+≤30 days (orange) — within next 30 days
+≤60 days (yellow) — 31-60 days away
+≤90 days (green) — 61-90 days away
+Not yet due (gray) — more than 90 days away
+
+Add "Due Today" as a filter chip alongside existing All/Overdue/30/60/90 days chips.
+Part 2 — Add duplicate protection column to Supabase:
+Run this SQL in Supabase SQL editor:
+sqlALTER TABLE lease_reminders ADD COLUMN IF NOT EXISTS renewal_email_sent_at timestamptz DEFAULT NULL;
+Then update the lease renewal sending logic in server/index.ts (the POST /api/admin/send-lease-renewal-email endpoint) AND extract it into a reusable function sendLeaseRenewalForLease(leaseId: string):
+
+After successfully sending all emails for a lease, update that lease record:
+
+tsawait supabaseAdmin
+  .from('lease_reminders')
+  .update({ renewal_email_sent_at: new Date().toISOString() })
+  .eq('id', leaseId);
+
+The manual send button should STILL work even if renewal_email_sent_at is already set — manual sends are always allowed, only the cron job checks this field
+
+Part 3 — Create server/lib/automation.ts:
+tsexport async function sendTodaysBirthdayEmails(): Promise<void> {
+  // Query master_clients where birthdate month+day = today AND email_opted_out = false
+  // For each: call sendBirthdayEmail, log results
+}
+
+export async function sendTodaysLeaseRenewalEmails(): Promise<void> {
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  
+  // Query lease_reminders where:
+  // notice_reminder_date = today
+  // AND renewal_email_sent_at IS NULL (duplicate protection)
+  
+  // For each matching lease:
+  // Call sendLeaseRenewalForLease(lease.id)
+  // Log: "Lease renewal automation: sent X, failed Y"
+}
+Part 4 — Schedule cron job in server/index.ts:
+Install node-cron: npm install node-cron @types/node-cron
+tsimport cron from 'node-cron';
+import { sendTodaysBirthdayEmails, sendTodaysLeaseRenewalEmails } from './lib/automation';
+
+// Only run in production — never in dev/testing
+if (process.env.NODE_ENV === 'production') {
+  cron.schedule('0 14 * * *', async () => {
+    console.log('[Automation] Running daily email jobs...');
+    await sendTodaysBirthdayEmails();
+    await sendTodaysLeaseRenewalEmails();
+  }, { timezone: 'America/Chicago' });
+  console.log('[Automation] Daily email cron job scheduled for 9:00 AM CT');
+}
+Part 5 — Show renewal_email_sent_at in the Lease Reminders table:
+
+Add a small indicator on each lease row showing if renewal email was already sent (e.g. a green "✓ Sent" badge next to the Send Renewal button, showing the date it was sent)
+This helps you see at a glance which leases have already had their renewal email sent
+
+Restart the dev server cleanly:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

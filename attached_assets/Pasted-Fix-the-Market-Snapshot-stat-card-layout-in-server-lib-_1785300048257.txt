@@ -1,0 +1,51 @@
+Fix the Market Snapshot stat card layout in server/lib/templates/marketUpdateEmail.ts.
+
+The current implementation renders empty gray placeholder boxes alongside the real stat cards. Fix the layout so exactly 6 clean stat cards render in a 2×3 grid (2 cards per row, 3 rows).
+
+Replace the entire stat card section with this clean table-based layout:
+
+ts
+const statCard = (label: string, value: string, trend: string) => `
+  <td style="width:48%;background:#F8F9FA;border:1px solid #E5E7EB;
+              border-radius:8px;padding:16px 12px;text-align:center;vertical-align:top;">
+    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;
+               color:#6B7280;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">
+      ${label}
+    </p>
+    <p style="font-family:Georgia,serif;font-size:22px;font-weight:700;
+               color:#1E293B;margin:0 0 4px;">
+      ${value || 'N/A'}
+    </p>
+    ${trend ? `<p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;color:#6B7280;margin:0;">${trend}</p>` : ''}
+  </td>`;
+
+const spacer = `<td style="width:4%;"></td>`;
+
+const statsHtml = `
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
+    <tr>
+      ${statCard('Median Home Price', data.medianPrice, data.medianPriceTrend)}
+      ${spacer}
+      ${statCard('Homes Sold', data.homesSold, data.homesSoldTrend)}
+    </tr>
+  </table>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
+    <tr>
+      ${statCard('Days on Market', data.daysOnMarket, data.daysOnMarketTrend)}
+      ${spacer}
+      ${statCard('Sold/List Ratio', data.soldListRatio, data.soldListRatioTrend)}
+    </tr>
+  </table>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
+    <tr>
+      ${statCard('Price per Sq Ft', data.pricePerSqFt, data.pricePerSqFtTrend)}
+      ${spacer}
+      ${statCard('Active Inventory', data.inventory, data.inventoryTrend)}
+    </tr>
+  </table>`;
+
+Replace the existing stat card rows (the two 3-column table rows) with ${statsHtml} in the returned HTML string.
+
+Do not change anything else — keep Market Summary, Neighborhood Spotlight, Buyer Insights, Seller Insights, Tip of the Month, and CTA exactly as they are.
+
+Restart dev server cleanly after implementing.

@@ -1,0 +1,44 @@
+Build a comprehensive Mortgage Calculator page at /mortgage-calculator. Do the following:
+1. Create src/pages/MortgageCalculator.tsx with:
+Inputs:
+
+Purchase price (default $500,000)
+Down payment amount + percentage (synced, with quick pick buttons: 3%, 5%, 10%, 20%)
+Loan term select (5, 10, 15, 20, 25, 30 years)
+Interest rate input (default 7.5%)
+Credit score range select (760-850, 720-759, 680-719, 640-679, 600-639, Below 600)
+Property tax rate input as % (default 2%)
+Home insurance rate input as % (default 0.5%)
+HOA monthly fee input (default $0)
+Loan type tabs: Conventional, FHA, VA, USDA
+
+Calculations:
+
+Standard amortization formula: M = P[r(1+r)^n]/[(1+r)^n-1]
+PMI: required if conventional loan and down payment less than 20%. Rates by credit score: 760+=0.2%, 720-759=0.4%, 680-719=0.6%, 640-679=0.9%, 600-639=1.2%, below 600=1.5% of loan amount annually
+FHA: 1.75% upfront MIP added to loan + 0.85% annual MIP monthly
+VA: 2.15% funding fee added to loan (first use, 0% down), no PMI
+USDA: 1% upfront guarantee fee + 0.35% annual fee, no down payment required
+Property tax monthly = (purchase price × tax rate) / 12
+Insurance monthly = (purchase price × insurance rate) / 12
+
+Display:
+
+Total monthly payment prominently at top
+Breakdown table: Principal & Interest, Property Tax, Home Insurance, PMI/MIP (if applicable), HOA, Total
+Loan summary: Purchase price, down payment, loan amount, total of all payments, total interest paid
+Income benchmarks table: show required annual income at 25%, 28%, 36%, 43% housing ratios
+All values update in real time as inputs change
+
+2. Add route /mortgage-calculator in src/App.tsx
+3. Update Footer.tsx: change the Mortgage Calculator link href to /mortgage-calculator
+4. Design requirements:
+
+Use existing Navbar and Footer components
+Use shadcn Card, Input, Select, Tabs, Button components
+Match site color scheme (navy primary, gold accent)
+Mobile responsive layout
+Two column layout on desktop: inputs left, results right
+Results panel sticky on desktop so it stays visible while scrolling inputs
+
+Do not modify any other existing pages or components. After building, confirm no TypeScript errors.

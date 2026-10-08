@@ -1,0 +1,55 @@
+Step 1 — Frontend UI only. No backend changes.
+
+In src/pages/admin/DistributionEmails.tsx, update the Monthly Market Update UI:
+
+When campaignType === "monthly_market_update", replace the Rough Notes textarea section with a PDF upload box styled similarly to the rough notes container:
+tsx
+<div className="space-y-2">
+  <label className="text-sm font-medium">Market Report PDF</label>
+  <div className="border rounded-md p-4 min-h-[100px] bg-muted/30 flex flex-col justify-center">
+    {!selectedPdf ? (
+      <label className="flex items-center gap-2 cursor-pointer text-sm text-muted-foreground hover:text-foreground transition-colors w-fit">
+        <input type="file" accept=".pdf" className="hidden"
+          onChange={(e) => setSelectedPdf(e.target.files?.[0] || null)} />
+        <span className="text-lg">➕</span>
+        <span>Upload Market Report PDF</span>
+      </label>
+    ) : (
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 text-sm">
+          <span>📎</span>
+          <span className="font-medium">{selectedPdf.name}</span>
+          <span className="text-muted-foreground">
+            ({(selectedPdf.size / 1024 / 1024).toFixed(1)} MB)
+          </span>
+        </div>
+        <button onClick={() => setSelectedPdf(null)}
+          className="text-muted-foreground hover:text-destructive text-xs">
+          ✕ Remove
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+Add state variable near other useState declarations:
+tsx
+const [selectedPdf, setSelectedPdf] = useState<File | null>(null);
+When campaignType === "monthly_market_update", replace the "Generate Draft with AI" button label with "✨ Generate Newsletter with AI". Keep the button disabled for now (placeholder — backend comes in Step 2):
+tsx
+{campaignType === "monthly_market_update" ? (
+  <Button disabled={!selectedPdf} variant="outline" className="gap-2">
+    <Sparkles className="h-4 w-4" />
+    Generate Newsletter with AI
+  </Button>
+) : (
+  // existing Generate Draft with AI button unchanged
+)}
+Auto-fill Campaign Title when Monthly Market Update is selected:
+Set title to "Austin Market Report — {current month} {current year}" (e.g. "Austin Market Report — July 2026")
+Only auto-fill if the title field is currently empty
+Keep General Update completely unchanged — rough notes, Generate Draft with AI button, everything exactly as before.
+Remove any remaining marketUpdateData state, MarketUpdateFormData interface, EMPTY_MARKET_UPDATE constant, and manual section editors if they still exist from the previous implementation.
+
+No backend changes. No Anthropic integration. Just the frontend UI.
+
+Restart dev server cleanly after implementing.

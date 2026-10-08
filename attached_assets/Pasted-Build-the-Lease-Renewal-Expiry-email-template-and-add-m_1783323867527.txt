@@ -1,0 +1,89 @@
+Build the Lease Renewal / Expiry email template and add manual sending to the Lease Reminders dashboard. Follow the same Phase 1 / Phase 2 pattern as Birthday Wishes — manual now, automated later.
+1. Create server/lib/templates/leaseRenewalEmail.ts:
+Export three functions, each returning HTML content for buildBrandedEmail:
+tsbuildTenantLeaseRenewalEmail(tenantName: string, propertyAddress: string, leaseEndDate: string, senderName: string): string
+buildOwnerLeaseRenewalEmail(ownerName: string, propertyAddress: string, leaseEndDate: string, senderName: string): string
+buildAgentLeaseRenewalNotificationEmail(propertyAddress: string, tenantName: string, leaseEndDate: string): string
+Content for each:
+Tenant version:
+Subject: Important Notice — Your Lease is Approaching Expiration
+
+Dear {Tenant Name},
+
+We wanted to reach out regarding your lease at {Property Address}.
+Your current lease agreement is scheduled to expire on {Lease End Date}.
+
+If you would like to discuss renewal options or have any questions about
+the next steps, please don't hesitate to contact us — we're here to help.
+
+We appreciate you as a valued tenant and look forward to hearing from you.
+
+Warm regards,
+{Sender Name}
+Owner version:
+Subject: Lease Expiration Notice — {Property Address}
+
+Dear {Owner Name},
+
+This is to inform you that the lease for your property at {Property Address}
+is approaching its expiration date of {Lease End Date}.
+
+We have notified the tenant regarding the upcoming lease expiration and
+renewal options. We will keep you informed of any updates or decisions
+made by the tenant.
+
+Please feel free to reach out if you have any questions or would like
+to discuss next steps.
+
+Warm regards,
+{Sender Name}
+Agent notification version:
+Subject: [Action Required] Lease Renewal Email Sent — {Property Address}
+
+Hi {Agent Name},
+
+This is an automated notification to inform you that the Lease Renewal /
+Expiry email has been sent for the following lease:
+
+Property: {Property Address}
+Tenant: {Tenant Name}
+Lease End Date: {Lease End Date}
+
+Both the tenant and owner have been notified. Please follow up with
+the tenant if needed to discuss renewal options or next steps.
+
+Texas Realty Hub
+2. Create POST /api/admin/send-lease-renewal-email in server/index.ts, protected by verifyAdmin:
+
+Accepts { leaseId: string } in the request body
+Fetches the full lease record from lease_reminders by ID
+Determines the assigned sender from the lease's owner1 email — check master_clients for a matching email to get their sender_email. If not found, default to ramanimma@texasrealtyhub.com
+Sends 3 emails using buildBrandedEmail + the three template functions above:
+
+To owner1_email (owner version) — from the assigned sender
+To tenant1_email (tenant version) — from the assigned sender
+If owner2_email exists, send owner version to them too
+If tenant2_email exists, send tenant version to them too
+To the assigned sender's email address (agent notification version) — from ramanimma@texasrealtyhub.com as a system notification
+
+
+Log the entire send as one campaign entry in email_campaigns (type: "lease_renewal") with all recipients logged in email_campaign_recipients
+Return { ok: true, sent: number, failed: number } or descriptive error
+
+3. Add a preview endpoint GET /api/admin/preview-lease-renewal-email/:id in server/index.ts, protected by verifyAdmin:
+
+Fetches the lease record by ID
+Returns the tenant version HTML (as the primary preview) wrapped in buildBrandedEmail with isPreview: true
+Same blob/new-tab pattern as birthday preview
+
+4. Add "Send Renewal Email" and "Preview" buttons to the Lease Reminders tab in src/pages/admin/ClientDatabase.tsx:
+
+Add alongside the existing "Review" and "Edit" buttons on each lease row
+Preview button (👁 icon): opens preview in new tab
+Send Renewal button (📧 icon): confirms with a small dialog "This will send renewal emails to the tenant, owner, and agent for {Property Address}. Proceed?" → on confirm, calls the endpoint
+Show loading state during send, success/error toast after
+Each row manages its own sending state independently
+
+Note for Phase 2 (do NOT build yet): After SendGrid is verified and manual sending is proven working, we will add a daily cron job that checks lease_reminders for records where notice_reminder_date = today and automatically sends the renewal email without any manual intervention.
+Do not change anything else. Restart the dev server cleanly:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

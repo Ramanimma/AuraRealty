@@ -1,0 +1,77 @@
+Make the entire homepage fully dark cinematic theme AND fix the logo on dark navbar. Make these changes:
+1. Fix logo on dark navbar in src/components/Navbar.tsx:
+
+When on homepage (transparent dark navbar): add style={{ filter: 'brightness(0) invert(1)' }} to the logo img tag so it appears white/clean on dark background
+When scrolled or on other pages (white navbar): show logo normally with no filter
+Use the existing scroll state and location detection already in the component
+
+2. Update src/components/AboutSection.tsx — full dark redesign:
+
+Background: #111111
+Label "WHY CHOOSE US": gold #C9A84C, uppercase Inter
+Heading: Cormorant Garamond, white, font-weight 300
+Body text: white/60%
+Feature icons background: rgba(201,168,76,0.1) with gold icon color
+Feature titles: white
+Feature descriptions: white/50%
+Stats overlay box (15+ Years): gold background stays
+Image: keep existing image, add slight dark overlay
+
+3. Update src/components/Neighborhoods.tsx — dark redesign:
+
+Section background: #1A1A1A
+Label "EXPLORE AUSTIN": gold
+Heading: white, Cormorant Garamond, font-weight 300
+Neighborhood cards: keep existing full-bleed image style — they already look great
+"Explore All Neighborhoods" button if exists: border: 0.5px solid rgba(255,255,255,0.25), white text
+
+4. Update src/components/Testimonials.tsx — dark redesign:
+
+Background: #0D0D0D (slightly darker than other sections for contrast)
+Label: gold
+Heading: white, Cormorant Garamond
+Quote marks: gold, low opacity
+Quote text: white/80%, Cormorant Garamond italic
+Client name: gold uppercase Inter
+Card background: #1A1A1A
+Card border: 0.5px solid rgba(255,255,255,0.08)
+Navigation arrows: white/40%, hover gold
+
+5. Update src/components/ContactSection.tsx — dark redesign:
+
+Section background: #111111
+Heading: white, Cormorant Garamond
+Subtitle: white/50%
+Form card background: #1A1A1A
+Form card border: 0.5px solid rgba(255,255,255,0.1)
+Input backgrounds: rgba(255,255,255,0.06)
+Input borders: 0.5px solid rgba(255,255,255,0.15)
+Input text: white
+Input placeholder: white/30%
+Labels: white/60%, uppercase Inter, letter-spacing
+Submit button: gold #C9A84C, white text, no border radius, uppercase
+Focus state on inputs: border-color: #C9A84C
+
+6. Update src/components/MailingList.tsx:
+
+Background: #0A0A0A (darkest section — creates rhythm)
+Everything else stays as-is (already dark)
+
+7. Update src/components/Footer.tsx:
+
+Background: #050505 (near black — darkest of all)
+This creates a dark gradient effect as you scroll down: #111 → #1A1A1A → #0D0D0D → #111 → #0A0A0A → #050505
+
+8. Update homepage section alternation in src/pages/Index.tsx:
+
+Add a CSS class or inline style to the main wrapper: background: #111111
+This ensures no white flashes between sections
+
+Design principle for the full dark theme:
+
+Each section uses a slightly different dark shade to create visual separation without borders
+Gold #C9A84C is the ONLY color accent used throughout
+White text at varying opacities (100%, 80%, 60%, 50%, 40%) creates hierarchy
+No cream, no light backgrounds anywhere on the homepage
+
+Do not modify any other pages (About, MortgageCalculator, HomeValuation, etc. stay cream/charcoal). Do not modify admin pages. Confirm no TypeScript errors after building.

@@ -1,0 +1,47 @@
+Polish the reusable branded email layout (server/lib/emailLayout.ts and the Birthday template) with these specific improvements. Keep the existing table-based structure for email-client compatibility — these are styling/content refinements, not a structural redesign.
+1. Footer — show ONLY the actual sender, not both agents:
+
+Remove the hardcoded "Rama Nimma · Swetha Nimma" line
+Replace with dynamic content based on which sender_email was used for this specific email:
+
+If Rama: show "Rama Nimma" + "Licensed REALTOR®" + his phone (732-740-2800) + his email (ramanimma@texasrealtyhub.com)
+If Swetha: show "Swetha Nimma" + "Licensed REALTOR®" + her phone (512-900-1897) + her email (swethanimma@texasrealtyhub.com)
+
+
+Below that, keep: website link (texasrealtyhub.com), "Full Circle Real Estate" tagline, divider, unsubscribe link
+
+2. Make phone, email, and website CLICKABLE links:
+
+Phone: <a href="tel:+17327402800">📞 (732) 740-2800</a> (formatted correctly per agent)
+Email: <a href="mailto:ramanimma@texasrealtyhub.com">✉ ramanimma@texasrealtyhub.com</a> (or Swetha's accordingly)
+Website: <a href="https://texasrealtyhub.com">🌐 texasrealtyhub.com</a>
+Style these links to NOT look like typical blue underlined web links — use the same text color as surrounding footer text, no underline, so they look clean and native to the email design
+
+3. Gold divider instead of gray:
+
+Find any <hr> or divider line in the footer (likely gray/light colored) and change its color to the brand gold (#C9A84C)
+
+4. Larger, more prominent name in the Birthday greeting:
+
+In buildBirthdayEmailHtml, increase the font-size of the recipient's name specifically (not the whole heading) — e.g. if currently one line "Happy Birthday, {Name}! 🎉" at one size, make the name itself larger/bolder, or split into two lines with the name on its own larger line below "Happy Birthday,"
+
+5. Real signature block in the Birthday email body:
+
+Change the closing signature from a single line to a proper block:
+
+Warm wishes,
+
+{Sender Name}
+Licensed REALTOR®
+
+Texas Realty Hub
+
+Add appropriate spacing between each line (use <br><br> or paragraph spacing, not cramped single-line breaks)
+
+6. More breathing room between body paragraphs:
+
+Increase the spacing between paragraphs in the email body (e.g. margin-bottom on <p> tags) for a more premium, less cramped feel
+
+7. Consistent 20-24px padding on mobile — confirm the existing responsive padding is in that range throughout header, content, and footer sections
+After implementing, restart the dev server cleanly:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

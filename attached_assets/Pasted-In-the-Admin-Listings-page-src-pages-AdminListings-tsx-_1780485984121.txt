@@ -1,0 +1,48 @@
+In the Admin Listings page (src/pages/AdminListings.tsx or similar), find the "Main Image URL" text input field. Replace it with a file upload button that works exactly like the existing "Upload Images" button for additional images.
+1. Replace the Main Image URL text input with:
+tsx<div>
+  <label className="block text-xs font-medium text-gray-700 mb-1">MAIN IMAGE</label>
+  <div className="flex items-center gap-3">
+    {formData.main_image && (
+      <img src={formData.main_image} alt="Main" className="h-16 w-24 object-cover rounded border" />
+    )}
+    <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+      <span>📷 Upload Main Image</span>
+      <input type="file" accept="image/*" className="hidden" onChange={handleMainImageUpload} />
+    </label>
+    {isUploadingMain && (
+      <div className="flex items-center gap-2">
+        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-yellow-600" />
+        <span className="text-xs text-gray-500">Uploading...</span>
+      </div>
+    )}
+  </div>
+</div>
+2. Add upload handler handleMainImageUpload:
+tsconst handleMainImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  setIsUploadingMain(true);
+  try {
+    const formData = new FormData();
+    formData.append('image', file);
+    const res = await fetch('/api/admin/upload-property-image', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}` },
+      body: formData
+    });
+    const data = await res.json();
+    if (data.url) {
+      setFormData(prev => ({ ...prev, main_image: data.url }));
+    }
+  } catch (err) {
+    alert('Image upload failed. Please try again.');
+  } finally {
+    setIsUploadingMain(false);
+  }
+};
+3. Add state variable:
+tsconst [isUploadingMain, setIsUploadingMain] = useState(false);
+4. Check if /api/admin/upload-property-image already exists — if it does, use it. If not, create it in server/index.ts using the same pattern as upload-hero-video but saving to the property-images bucket instead of hero-videos
+5. Keep the existing additional images upload button exactly as it is — do not change it
+Do not change anything else.

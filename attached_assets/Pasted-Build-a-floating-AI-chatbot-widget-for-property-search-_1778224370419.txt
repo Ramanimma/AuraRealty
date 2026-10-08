@@ -1,0 +1,89 @@
+Build a floating AI chatbot widget for property search. Requirements:
+1. Create src/components/ChatBot.tsx — a floating chat widget that appears on all public pages:
+
+Floating button: bottom-right corner, navy background, chat icon, gold pulse animation to draw attention
+Click to open: slides up a chat panel (400px wide, 500px tall on desktop, full screen on mobile)
+Chat panel header: "Texas Realty Hub Assistant" with navy background, gold accent, close button
+Message thread: scrollable, user messages right-aligned (gold background), bot messages left-aligned (navy/white)
+Input bar at bottom: text input + send button
+Typing indicator: animated dots while bot is "thinking"
+Welcome message on open: "Hi! I'm your Texas Realty Hub assistant. I can help you find properties. Try asking: 'Show me 4 bed homes in Leander' or 'Homes under $500k in Cedar Park'"
+
+2. Create src/lib/chatbot.ts — rule-based parser and response engine:
+Parse these from user input:
+
+Beds: "4 bed", "4 bedroom", "4br", "four bedroom" → beds: 4
+Baths: "3 bath", "3 bathroom", "3ba" → baths: 3
+City: match against ["Leander","Liberty Hill","Georgetown","Round Rock","Cedar Park","Hutto","Austin"] case-insensitive
+Max price: "$500k", "$500,000", "under 500k", "below $600k" → max_price: 500000
+Min price: "above $400k", "over $400,000" → min_price: 400000
+Property type: "single family", "condo", "townhouse", "land"
+Listing type: "rent", "rental", "for rent" → listing_type: rent, otherwise sale
+Status: "active" default, also parse "sold", "pending"
+
+Handle these intents:
+
+property_search: any message with beds/baths/city/price keywords
+greeting: "hi", "hello", "hey" → friendly greeting + prompt to search
+help: "help", "what can you do" → list capabilities
+contact: "contact", "agent", "call", "schedule", "tour" → show agent contact info + link to contact form
+valuation: "value", "worth", "valuation", "sell my home" → link to home valuation page
+mortgage: "mortgage", "payment", "afford", "calculator" → link to mortgage calculator
+fallback: anything unrecognized → "I can help you find properties! Try: 'Show me 3 bed homes in Austin'"
+
+3. Create server/routes/chatbot.ts — backend search endpoint:
+POST /api/chatbot/search accepts:
+json{
+  "filters": {
+    "city": "Leander",
+    "beds": 4,
+    "baths": 3,
+    "max_price": 500000,
+    "min_price": 0,
+    "property_type": "Single Family",
+    "listing_type": "sale"
+  },
+  "session_token": "uuid"
+}
+
+Query listings table with all provided filters (only apply filter if value exists)
+Save search to search_analytics table: query_text, parsed_filters, results_count
+Return matching listings with all fields
+
+4. Response format in chat:
+If results found:
+
+Show count: "I found 3 properties matching your search:"
+For each listing show a mini card inside the chat:
+
+Property image (small thumbnail)
+Address
+Price
+Beds / Baths / Sqft
+"View Details" button linking to /property/:id
+
+
+Below results: "Want to schedule a tour? Click here" → links to /#contact
+
+If no results:
+
+"I didn't find any properties matching that search in our current listings. Our inventory is growing — would you like to be notified when new listings match your criteria?"
+Show "Contact an Agent" button
+
+5. Add chatbot to src/pages/Index.tsx and all other public pages by adding it to the main layout
+6. Add route to server/index.ts: import and use the chatbot router
+7. Save chat sessions:
+
+Generate a session_token (UUID) on first message, store in localStorage
+Create record in chat_sessions table on first message
+Save each message to chat_messages table (role: user/assistant, content, metadata: parsed filters)
+
+Design:
+
+Navy (#1B3A6B) and gold (#C9A84C) color scheme
+Smooth slide-up animation when opening
+Mobile: full screen overlay
+Unread message badge on floating button when closed
+Do not show chatbot on any /admin pages
+
+Do not modify any existing components except adding ChatBot to the main layout. Confirm no errors after building.

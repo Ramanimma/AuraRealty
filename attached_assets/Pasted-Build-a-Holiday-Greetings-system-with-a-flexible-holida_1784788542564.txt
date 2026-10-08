@@ -1,0 +1,132 @@
+Build a Holiday Greetings system with a flexible holiday management admin page, email templates, and automation.
+
+1. Create Supabase table:
+
+sql
+CREATE TABLE holidays (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text NOT NULL,
+  type text NOT NULL DEFAULT 'us',
+  holiday_date date NOT NULL,
+  year int NOT NULL,
+  is_active boolean DEFAULT true,
+  greeting_email_sent_at timestamptz DEFAULT NULL,
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE holidays ENABLE ROW LEVEL SECURITY;
+
+2. Seed initial holidays for 2026 (insert these rows):
+
+sql
+INSERT INTO holidays (name, type, holiday_date, year) VALUES
+('New Year', 'us', '2026-01-01', 2026),
+('Independence Day', 'us', '2026-07-04', 2026),
+('Thanksgiving', 'us', '2026-11-26', 2026),
+('Christmas', 'us', '2026-12-25', 2026),
+('Holi', 'indian', '2026-03-29', 2026),
+('Vinayaka Chavithi', 'indian', '2026-08-22', 2026),
+('Dussehra', 'indian', '2026-10-02', 2026),
+('Diwali', 'indian', '2026-10-21', 2026);
+
+3. Backend endpoints in server/index.ts, all protected by verifyAdmin:
+
+GET /api/admin/holidays — returns all holidays ordered by date
+POST /api/admin/holidays — create new holiday
+PUT /api/admin/holidays/:id — update holiday (name, date, type, is_active)
+DELETE /api/admin/holidays/:id — delete holiday
+POST /api/admin/send-holiday-greeting/:id — manually send greeting for a specific holiday
+GET /api/admin/preview-holiday-greeting/:id?audience=us|indian — preview the greeting email
+
+4. Create holiday greeting email template in server/lib/templates/holidayGreetingEmail.ts:
+
+ts
+export function buildHolidayGreetingEmail(
+  recipientName: string,
+  holidayName: string,
+  holidayType: 'us' | 'indian',
+  senderName: string
+): string
+
+Content:
+
+Subject: Happy {Holiday Name} from Texas Realty Hub! 🎉
+
+Dear {Recipient Name},
+
+Wishing you and your family a wonderful {Holiday Name}!
+
+May this special occasion bring you joy, happiness, and cherished
+moments with your loved ones.
+
+From all of us at Texas Realty Hub, we are grateful to have you
+as part of our community.
+
+Warm wishes,
+{Sender Name}
+
+Use the existing buildBrandedEmail shell with isPreview support.
+
+5. Sending logic for POST /api/admin/send-holiday-greeting/:id:
+
+Fetch the holiday by ID
+Determine audience based on type:
+us → send to ALL clients where greeting_preference != 'none' and email_opted_out = false
+indian → send to clients where greeting_preference = 'indian_and_us' and email_opted_out = false
+For each client, send using their sender_email (Rama or Swetha)
+Log to email_campaigns and email_campaign_recipients
+After successful send, update greeting_email_sent_at on the holiday record (duplicate protection)
+Return { sent, failed, skipped }
+
+6. Update server/lib/automation.ts — add a new function:
+
+ts
+export async function sendTodaysHolidayGreetings(): Promise<void> {
+  const today = new Date().toISOString().split('T')[0];
+  // Find active holidays where holiday_date = today AND greeting_email_sent_at IS NULL
+  // For each: call the holiday greeting send logic
+  // Log results
+}
+
+Add this to the existing daily cron job in server/index.ts:
+
+ts
+await sendTodaysHolidayGreetings();
+
+7. Create src/pages/admin/Holidays.tsx — Holiday Management admin page:
+
+Header: "Holiday Greetings" + "+ Add Holiday" button
+
+Table columns: Name | Type (🇺🇸 US / 🌏 Indian) | Date | Year | Status (Active/Inactive) | Sent | Actions
+
+"Sent" column: Shows "✓ Sent {date}" if greeting_email_sent_at is set, otherwise shows "Not sent yet"
+
+Actions per row:
+
+👁 Preview button — shows preview of greeting email
+📧 Send Now button — manually trigger the greeting (with confirmation dialog showing recipient count)
+✏️ Edit button — change name, date, type, active status
+🗑️ Delete button (with confirmation)
+
+Empty state: "No holidays added yet. Click + Add Holiday to get started."
+
+8. Add Holiday form panel src/components/admin/HolidayPanel.tsx:
+
+Name (text input)
+Type: dropdown — "🇺🇸 US Holiday" / "🌏 Indian Holiday"
+Date (date picker)
+Year (number input, default current year)
+Active toggle (yes/no)
+
+9. Add to sidebar and routing:
+
+Add "Holiday Greetings" with a 🎉 or Sparkles icon to admin sidebar
+Add route /admin/holidays in src/App.tsx
+
+10. Run SQL in Supabase (remind user to do this manually):
+
+Create table
+Insert seed data
+
+Restart dev server cleanly after implementing:
+
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

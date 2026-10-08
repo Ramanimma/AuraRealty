@@ -1,0 +1,29 @@
+We found a gap in the sync logic, plus a UI refresh issue. Please fix both:
+Part 1 — Sync gap:
+
+Currently, editing a phone/email on the Lease Reminders tab correctly updates that person's Master Clients record, but does NOT continue on to update that same person's OTHER lease records. The cascade stops one step too early.
+Fix this by creating ONE shared sync function that both edit paths call:
+
+Create a helper function syncContactAcrossAllRecords(fullName, newPhone, newEmail) in server/index.ts (or a shared utils file) that:
+
+Updates the matching row in master_clients (by full_name match) with the new phone/email
+Searches lease_reminders for ALL rows where fullName appears in owner1_name, owner2_name, tenant1_name, or tenant2_name (case-insensitive, trimmed)
+Updates the corresponding phone/email columns on EVERY matching lease row found
+Wrapped in try/catch per update so one failure doesn't block others
+
+
+In PUT /api/admin/master-clients/:id: after updating, call syncContactAcrossAllRecords(oldName, newPhone, newEmail)
+In PUT /api/admin/lease-reminders/:id: after updating, for each owner/tenant field that changed, call syncContactAcrossAllRecords(personName, newPhone, newEmail) — this cascades to BOTH master_clients AND all other lease records for that person
+
+Part 2 — Instant UI refresh (no manual navigation needed):
+
+Right now, after clicking "Save Changes" on either the Master Clients edit panel or the Lease Reminders edit panel, the updated data does NOT appear immediately in the table — the admin has to navigate away to another tab/page and come back to see the change. Fix this:
+
+Find how the Master Clients table and Lease Reminders table currently fetch their data (likely a useQuery or useEffect + useState pattern in src/pages/admin/ClientDatabase.tsx)
+After a successful Save in ClientEditPanel.tsx, immediately trigger a refetch of BOTH the Master Clients list AND the Lease Reminders list (since a single edit can affect both tables now, per Part 1's cascade)
+After a successful Save in LeaseEditPanel.tsx, do the same — refetch BOTH lists immediately
+If using React Query (useQuery/useMutation), use queryClient.invalidateQueries() for both the master-clients and lease-reminders query keys right after a successful save, so both tabs are always fresh without requiring manual navigation
+The currently open panel should still show its "success" message and close as before — just make sure the underlying table data refreshes in the background at the same time, so when the admin looks at either tab, the numbers are already correct
+
+After implementing both parts, restart the dev server cleanly:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

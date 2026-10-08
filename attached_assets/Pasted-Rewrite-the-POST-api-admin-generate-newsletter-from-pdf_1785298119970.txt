@@ -1,0 +1,219 @@
+Rewrite the POST /api/admin/generate-newsletter-from-pdf endpoint in server/index.ts to use a JSON-first approach instead of asking Claude to generate HTML directly.
+
+1. Update the Anthropic API call to return structured JSON only:
+
+ts
+const message = await anthropic.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 2000,
+  messages: [{
+    role: "user",
+    content: `You are a real estate data analyst. Extract information from this Austin market report and return ONLY a valid JSON object with no explanation, no markdown, no code blocks.
+
+Extract these exact fields:
+- medianPrice: median home price (e.g. "$485,000")
+- medianPriceTrend: short trend vs last period (e.g. "▲ 2%" or "▼ $5,000") or ""
+- homesSold: total homes sold (e.g. "342")
+- homesSoldTrend: short trend (e.g. "▲ 24 vs last month") or ""
+- daysOnMarket: average or median days on market (e.g. "28")
+- daysOnMarketTrend: short trend (e.g. "▼ 3 days") or ""
+- soldListRatio: sold-to-list price ratio (e.g. "96%")
+- soldListRatioTrend: short trend or ""
+- pricePerSqFt: price per square foot (e.g. "$245")
+- pricePerSqFtTrend: short trend or ""
+- inventory: months of supply or active inventory (e.g. "2.1 months")
+- inventoryTrend: short trend or ""
+- marketSummary: 2-3 sentence summary of overall market conditions using specific numbers
+- neighborhoodSpotlight: 2-3 sentences about one specific Greater Austin area (Cedar Park, Leander, Georgetown, Round Rock, Liberty Hill, or Austin) with data from the report
+- buyerInsights: exactly 3 bullet points as plain text separated by | character (e.g. "Insight 1|Insight 2|Insight 3") based on current market conditions
+- sellerInsights: exactly 3 bullet points as plain text separated by | character based on current market conditions
+- tipOfMonth: one practical actionable real estate tip based on current conditions
+
+If a value cannot be found in the report, use empty string "".
+Return ONLY the JSON object, nothing else.
+
+Market Report:
+${extractedText}
+${userNotes ? `\n\nAdditional context: ${userNotes}` : ''}`
+  }]
+});
+
+2. Parse the JSON response:
+
+ts
+let newsletterData;
+try {
+  const rawJson = message.content[0]?.type === "text" ? message.content[0].text.trim() : "";
+  newsletterData = JSON.parse(rawJson);
+} catch (e) {
+  return res.status(500).json({ error: "Failed to parse AI response. Please try again." });
+}
+
+3. Build the newsletter HTML from the JSON using a fixed server-side template function buildMarketUpdateNewsletterHtml(data):
+
+Create this function in server/lib/templates/marketUpdateEmail.ts (replace existing content):
+
+ts
+export function buildMarketUpdateNewsletterHtml(data: {
+  medianPrice: string; medianPriceTrend: string;
+  homesSold: string; homesSoldTrend: string;
+  daysOnMarket: string; daysOnMarketTrend: string;
+  soldListRatio: string; soldListRatioTrend: string;
+  pricePerSqFt: string; pricePerSqFtTrend: string;
+  inventory: string; inventoryTrend: string;
+  marketSummary: string;
+  neighborhoodSpotlight: string;
+  buyerInsights: string;
+  sellerInsights: string;
+  tipOfMonth: string;
+  month: string;
+}): string {
+
+  // Helper to build a stat card
+  const statCard = (label: string, value: string, trend: string) => `
+    <td width="30%" style="background:#F8F9FA;border:1px solid #E5E7EB;border-radius:8px;
+                            padding:16px 12px;text-align:center;vertical-align:top;">
+      <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;
+                 color:#6B7280;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">
+        ${label}
+      </p>
+      <p style="font-family:Georgia,serif;font-size:22px;font-weight:700;
+                 color:#1E293B;margin:0 0 4px;">
+        ${value || 'N/A'}
+      </p>
+      ${trend ? `<p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;
+                             color:#6B7280;margin:0;">${trend}</p>` : ''}
+    </td>`;
+
+  // Helper to build bullet points from pipe-separated string
+  const bulletPoints = (text: string) => text
+    ? text.split('|').map(b => b.trim()).filter(Boolean)
+        .map(b => `<li style="margin-bottom:8px;">${b}</li>`).join('')
+    : '<li>See full report for details</li>';
+
+  return `
+    <h2 style="font-family:Georgia,serif;font-size:22px;color:#1E293B;
+                border-left:3px solid #C9A84C;padding-left:12px;margin:0 0 12px;">
+      📈 Market Summary
+    </h2>
+    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;
+               color:#444;line-height:1.7;margin:0 0 28px;">
+      ${data.marketSummary || 'Market data extracted from official Austin Board of Realtors report.'}
+    </p>
+
+    <h2 style="font-family:Georgia,serif;font-size:22px;color:#1E293B;
+                border-left:3px solid #C9A84C;padding-left:12px;margin:0 0 16px;">
+      📊 Market Snapshot — ${data.month}
+    </h2>
+
+    <!-- Stat Cards Row 1 -->
+    <table width="100%" cellpadding="0" cellspacing="8" style="margin-bottom:8px;">
+      <tr>
+        ${statCard('Median Home Price', data.medianPrice, data.medianPriceTrend)}
+        <td width="3%"></td>
+        ${statCard('Homes Sold', data.homesSold, data.homesSoldTrend)}
+        <td width="3%"></td>
+        ${statCard('Days on Market', data.daysOnMarket, data.daysOnMarketTrend)}
+      </tr>
+    </table>
+
+    <!-- Stat Cards Row 2 -->
+    <table width="100%" cellpadding="0" cellspacing="8" style="margin-bottom:28px;">
+      <tr>
+        ${statCard('Sold/List Ratio', data.soldListRatio, data.soldListRatioTrend)}
+        <td width="3%"></td>
+        ${statCard('Price per Sq Ft', data.pricePerSqFt, data.pricePerSqFtTrend)}
+        <td width="3%"></td>
+        ${statCard('Active Inventory', data.inventory, data.inventoryTrend)}
+      </tr>
+    </table>
+
+    <hr style="border:none;border-top:1px solid #E5E7EB;margin:0 0 28px;">
+
+    <h2 style="font-family:Georgia,serif;font-size:22px;color:#1E293B;
+                border-left:3px solid #C9A84C;padding-left:12px;margin:0 0 12px;">
+      🏘️ Neighborhood Spotlight
+    </h2>
+    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;
+               color:#444;line-height:1.7;margin:0 0 28px;">
+      ${data.neighborhoodSpotlight || ''}
+    </p>
+
+    <hr style="border:none;border-top:1px solid #E5E7EB;margin:0 0 28px;">
+
+    <h2 style="font-family:Georgia,serif;font-size:22px;color:#1E293B;
+                border-left:3px solid #C9A84C;padding-left:12px;margin:0 0 12px;">
+      🏡 For Buyers
+    </h2>
+    <ul style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;
+                color:#444;line-height:1.8;padding-left:20px;margin:0 0 28px;">
+      ${bulletPoints(data.buyerInsights)}
+    </ul>
+
+    <hr style="border:none;border-top:1px solid #E5E7EB;margin:0 0 28px;">
+
+    <h2 style="font-family:Georgia,serif;font-size:22px;color:#1E293B;
+                border-left:3px solid #C9A84C;padding-left:12px;margin:0 0 12px;">
+      💰 For Sellers & Owners
+    </h2>
+    <ul style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;
+                color:#444;line-height:1.8;padding-left:20px;margin:0 0 28px;">
+      ${bulletPoints(data.sellerInsights)}
+    </ul>
+
+    <hr style="border:none;border-top:1px solid #E5E7EB;margin:0 0 28px;">
+
+    <h2 style="font-family:Georgia,serif;font-size:22px;color:#1E293B;
+                border-left:3px solid #C9A84C;padding-left:12px;margin:0 0 12px;">
+      📌 Tip of the Month
+    </h2>
+    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;
+               color:#444;line-height:1.7;margin:0 0 28px;">
+      ${data.tipOfMonth || ''}
+    </p>
+
+    <hr style="border:none;border-top:1px solid #E5E7EB;margin:0 0 28px;">
+
+    <!-- CTA -->
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="background:#F8F9FA;border-radius:8px;padding:24px;text-align:center;">
+          <p style="font-family:Georgia,serif;font-size:18px;color:#1E293B;
+                     font-weight:600;margin:0 0 8px;">
+            Ready to make your next move?
+          </p>
+          <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;
+                     color:#6B7280;margin:0 0 20px;">
+            Let's discuss what these market trends mean for you personally.
+          </p>
+          <a href="https://texasrealtyhub.com/contact"
+             style="display:inline-block;background:#C9A84C;color:#000000;
+                     font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;
+                     font-weight:700;letter-spacing:1px;text-transform:uppercase;
+                     text-decoration:none;padding:14px 32px;border-radius:2px;">
+            Schedule a Free Consultation
+          </a>
+          <br/><br/>
+          <a href="https://texasrealtyhub.com/properties"
+             style="font-size:13px;color:#C9A84C;font-family:'Helvetica Neue',Arial,sans-serif;
+                     text-decoration:underline;">
+            Browse Current Listings →
+          </a>
+        </td>
+      </tr>
+    </table>
+  `;
+}
+
+4. In the endpoint, after building the HTML:
+
+ts
+const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+const newsletterHtml = buildMarketUpdateNewsletterHtml({ ...newsletterData, month: currentMonth });
+return res.json({ newsletterHtml });
+
+5. Keep the frontend exactly as is — the generated HTML goes into the Quill editor as before.
+
+Restart dev server cleanly after implementing:
+
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

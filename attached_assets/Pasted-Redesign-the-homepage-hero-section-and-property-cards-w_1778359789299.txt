@@ -1,0 +1,74 @@
+Redesign the homepage hero section and property cards with a Cinematic Dark style. Make these changes:
+1. Update src/components/HeroSection.tsx — full cinematic dark redesign:
+
+Section background: #1A1A1A (very dark charcoal)
+Remove the sliding image background — replace with a solid dark background with a subtle large icon watermark (use a CSS background pattern or just dark color)
+Keep existing search functionality and onSearch prop — just restyle
+
+Layout:
+
+Gold uppercase label above headline: "AUSTIN & CENTRAL TEXAS"
+Headline: Cormorant Garamond, 64px desktop / 40px mobile, font-weight 300, white, with the word "Austin" in gold italic
+Subheadline: Inter, 14px, white/50%, letter-spacing 0.05em
+Search bar: dark glass style:
+
+Input: background: rgba(255,255,255,0.08), border: 0.5px solid rgba(255,255,255,0.2), white text, white/35% placeholder
+Dropdowns: same dark glass style
+Search button: solid gold #C9A84C, white text, no border radius, uppercase Inter
+
+
+Stats row below search bar (separated by thin white/10% top border):
+
+4 stats in a row: "500+ Homes Sold", "15+ Years Experience", "7 Service Areas", "5★ Rated"
+Number: Cormorant Garamond 32px gold
+Label: Inter 10px uppercase white/40% letter-spacing
+
+
+
+2. Update src/components/FeaturedProperties.tsx — cinematic card redesign:
+
+Section background: #111111
+Section label: gold #C9A84C, uppercase Inter
+Section heading: Cormorant Garamond white, font-weight 300
+
+Property grid layout:
+
+First property card spans full width (featured card) — height 320px
+Remaining cards in 2-column grid — height 260px
+Each card: dark background #2A2A2A, relative positioned
+Image fills the entire card (object-fit cover)
+Dark gradient overlay: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 55%, transparent 100%)
+Price badge top-left: gold background, white text, uppercase Inter 10px
+Status badge: "For Sale" = gold, "For Rent" = dark green #1C6B4A, "Pending" = charcoal
+Content overlaid at bottom:
+
+Price: Cormorant Garamond 22px gold
+Address: Inter 13px white/85%
+Beds/Baths/Sqft: Inter 10px uppercase white/50% with dot separators
+
+
+"View Details" button: bottom right, border: 0.5px solid rgba(255,255,255,0.3), white text, transparent background, 10px uppercase
+Hover effect: slight scale on image (1.03), overlay darkens slightly
+
+"View All Properties" button:
+
+Centered below grid
+border: 0.5px solid rgba(255,255,255,0.25), white/70% text, transparent background
+Hover: gold border and text
+
+3. Update src/components/Navbar.tsx:
+
+When hero is dark (homepage), navbar should be transparent with white text
+Use useLocation() — if path is / make navbar transparent + white text over the dark hero
+On scroll past 80px: navbar becomes white background with dark text
+On all other pages: always white background with dark text
+"Get Started" button stays gold on all pages
+
+4. Keep all existing functionality:
+
+Search filters still work (query, propertyType, priceRange)
+"View Details" still navigates to /property/:id
+All TanStack Query data fetching unchanged
+Mobile responsive — on mobile stack cards single column
+
+Do not modify any admin pages, other pages, or the backend. Confirm no TypeScript errors after building.

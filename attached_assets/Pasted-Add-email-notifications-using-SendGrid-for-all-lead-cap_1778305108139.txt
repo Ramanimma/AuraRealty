@@ -1,0 +1,106 @@
+Add email notifications using SendGrid for all lead capture forms. Requirements:
+1. Install SendGrid package — run in shell:
+bashnpm install @sendgrid/mail
+2. Create server/lib/email.ts — email service module:
+tsimport sgMail from '@sendgrid/mail';
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+
+const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL!;
+const FROM_NAME = process.env.SENDGRID_FROM_NAME!;
+const AGENT_EMAIL = 'ramanimma@texasrealtyhub.com';
+const AGENT_EMAIL_2 = 'swethanimma@texasrealtyhub.com';
+Build these email functions:
+A) Tour Request — Agent Notification:
+To: ramanimma@texasrealtyhub.com + swethanimma@texasrealtyhub.com
+From: Texas Realty Hub <ramanimma@texasrealtyhub.com>
+Subject: 🏠 New Tour Request — {full_name}
+Body (HTML):
+  - Header: navy background, "Texas Realty Hub" white logo text
+  - "New Tour Request Received" headline
+  - Details table:
+    Name, Email, Phone, Property of Interest, Preferred Date, Message
+  - Gold CTA button: "View in Dashboard" → link to /admin/inquiries
+  - Footer: Texas Realty Hub | ramanimma@texasrealtyhub.com
+B) Tour Request — Visitor Confirmation:
+To: visitor's email
+From: Texas Realty Hub <ramanimma@texasrealtyhub.com>
+Subject: We received your tour request — Texas Realty Hub
+Body (HTML):
+  - Header: navy/charcoal background, "Texas Realty Hub" white
+  - "Thank You, {first_name}!" headline in Cormorant Garamond style
+  - Body: "We've received your tour request and one of our agents will contact you within 24 hours to confirm your appointment."
+  - Details box: Date requested, Property of Interest
+  - Agent contact section: show Rama Nimma photo placeholder, phone 732-740-2800, email
+  - Gold CTA: "Browse More Properties" → link to site URL
+  - Footer with TREC disclaimer
+C) Home Valuation — Agent Notification:
+To: ramanimma@texasrealtyhub.com + swethanimma@texasrealtyhub.com
+Subject: 📊 New Valuation Request — {full_name} — {address}
+Body (HTML):
+  - "New Home Valuation Request" headline
+  - Property details table: Address, City, ZIP, State, Type, Beds, Baths, Sqft, Year Built, Condition
+  - Contact details: Name, Email, Phone
+  - Notes section if provided
+  - Gold CTA: "View in Dashboard" → /admin/dashboard
+D) Home Valuation — Visitor Confirmation:
+To: visitor's email
+Subject: Your free home valuation request — Texas Realty Hub
+Body (HTML):
+  - "We're On It, {first_name}!" headline
+  - "Our team is analyzing comparable sales in {city} and will deliver your personalized market report within 24 hours."
+  - What to expect: 3 bullet points — Market Analysis, Comparable Sales, Expert Recommendation
+  - Agent contact info
+  - CTA: "Learn More About Selling" → /home-valuation
+E) Newsletter Signup — Welcome Email:
+To: subscriber's email
+Subject: Welcome to Texas Realty Hub Insider Updates
+Body (HTML):
+  - "Welcome, {first_name}!" headline
+  - "You're now part of our exclusive list. We'll keep you updated on new listings, market trends, and opportunities in Central Texas."
+  - What you'll receive: New Listings, Market Updates, Neighborhood Guides, Investment Tips
+  - CTA: "Explore Current Listings" → site URL
+F) New Contact/Lead — Agent Notification:
+To: ramanimma@texasrealtyhub.com
+Subject: 👤 New Lead — {full_name} from {source}
+Body: Name, email, phone, source, any notes
+3. Update server/index.ts — add email sending to these existing routes:
+
+POST /api/inquiries:
+After saving to DB, call:
+
+sendTourRequestToAgent(inquiryData)
+sendTourConfirmationToVisitor(inquiryData)
+Log to email_log table: both emails with status
+Don't fail the request if email fails — catch errors silently and log them
+
+
+POST /api/home-valuations:
+After saving to DB, call:
+
+sendValuationRequestToAgent(valuationData)
+sendValuationConfirmationToVisitor(valuationData)
+Log to email_log table
+
+
+POST /api/newsletter:
+After saving to DB, call:
+
+sendNewsletterWelcome(contactData)
+Log to email_log table
+
+
+
+4. Add SENDGRID_SITE_URL to email links:
+Use process.env.VITE_SUPABASE_URL is wrong — instead hardcode the site URL as:
+https://444d061f-7f31-4310-9fe8-9530001c2ca3-00-2amm4076yk3sk.janeway.replit.dev
+for all CTA links in emails for now. We'll update this when we get a custom domain.
+5. Add to Replit Secrets instruction (tell me to add this):
+Remind me to verify SENDGRID_API_KEY, SENDGRID_FROM_EMAIL, SENDGRID_FROM_NAME are in Replit Secrets.
+Error handling:
+
+Wrap ALL email sends in try/catch
+Never let email failure cause API endpoint to return error
+Log all email attempts to email_log table with status 'sent' or 'failed'
+Console.log errors for debugging
+
+Do not modify any frontend files or admin pages. Confirm no TypeScript errors after building.

@@ -1,0 +1,129 @@
+Perform a complete color palette refresh across the entire site to a Warm Cream & Charcoal luxury theme. Make these changes:
+1. Update src/index.css — replace the entire :root CSS variables with:
+css:root {
+  --background: 40 30% 97%;
+  --foreground: 0 0% 11%;
+  --primary: 0 0% 11%;
+  --primary-foreground: 40 30% 97%;
+  --secondary: 40 20% 94%;
+  --secondary-foreground: 0 0% 11%;
+  --accent: 42 55% 57%;
+  --accent-foreground: 0 0% 100%;
+  --muted: 40 20% 93%;
+  --muted-foreground: 0 0% 40%;
+  --border: 40 15% 88%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 11%;
+  --ring: 42 55% 57%;
+  --radius: 0rem;
+}
+Also add these custom CSS classes at the bottom of index.css:
+css.section-cream { background-color: #F8F5F0; }
+.section-white { background-color: #FFFFFF; }
+.section-dark { background-color: #1C1C1C; }
+.section-darkest { background-color: #141414; }
+.text-gold { color: #C9A84C; }
+.border-gold { border-color: #C9A84C; }
+.luxury-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #C9A84C;
+}
+2. Update src/components/Navbar.tsx:
+
+Background: pure white #FFFFFF
+Logo text color: charcoal #1C1C1C
+Nav links: charcoal #1C1C1C, uppercase, letter-spacing
+Phone number: charcoal
+"Get Started" button: gold background #C9A84C, white text, no border radius
+Border bottom: 1px solid #EFEFEB
+
+3. Update src/components/FeaturedProperties.tsx:
+
+Section background: cream #F8F5F0
+Section label: gold #C9A84C
+Heading: charcoal #1C1C1C
+Cards: white background, 1px solid #E8E4DC border
+Price badge: gold #C9A84C background, white text
+Address text: charcoal #1C1C1C
+Beds/baths text: #6B6B6B
+"View Details" button: charcoal outline, charcoal text, hover fills charcoal with white text
+
+4. Update src/components/AboutSection.tsx:
+
+Section background: white #FFFFFF
+Label: gold
+Heading: charcoal
+Body text: #4A4A4A
+Feature icons background: cream #F8F5F0
+Stats overlay box: gold #C9A84C background (keep as is)
+
+5. Update src/components/Neighborhoods.tsx:
+
+Section background: cream #F8F5F0
+Label: gold
+Heading: charcoal
+Cards: keep dark gradient overlay on images
+Neighborhood name: white, Cormorant Garamond italic
+City/price text: white/70% uppercase Inter
+
+6. Update src/components/Testimonials.tsx:
+
+Section background: charcoal #1C1C1C (NOT navy, NOT black)
+Label: gold #C9A84C
+Heading: white
+Quote marks: gold, low opacity
+Quote text: white, Cormorant Garamond italic
+Client name: gold #C9A84C, uppercase Inter, letter-spacing
+Card background: slightly lighter charcoal #2A2A2A
+Card border: 1px solid #333333
+
+7. Update src/components/ContactSection.tsx:
+
+Section background: white #FFFFFF
+Heading: charcoal
+Subtitle: #6B6B6B
+Form card: white, 1px solid #E8E4DC
+Input borders: 1px solid #E8E4DC, focus border gold
+Submit button: gold #C9A84C background, white text, no border radius, uppercase
+
+8. Update src/components/MailingList.tsx:
+
+Section background: charcoal #1C1C1C (matches testimonials — intentional dark band)
+Heading: white, Cormorant Garamond, font-weight 300
+Subtitle: white/60%
+Inputs: transparent background, border-bottom only 1px solid rgba(255,255,255,0.3), white text, placeholder white/40%
+Subscribe button: 1px solid white border, white text, transparent background, hover: white background charcoal text
+Consent text: white/40%
+Checkbox: white border
+
+9. Update src/components/Footer.tsx:
+
+Background: darkest charcoal #141414
+Logo: white, Cormorant Garamond
+All text: white/60%
+Links hover: gold #C9A84C
+Gold divider lines under section headings
+Bottom border: 1px solid #2A2A2A
+Copyright text: white/30%
+
+10. Update these pages to use cream background:
+
+src/pages/About.tsx — hero section background: charcoal #1C1C1C, page background: cream #F8F5F0
+src/pages/MortgageCalculator.tsx — page background: cream #F8F5F0, results card: white
+src/pages/NeighborhoodDetail.tsx — page background: cream #F8F5F0, cards: white
+
+11. Update Admin pages — do NOT change admin colors. Admin dashboard should keep its current styling unchanged.
+Key design rules to follow throughout:
+
+Testimonials (charcoal) + Mailing List (charcoal) create intentional dark bands that feel designed, not random
+Alternate sections: cream → white → cream → dark → white → dark — creates visual rhythm
+Gold is used ONLY for: accent labels, price badges, CTA buttons, hover states, dividers
+No rounded corners anywhere (border-radius: 0)
+All transitions: transition: all 0.3s ease
+
+Do not change any functionality, routing, data fetching, or admin pages. Only visual/CSS changes. Confirm no TypeScript errors after changes.

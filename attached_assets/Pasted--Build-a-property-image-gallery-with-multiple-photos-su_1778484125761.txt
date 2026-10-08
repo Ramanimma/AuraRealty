@@ -1,0 +1,115 @@
+
+
+Build a property image gallery with multiple photos support. Full requirements:
+1. Update src/pages/PropertyDetails.tsx — replace single image with full gallery:
+Main gallery layout:
+
+Large main image display (top, full width, height 500px on desktop / 300px mobile)
+Below main image: horizontal thumbnail strip showing all images
+Thumbnail: 80px × 60px, object-fit cover, slight opacity on non-active, full opacity on active
+Click thumbnail → updates main image
+Active thumbnail: gold border 2px solid #C9A84C
+
+Navigation:
+
+Left/Right arrow buttons overlaid on main image
+Arrows: circular, semi-transparent dark background, white arrow icon
+Keyboard navigation: left/right arrow keys
+Image counter: "3 / 6" shown bottom right of main image
+
+Lightbox:
+
+Click main image → opens fullscreen lightbox
+Dark overlay background
+Full size image centered
+Close button top right (X)
+Left/Right navigation in lightbox
+Click outside to close
+ESC key to close
+
+Image sources:
+
+Check listing.images[] array first (new multiple images field)
+Fall back to listing.main_image if no images array
+If neither: show placeholder
+
+2. Update Admin Listings — Add Multiple Image Upload:
+In the Add/Edit listing form in src/pages/admin/Listings.tsx:
+Replace the single "Main Image URL" input with:
+
+Main Image URL input (keeps existing field)
+Additional Images section:
+
+"Add Image URL" input + "Add" button — adds URL to images array
+Display added images as small thumbnails in a row
+Each thumbnail has an X button to remove
+Reorder by drag or up/down arrows
+Show count: "3 images added"
+
+
+Upload Images button:
+
+Opens file picker (multiple files allowed: multiple accept="image/*")
+Upload each file to Supabase Storage property-images bucket
+File naming: listing-{listingId}-{timestamp}-{index}.jpg
+Show upload progress per file
+After upload: add public URLs to images array automatically
+Max 10 images per listing
+Max 5MB per image
+
+
+
+3. Create src/lib/uploadPropertyImages.ts:
+tsexport async function uploadPropertyImages(
+  files: FileList,
+  listingId: string,
+  supabaseUrl: string,
+  supabaseKey: string
+): Promise<string[]> {
+  const supabase = createClient(supabaseUrl, supabaseKey);
+  const urls: string[] = [];
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    if (!file.type.startsWith('image/')) continue;
+    if (file.size > 5 * 1024 * 1024) continue;
+
+    const ext = file.name.split('.').pop();
+    const fileName = `listing-${listingId}-${Date.now()}-${i}.${ext}`;
+
+    const { error } = await supabase.storage
+      .from('property-images')
+      .upload(fileName, file, { upsert: true });
+
+    if (!error) {
+      const { data } = supabase.storage
+        .from('property-images')
+        .getPublicUrl(fileName);
+      urls.push(data.publicUrl);
+    }
+  }
+  return urls;
+}
+4. Update src/components/FeaturedProperties.tsx — cinematic cards:
+
+If listing has images[] array with multiple photos, show first image as card background
+No other changes to card style
+
+5. Backend — already has images TEXT[] column on listings table from our schema. Just verify the PATCH /api/admin/listings route accepts and saves the images array field correctly.
+6. Update listing seed data — add sample images arrays to existing listings so gallery works immediately:
+Run this in Supabase SQL Editor after building:
+sqlUPDATE public.listings SET images = ARRAY[
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop',
+  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&h=800&fit=crop',
+  'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200&h=800&fit=crop'
+] WHERE images = '{}' OR images IS NULL;
+Design:
+
+Match cinematic dark theme
+Main image: no border radius
+Thumbnails: no border radius
+Arrows: circular dark buttons with white icons
+Lightbox: full dark overlay, image centered with max 90vw × 90vh
+Counter: Inter 12px, white, bottom right of image
+
+Do not modify any admin overview, navbar, footer or other pages. Confirm no TypeScript errors after building.

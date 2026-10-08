@@ -1,0 +1,43 @@
+In server/index.ts, in the POST /api/admin/generate-newsletter-from-pdf endpoint, update the second focused API call for buyer/seller insights (around line 1381) to explicitly tell Claude to use the agent notes for those sections:
+
+Replace the current second API call content with:
+
+ts
+if (!newsletterData.buyerInsights || !newsletterData.sellerInsights) {
+  const insightsMsg = await anthropic.messages.create({
+    model: "claude-sonnet-4-6",
+    max_tokens: 600,
+    messages: [{
+      role: "user",
+      content: `You are writing buyer and seller insights for a real estate newsletter.
+
+Market statistics from the official report:
+- Median Price: ${newsletterData.medianPrice} (${newsletterData.medianPriceTrend})
+- Homes Sold: ${newsletterData.homesSold} (${newsletterData.homesSoldTrend})
+- Days on Market: ${newsletterData.daysOnMarket} (${newsletterData.daysOnMarketTrend})
+- Sold/List Ratio: ${newsletterData.soldListRatio}
+- Price per Sq Ft: ${newsletterData.pricePerSqFt}
+
+${userNotes ? `Additional notes from the agent: ${userNotes}` : ''}
+
+Return ONLY this JSON with real content replacing the placeholders:
+{
+  "buyerInsights": "one sentence buyer insight using the stats above|one sentence buyer insight|one actionable buyer advice",
+  "sellerInsights": "one sentence seller insight using the stats above|one sentence seller insight|one actionable seller advice"
+}`
+    }]
+  });
+
+  try {
+    const insightsText = insightsMsg.content[0]?.type === "text" ? insightsMsg.content[0].text.trim() : "{}";
+    const insightsData = JSON.parse(insightsText);
+    if (insightsData.buyerInsights) newsletterData.buyerInsights = insightsData.buyerInsights;
+    if (insightsData.sellerInsights) newsletterData.sellerInsights = insightsData.sellerInsights;
+  } catch {
+    // keep empty if parsing fails
+  }
+}
+
+The key difference: instead of sending raw PDF text, send the already-extracted stats directly as structured bullet points. Claude performs much better when given clean structured data instead of raw PDF text.
+
+Do not change anything else. Restart dev server cleanly.

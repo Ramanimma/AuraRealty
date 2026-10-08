@@ -1,0 +1,75 @@
+Got it — nothing has been sent yet. Let's combine everything into one single, complete prompt so the Agent builds it correctly from the start with security baked in, rather than building first and retrofitting auth after.
+Here's the full, final prompt — copy this entire thing into Replit Agent:
+
+
+We're consolidating client data management into a single "Client Database" page with tabs, inside the authenticated admin area only. This is not a public-facing feature — no public route, page, or API endpoint should expose this data.
+Security requirements (verify first):
+
+Check how existing admin pages like src/pages/admin/Listings.tsx enforce authentication (likely a wrapper/layout component or verifyAdmin check) — the new page must use the exact same protection pattern
+Any new data fetching for master_clients or lease_reminders must go through backend API routes protected by verifyAdmin middleware — do NOT query these tables directly from the frontend using the Supabase anon client
+Confirm master_clients and lease_reminders tables still have RLS enabled with no public policies (set up earlier) — these tables should only be readable via the service role key on the server
+
+1. Create two protected backend endpoints in server/index.ts:
+
+GET /api/admin/master-clients — protected by verifyAdmin, returns all rows from master_clients using supabaseAdmin
+GET /api/admin/lease-reminders — protected by verifyAdmin, returns all rows from lease_reminders using supabaseAdmin
+
+2. Create src/pages/admin/ClientDatabase.tsx as the new main page, wrapped in the same admin auth layout as other admin pages:
+
+Header: "Client Database" with a button top-right "+ Import / Update Database"
+Two tabs below: "Master Clients" (default active) and "Lease Reminders"
+Match the existing admin panel's visual style — check src/pages/admin/Listings.tsx for spacing, fonts, button colors, table styling and reuse the same patterns
+
+3. Master Clients tab:
+
+Fetch data from GET /api/admin/master-clients (with admin auth token)
+Search input filtering by full_name, phone_number, or email_address (client-side filter)
+Filter chips: "All", "Owner", "Tenant", "Buyer" — filters by client_role
+Table columns: Role, Full Name, Phone, Email, Birthdate
+Show total count, e.g. "136 clients"
+Empty state if no results match
+
+4. Lease Reminders tab:
+
+Fetch data from GET /api/admin/lease-reminders (with admin auth token)
+Search input filtering by owner1_name, owner2_name, tenant1_name, tenant2_name, or property_address
+Toggle control: "Notice Date" / "Lease End Date" (Notice Date default) — determines which field drives urgency calculation
+Filter chips: "All", "Overdue", "30 days", "60 days", "90 days" — calculated against today's date using whichever date field is toggled
+Status badge logic:
+
+Overdue (red) = trigger date before today
+30 days (orange) = within next 30 days
+60 days (yellow) = 31-60 days away
+90 days (green) = 61-90 days away
+Not yet due (gray) = more than 90 days away
+
+
+Table columns: Property Address, Tenant(s), Owner(s), Lease Start Date, Lease End Date, Notice Reminder Date, Status Badge, "Review" button
+Show total count, e.g. "19 active leases"
+
+5. Review side panel src/components/admin/LeaseReviewPanel.tsx:
+
+Desktop/tablet (≥768px): slides in from right, ~450px wide, semi-transparent backdrop, list stays visible behind it
+Mobile (<768px): full-screen view with back arrow at top to close
+Content: Property address header, Owner 1 & 2 details, Tenant 1 & 2 details, Lease Start/End/Notice dates
+Disabled button at bottom: "Send Reminder Email" with subtext "Coming soon — email workflow in Phase 2"
+Close button (X) on desktop, back arrow on mobile
+
+6. Import / Update Database modal:
+
+Relocate the existing upload functionality (file picker, confirmation checkbox, progress bar, success/error messages, SQL setup instructions) from the standalone import page into a modal triggered by the "+ Import / Update Database" button on this new page
+Keep all existing upload logic exactly as is — just move the UI into a modal
+
+7. Routing and sidebar:
+
+In src/App.tsx, route /admin/client-database to the new ClientDatabase.tsx page, wrapped in the same auth-protection wrapper used by other admin routes
+Remove the old standalone import page route since it's now replaced by the modal
+Keep a single sidebar nav item "Client Database" pointing to /admin/client-database
+
+8. After building, explicitly test and report:
+
+Does navigating directly to /admin/client-database while logged out redirect to the admin login screen?
+Confirm both new GET endpoints return 401 without a valid admin token
+Confirm the frontend is calling the protected backend endpoints (not querying Supabase directly with the anon key) for both tabs
+
+Do not change anything else.

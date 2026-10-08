@@ -1,0 +1,153 @@
+Implement comprehensive SEO optimization across the entire Texas Realty Hub website:
+1. Create src/components/SEOHead.tsx — a reusable SEO component:
+tsximport { Helmet } from 'react-helmet-async';
+
+interface SEOHeadProps {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  schema?: object;
+}
+
+const SEOHead = ({ title, description, keywords, ogImage, ogUrl, schema }: SEOHeadProps) => (
+  <Helmet>
+    <title>{title || 'Texas Realty Hub | Austin & Central Texas Real Estate'}</title>
+    <meta name="description" content={description || 'Premium real estate services in Austin and Central Texas.'} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta property="og:title" content={title || 'Texas Realty Hub'} />
+    <meta property="og:description" content={description || ''} />
+    <meta property="og:image" content={ogImage || 'https://texasrealtyhub.com/TRH_Finalized.png'} />
+    <meta property="og:url" content={ogUrl || 'https://texasrealtyhub.com'} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title || 'Texas Realty Hub'} />
+    <meta name="twitter:description" content={description || ''} />
+    {schema && <script type="application/ld+json">{JSON.stringify(schema)}</script>}
+  </Helmet>
+);
+
+export default SEOHead;
+2. Install react-helmet-async:
+Run: npm install react-helmet-async
+Wrap the app in src/main.tsx with <HelmetProvider>
+3. Add SEOHead to every page with unique content:
+src/pages/Index.tsx:
+tsx<SEOHead
+  title="Texas Realty Hub | Homes for Sale in Austin & Central Texas"
+  description="Find homes for sale in Leander, Cedar Park, Georgetown, Round Rock, Liberty Hill, Hutto and Austin TX. Expert real estate agents serving Central Texas."
+  keywords="homes for sale Austin TX, real estate agent Leander TX, Cedar Park homes, Georgetown TX real estate, Round Rock homes for sale, Liberty Hill real estate"
+  ogUrl="https://texasrealtyhub.com"
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Texas Realty Hub",
+    "url": "https://texasrealtyhub.com",
+    "logo": "https://texasrealtyhub.com/TRH_Finalized.png",
+    "telephone": "+17327402800",
+    "email": "ramanimma@texasrealtyhub.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cedar Park",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "areaServed": ["Leander", "Cedar Park", "Georgetown", "Round Rock", "Liberty Hill", "Hutto", "Austin"],
+    "priceRange": "$$",
+    "openingHours": "Mo-Su 08:00-20:00"
+  }}
+/>
+src/pages/About.tsx:
+tsx<SEOHead
+  title="Meet Our Agents | Texas Realty Hub - Rama & Swetha Nimma"
+  description="Meet Rama Nimma and Swetha Nimma, licensed real estate agents serving Leander, Cedar Park, Georgetown, Round Rock and all of Central Texas."
+  keywords="Rama Nimma realtor, Swetha Nimma real estate, Texas Realty Hub agents, Central Texas realtor"
+  ogUrl="https://texasrealtyhub.com/about"
+/>
+src/pages/HomeValuation.tsx:
+tsx<SEOHead
+  title="Free Home Valuation | What Is My Home Worth in Central Texas?"
+  description="Get a free home valuation in Leander, Cedar Park, Georgetown, Round Rock, Liberty Hill and Austin TX. Expert market analysis within 24 hours. No obligation."
+  keywords="home valuation Leander TX, what is my home worth Cedar Park, Georgetown TX home value, sell my home Round Rock, free home valuation Austin"
+  ogUrl="https://texasrealtyhub.com/home-valuation"
+/>
+src/pages/MortgageCalculator.tsx:
+tsx<SEOHead
+  title="Mortgage Calculator | Texas Home Payment Estimator"
+  description="Calculate your monthly mortgage payment including taxes, insurance, PMI and HOA. FHA, VA, USDA and Conventional loan calculators for Texas home buyers."
+  keywords="mortgage calculator Texas, FHA loan calculator Austin, VA loan calculator, USDA loan Texas, home payment calculator Central Texas"
+  ogUrl="https://texasrealtyhub.com/mortgage-calculator"
+/>
+src/pages/SellersNetsheet.tsx:
+tsx<SEOHead
+  title="Sellers Net Sheet Calculator | How Much Will I Make Selling My Home in Texas?"
+  description="Calculate your estimated net proceeds from selling your home in Texas. Includes agent commission, title fees, closing costs and prorated taxes."
+  keywords="sellers net sheet Texas, how much will I make selling my home, closing costs Texas seller, net proceeds home sale calculator"
+  ogUrl="https://texasrealtyhub.com/sellers-netsheet"
+/>
+src/pages/TitleCalculator.tsx:
+tsx<SEOHead
+  title="Texas Title Premium Calculator | Official TDI Rates"
+  description="Calculate Texas title insurance premiums based on official Texas Department of Insurance promulgated rates. Owner's policy, loan policy and endorsement costs."
+  keywords="Texas title insurance calculator, title premium calculator Texas, owner title policy cost Texas, TDI title rates"
+  ogUrl="https://texasrealtyhub.com/title-calculator"
+/>
+src/pages/NeighborhoodDetail.tsx — dynamic based on neighborhood:
+tsx<SEOHead
+  title={`${neighborhood.name} TX Homes for Sale | Texas Realty Hub`}
+  description={`Find homes for sale in ${neighborhood.name}, TX. ${neighborhood.description?.slice(0, 120)}. Expert real estate agents serving ${neighborhood.name} and Central Texas.`}
+  keywords={`${neighborhood.name} TX homes for sale, ${neighborhood.name} real estate, homes in ${neighborhood.name} Texas, ${neighborhood.name} TX realtor`}
+  ogUrl={`https://texasrealtyhub.com/neighborhoods/${neighborhood.slug}`}
+/>
+src/pages/PropertyDetails.tsx — dynamic based on listing:
+tsx<SEOHead
+  title={`${listing.address} | ${listing.beds} bed ${listing.baths} bath | Texas Realty Hub`}
+  description={`${listing.beds} bedroom ${listing.baths} bathroom home at ${listing.address}. ${listing.sqft.toLocaleString()} sqft listed at ${listing.price}. Contact Texas Realty Hub today.`}
+  keywords={`${listing.address}, homes for sale ${listing.city} TX, ${listing.beds} bedroom homes ${listing.city}`}
+  ogUrl={`https://texasrealtyhub.com/property/${listing.id}`}
+  ogImage={listing.main_image || 'https://texasrealtyhub.com/TRH_Finalized.png'}
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "name": listing.address,
+    "description": listing.description,
+    "url": `https://texasrealtyhub.com/property/${listing.id}`,
+    "image": listing.main_image,
+    "offers": {
+      "@type": "Offer",
+      "price": listing.price,
+      "priceCurrency": "USD"
+    }
+  }}
+/>
+4. Create public/sitemap.xml:
+xml<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://texasrealtyhub.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://texasrealtyhub.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://texasrealtyhub.com/home-valuation</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://texasrealtyhub.com/mortgage-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://texasrealtyhub.com/sellers-netsheet</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://texasrealtyhub.com/title-calculator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://texasrealtyhub.com/neighborhoods/leander</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://texasrealtyhub.com/neighborhoods/cedar-park</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://texasrealtyhub.com/neighborhoods/georgetown</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://texasrealtyhub.com/neighborhoods/round-rock</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://texasrealtyhub.com/neighborhoods/liberty-hill</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://texasrealtyhub.com/neighborhoods/hutto</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://texasrealtyhub.com/neighborhoods/austin</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+</urlset>
+5. Create public/robots.txt:
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Sitemap: https://texasrealtyhub.com/sitemap.xml
+6. Update index.html with additional tags:
+html<meta name="robots" content="index, follow">
+<meta name="author" content="Texas Realty Hub">
+<meta name="geo.region" content="US-TX">
+<meta name="geo.placename" content="Cedar Park, Texas">
+<link rel="canonical" href="https://texasrealtyhub.com">
+Do not modify any admin pages. Install react-helmet-async first. Confirm no TypeScript errors after building.

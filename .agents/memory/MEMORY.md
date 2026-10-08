@@ -1,0 +1,4 @@
+- [react-quill with React 19](react-quill-react19.md) — react-quill@2.0.0 peer-deps on React 16-18; install with `--legacy-peer-deps` on React 19 projects.
+- [Backgrounded tsx+vite restart](dev-server-restart-backend-drops.md) — `pkill tsx; pkill vite; npm run dev` in this repo's split Express+Vite setup can leave the Express backend down; verify port 3001 responds, use restart_workflow if not.
+- [Supabase direct SQL access](supabase-sql-access.md) — db.<project-ref>.supabase.co is not resolvable from the Replit agent env; run Supabase DDL via the Supabase SQL Editor.
+- [pdf-parse v2 API](pdf-parse-v2-api.md) — use the named PDFParse class with buffer data; the installed ESM package has no default export.

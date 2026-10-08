@@ -1,0 +1,59 @@
+Fix email sending in server/index.ts — add explicit error logging and fix the email calls in the inquiries and home-valuations routes:
+1. In the POST /api/inquiries route, replace the current email sending block with:
+ts// Send emails (non-blocking)
+setImmediate(async () => {
+  try {
+    console.log('[EMAIL] Sending tour request emails to agents...');
+    await sendTourRequestToAgent({
+      full_name: full_name,
+      email: email,
+      phone: phone,
+      message: message,
+      preferred_date: preferred_date,
+      inquiry_id: inquiryId
+    });
+    console.log('[EMAIL] Agent notification sent ✅');
+    await sendTourConfirmationToVisitor({
+      full_name: full_name,
+      email: email,
+      phone: phone,
+      message: message,
+      preferred_date: preferred_date,
+      inquiry_id: inquiryId
+    });
+    console.log('[EMAIL] Visitor confirmation sent ✅');
+  } catch (err: any) {
+    console.error('[EMAIL ERROR] Failed to send emails:', err?.response?.body || err?.message || err);
+  }
+});
+2. In the POST /api/home-valuations route, replace the current email sending block with the same pattern:
+tssetImmediate(async () => {
+  try {
+    console.log('[EMAIL] Sending valuation emails...');
+    await sendValuationRequestToAgent(valuationData);
+    console.log('[EMAIL] Valuation agent notification sent ✅');
+    await sendValuationConfirmationToVisitor(valuationData);
+    console.log('[EMAIL] Valuation visitor confirmation sent ✅');
+  } catch (err: any) {
+    console.error('[EMAIL ERROR] Valuation emails failed:', err?.response?.body || err?.message || err);
+  }
+});
+3. In server/lib/email.ts, add console.log at the start of each send function:
+ts// At start of sendTourRequestToAgent:
+console.log('[EMAIL] sendTourRequestToAgent called for:', data.email);
+
+// At start of sendTourConfirmationToVisitor:
+console.log('[EMAIL] sendTourConfirmationToVisitor called for:', data.email);
+
+// At start of sendValuationRequestToAgent:
+console.log('[EMAIL] sendValuationRequestToAgent called for:', data.email);
+
+// At start of sendValuationConfirmationToVisitor:
+console.log('[EMAIL] sendValuationConfirmationToVisitor called for:', data.email);
+4. Also check server/lib/email.ts — make sure the from field uses the exact verified sender email:
+tsfrom: {
+  email: 'ramanimma@texasrealtyhub.com',
+  name: 'Texas Realty Hub'
+}
+This must exactly match the verified single sender in SendGrid.
+Do not modify any frontend files. Confirm no errors after fixing.

@@ -1,0 +1,92 @@
+Build a Home Valuation page at /home-valuation. Requirements:
+1. Add backend route to server/index.ts:
+POST /api/home-valuations
+  Body: { full_name, email, phone, address, city, zip_code, property_type, bedrooms, bathrooms, sqft, year_built, condition, notes }
+  Save to home_valuations table with status='pending'
+  Also upsert contact record using email as unique key with source='website', contact_type='lead'
+  Return: { ok: true, id: valuation_id }
+2. Add to src/lib/api.ts:
+tsapi.valuations.submit(data) → POST /api/home-valuations
+3. Create src/pages/HomeValuation.tsx:
+Hero section:
+
+Full width, charcoal #1C1C1C background
+Large Cormorant Garamond headline: "What Is Your Home Worth?"
+Subtitle: "Get a free, no-obligation market analysis from our local experts"
+Two trust badges: "Free Analysis" and "No Obligation" and "Local Experts"
+
+How It Works section:
+
+Cream background
+3 steps in a row with gold numbers:
+
+"Submit Your Details" — Tell us about your property
+"We Analyze The Market" — Our agents research comparable sales
+"Receive Your Report" — Get a detailed valuation within 24 hours
+
+
+
+Valuation Form section:
+
+White background
+Two column layout on desktop
+Form fields:
+
+Full Name (required)
+Email Address (required)
+Phone Number (required)
+Property Address (required)
+City — dropdown: Leander, Liberty Hill, Georgetown, Round Rock, Cedar Park, Hutto, Austin, Other
+ZIP Code
+Property Type — dropdown: Single Family, Condo, Townhouse, Multi-Family, Land
+Bedrooms — number input
+Bathrooms — number input
+Square Footage — number input
+Year Built — number input
+Property Condition — select: Excellent, Good, Fair, Needs Work
+Additional Notes — textarea: "Any renovations, upgrades, or special features?"
+
+
+Submit button: gold, full width, uppercase "REQUEST FREE VALUATION"
+Below button: small text "We respect your privacy. Your information is never shared."
+On success: hide form, show thank you card:
+
+Gold checkmark icon
+"Thank You! Your valuation request has been received."
+"One of our agents will contact you within 24 hours with your free market analysis."
+"In the meantime, explore our current listings" button → /properties (not built yet, link to /#properties)
+
+
+
+Why Choose Us for Your Valuation section:
+
+Cream background
+4 cards: Local Market Expert, Data-Driven Analysis, No Obligation, Fast 24hr Turnaround
+
+Agent CTA section:
+
+Charcoal background
+"Speak Directly With An Agent"
+Show both agent cards (Rama + Swetha) with phone and email links
+Fetch agents from /api/agents
+
+4. Update src/App.tsx: add route /home-valuation
+5. Update src/components/Navbar.tsx:
+
+"Get Started" button should link to /home-valuation
+
+6. Update src/components/Footer.tsx:
+
+Find "Home Valuation" link and update href to /home-valuation
+
+7. Add MailingList and Footer at the bottom of the page
+Design:
+
+Match warm cream and charcoal color scheme
+Cormorant Garamond for all headings
+Inter for body text
+No border radius anywhere
+Gold accents on numbers, icons, buttons
+Mobile responsive — single column on mobile
+
+Do not modify any admin pages. Confirm no TypeScript errors after building.

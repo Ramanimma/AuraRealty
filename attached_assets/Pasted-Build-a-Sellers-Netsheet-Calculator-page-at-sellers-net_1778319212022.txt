@@ -1,0 +1,100 @@
+Build a Sellers Netsheet Calculator page at /sellers-netsheet. Requirements:
+1. Create src/pages/SellersNetsheet.tsx with:
+Hero section:
+
+Charcoal #1C1C1C background
+Gold label: "SELLER TOOLS"
+Headline: "How Much Will You Make From Your Home Sale?"
+Subtitle: "Get an instant estimate of your net proceeds after all closing costs"
+
+Calculator section — two column layout (inputs left, results right sticky):
+Left column — Inputs:
+Property Information:
+
+Sale Price (default $450,000)
+Current Mortgage Balance (default $250,000)
+Annual Property Tax (default $8,000) — prorated at closing
+
+Agent Commission:
+
+Listing Agent Commission % (default 3%)
+Buyer's Agent Commission % (default 3%)
+Total Commission % — auto-calculated, display only
+
+Title & Closing Costs:
+
+Owner's Title Policy — auto-calculated based on Texas rate table:
+
+Up to $100k: $100k × 0.00575 = $575 minimum
+$100k-$1M: base $575 + (price - $100k) × 0.00475
+Over $1M: base $4,825 + (price - $1M) × 0.00375
+
+
+Title Search Fee (default $200, editable)
+Survey (default $500, editable)
+Recording Fees (default $150, editable)
+HOA Transfer Fee (default $0, editable)
+Home Warranty (default $0, editable)
+Repairs/Concessions (default $0, editable)
+
+Closing Timeline:
+
+Closing Date picker — used to prorate taxes
+Days remaining in year — auto-calculated
+Prorated tax credit to buyer — auto-calculated
+
+Right column — Results (sticky):
+Show a clean breakdown card:
+SALE PRICE                    $450,000
+─────────────────────────────────────
+DEDUCTIONS
+Mortgage Payoff              -$250,000
+Listing Commission (3%)       -$13,500
+Buyer Commission (3%)         -$13,500
+Owner's Title Policy           -$2,163
+Title Search                     -$200
+Survey                           -$500
+Recording Fees                   -$150
+HOA Transfer Fee                    $0
+Home Warranty                       $0
+Repairs/Concessions                 $0
+Prorated Property Tax            -$XXX
+─────────────────────────────────────
+ESTIMATED NET PROCEEDS        $170,987
+
+Net proceeds displayed large in gold if positive, red if negative
+All values update in real time as inputs change
+Show percentage of sale price next to net proceeds
+
+Disclaimer section:
+
+Small text: "This is an estimate only. Actual closing costs may vary. Contact your agent for a detailed analysis."
+
+Agent CTA section:
+
+Charcoal background
+"Ready to List Your Home?"
+"Get a free market analysis and personalized net sheet from our agents"
+Two buttons: "Request Free Valuation" → /home-valuation and "Contact an Agent" → /#contact
+Show both agent cards (fetch from /api/agents)
+
+2. Add route to src/App.tsx: /sellers-netsheet
+3. Update src/components/Footer.tsx:
+
+Change "Title Calculators" link to show a dropdown or update href to /sellers-netsheet
+Add "Sellers Netsheet" as a separate link under Useful Tools
+
+4. Add to Navbar under a new "Tools" section or add to the existing nav — actually just add it to the Footer Useful Tools section, not the main nav (already too many items)
+5. Add MailingList and Footer at bottom of page
+Design:
+
+Match warm cream and charcoal color scheme
+Cormorant Garamond for headings
+Inter for body/numbers
+Gold for positive numbers and highlights
+Red for negative/deduction items
+No border radius
+Mobile responsive — single column on mobile, results show below inputs
+Loading skeleton not needed — all calculations are client-side
+
+Do not modify any admin pages. Confirm no TypeScript errors after building.

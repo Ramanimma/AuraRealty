@@ -1,0 +1,109 @@
+
+
+Build a comprehensive Admin Dashboard. Here are the full requirements:
+Authentication:
+
+Admin login page already exists at /admin/login — do not change it
+All admin routes must be protected — redirect to /admin/login if not authenticated
+Use the existing auth pattern already in the codebase
+
+Create these admin pages/sections all under /admin/ route prefix:
+1. /admin/dashboard — Overview page:
+
+Stats cards: Total Listings, Active Listings, Total Inquiries, New Inquiries (this week), Total Contacts, Chat Sessions
+Each stat card fetches real counts from the database via the existing API
+Recent inquiries table (last 5) with columns: Name, Email, Type, Status, Date
+Recent chat sessions table (last 5) with columns: Visitor, Page, Started, Converted
+Quick action buttons: Add Listing, View Inquiries, View Contacts
+
+2. /admin/listings — Listings management:
+
+Table of all listings with columns: Photo, Address, Price, Type, Status, City, Beds, Baths, Agent, Actions
+Status badge: Active (green), Pending (yellow), Sold (gray), Rented (blue)
+Actions per row: Edit, Delete
+"Add New Listing" button opens a modal/drawer with full form:
+
+Title, Address, City, ZIP code, Price, Property Type (Single Family/Condo/Townhouse/Multi-Family/Land/Commercial), Listing Type (Sale/Rent), Status (Active/Pending/Sold/Rented)
+Beds, Baths, Sqft, Year Built, Garage Spaces
+Has Pool checkbox, Is Featured checkbox
+Description textarea
+Main Image URL input
+Agent selector dropdown (fetches from agent_profile table)
+Neighborhood selector dropdown (fetches from neighborhoods table)
+MLS Number input
+Virtual Tour URL input
+
+
+Edit listing opens same form pre-populated
+Delete with confirmation dialog
+
+3. /admin/inquiries — Inquiries/Leads management:
+
+Table of all inquiries with columns: Name, Email, Phone, Type, Status, Property, Agent, Date, Actions
+Filter by status: New, Contacted, In Progress, Closed
+Filter by type: Tour, Valuation, General, Buying, Selling
+Click row to see full inquiry detail in a side panel
+Actions: Update status, Assign to agent, Delete
+Status badge colors: New (red), Contacted (yellow), In Progress (blue), Closed (green)
+
+4. /admin/contacts — CRM contacts:
+
+Table with columns: Name, Email, Phone, Type, Status, Source, Assigned Agent, Budget, Created
+Filter by contact_type and status
+Click to view/edit full contact record
+Edit form: all contact fields including preferred cities, budget range, min beds/baths
+Assign to agent dropdown
+
+5. /admin/agents — Agent management:
+
+List of agents with photo placeholder, name, title, brokerage, email, phone, license
+Edit agent details inline
+Photo upload button (uploads to Supabase Storage 'agent-photos' bucket, saves URL to agent_profile.photo_url)
+Toggle agent active/inactive
+
+6. /admin/neighborhoods — Neighborhood management:
+
+Table of all neighborhoods with columns: Name, City, Avg Price, Active, Order, Actions
+Add/Edit neighborhood form with all fields: name, slug (auto-generated from name), city, state, description, lifestyle, avg_price, highlights (add/remove bullet points dynamically), image_url, display_order, is_active toggle
+Delete with confirmation
+
+7. /admin/reviews — Reviews moderation:
+
+Table of all reviews: Client Name, Rating (stars), Comment preview, Agent, Approved, Date
+One-click approve/reject toggle
+Delete review
+
+8. /admin/chat — Chat sessions viewer:
+
+List of chat sessions with visitor info and conversion status
+Click session to view full conversation thread
+Mark as converted, link to inquiry
+
+Backend — add these API routes to server/index.ts:
+
+GET /api/admin/dashboard-stats — counts from all tables
+GET/POST/PATCH/DELETE /api/admin/listings — full CRUD (already partially exists, enhance it)
+GET/PATCH/DELETE /api/admin/inquiries — manage inquiries
+GET/POST/PATCH/DELETE /api/admin/contacts — CRM contacts
+GET/PATCH /api/admin/agents — agent management
+GET/POST/PATCH/DELETE /api/admin/neighborhoods — neighborhood CRUD
+GET/PATCH/DELETE /api/admin/reviews — review moderation
+GET /api/admin/chat-sessions — list sessions
+GET /api/admin/chat-sessions/:id/messages — get conversation
+
+Add to src/lib/api.ts: corresponding frontend API functions for all above endpoints
+Navigation:
+
+Create src/components/AdminSidebar.tsx — persistent left sidebar for all admin pages with links to each section, Texas Realty Hub logo at top, logout button at bottom
+Admin pages should NOT show the main site Navbar or Footer
+
+Design:
+
+Clean professional admin UI using shadcn components
+Navy and gold color scheme matching the main site
+Mobile responsive with collapsible sidebar
+Use shadcn Table, Dialog, Badge, Select, Tabs components
+Loading states and error handling on all data fetches
+
+Update src/App.tsx: add all admin routes under /admin/ prefix
+Do not modify any existing public-facing pages. Confirm no TypeScript errors after building.

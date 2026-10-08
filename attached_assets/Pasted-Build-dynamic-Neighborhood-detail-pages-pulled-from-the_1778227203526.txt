@@ -1,0 +1,59 @@
+Build dynamic Neighborhood detail pages pulled from the database. Requirements:
+1. Add backend route to server/index.ts:
+
+GET /api/neighborhoods — fetch all active neighborhoods ordered by display_order
+GET /api/neighborhoods/:slug — fetch single neighborhood by slug
+GET /api/neighborhoods/:slug/listings — fetch all active listings where city matches the neighborhood's city name
+
+2. Add frontend API functions to src/lib/api.ts:
+
+api.neighborhoods.list() → GET /api/neighborhoods
+api.neighborhoods.getBySlug(slug) → GET /api/neighborhoods/:slug
+api.neighborhoods.getListings(slug) → GET /api/neighborhoods/:slug/listings
+
+3. Update src/components/Neighborhoods.tsx (homepage section):
+
+Currently shows hardcoded neighborhood cards
+Replace with dynamic data fetched from api.neighborhoods.list()
+Each card shows: neighborhood image (use image_url from DB, fallback to a relevant Unsplash photo based on city name), neighborhood name, city, avg_price
+Make each card clickable — navigate to /neighborhoods/:slug using React Router
+Show loading skeleton while fetching
+
+4. Create src/pages/NeighborhoodDetail.tsx:
+Fetch data using useParams() to get slug, then call:
+
+api.neighborhoods.getBySlug(slug) for neighborhood info
+api.neighborhoods.getListings(slug) for matching listings
+
+Page sections:
+
+Hero: full-width image with dark overlay, neighborhood name as large headline, city + state subtitle, avg_price badge. If no image_url use a relevant Unsplash URL based on city name
+Overview cards row: 4 stat cards showing:
+
+Average Price (from avg_price field)
+Walk Score (from walk_score, show "N/A" if null)
+School Rating (from school_rating, show "N/A" if null)
+Homes Available (count from listings query)
+
+
+About section: two columns — left shows description + lifestyle paragraphs, right shows highlights as a bulleted list with gold checkmark icons
+Available Listings section:
+
+If listings exist: show same property card grid as homepage (image, price badge, address, beds/baths/sqft, View Details button)
+If no listings: show "No current listings in [city]. New properties coming soon. Contact us to be notified." with a Contact Agent button
+
+
+Market snapshot section: simple info cards showing avg_price, and a note "Market data updated regularly by our team"
+CTA section: navy background, "Interested in [neighborhood name]?" headline, two buttons — "Schedule a Consultation" (href="/#contact") and "Calculate Mortgage" (href="/mortgage-calculator")
+Back navigation: "← Back to Neighborhoods" link at top that navigates to /#neighborhoods
+
+5. Update src/App.tsx: add route /neighborhoods/:slug
+Design:
+
+Use existing Navbar and Footer
+Match navy/gold color scheme
+Mobile responsive
+Loading skeleton while data fetches
+Handle 404 gracefully — if slug not found show "Neighborhood not found" with link back to home
+
+Do not modify any admin pages. Confirm no errors after building.

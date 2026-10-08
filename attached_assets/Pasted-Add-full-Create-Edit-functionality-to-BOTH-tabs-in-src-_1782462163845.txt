@@ -1,0 +1,48 @@
+Add full Create/Edit functionality to BOTH tabs in src/pages/admin/ClientDatabase.tsx, plus smart auto-sync between leases and master clients.
+PART 1 — Master Clients tab
+1. Add a "+ Add New Client" button near the top of the Master Clients tab (next to search bar or count)
+2. Add an "Edit" button at the end of each row in the Master Clients table
+3. Create src/components/admin/ClientEditPanel.tsx:
+
+Responsive: slides in from right on desktop/tablet (≥768px, ~450px wide, semi-transparent backdrop), full-screen on mobile (<768px) with back arrow to close
+Accepts optional existingClient prop — pre-fill if provided (Edit mode), empty if not (Add New mode)
+Fields: Client Role/Type (dropdown: Owner, Tenant, Buyer), Full Name (required), Phone Number (required), Email Address (required, validate basic email format), Birthdate (optional date picker)
+Buttons: "Save Changes"/"Add Client" (gold primary) + "Cancel"
+Loading spinner during save, inline error on failure, success message + close + refresh list on success
+
+4. Backend endpoints in server/index.ts, both protected by verifyAdmin:
+
+PUT /api/admin/master-clients/:id — updates existing row via supabaseAdmin
+POST /api/admin/master-clients — inserts new row via supabaseAdmin
+
+PART 2 — Lease Reminders tab
+5. Add a "+ Add New Lease" button near the top of the Lease Reminders tab
+6. Add an "Edit" button on each lease row, alongside the existing "Review" button (Review stays read-only, Edit opens the editable form)
+7. Create src/components/admin/LeaseEditPanel.tsx:
+
+Same responsive pattern as above
+Accepts optional existingLease prop — pre-fill if provided (Edit mode), empty if not (Add New mode)
+Fields: Property Address, Client Type, Owner 1 (Name/Phone/Email), Owner 2 (optional, Name/Phone/Email), Tenant 1 (Name/Phone/Email), Tenant 2 (optional, Name/Phone/Email), Lease Start Date, Lease End Date, Notice Reminder Date (all date pickers)
+Buttons: "Save Lease"/"Save Changes" (gold primary) + "Cancel"
+Loading spinner, inline error, success + close + refresh on success
+
+8. Auto-sync logic (backend only, runs on every lease Create/Edit):
+
+For each Owner/Tenant field group with a name filled in:
+
+Check master_clients for an exact match on full_name + phone_number + email_address (case-insensitive, trimmed)
+If exact match exists → do nothing, this person already exists correctly
+If a row exists with the same full_name but DIFFERENT phone/email (only relevant on Edit, when comparing against who was previously on this exact lease) → UPDATE that person's existing master_clients row with the new phone/email
+If no row exists with that name at all → INSERT a new master_clients row with role "Owner" or "Tenant" as appropriate, using the name/phone/email from the lease form
+
+9. Backend endpoints in server/index.ts, both protected by verifyAdmin:
+
+POST /api/admin/lease-reminders — creates new lease row, then runs auto-sync logic above for all filled owner/tenant fields, via supabaseAdmin
+PUT /api/admin/lease-reminders/:id — updates existing lease row, then runs auto-sync logic comparing old vs new owner/tenant values to detect changes, via supabaseAdmin
+
+PART 3 — Wiring and security
+10. Wire up all four buttons ("+ Add New Client", per-row "Edit" on Master Clients, "+ Add New Lease", per-row "Edit" on Lease Reminders) to open the correct panel in the correct mode
+11. Confirm all 4 new endpoints return 401 without a valid admin token
+12. Do not change anything else — keep existing search, filter chips, the Notice/Lease End toggle, and the existing "Review" button on Lease Reminders exactly as they are.
+After building, restart the dev server cleanly and confirm there are no errors:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev

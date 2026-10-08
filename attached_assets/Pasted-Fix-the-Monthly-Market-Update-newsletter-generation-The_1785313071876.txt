@@ -1,0 +1,108 @@
+Fix the Monthly Market Update newsletter generation. The template needs to be completely rewritten to use the same buildBrandedEmail shell that Birthday and Lease Renewal emails use — this shell is already proven to work perfectly.
+
+1. In server/lib/templates/marketUpdateEmail.ts, completely replace buildMarketUpdateNewsletterHtml with this simple function that returns ONLY the content HTML (no full email shell — buildBrandedEmail handles the wrapper):
+
+ts
+export function buildMarketUpdateNewsletterHtml(data: {
+  month: string;
+  medianPrice: string; medianPriceTrend: string;
+  homesSold: string; homesSoldTrend: string;
+  daysOnMarket: string; daysOnMarketTrend: string;
+  soldListRatio: string; soldListRatioTrend: string;
+  pricePerSqFt: string; pricePerSqFtTrend: string;
+  inventory: string; inventoryTrend: string;
+  marketSummary: string;
+  neighborhoodSpotlight: string;
+  buyerInsights: string;
+  sellerInsights: string;
+  tipOfMonth: string;
+}): string {
+
+  function stat(label: string, value: string, trend: string): string {
+    return `<td style="width:30%;padding:12px;background:#F8F9FA;border:1px solid #E5E7EB;border-radius:6px;text-align:center;vertical-align:top;">
+      <p style="margin:0 0 6px;font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:1px;font-family:Arial,sans-serif;">${label}</p>
+      <p style="margin:0 0 4px;font-size:22px;font-weight:700;color:#111827;font-family:Georgia,serif;">${value || 'N/A'}</p>
+      <p style="margin:0;font-size:11px;color:#6B7280;font-family:Arial,sans-serif;">${trend || '&nbsp;'}</p>
+    </td>`;
+  }
+
+  function bullets(text: string): string {
+    if (!text) return '<li>See full report for details.</li>';
+    return text.split('|').map(b => b.trim()).filter(Boolean)
+      .map(b => `<li style="margin-bottom:8px;">${b}</li>`).join('');
+  }
+
+  return `
+    <h2 style="font-family:Georgia,serif;font-size:13px;color:#C9A84C;text-transform:uppercase;letter-spacing:2px;margin:0 0 4px;text-align:center;">Austin Real Estate Market Update</h2>
+    <h1 style="font-family:Georgia,serif;font-size:24px;color:#111827;margin:0 0 16px;text-align:center;">${data.month}</h1>
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;">${data.marketSummary}</p>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 16px;">📊 Market Snapshot</h2>
+
+    <table width="100%" cellpadding="0" cellspacing="8" border="0" style="margin-bottom:8px;">
+      <tr>
+        ${stat('Median Home Price', data.medianPrice, data.medianPriceTrend)}
+        <td width="4%"></td>
+        ${stat('Homes Sold', data.homesSold, data.homesSoldTrend)}
+        <td width="4%"></td>
+        ${stat('Days on Market', data.daysOnMarket, data.daysOnMarketTrend)}
+      </tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="8" border="0" style="margin-bottom:24px;">
+      <tr>
+        ${stat('Sold/List Ratio', data.soldListRatio, data.soldListRatioTrend)}
+        <td width="4%"></td>
+        ${stat('Price / Sq Ft', data.pricePerSqFt, data.pricePerSqFtTrend)}
+        <td width="4%"></td>
+        ${stat('Active Inventory', data.inventory, data.inventoryTrend)}
+      </tr>
+    </table>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">🏘️ Neighborhood Spotlight</h2>
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;">${data.neighborhoodSpotlight}</p>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">🏡 For Buyers</h2>
+    <ul style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;padding-left:20px;">
+      ${bullets(data.buyerInsights)}
+    </ul>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">💰 For Sellers</h2>
+    <ul style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;padding-left:20px;">
+      ${bullets(data.sellerInsights)}
+    </ul>
+
+    <h2 style="font-family:Georgia,serif;font-size:18px;color:#111827;border-left:4px solid #C9A84C;padding-left:10px;margin:0 0 12px;">⭐ Tip of the Month</h2>
+    <p style="font-family:Arial,sans-serif;font-size:15px;color:#374151;line-height:1.7;margin:0 0 24px;">${data.tipOfMonth}</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td style="background:#F8F9FA;border-radius:8px;padding:24px;text-align:center;">
+          <p style="font-family:Georgia,serif;font-size:18px;font-weight:700;color:#111827;margin:0 0 8px;">Thinking About Buying or Selling?</p>
+          <p style="font-family:Arial,sans-serif;font-size:14px;color:#6B7280;margin:0 0 20px;line-height:1.6;">Whether you're buying, selling, investing, or just curious about your home's value, Texas Realty Hub is here to help.</p>
+          <a href="https://texasrealtyhub.com/contact" style="display:inline-block;background:#C9A84C;color:#000;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;padding:14px 32px;">Schedule a Free Consultation</a>
+          <br/><br/>
+          <a href="https://texasrealtyhub.com/properties" style="font-size:13px;color:#C9A84C;font-family:Arial,sans-serif;text-decoration:underline;">Browse Current Listings →</a>
+        </td>
+      </tr>
+    </table>
+  `;
+}
+
+2. In server/index.ts, update the POST /api/admin/generate-newsletter-from-pdf endpoint:
+
+Import buildMarketUpdateNewsletterHtml from the template
+After parsing the JSON from Claude, call:
+ts
+const contentHtml = buildMarketUpdateNewsletterHtml({ ...newsletterData, month: currentMonth });
+const newsletterHtml = buildBrandedEmail({
+  contentHtml,
+  recipientName: 'Preview',
+  unsubscribeToken: 'preview',
+  senderEmail: 'ramanimma@texasrealtyhub.com',
+  isPreview: false
+});
+return res.json({ newsletterHtml });
+
+3. Make sure buildBrandedEmail is imported in server/index.ts — it should already be imported since Birthday emails use it.
+
+Do not change anything else. Restart dev server cleanly after implementing.

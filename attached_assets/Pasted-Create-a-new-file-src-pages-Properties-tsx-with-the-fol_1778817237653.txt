@@ -1,0 +1,19 @@
+Create a new file src/pages/Properties.tsx with the following content — this is the /properties page for Texas Realty Hub:
+
+Page structure: Navbar at top, dark cinematic header section, sticky filter bar, listings grid, "coming soon" banner, Footer at bottom
+Header section (bg #111111, pt-32 pb-12): Gold uppercase label "GREATER AUSTIN & CENTRAL TEXAS", large serif heading "All Properties" in Cormorant Garamond font-light, gold divider line centered below
+Sticky filter bar (bg #1A1A1A, border-b border-white/10, sticky top-[64px] z-30): Left side has 4 type filter buttons — "All Types", "For Sale", "For Rent", "Lease" — active state is gold background with black text, inactive is transparent with white/60 text and white/20 border. Right side has a City dropdown select and a Sort dropdown (Newest First, Price Low→High, Price High→Low, Most Beds), plus a property count label in white/30
+Data fetching: Use supabase client imported from @/lib/supabase. Query the listings table selecting: id, title, price, address, city, zip_code, state, beds, baths, sqft, main_image, listing_type, status, property_type, is_featured. Order by is_featured desc, then created_at desc. Use useState and useEffect.
+Filtering logic: Filter by listing_type (sale/rent/lease) and city. Sort by price asc/desc or beds desc. Show 9 at a time with a "Load More Properties" button.
+Property cards (same style as FeaturedProperties.tsx): Dark bg #1A1A1A, 240px image with object-cover object-top, group hover scale-105 on image, gradient overlay bottom, gold price badge top-left, status badge top-right (gold for active/sold/rented, neutral-600 for off_market, orange for pending), price + address overlay at bottom-left, footer bar with beds/baths/sqft in white/50 and gold "View Details" text. Card links to /property/${listing.id} using Link from wouter. Add hover:border-[#C9A84C]/40 on the card.
+Price formatting: Strip non-numeric chars, format as $X,XXX. Append "/mo" if listing_type is rent or lease.
+Loading state: Show 6 skeleton cards (bg #1A1A1A, animate-pulse, height 380px)
+Empty state: Centered text "No properties match your filters" in white/30, plus a gold "Clear Filters" button
+Coming Soon banner (bg #1A1A1A, border-t border-white/10, py-16): Gold divider line, gold uppercase label "EXCLUSIVE INVENTORY", serif heading "More Exceptional Properties Coming Soon", subtext in white/50, gold outlined button "GET NOTIFIED" linking to /home-valuation
+SEO: Use SEOHead component with title "Properties | Texas Realty Hub – Greater Austin Homes", description about browsing homes in Greater Austin
+
+After creating Properties.tsx, also:
+
+In src/App.tsx: import Properties from @/pages/Properties and add a route <Route path="/properties" component={Properties} />
+In src/components/Navbar.tsx: find the PROPERTIES nav link and make sure its href is /properties
+In src/components/FeaturedProperties.tsx: find the "VIEW ALL PROPERTIES" button at the bottom and make sure it links to /properties using Link from wouter

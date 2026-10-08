@@ -1,0 +1,41 @@
+Restructure the Distribution Emails page (src/pages/admin/DistributionEmails.tsx) to have THREE tabs instead of two: "Campaigns", "Birthday Wishes", and "History". The existing Compose content moves into "Campaigns" tab, History stays as is. Build the new "Birthday Wishes" tab as described below.
+1. Update tab structure:
+
+Tab 1: "Campaigns" — move all existing Compose content here unchanged
+Tab 2: "Birthday Wishes" — new, built below
+Tab 3: "History" — existing, unchanged
+
+2. Birthday Wishes tab layout:
+At the top, a date range control:
+
+Two date inputs: "From" and "To" (defaulting to today's date for both, so it shows today's birthdays on load)
+A "Search" button to fetch birthdays in that range
+Label showing result count
+
+Today's Birthdays section (auto-fetches on load):
+
+Fetches GET /api/admin/birthday-clients (already built)
+Shows list: checkbox (checked by default), name, email, sender badge (Rama/Swetha), 👁 Preview button, 📤 Send button per row
+"🎂 Send All Today's Birthdays" button top right
+Empty state: "No birthdays today 🎉"
+
+Upcoming/Range Birthdays section (shown after clicking Search):
+
+Same list format as above
+"Send All Selected" button
+Empty state if no birthdays in range
+
+3. Update GET /api/admin/birthday-clients to accept optional ?from=MM-DD&to=MM-DD query params for date range search. When params provided, return clients whose birthdate month+day falls within that range (handle year-end wraparound e.g. Dec 28 to Jan 5). When no params, return today's birthdays as before.
+4. Sending logic:
+
+Individual Send button: calls existing POST /api/admin/send-birthday-email with that client's ID
+Send All / Send All Selected: loops through checked clients, calls same endpoint for each, shows progress indicator and final summary (X sent, X failed)
+All sends log to email_campaigns and email_campaign_recipients so they appear in History tab
+
+5. Preview per row:
+
+Calls existing GET /api/admin/preview-birthday-email/:id and opens result in new tab (same blob pattern as before)
+
+6. Note for Phase 2 (do NOT build yet): After manual sending is proven working, we will add a daily cron job to automate birthday sends. For now, manual only.
+Do not change anything in the Campaigns tab or History tab. Restart the dev server cleanly:
+pkill -f "tsx" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 2 && npm run dev
