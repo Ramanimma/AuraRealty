@@ -9,7 +9,7 @@ interface Props {
   onSaved: () => void;
 }
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 function Field({
   label,
@@ -536,7 +536,7 @@ export default function AppointmentPanel({ existing, onClose, onSaved }: Props) 
             disabled={saving || success}
             data-testid="button-save-appointment"
             className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium font-sans transition-opacity disabled:opacity-60"
-            style={{ background: GOLD, color: "#1C1C1C" }}
+            style={{ background: GOLD, color: "#1E2A44" }}
           >
             {saving && <Loader2 className="h-4 w-4 animate-spin" />}
             {saving ? "Saving…" : isEdit ? "Save Changes" : "Create Appointment"}

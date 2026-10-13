@@ -207,10 +207,10 @@ export default function ChatBot() {
         onClick={() => setIsOpen((o) => !o)}
         aria-label="Open chat assistant"
         className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-xl items-center justify-center transition-transform duration-200 hover:scale-110 focus:outline-none ${isOpen ? "hidden sm:flex" : "flex"}`}
-        style={{ backgroundColor: "#1B3A6B" }}
+        style={{ backgroundColor: "#1E2A44" }}
       >
         {!isOpen && (
-          <span className="absolute inset-0 rounded-full opacity-50 animate-ping" style={{ backgroundColor: "#C9A84C" }} />
+          <span className="absolute inset-0 rounded-full opacity-50 animate-ping" style={{ backgroundColor: "#C07A4A" }} />
         )}
         {isOpen ? (
           <X className="w-6 h-6 text-white" />
@@ -220,7 +220,7 @@ export default function ChatBot() {
         {!isOpen && unread > 0 && (
           <span
             className="absolute -top-1 -right-1 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: "#C9A84C" }}
+            style={{ backgroundColor: "#C07A4A" }}
           >
             {unread}
           </span>
@@ -237,15 +237,15 @@ export default function ChatBot() {
         {/* Header */}
         <div
           className="flex items-center justify-between shrink-0"
-          style={{ backgroundColor: "#1B3A6B", position: "sticky", top: 0, zIndex: 10, minHeight: "64px", padding: "0 16px" }}
+          style={{ backgroundColor: "#1E2A44", position: "sticky", top: 0, zIndex: 10, minHeight: "64px", padding: "0 16px" }}
         >
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: "#C9A84C" }}>
+            <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: "#C07A4A" }}>
               <Home className="w-4 h-4 text-white" />
             </div>
             <div>
               <p className="text-white font-semibold text-sm leading-tight">Aura Realty Assistant</p>
-              <p className="text-xs" style={{ color: "#C9A84C" }}>Here to help you find your home</p>
+              <p className="text-xs" style={{ color: "#C07A4A" }}>Here to help you find your home</p>
             </div>
           </div>
           <button
@@ -267,14 +267,14 @@ export default function ChatBot() {
 
           {isTyping && (
             <div className="flex gap-2 items-end">
-              <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: "#1B3A6B" }}>
+              <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: "#1E2A44" }}>
                 <Home className="w-3.5 h-3.5 text-white" />
               </div>
               <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
                 <div className="flex gap-1 items-center h-4">
-                  <span className="w-2 h-2 rounded-full animate-bounce [animation-delay:0ms]" style={{ backgroundColor: "#1B3A6B" }} />
-                  <span className="w-2 h-2 rounded-full animate-bounce [animation-delay:150ms]" style={{ backgroundColor: "#1B3A6B" }} />
-                  <span className="w-2 h-2 rounded-full animate-bounce [animation-delay:300ms]" style={{ backgroundColor: "#1B3A6B" }} />
+                  <span className="w-2 h-2 rounded-full animate-bounce [animation-delay:0ms]" style={{ backgroundColor: "#1E2A44" }} />
+                  <span className="w-2 h-2 rounded-full animate-bounce [animation-delay:150ms]" style={{ backgroundColor: "#1E2A44" }} />
+                  <span className="w-2 h-2 rounded-full animate-bounce [animation-delay:300ms]" style={{ backgroundColor: "#1E2A44" }} />
                 </div>
               </div>
             </div>
@@ -293,14 +293,14 @@ export default function ChatBot() {
             onKeyDown={handleKeyDown}
             placeholder="Ask about properties..."
             className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-1 transition-colors"
-            style={{ "--tw-ring-color": "#1B3A6B" } as React.CSSProperties}
+            style={{ "--tw-ring-color": "#1E2A44" } as React.CSSProperties}
           />
           <button
             data-testid="chatbot-send"
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
             className="w-9 h-9 rounded-full flex items-center justify-center text-white disabled:opacity-40 transition-colors shrink-0"
-            style={{ backgroundColor: "#1B3A6B" }}
+            style={{ backgroundColor: "#1E2A44" }}
           >
             <Send className="w-4 h-4" />
           </button>
@@ -317,7 +317,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       {!isUser && (
         <div
           className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
-          style={{ backgroundColor: "#1B3A6B" }}
+          style={{ backgroundColor: "#1E2A44" }}
         >
           <Home className="w-3.5 h-3.5 text-white" />
         </div>
@@ -329,28 +329,28 @@ function MessageBubble({ message }: { message: ChatMessage }) {
               ? "text-white rounded-br-sm"
               : "bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm"
           }`}
-          style={isUser ? { backgroundColor: "#C9A84C" } : undefined}
+          style={isUser ? { backgroundColor: "#C07A4A" } : undefined}
         >
           {message.content}
         </div>
 
         {!isUser && message.intent === "contact" && (
-          <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1B3A6B" }}>
+          <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1E2A44" }}>
             Contact an Agent
           </a>
         )}
         {!isUser && message.intent === "valuation" && (
-          <a href="/home-valuation" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1B3A6B" }}>
+          <a href="/home-valuation" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1E2A44" }}>
             Get Free Valuation →
           </a>
         )}
         {!isUser && message.intent === "mortgage" && (
-          <a href="/mortgage-calculator" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1B3A6B" }}>
+          <a href="/mortgage-calculator" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1E2A44" }}>
             Open Calculator →
           </a>
         )}
         {!isUser && message.intent === "property_search_empty" && (
-          <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1B3A6B" }}>
+          <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1E2A44" }}>
             Contact an Agent
           </a>
         )}
@@ -363,10 +363,10 @@ function MessageBubble({ message }: { message: ChatMessage }) {
             {message.listings.length > 3 && (
               <p className="text-xs text-gray-500 pl-1">
                 +{message.listings.length - 3} more.{" "}
-                <a href="/" className="underline" style={{ color: "#1B3A6B" }}>View all listings</a>
+                <a href="/" className="underline" style={{ color: "#1E2A44" }}>View all listings</a>
               </p>
             )}
-            <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#C9A84C" }}>
+            <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#C07A4A" }}>
               Want to schedule a tour? Click here
             </a>
           </div>
@@ -388,8 +388,8 @@ function PropertyCard({ listing }: { listing: Listing }) {
         />
       )}
       <div className="p-3">
-        <p className="font-semibold text-sm leading-tight truncate" style={{ color: "#1B3A6B" }}>{listing.address}</p>
-        <p className="font-bold text-sm mt-0.5" style={{ color: "#C9A84C" }}>{listing.price}</p>
+        <p className="font-semibold text-sm leading-tight truncate" style={{ color: "#1E2A44" }}>{listing.address}</p>
+        <p className="font-bold text-sm mt-0.5" style={{ color: "#C07A4A" }}>{listing.price}</p>
         <div className="flex gap-3 text-xs text-gray-500 mt-1">
           <span>{listing.beds} bd</span>
           <span>{listing.baths} ba</span>
@@ -399,7 +399,7 @@ function PropertyCard({ listing }: { listing: Listing }) {
           href={`/property/${listing.id}`}
           data-testid={`chatbot-view-property-${listing.id}`}
           className="mt-2 block text-center text-xs text-white px-3 py-1.5 rounded-lg transition-colors hover:opacity-90"
-          style={{ backgroundColor: "#1B3A6B" }}
+          style={{ backgroundColor: "#1E2A44" }}
         >
           View Details
         </a>

@@ -5,7 +5,7 @@ import { api } from "@/lib/api";
 import ReviewModal from "@/components/ReviewModal";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 const staticTestimonials = [
   { client_name: "Sarah & James Mitchell", comment: "Aura Realty made our home-buying experience seamless. Their market knowledge in the DFW area is unmatched. We found our dream home in Westlake within weeks.", rating: 5 },
@@ -143,7 +143,7 @@ const Testimonials = () => {
         <button
           onClick={() => setReviewOpen(true)}
           data-testid="button-leave-review"
-          className="border border-[#C9A84C] text-[#C9A84C] px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#C9A84C] hover:text-black transition-all"
+          className="border border-[#C07A4A] text-[#C07A4A] px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#C07A4A] hover:text-black transition-all"
         >
           Leave a Review
         </button>

@@ -1,7 +1,7 @@
 import { MapPin, Users, TrendingUp, Award } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 const features = [
   { icon: MapPin, title: "Local Expertise", desc: "Deep knowledge of Austin's neighborhoods, schools, and market trends." },
@@ -53,7 +53,7 @@ const AboutSection = () => {
                 <div key={f.title} className="flex gap-4">
                   <div
                     className="flex-shrink-0 w-11 h-11 flex items-center justify-center"
-                    style={{ backgroundColor: "rgba(201,168,76,0.10)", borderRadius: 0 }}
+                    style={{ backgroundColor: "rgba(192,122,74,0.10)", borderRadius: 0 }}
                   >
                     <f.icon className="h-5 w-5" style={{ color: GOLD }} />
                   </div>

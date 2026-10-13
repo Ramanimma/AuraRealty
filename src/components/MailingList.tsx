@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { api } from "@/lib/api";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 const MailingList = () => {
   const [fullName, setFullName] = useState("");
@@ -154,7 +154,7 @@ const MailingList = () => {
                     onMouseEnter={(e) => {
                       if (!isSubmitting) {
                         (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#fff";
-                        (e.currentTarget as HTMLButtonElement).style.color = "#1C1C1C";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#1E2A44";
                       }
                     }}
                     onMouseLeave={(e) => {

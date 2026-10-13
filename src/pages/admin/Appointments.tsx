@@ -123,7 +123,7 @@ export default function Appointments() {
             onClick={openNew}
             data-testid="button-new-appointment"
             className="flex items-center gap-2"
-            style={{ background: "#C9A84C", color: "#1C1C1C" }}
+            style={{ background: "#C07A4A", color: "#1E2A44" }}
           >
             <Plus className="h-4 w-4" />
             New Appointment

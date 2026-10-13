@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 function formatPrice(price: string | null | undefined, listingType: string | null | undefined): string | null {
   if (!price || price.trim() === "") return null;

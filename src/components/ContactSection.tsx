@@ -12,7 +12,7 @@ import {
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { api } from "@/lib/api";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
@@ -151,7 +151,7 @@ const ContactSection = () => {
         ) : (
           <>
             {prefill.propertyAddress && (
-              <p style={{ color: "#C9A84C", fontSize: "14px", marginBottom: "16px" }}>
+              <p style={{ color: "#C07A4A", fontSize: "14px", marginBottom: "16px" }}>
                 🏠 Scheduling a tour for: <strong>{prefill.propertyAddress}</strong>
               </p>
             )}
@@ -272,7 +272,7 @@ const ContactSection = () => {
               disabled={isSubmitting}
               data-testid="button-submit-tour"
               style={{ width: "100%", padding: "14px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", cursor: isSubmitting ? "not-allowed" : "pointer", transition: "all 0.3s ease", borderRadius: 0, opacity: isSubmitting ? 0.7 : 1 }}
-              onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#B8973B"; }}
+              onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
             >
               {isSubmitting ? "Submitting..." : "Submit Request"}

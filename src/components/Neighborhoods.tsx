@@ -4,7 +4,7 @@ import { api } from "@/lib/api";
 import type { Neighborhood } from "@/lib/api";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 const CITY_IMAGES: Record<string, string> = {
   "Austin": "https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=600&h=600&fit=crop",

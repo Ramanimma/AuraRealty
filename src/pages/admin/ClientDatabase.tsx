@@ -28,7 +28,7 @@ function getDaysUntil(dateStr: string | null): number | null {
 
 function statusBadge(days: number | null) {
   if (days === null) return { label: "No date", cls: "bg-gray-100 text-gray-500" };
-  if (days === 0) return { label: "Due Today", cls: "bg-[#C9A84C] text-white" };
+  if (days === 0) return { label: "Due Today", cls: "bg-[#C07A4A] text-white" };
   if (days < 0) return { label: "Overdue", cls: "bg-red-100 text-red-700" };
   if (days <= 30) return { label: "≤30 days", cls: "bg-orange-100 text-orange-700" };
   if (days <= 60) return { label: "≤60 days", cls: "bg-yellow-100 text-yellow-700" };

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -343,7 +343,7 @@ const HeroSection = () => {
               borderRadius: 0,
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#B8973B";
+              (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD;

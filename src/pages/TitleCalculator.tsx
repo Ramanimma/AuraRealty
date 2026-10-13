@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
 
-const CHARCOAL = "#1C1C1C";
-const GOLD = "#C9A84C";
-const CREAM = "#F8F5F0";
+const CHARCOAL = "#1E2A44";
+const GOLD = "#C07A4A";
+const CREAM = "#F7F8FA";
 
 function calcTDIPremium(value: number): number {
   if (value <= 0) return 0;
@@ -94,12 +94,12 @@ const TitleCalculator = () => {
   }, [txType, propertyValue, loanAmount, ownerPolicy, loanPolicy, endorsements]);
 
   const inputClass =
-    "w-full text-right text-sm bg-transparent border-b border-[#C9A84C] focus:outline-none text-[#1C1C1C] py-1 font-sans";
+    "w-full text-right text-sm bg-transparent border-b border-[#C07A4A] focus:outline-none text-[#1E2A44] py-1 font-sans";
 
   const labelClass = "text-xs uppercase tracking-widest text-[#6B6B6B] font-sans";
 
   const rowClass =
-    "flex justify-between items-center py-3 border-b border-[#E8E4DC]";
+    "flex justify-between items-center py-3 border-b border-[#E5E7EB]";
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: CREAM }}>
@@ -136,8 +136,8 @@ const TitleCalculator = () => {
           <div className="space-y-8">
 
             {/* Transaction Type */}
-            <div className="bg-white p-8 border border-[#E8E4DC]">
-              <h2 className="font-serif text-2xl text-[#1C1C1C] mb-6">
+            <div className="bg-white p-8 border border-[#E5E7EB]">
+              <h2 className="font-serif text-2xl text-[#1E2A44] mb-6">
                 Transaction Type
               </h2>
               <div className="flex gap-0">
@@ -153,7 +153,7 @@ const TitleCalculator = () => {
                     style={{
                       backgroundColor: txType === type ? CHARCOAL : "transparent",
                       color: txType === type ? "#fff" : "#6B6B6B",
-                      border: `1px solid ${txType === type ? CHARCOAL : "#E8E4DC"}`,
+                      border: `1px solid ${txType === type ? CHARCOAL : "#E5E7EB"}`,
                     }}
                   >
                     {type === "purchase" ? "Purchase" : "Refinance"}
@@ -163,8 +163,8 @@ const TitleCalculator = () => {
             </div>
 
             {/* Property Information */}
-            <div className="bg-white p-8 border border-[#E8E4DC]">
-              <h2 className="font-serif text-2xl text-[#1C1C1C] mb-6">
+            <div className="bg-white p-8 border border-[#E5E7EB]">
+              <h2 className="font-serif text-2xl text-[#1E2A44] mb-6">
                 Property Information
               </h2>
 
@@ -204,8 +204,8 @@ const TitleCalculator = () => {
             </div>
 
             {/* Policy Selection */}
-            <div className="bg-white p-8 border border-[#E8E4DC]">
-              <h2 className="font-serif text-2xl text-[#1C1C1C] mb-6">
+            <div className="bg-white p-8 border border-[#E5E7EB]">
+              <h2 className="font-serif text-2xl text-[#1E2A44] mb-6">
                 Policy Selection
               </h2>
 
@@ -216,7 +216,7 @@ const TitleCalculator = () => {
                     type="checkbox"
                     checked={ownerPolicy}
                     onChange={e => setOwnerPolicy(e.target.checked)}
-                    className="w-4 h-4 accent-[#C9A84C]"
+                    className="w-4 h-4 accent-[#C07A4A]"
                   />
                 </label>
               )}
@@ -227,7 +227,7 @@ const TitleCalculator = () => {
                   type="checkbox"
                   checked={loanPolicy}
                   onChange={e => setLoanPolicy(e.target.checked)}
-                  className="w-4 h-4 accent-[#C9A84C]"
+                  className="w-4 h-4 accent-[#C07A4A]"
                 />
               </label>
 
@@ -239,8 +239,8 @@ const TitleCalculator = () => {
             </div>
 
             {/* Endorsements */}
-            <div className="bg-white p-8 border border-[#E8E4DC]">
-              <h2 className="font-serif text-2xl text-[#1C1C1C] mb-2">
+            <div className="bg-white p-8 border border-[#E5E7EB]">
+              <h2 className="font-serif text-2xl text-[#1E2A44] mb-2">
                 Endorsements
               </h2>
               <p className="text-xs text-[#6B6B6B] font-sans mb-6">
@@ -253,7 +253,7 @@ const TitleCalculator = () => {
                 >
                   <div>
                     <span className={labelClass}>{e.label}</span>
-                    <span className="block text-xs text-[#C9A84C] font-sans mt-0.5">
+                    <span className="block text-xs text-[#C07A4A] font-sans mt-0.5">
                       +${e.fee}
                     </span>
                   </div>
@@ -261,7 +261,7 @@ const TitleCalculator = () => {
                     type="checkbox"
                     checked={!!endorsements[e.id]}
                     onChange={() => toggleEndorsement(e.id)}
-                    className="w-4 h-4 accent-[#C9A84C] flex-shrink-0"
+                    className="w-4 h-4 accent-[#C07A4A] flex-shrink-0"
                   />
                 </label>
               ))}
@@ -416,13 +416,13 @@ const TitleCalculator = () => {
           ].map(card => (
             <div
               key={card.title}
-              className="bg-white p-8 border border-[#E8E4DC]"
+              className="bg-white p-8 border border-[#E5E7EB]"
             >
               <div
                 className="w-8 mb-5"
                 style={{ height: "2px", backgroundColor: GOLD }}
               />
-              <h3 className="font-serif text-xl text-[#1C1C1C] mb-4">
+              <h3 className="font-serif text-xl text-[#1E2A44] mb-4">
                 {card.title}
               </h3>
               <p className="text-sm text-[#6B6B6B] font-sans leading-relaxed">

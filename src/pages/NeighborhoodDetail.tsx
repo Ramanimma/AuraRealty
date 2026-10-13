@@ -29,8 +29,8 @@ function getHeroImage(n: Neighborhood): string {
 function StatCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
     <div className="bg-white border border-border p-6 flex flex-col items-center text-center shadow-sm" style={{ borderRadius: 0 }}>
-      <div className="w-12 h-12 flex items-center justify-center mb-3" style={{ backgroundColor: "#F8F5F0", borderRadius: 0 }}>
-        <span style={{ color: "#1C1C1C" }}>{icon}</span>
+      <div className="w-12 h-12 flex items-center justify-center mb-3" style={{ backgroundColor: "#F7F8FA", borderRadius: 0 }}>
+        <span style={{ color: "#1E2A44" }}>{icon}</span>
       </div>
       <p className="text-2xl font-bold font-serif text-foreground">{value}</p>
       <p className="text-sm text-muted-foreground font-sans mt-1">{label}</p>
@@ -186,7 +186,7 @@ export default function NeighborhoodDetail() {
             )}
             <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-4">{n.name}</h1>
             {n.avg_price && (
-              <span className="inline-block text-sm font-semibold font-sans px-4 py-1.5 rounded-full" style={{ backgroundColor: "#C9A84C", color: "#fff" }}>
+              <span className="inline-block text-sm font-semibold font-sans px-4 py-1.5 rounded-full" style={{ backgroundColor: "#C07A4A", color: "#fff" }}>
                 Avg. {avgPriceDisplay}
               </span>
             )}
@@ -250,7 +250,7 @@ export default function NeighborhoodDetail() {
                     <ul className="space-y-3">
                       {n.highlights.map((h, i) => (
                         <li key={i} className="flex items-start gap-3">
-                          <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "#C9A84C" }} />
+                          <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "#C07A4A" }} />
                           <span className="text-muted-foreground font-sans">{h}</span>
                         </li>
                       ))}
@@ -341,7 +341,7 @@ export default function NeighborhoodDetail() {
         </section>
 
         {/* ── CTA ─────────────────────────────────────────────────── */}
-        <section className="py-20" style={{ backgroundColor: "#1B3A6B" }}>
+        <section className="py-20" style={{ backgroundColor: "#1E2A44" }}>
           <div className="container mx-auto px-6 text-center">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
               Interested in {n.name}?
@@ -354,7 +354,7 @@ export default function NeighborhoodDetail() {
                 <Button
                   size="lg"
                   className="font-sans font-semibold w-full sm:w-auto"
-                  style={{ backgroundColor: "#C9A84C", color: "#fff" }}
+                  style={{ backgroundColor: "#C07A4A", color: "#fff" }}
                 >
                   Schedule a Consultation
                 </Button>

@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
 
-const CHARCOAL = "#1C1C1C";
-const GOLD = "#C9A84C";
+const CHARCOAL = "#1E2A44";
+const GOLD = "#C07A4A";
 
 const navLinks = [
   { label: "Home", href: "/", path: "/" },
@@ -105,7 +105,7 @@ const Navbar = () => {
               style={{ height: "48px", width: "48px", objectFit: "contain" }}
             />
             <span
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, letterSpacing: "0.02em", whiteSpace: "nowrap", color: isHomepage ? "#ffffff" : "#1C1C1C" }}
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, letterSpacing: "0.02em", whiteSpace: "nowrap", color: isHomepage ? "#ffffff" : "#1E2A44" }}
             >
               Aura Realty
             </span>
@@ -145,7 +145,7 @@ const Navbar = () => {
               onClick={() => navigate("/home-valuation")}
               data-testid="button-get-started"
               style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "10px 24px", cursor: "pointer", transition: "all 0.3s ease", borderRadius: 0 }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#B8973B"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)"; }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)"; }}
             >
               Get Started
@@ -218,7 +218,7 @@ const Navbar = () => {
             onClick={() => handleMobileNav("/home-valuation")}
             data-testid="mobile-button-get-started"
             style={{ marginTop: "36px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "16px 48px", cursor: "pointer", transition: "background-color 0.3s ease", borderRadius: 0 }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#B8973B"; }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
           >
             Get Started

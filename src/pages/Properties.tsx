@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { api } from "@/lib/api";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 const UNSPLASH_FALLBACKS = [
   "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",

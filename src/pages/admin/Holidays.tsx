@@ -148,7 +148,7 @@ export default function Holidays() {
             onClick={openNew}
             data-testid="button-new-holiday"
             className="flex items-center gap-2"
-            style={{ background: "#C9A84C", color: "#1C1C1C" }}
+            style={{ background: "#C07A4A", color: "#1E2A44" }}
           >
             <Plus className="h-4 w-4" />
             Add Holiday
@@ -372,7 +372,7 @@ export default function Holidays() {
             <Button
               onClick={handleSend}
               disabled={sendLoading}
-              style={{ background: "#C9A84C", color: "#1C1C1C" }}
+              style={{ background: "#C07A4A", color: "#1E2A44" }}
             >
               {sendLoading && <Loader2 className="h-3.5 w-3.5 animate-spin mr-1" />}
               {sendLoading ? "Sending…" : "Send Now"}

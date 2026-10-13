@@ -9,9 +9,9 @@ import { api } from "@/lib/api";
 import type { Agent } from "@/lib/api";
 import SEOHead from "@/components/SEOHead";
 
-const CHARCOAL = "#1C1C1C";
-const GOLD = "#C9A84C";
-const CREAM = "#F8F5F0";
+const CHARCOAL = "#1E2A44";
+const GOLD = "#C07A4A";
+const CREAM = "#F7F8FA";
 
 const CITIES = ["Leander", "Liberty Hill", "Georgetown", "Round Rock", "Cedar Park", "Hutto", "Austin", "Other"];
 const PROPERTY_TYPES = ["Single Family", "Condo", "Townhouse", "Multi-Family", "Land"];
@@ -24,7 +24,7 @@ const selectStyle: React.CSSProperties = {
   fontSize: "14px",
   color: CHARCOAL,
   backgroundColor: "#fff",
-  border: "1px solid #E8E4DC",
+  border: "1px solid #E5E7EB",
   borderRadius: 0,
   outline: "none",
   appearance: "none",
@@ -38,7 +38,7 @@ const inputStyle: React.CSSProperties = {
   fontSize: "14px",
   color: CHARCOAL,
   backgroundColor: "#fff",
-  border: "1px solid #E8E4DC",
+  border: "1px solid #E5E7EB",
   borderRadius: 0,
   outline: "none",
 };
@@ -299,7 +299,7 @@ export default function HomeValuation() {
           {isSubmitted ? (
             <div
               className="text-center p-12 md:p-16"
-              style={{ border: "1px solid #E8E4DC", backgroundColor: "#fff" }}
+              style={{ border: "1px solid #E5E7EB", backgroundColor: "#fff" }}
             >
               <CheckCircle2 className="mx-auto mb-6 h-14 w-14" style={{ color: GOLD }} />
               <h3
@@ -357,7 +357,7 @@ export default function HomeValuation() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              style={{ border: "1px solid #E8E4DC", padding: "48px", backgroundColor: "#fff" }}
+              style={{ border: "1px solid #E5E7EB", padding: "48px", backgroundColor: "#fff" }}
             >
               {/* Contact Info */}
               <h3
@@ -368,7 +368,7 @@ export default function HomeValuation() {
                   color: CHARCOAL,
                   marginBottom: "24px",
                   paddingBottom: "12px",
-                  borderBottom: "1px solid #E8E4DC",
+                  borderBottom: "1px solid #E5E7EB",
                 }}
               >
                 Your Contact Information
@@ -377,7 +377,7 @@ export default function HomeValuation() {
                 <Field label="Full Name" required>
                   <input
                     data-testid="input-valuation-name"
-                    style={{ ...inputStyle, borderColor: errors.full_name ? "#c0392b" : "#E8E4DC" }}
+                    style={{ ...inputStyle, borderColor: errors.full_name ? "#c0392b" : "#E5E7EB" }}
                     placeholder="John Smith"
                     value={form.full_name}
                     onChange={set("full_name")}
@@ -389,7 +389,7 @@ export default function HomeValuation() {
                   <input
                     data-testid="input-valuation-email"
                     type="email"
-                    style={{ ...inputStyle, borderColor: errors.email ? "#c0392b" : "#E8E4DC" }}
+                    style={{ ...inputStyle, borderColor: errors.email ? "#c0392b" : "#E5E7EB" }}
                     placeholder="john@example.com"
                     value={form.email}
                     onChange={set("email")}
@@ -401,7 +401,7 @@ export default function HomeValuation() {
                   <input
                     data-testid="input-valuation-phone"
                     type="tel"
-                    style={{ ...inputStyle, borderColor: errors.phone ? "#c0392b" : "#E8E4DC" }}
+                    style={{ ...inputStyle, borderColor: errors.phone ? "#c0392b" : "#E5E7EB" }}
                     placeholder="(512) 555-0123"
                     value={form.phone}
                     onChange={set("phone")}
@@ -420,7 +420,7 @@ export default function HomeValuation() {
                   color: CHARCOAL,
                   marginBottom: "24px",
                   paddingBottom: "12px",
-                  borderBottom: "1px solid #E8E4DC",
+                  borderBottom: "1px solid #E5E7EB",
                 }}
               >
                 Property Details
@@ -430,7 +430,7 @@ export default function HomeValuation() {
                   <Field label="Property Address" required>
                     <input
                       data-testid="input-valuation-address"
-                      style={{ ...inputStyle, borderColor: errors.address ? "#c0392b" : "#E8E4DC" }}
+                      style={{ ...inputStyle, borderColor: errors.address ? "#c0392b" : "#E5E7EB" }}
                       placeholder="123 Oak Lane"
                       value={form.address}
                       onChange={set("address")}
@@ -443,7 +443,7 @@ export default function HomeValuation() {
                   <Field label="City" required>
                     <input
                       data-testid="input-valuation-city"
-                      style={{ ...inputStyle, borderColor: errors.city ? "#c0392b" : "#E8E4DC" }}
+                      style={{ ...inputStyle, borderColor: errors.city ? "#c0392b" : "#E5E7EB" }}
                       placeholder="e.g. Cedar Park, Leander, Austin"
                       value={form.city}
                       onChange={set("city")}
@@ -455,7 +455,7 @@ export default function HomeValuation() {
                 <Field label="ZIP Code" required>
                   <input
                     data-testid="input-valuation-zip"
-                    style={{ ...inputStyle, borderColor: errors.zip_code ? "#c0392b" : "#E8E4DC" }}
+                    style={{ ...inputStyle, borderColor: errors.zip_code ? "#c0392b" : "#E5E7EB" }}
                     placeholder="78641"
                     value={form.zip_code}
                     onChange={set("zip_code")}
@@ -583,7 +583,7 @@ export default function HomeValuation() {
                   borderRadius: 0,
                   opacity: isSubmitting ? 0.7 : 1,
                 }}
-                onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#B8973B"; }}
+                onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
               >
                 {isSubmitting ? "Submitting…" : "Request Free Valuation"}
@@ -653,7 +653,7 @@ export default function HomeValuation() {
                 key={card.title}
                 style={{
                   backgroundColor: "#fff",
-                  border: "1px solid #E8E4DC",
+                  border: "1px solid #E5E7EB",
                   padding: "36px 28px",
                   borderRadius: 0,
                 }}

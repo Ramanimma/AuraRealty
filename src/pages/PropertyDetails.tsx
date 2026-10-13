@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 
-const GOLD = "#C9A84C";
+const GOLD = "#C07A4A";
 
 function getImages(listing: Listing): string[] {
   if (listing.images && listing.images.length > 0) return listing.images;
@@ -226,7 +226,7 @@ const PropertyDetails = () => {
                     propertyTitle: property.title || property.address,
                   },
                 })}
-                className="inline-flex items-center gap-2 bg-[#C9A84C] text-black px-6 py-3 text-sm font-medium hover:bg-[#b8963d] transition-colors"
+                className="inline-flex items-center gap-2 bg-[#C07A4A] text-black px-6 py-3 text-sm font-medium hover:bg-[#b8963d] transition-colors"
               >
                 📅 Schedule a Tour
               </button>
@@ -234,13 +234,13 @@ const PropertyDetails = () => {
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(property.address)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-[#C9A84C] text-[#C9A84C] px-6 py-3 text-sm font-medium hover:bg-[#C9A84C] hover:text-black transition-colors"
+                className="inline-flex items-center gap-2 border border-[#C07A4A] text-[#C07A4A] px-6 py-3 text-sm font-medium hover:bg-[#C07A4A] hover:text-black transition-colors"
               >
                 📍 View on Map
               </a>
               <button
                 onClick={handleShare}
-                className="inline-flex items-center gap-2 border border-[#C9A84C] text-[#C9A84C] px-6 py-3 text-sm font-medium hover:bg-[#C9A84C] hover:text-black transition-colors"
+                className="inline-flex items-center gap-2 border border-[#C07A4A] text-[#C07A4A] px-6 py-3 text-sm font-medium hover:bg-[#C07A4A] hover:text-black transition-colors"
               >
                 🔗 Share
               </button>
