@@ -25,7 +25,7 @@ const selectStyle: React.CSSProperties = {
   color: CHARCOAL,
   backgroundColor: "#fff",
   border: "1px solid #E5E7EB",
-  borderRadius: 0,
+  borderRadius: 8,
   outline: "none",
   appearance: "none",
   WebkitAppearance: "none",
@@ -39,7 +39,7 @@ const inputStyle: React.CSSProperties = {
   color: CHARCOAL,
   backgroundColor: "#fff",
   border: "1px solid #E5E7EB",
-  borderRadius: 0,
+  borderRadius: 8,
   outline: "none",
 };
 
@@ -182,7 +182,7 @@ export default function HomeValuation() {
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 color: GOLD,
-                borderRadius: 0,
+                borderRadius: 8,
               }}
             >
               {badge}
@@ -340,7 +340,7 @@ export default function HomeValuation() {
                   border: `1px solid ${CHARCOAL}`,
                   cursor: "pointer",
                   transition: "all 0.3s ease",
-                  borderRadius: 0,
+                  borderRadius: 8,
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLButtonElement).style.backgroundColor = CHARCOAL;
@@ -580,7 +580,7 @@ export default function HomeValuation() {
                   border: "none",
                   cursor: isSubmitting ? "not-allowed" : "pointer",
                   transition: "all 0.3s ease",
-                  borderRadius: 0,
+                  borderRadius: 8,
                   opacity: isSubmitting ? 0.7 : 1,
                 }}
                 onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
@@ -655,7 +655,7 @@ export default function HomeValuation() {
                   backgroundColor: "#fff",
                   border: "1px solid #E5E7EB",
                   padding: "36px 28px",
-                  borderRadius: 0,
+                  borderRadius: 8,
                 }}
               >
                 <div
@@ -668,7 +668,7 @@ export default function HomeValuation() {
                     justifyContent: "center",
                     color: GOLD,
                     marginBottom: "20px",
-                    borderRadius: 0,
+                    borderRadius: 8,
                   }}
                 >
                   {card.icon}
@@ -736,10 +736,10 @@ export default function HomeValuation() {
               <div
                 key={agent.id}
                 style={{
-                  backgroundColor: "#2A2A2A",
+                  backgroundColor: "#26324C",
                   border: "1px solid #333333",
                   padding: "36px",
-                  borderRadius: 0,
+                  borderRadius: 8,
                   display: "flex",
                   flexDirection: "column",
                   gap: "16px",
@@ -750,7 +750,7 @@ export default function HomeValuation() {
                     <img
                       src={agent.photo_url}
                       alt={agent.name}
-                      style={{ width: "64px", height: "64px", objectFit: "cover", borderRadius: 0, flexShrink: 0 }}
+                      style={{ width: "64px", height: "64px", objectFit: "cover", borderRadius: 8, flexShrink: 0 }}
                     />
                   ) : (
                     <div style={{ width: "64px", height: "64px", backgroundColor: "#3A3A3A", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -832,10 +832,10 @@ export default function HomeValuation() {
               <div
                 style={{
                   gridColumn: "1 / -1",
-                  backgroundColor: "#2A2A2A",
+                  backgroundColor: "#26324C",
                   border: "1px solid #333333",
                   padding: "48px",
-                  borderRadius: 0,
+                  borderRadius: 8,
                   textAlign: "center",
                 }}
               >

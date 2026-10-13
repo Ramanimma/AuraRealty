@@ -91,7 +91,7 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
       onClick={() => navigate(`/property/${listing.id}`)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#1A1A1A", cursor: "pointer" }}
+      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#1A2438", cursor: "pointer" }}
     >
       <div style={{ position: "relative", height: "240px", overflow: "hidden", flexShrink: 0 }}>
         <img
@@ -130,7 +130,7 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
       </div>
 
       {/* Footer bar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 18px", backgroundColor: "#1A1A1A", borderTop: "0.5px solid rgba(255,255,255,0.06)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 18px", backgroundColor: "#1A2438", borderTop: "0.5px solid rgba(255,255,255,0.06)" }}>
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 400, letterSpacing: "0.09em", textTransform: "uppercase", color: "rgba(255,255,255,0.50)", margin: 0 }}>
           {listing.beds} Beds&nbsp;·&nbsp;{listing.baths} Baths&nbsp;·&nbsp;{Number(listing.sqft).toLocaleString()} sqft
         </p>
@@ -148,7 +148,7 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
 };
 
 const SkeletonCard = () => (
-  <div className="animate-pulse" style={{ backgroundColor: "#1A1A1A", height: "380px" }} />
+  <div className="animate-pulse" style={{ backgroundColor: "#1A2438", height: "380px" }} />
 );
 
 const Properties = () => {
@@ -213,7 +213,7 @@ const Properties = () => {
       <Navbar />
 
       {/* Dark cinematic header */}
-      <section style={{ backgroundColor: "#111111", paddingTop: "128px", paddingBottom: "48px", textAlign: "center" }}>
+      <section style={{ backgroundColor: "#141C2E", paddingTop: "128px", paddingBottom: "48px", textAlign: "center" }}>
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "18px" }}>
           DFW &amp; DFW
         </p>
@@ -225,7 +225,7 @@ const Properties = () => {
 
       {/* Sticky filter bar */}
       <div
-        style={{ backgroundColor: "#1A1A1A", borderBottom: "0.5px solid rgba(255,255,255,0.10)", position: "sticky", top: "70px", zIndex: 30 }}
+        style={{ backgroundColor: "#1A2438", borderBottom: "0.5px solid rgba(255,255,255,0.10)", position: "sticky", top: "70px", zIndex: 30 }}
       >
         <div className="container mx-auto px-6" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", padding: "14px 24px" }}>
           {/* Type filter buttons */}
@@ -247,7 +247,7 @@ const Properties = () => {
                   backgroundColor: typeFilter === btn.key ? GOLD : "transparent",
                   color: typeFilter === btn.key ? "#111" : "rgba(255,255,255,0.60)",
                   transition: "all 0.2s ease",
-                  borderRadius: 0,
+                  borderRadius: 8,
                 }}
               >
                 {btn.label}
@@ -262,7 +262,7 @@ const Properties = () => {
               data-testid="filter-city"
               value={cityFilter}
               onChange={e => { setCityFilter(e.target.value); setVisibleCount(PAGE_SIZE); }}
-              style={{ backgroundColor: "#2A2A2A", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.70)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 0 }}
+              style={{ backgroundColor: "#26324C", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.70)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
             >
               {cities.map(c => (
                 <option key={c} value={c}>{c === "all" ? "All Cities" : c}</option>
@@ -274,7 +274,7 @@ const Properties = () => {
               data-testid="filter-sort"
               value={sort}
               onChange={e => setSort(e.target.value as SortKey)}
-              style={{ backgroundColor: "#2A2A2A", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.70)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 0 }}
+              style={{ backgroundColor: "#26324C", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.70)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
             >
               <option value="newest">Newest First</option>
               <option value="price_asc">Price: Low → High</option>
@@ -293,7 +293,7 @@ const Properties = () => {
       </div>
 
       {/* Listings grid */}
-      <main style={{ backgroundColor: "#111111", minHeight: "60vh", padding: "48px 0 80px" }}>
+      <main style={{ backgroundColor: "#141C2E", minHeight: "60vh", padding: "48px 0 80px" }}>
         <div className="container mx-auto px-6">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -307,7 +307,7 @@ const Properties = () => {
               <button
                 data-testid="button-clear-filters"
                 onClick={clearFilters}
-                style={{ padding: "12px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", borderRadius: 0 }}
+                style={{ padding: "12px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", borderRadius: 8 }}
               >
                 Clear Filters
               </button>
@@ -324,7 +324,7 @@ const Properties = () => {
                   <button
                     data-testid="button-load-more"
                     onClick={() => setVisibleCount(c => c + PAGE_SIZE)}
-                    style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: "rgba(255,255,255,0.70)", border: "0.5px solid rgba(255,255,255,0.25)", cursor: "pointer", transition: "all 0.25s ease", borderRadius: 0 }}
+                    style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: "rgba(255,255,255,0.70)", border: "0.5px solid rgba(255,255,255,0.25)", cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
                     onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = GOLD; (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.70)"; (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)"; }}
                   >
@@ -338,7 +338,7 @@ const Properties = () => {
       </main>
 
       {/* Coming Soon banner */}
-      <section style={{ backgroundColor: "#1A1A1A", borderTop: "0.5px solid rgba(255,255,255,0.10)", padding: "64px 0", textAlign: "center" }}>
+      <section style={{ backgroundColor: "#1A2438", borderTop: "0.5px solid rgba(255,255,255,0.10)", padding: "64px 0", textAlign: "center" }}>
         <div className="container mx-auto px-6">
           <div style={{ width: "40px", height: "1px", backgroundColor: GOLD, margin: "0 auto 20px" }} />
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
@@ -353,7 +353,7 @@ const Properties = () => {
           <button
             data-testid="button-get-notified"
             onClick={() => navigate("/home-valuation")}
-            style={{ padding: "14px 40px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", transition: "all 0.25s ease", borderRadius: 0 }}
+            style={{ padding: "14px 40px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
             onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#111"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
           >

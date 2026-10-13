@@ -28,8 +28,8 @@ function getHeroImage(n: Neighborhood): string {
 
 function StatCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-white border border-border p-6 flex flex-col items-center text-center shadow-sm" style={{ borderRadius: 0 }}>
-      <div className="w-12 h-12 flex items-center justify-center mb-3" style={{ backgroundColor: "#F7F8FA", borderRadius: 0 }}>
+    <div className="bg-white border border-border p-6 flex flex-col items-center text-center shadow-sm" style={{ borderRadius: 8 }}>
+      <div className="w-12 h-12 flex items-center justify-center mb-3" style={{ backgroundColor: "#F7F8FA", borderRadius: 8 }}>
         <span style={{ color: "#1E2A44" }}>{icon}</span>
       </div>
       <p className="text-2xl font-bold font-serif text-foreground">{value}</p>
@@ -43,7 +43,7 @@ function ListingCard({ listing }: { listing: Listing }) {
   return (
     <div
       className="group bg-card overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
-      style={{ borderRadius: 0 }}
+      style={{ borderRadius: 8 }}
       onClick={() => navigate(`/property/${listing.id}`)}
       data-testid={`card-listing-${listing.id}`}
     >

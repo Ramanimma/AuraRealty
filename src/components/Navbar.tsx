@@ -85,7 +85,7 @@ const Navbar = () => {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          backgroundColor: isHomepage ? "#111111" : "#FFFFFF",
+          backgroundColor: isHomepage ? "#141C2E" : "#FFFFFF",
           borderBottom: isHomepage ? "0.5px solid rgba(255,255,255,0.08)" : "0.5px solid #EFEFEB",
         }}
       >
@@ -144,7 +144,7 @@ const Navbar = () => {
             <button
               onClick={() => navigate("/home-valuation")}
               data-testid="button-get-started"
-              style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "10px 24px", cursor: "pointer", transition: "all 0.3s ease", borderRadius: 0 }}
+              style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "10px 24px", cursor: "pointer", transition: "all 0.3s ease", borderRadius: 8 }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)"; }}
             >
@@ -217,7 +217,7 @@ const Navbar = () => {
           <button
             onClick={() => handleMobileNav("/home-valuation")}
             data-testid="mobile-button-get-started"
-            style={{ marginTop: "36px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "16px 48px", cursor: "pointer", transition: "background-color 0.3s ease", borderRadius: 0 }}
+            style={{ marginTop: "36px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "16px 48px", cursor: "pointer", transition: "background-color 0.3s ease", borderRadius: 8 }}
             onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
           >

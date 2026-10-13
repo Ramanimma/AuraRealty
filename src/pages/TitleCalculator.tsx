@@ -276,7 +276,7 @@ const TitleCalculator = () => {
               </h2>
 
               {/* Summary values */}
-              <div className="border-b border-[#2A2A2A] pb-4 mb-4 space-y-2">
+              <div className="border-b border-[#26324C] pb-4 mb-4 space-y-2">
                 <div className="flex justify-between text-sm font-sans">
                   <span className="text-white/50 uppercase tracking-widest text-xs">
                     Property Value
@@ -294,7 +294,7 @@ const TitleCalculator = () => {
               </div>
 
               {/* Title premiums */}
-              <div className="border-b border-[#2A2A2A] pb-4 mb-4 space-y-2">
+              <div className="border-b border-[#26324C] pb-4 mb-4 space-y-2">
                 {calc.showOwner && (
                   <div className="flex justify-between text-sm font-sans">
                     <span className="text-white/70">Owner's Title Policy</span>
@@ -318,7 +318,7 @@ const TitleCalculator = () => {
 
               {/* Endorsements */}
               {calc.endorsementTotal > 0 && (
-                <div className="border-b border-[#2A2A2A] pb-4 mb-4 space-y-2">
+                <div className="border-b border-[#26324C] pb-4 mb-4 space-y-2">
                   <p className="text-white/50 uppercase tracking-widest text-xs font-sans mb-2">
                     Endorsements
                   </p>
@@ -332,7 +332,7 @@ const TitleCalculator = () => {
               )}
 
               {/* Total title premium */}
-              <div className="border-b border-[#2A2A2A] pb-4 mb-4">
+              <div className="border-b border-[#26324C] pb-4 mb-4">
                 <div className="flex justify-between items-center">
                   <span
                     className="text-sm uppercase tracking-widest font-sans font-medium"
@@ -350,7 +350,7 @@ const TitleCalculator = () => {
               </div>
 
               {/* Additional fees */}
-              <div className="border-b border-[#2A2A2A] pb-4 mb-4 space-y-2">
+              <div className="border-b border-[#26324C] pb-4 mb-4 space-y-2">
                 <p className="text-white/50 uppercase tracking-widest text-xs font-sans mb-2">
                   Additional Fees (estimates)
                 </p>

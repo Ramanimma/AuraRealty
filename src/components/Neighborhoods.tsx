@@ -64,7 +64,7 @@ const Neighborhoods = () => {
       id="neighborhoods"
       className="py-32"
       ref={sectionRef}
-      style={{ backgroundColor: "#1A1A1A", opacity: 0 }}
+      style={{ backgroundColor: "#1A2438", opacity: 0 }}
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
@@ -79,7 +79,7 @@ const Neighborhoods = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5">
           {isLoading
             ? [1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="aspect-square animate-pulse" style={{ backgroundColor: "#2A2A2A" }} />
+                <div key={i} className="aspect-square animate-pulse" style={{ backgroundColor: "#26324C" }} />
               ))
             : items.map((n, idx) => {
                 const isNeighborhood = "id" in n;

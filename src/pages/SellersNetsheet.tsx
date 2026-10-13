@@ -103,7 +103,7 @@ const SellersNetsheet = () => {
   const ResultRow = ({ label, amount, isDeduction = false }: {
     label: string; amount: number; isDeduction?: boolean;
   }) => (
-    <div className="flex justify-between items-center py-2 border-b border-[#2A2A2A]">
+    <div className="flex justify-between items-center py-2 border-b border-[#26324C]">
       <span className="text-sm font-sans text-white/70">{label}</span>
       <span className={`text-sm font-sans ${isDeduction ? "text-red-400" : "text-white"}`}>
         {isDeduction ? `-${fmt(amount)}` : fmt(amount)}
@@ -186,7 +186,7 @@ const SellersNetsheet = () => {
               <h2 className="font-serif text-2xl text-white mb-8">Your Net Proceeds</h2>
 
               {/* Net Proceeds Hero */}
-              <div className="text-center py-8 border-b border-[#2A2A2A] mb-8">
+              <div className="text-center py-8 border-b border-[#26324C] mb-8">
                 <p className="text-xs uppercase tracking-widest text-white/40 font-sans mb-2">Estimated Net Proceeds</p>
                 <p className={`font-serif text-5xl font-light mb-2 ${calc.netProceeds >= 0 ? "text-[#C07A4A]" : "text-red-400"}`}>
                   {fmt(calc.netProceeds)}
@@ -196,7 +196,7 @@ const SellersNetsheet = () => {
 
               {/* Breakdown */}
               <div className="space-y-0">
-                <div className="flex justify-between items-center py-2 border-b border-[#2A2A2A]">
+                <div className="flex justify-between items-center py-2 border-b border-[#26324C]">
                   <span className="text-sm font-sans text-white font-medium">Sale Price</span>
                   <span className="text-sm font-sans text-white font-medium">{fmt(salePrice)}</span>
                 </div>

@@ -113,7 +113,7 @@ const Testimonials = () => {
             >
               <div
                 className="h-full flex flex-col p-10"
-                style={{ backgroundColor: "#1A1A1A", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 0, position: "relative" }}
+                style={{ backgroundColor: "#1A2438", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 8, position: "relative" }}
               >
                 <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "80px", lineHeight: 1, color: GOLD, opacity: 0.2, position: "absolute", top: "20px", left: "28px", userSelect: "none" }}>
                   "

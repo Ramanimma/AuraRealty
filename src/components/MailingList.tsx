@@ -41,7 +41,7 @@ const MailingList = () => {
     padding: "10px 0",
     outline: "none",
     width: "100%",
-    borderRadius: 0,
+    borderRadius: 8,
   };
 
   return (
@@ -146,7 +146,7 @@ const MailingList = () => {
                       border: "1px solid rgba(255,255,255,0.6)",
                       cursor: isSubmitting ? "not-allowed" : "pointer",
                       transition: "all 0.3s ease",
-                      borderRadius: 0,
+                      borderRadius: 8,
                       whiteSpace: "nowrap",
                       width: "100%",
                       opacity: isSubmitting ? 0.6 : 1,

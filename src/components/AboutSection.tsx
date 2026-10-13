@@ -18,7 +18,7 @@ const AboutSection = () => {
       id="about"
       className="py-32"
       ref={sectionRef}
-      style={{ backgroundColor: "#111111", opacity: 0 }}
+      style={{ backgroundColor: "#141C2E", opacity: 0 }}
     >
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -29,7 +29,7 @@ const AboutSection = () => {
                 src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop"
                 alt="Luxury Austin home exterior"
                 className="w-full object-cover aspect-[4/5]"
-                style={{ borderRadius: 0, display: "block" }}
+                style={{ borderRadius: 8, display: "block" }}
                 loading="lazy"
               />
               <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
@@ -53,7 +53,7 @@ const AboutSection = () => {
                 <div key={f.title} className="flex gap-4">
                   <div
                     className="flex-shrink-0 w-11 h-11 flex items-center justify-center"
-                    style={{ backgroundColor: "rgba(192,122,74,0.10)", borderRadius: 0 }}
+                    style={{ backgroundColor: "rgba(192,122,74,0.10)", borderRadius: 8 }}
                   >
                     <f.icon className="h-5 w-5" style={{ color: GOLD }} />
                   </div>

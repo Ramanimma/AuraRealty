@@ -200,7 +200,7 @@ const HeroSection = () => {
         minHeight: "600px",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#1A1A1A",
+        backgroundColor: "#1A2438",
       }}
     >
       {/* Video slot A */}
@@ -340,7 +340,7 @@ const HeroSection = () => {
               border: "none",
               cursor: "pointer",
               transition: "background-color 0.3s ease",
-              borderRadius: 0,
+              borderRadius: 8,
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A";
@@ -367,7 +367,7 @@ const HeroSection = () => {
               border: "1px solid rgba(255,255,255,0.4)",
               cursor: "pointer",
               transition: "border-color 0.3s ease, color 0.3s ease",
-              borderRadius: 0,
+              borderRadius: 8,
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD;
@@ -410,7 +410,7 @@ const HeroSection = () => {
                 border: "none",
                 cursor: "pointer",
                 transition: "all 0.3s ease",
-                borderRadius: 0,
+                borderRadius: 8,
                 padding: 0,
               }}
             />

@@ -243,7 +243,7 @@ const Footer = () => {
                   style={{
                     border: "1px solid rgba(255,255,255,0.15)",
                     color: "rgba(255,255,255,0.55)",
-                    borderRadius: 0,
+                    borderRadius: 8,
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
@@ -263,7 +263,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom divider */}
-        <div style={{ height: "1px", backgroundColor: "#2A2A2A", marginBottom: "28px" }} />
+        <div style={{ height: "1px", backgroundColor: "#26324C", marginBottom: "28px" }} />
 
         {/* Compliance */}
         <div className="flex flex-col items-center gap-2 mb-6">

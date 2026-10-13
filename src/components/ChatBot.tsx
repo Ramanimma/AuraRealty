@@ -231,7 +231,7 @@ export default function ChatBot() {
       <div
         className={`fixed z-40 flex flex-col shadow-2xl overflow-hidden transition-all duration-300 origin-bottom-right
           sm:bottom-24 sm:right-6 sm:w-[400px] sm:h-[500px] sm:rounded-2xl
-          max-sm:bottom-0 max-sm:left-0 max-sm:right-0 max-sm:top-16 max-sm:rounded-none
+          max-sm:bottom-0 max-sm:left-0 max-sm:right-0 max-sm:top-16 max-sm:rounded-md
           ${isOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}`}
       >
         {/* Header */}

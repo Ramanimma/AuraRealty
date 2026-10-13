@@ -24,7 +24,7 @@ const inputStyle: React.CSSProperties = {
   fontSize: "14px",
   fontWeight: 300,
   outline: "none",
-  borderRadius: 0,
+  borderRadius: 8,
   transition: "border-color 0.2s ease",
 };
 
@@ -107,7 +107,7 @@ const ContactSection = () => {
       id="contact"
       className="py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#111111", opacity: 0 }}
+      style={{ backgroundColor: "#141C2E", opacity: 0 }}
     >
       <style>{`
         .dark-input::placeholder { color: rgba(255,255,255,0.30); }
@@ -130,7 +130,7 @@ const ContactSection = () => {
         {isSubmitted ? (
           <div
             className="max-w-2xl mx-auto p-8 md:p-12 text-center space-y-4"
-            style={{ backgroundColor: "#1A1A1A", border: "0.5px solid rgba(255,255,255,0.10)" }}
+            style={{ backgroundColor: "#1A2438", border: "0.5px solid rgba(255,255,255,0.10)" }}
           >
             <CheckCircle2 className="h-12 w-12 mx-auto" style={{ color: GOLD }} />
             <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontWeight: 400, color: "#fff" }}>
@@ -141,7 +141,7 @@ const ContactSection = () => {
             </p>
             <button
               onClick={() => setIsSubmitted(false)}
-              style={{ marginTop: "16px", padding: "10px 28px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `1px solid ${GOLD}`, cursor: "pointer", transition: "all 0.3s ease", borderRadius: 0 }}
+              style={{ marginTop: "16px", padding: "10px 28px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `1px solid ${GOLD}`, cursor: "pointer", transition: "all 0.3s ease", borderRadius: 8 }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
             >
@@ -159,7 +159,7 @@ const ContactSection = () => {
             <form
               onSubmit={handleSubmit}
               className="max-w-2xl mx-auto p-8 md:p-12 space-y-6"
-              style={{ backgroundColor: "#1A1A1A", border: "0.5px solid rgba(255,255,255,0.10)" }}
+              style={{ backgroundColor: "#1A2438", border: "0.5px solid rgba(255,255,255,0.10)" }}
             >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
@@ -271,7 +271,7 @@ const ContactSection = () => {
               type="submit"
               disabled={isSubmitting}
               data-testid="button-submit-tour"
-              style={{ width: "100%", padding: "14px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", cursor: isSubmitting ? "not-allowed" : "pointer", transition: "all 0.3s ease", borderRadius: 0, opacity: isSubmitting ? 0.7 : 1 }}
+              style={{ width: "100%", padding: "14px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", cursor: isSubmitting ? "not-allowed" : "pointer", transition: "all 0.3s ease", borderRadius: 8, opacity: isSubmitting ? 0.7 : 1 }}
               onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
             >

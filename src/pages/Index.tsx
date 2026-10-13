@@ -24,7 +24,7 @@ const Index = () => {
   }, [location]);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#111111" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#141C2E" }}>
       <SEOHead
         title="Aura Realty | Homes for Sale in Austin & DFW"
         description="Find homes for sale in Leander, Frisco, Georgetown, Round Rock, Liberty Hill, Hutto and Austin TX. Expert real estate agents serving DFW."
