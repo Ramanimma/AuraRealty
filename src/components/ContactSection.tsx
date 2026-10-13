@@ -107,7 +107,7 @@ const ContactSection = () => {
       id="contact"
       className="py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#141C2E", opacity: 0 }}
+      style={{ backgroundColor: "#1E2A44", opacity: 0 }}
     >
       <style>{`
         .dark-input::placeholder { color: rgba(255,255,255,0.30); }
@@ -130,7 +130,7 @@ const ContactSection = () => {
         {isSubmitted ? (
           <div
             className="max-w-2xl mx-auto p-8 md:p-12 text-center space-y-4"
-            style={{ backgroundColor: "#1A2438", border: "0.5px solid rgba(255,255,255,0.10)" }}
+            style={{ backgroundColor: "#26324C", border: "0.5px solid rgba(255,255,255,0.10)" }}
           >
             <CheckCircle2 className="h-12 w-12 mx-auto" style={{ color: GOLD }} />
             <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontWeight: 400, color: "#fff" }}>
@@ -159,7 +159,7 @@ const ContactSection = () => {
             <form
               onSubmit={handleSubmit}
               className="max-w-2xl mx-auto p-8 md:p-12 space-y-6"
-              style={{ backgroundColor: "#1A2438", border: "0.5px solid rgba(255,255,255,0.10)" }}
+              style={{ backgroundColor: "#26324C", border: "0.5px solid rgba(255,255,255,0.10)" }}
             >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">

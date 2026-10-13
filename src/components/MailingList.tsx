@@ -47,7 +47,7 @@ const MailingList = () => {
   return (
     <section
       style={{
-        backgroundColor: "#0A0A0A",
+        backgroundColor: "#1E2A44",
         padding: "100px 24px",
         minHeight: "300px",
       }}
