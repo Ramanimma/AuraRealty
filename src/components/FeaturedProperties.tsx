@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { BedDouble, Bath, Ruler } from "lucide-react";
 import { api } from "@/lib/api";
+import Reveal from "@/components/Reveal";
 
 const GOLD = "#C07A4A";
 
@@ -136,14 +137,14 @@ const FeaturedProperties = () => {
       <div className="container mx-auto px-6">
 
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "56px" }}>
+        <Reveal style={{ textAlign: "center", marginBottom: "56px" }}>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: "#A8653A", marginBottom: "16px" }}>
             Featured Listings
           </p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em" }}>
             Explore Austin's Finest Properties
           </h2>
-        </div>
+        </Reveal>
 
         {/* Grid */}
         {isLoading ? (
@@ -155,13 +156,15 @@ const FeaturedProperties = () => {
         ) : properties.length === 0 ? null : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {properties.map((p, i) => (
-              <PropertyCard key={p.id} p={p} idx={i} />
+              <Reveal key={p.id} delay={(i % 4) * 80} style={{ display: "grid" }}>
+                <PropertyCard p={p} idx={i} />
+              </Reveal>
             ))}
           </div>
         )}
 
         {/* View All button */}
-        <div style={{ textAlign: "center", marginTop: "48px" }}>
+        <Reveal style={{ textAlign: "center", marginTop: "48px" }}>
           <button
             data-testid="button-view-all-properties"
             onClick={() => navigate("/properties")}
@@ -172,7 +175,7 @@ const FeaturedProperties = () => {
           >
             View All Properties
           </button>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

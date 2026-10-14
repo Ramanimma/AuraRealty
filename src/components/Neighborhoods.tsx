@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import type { Neighborhood } from "@/lib/api";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import Reveal from "@/components/Reveal";
 
 const CITY_IMAGES: Record<string, string> = {
   "Austin": "https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=600&h=600&fit=crop",
@@ -46,7 +46,6 @@ const CtaCard = () => (
 
 const Neighborhoods = () => {
   const navigate = useNavigate();
-  const sectionRef = useScrollAnimation();
 
   const { data: neighborhoods = [], isLoading } = useQuery({
     queryKey: ["neighborhoods"],
@@ -61,18 +60,17 @@ const Neighborhoods = () => {
     <section
       id="neighborhoods"
       className="py-16 md:py-24"
-      ref={sectionRef}
-      style={{ backgroundColor: "#FFFFFF", opacity: 0, scrollMarginTop: "84px" }}
+      style={{ backgroundColor: "#FFFFFF", scrollMarginTop: "84px" }}
     >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <Reveal className="text-center mb-16">
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "#A8653A", marginBottom: "16px" }}>
             Explore Austin
           </p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em" }}>
             Neighborhood Spotlight
           </h2>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {isLoading
@@ -91,8 +89,9 @@ const Neighborhoods = () => {
                 const clickable = !!slug;
 
                 return (
-                  <div
+                  <Reveal
                     key={isNeighborhood ? (n as Neighborhood).id : idx}
+                    delay={(idx % 4) * 80}
                     data-testid={`card-neighborhood-${slug ?? idx}`}
                     className="group relative aspect-square overflow-hidden"
                     style={{ cursor: clickable ? "pointer" : "default", borderRadius: 12 }}
@@ -142,11 +141,15 @@ const Neighborhoods = () => {
                         </p>
                       )}
                     </div>
-                  </div>
+                  </Reveal>
                 );
               })}
 
-          {!isLoading && needsCta && <CtaCard />}
+          {!isLoading && needsCta && (
+            <Reveal delay={(items.length % 4) * 80} style={{ display: "grid" }}>
+              <CtaCard />
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

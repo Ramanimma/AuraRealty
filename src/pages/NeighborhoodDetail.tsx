@@ -1,3 +1,4 @@
+import Reveal from "@/components/Reveal";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -213,7 +214,7 @@ export default function NeighborhoodDetail() {
         {/* ── About ───────────────────────────────────────────────── */}
         {(n.description || n.lifestyle || (n.highlights && n.highlights.length > 0)) && (
           <section className="py-16 bg-white">
-            <div className="container mx-auto px-6">
+            <Reveal className="container mx-auto px-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Left: description + lifestyle */}
                 <div>
@@ -245,21 +246,21 @@ export default function NeighborhoodDetail() {
                   </div>
                 )}
               </div>
-            </div>
+            </Reveal>
           </section>
         )}
 
         {/* ── Available Listings ──────────────────────────────────── */}
         <section className="py-16 bg-[#F7F8FA]">
           <div className="container mx-auto px-6">
-            <div className="mb-10">
+            <Reveal className="mb-10">
               <p className="text-[#4B5563] font-semibold text-sm tracking-widest uppercase mb-2 font-sans">
                 Available Now
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground">
                 Listings in {n.name}
               </h2>
-            </div>
+            </Reveal>
 
             {loadingListings ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -276,8 +277,10 @@ export default function NeighborhoodDetail() {
               </div>
             ) : listings.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {listings.map((l) => (
-                  <ListingCard key={l.id} listing={l} />
+                {listings.map((l, i) => (
+                  <Reveal key={l.id} delay={(i % 4) * 80} style={{ display: "grid" }}>
+                    <ListingCard listing={l} />
+                  </Reveal>
                 ))}
               </div>
             ) : (
@@ -302,11 +305,11 @@ export default function NeighborhoodDetail() {
         {/* ── Market Snapshot ─────────────────────────────────────── */}
         <section className="py-16 bg-background">
           <div className="container mx-auto px-6">
-            <div className="mb-8">
+            <Reveal className="mb-8">
               <p className="text-[#A8653A] font-semibold text-sm tracking-widest uppercase mb-2 font-sans">Market Data</p>
               <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground">Market Snapshot</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            </Reveal>
+            <Reveal className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-white border border-[#E9EDF3] rounded-xl p-6 shadow-sm">
                 <p className="text-sm text-[#4B5563] font-sans mb-1">Median List Price</p>
                 <p className="text-2xl font-bold font-serif text-foreground">{avgPriceDisplay}</p>
@@ -323,13 +326,13 @@ export default function NeighborhoodDetail() {
                   Market data updated regularly by our team. Contact an agent for a personalized report.
                 </p>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── CTA ─────────────────────────────────────────────────── */}
         <section className="py-20" style={{ backgroundColor: "#1E2A44" }}>
-          <div className="container mx-auto px-6 text-center">
+          <Reveal className="container mx-auto px-6 text-center">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
               Interested in {n.name}?
             </h2>
@@ -356,7 +359,7 @@ export default function NeighborhoodDetail() {
                 </Button>
               </a>
             </div>
-          </div>
+          </Reveal>
         </section>
       </main>
 

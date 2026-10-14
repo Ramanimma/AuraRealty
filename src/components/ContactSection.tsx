@@ -9,7 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import Reveal from "@/components/Reveal";
 import { api } from "@/lib/api";
 
 const GOLD = "#C07A4A";
@@ -48,7 +48,6 @@ const ContactSection = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [focused, setFocused] = useState<string | null>(null);
-  const sectionRef = useScrollAnimation();
 
   const validate = (form: HTMLFormElement) => {
     const errs: Record<string, string> = {};
@@ -107,8 +106,7 @@ const ContactSection = () => {
     <section
       id="contact"
       className="py-16 md:py-24"
-      ref={sectionRef}
-      style={{ backgroundColor: "#FFFFFF", opacity: 0, scrollMarginTop: "84px" }}
+      style={{ backgroundColor: "#FFFFFF", scrollMarginTop: "84px" }}
     >
       <style>{`
         .dark-input::placeholder { color: #4B5563; }
@@ -116,7 +114,7 @@ const ContactSection = () => {
       `}</style>
 
       <div className="container mx-auto px-6">
-        <div className="max-w-2xl mx-auto text-center mb-14">
+        <Reveal className="max-w-2xl mx-auto text-center mb-14">
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "#A8653A", marginBottom: "16px" }}>
             Get In Touch
           </p>
@@ -126,7 +124,7 @@ const ContactSection = () => {
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 400, color: "#4B5563", lineHeight: 1.7 }}>
             Interested in a property? Fill out the form below and one of our agents will reach out to arrange a private showing at your convenience.
           </p>
-        </div>
+        </Reveal>
 
         {isSubmitted ? (
           <div

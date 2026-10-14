@@ -1,3 +1,4 @@
+import Reveal from "@/components/Reveal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -155,7 +156,7 @@ export default function HomeValuation() {
       {/* ── How It Works ── */}
       <section style={{ backgroundColor: CREAM, padding: "96px 24px" }}>
         <div className="container mx-auto" style={{ maxWidth: "1100px" }}>
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <p
               style={{
                 fontFamily: "'Inter', sans-serif",
@@ -180,8 +181,8 @@ export default function HomeValuation() {
             >
               How It Works
             </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          </Reveal>
+          <Reveal className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
               { num: "01", title: "Submit Your Details", desc: "Tell us about your property — address, size, condition, and any upgrades." },
               { num: "02", title: "We Analyze The Market", desc: "Our agents research comparable sales, current inventory, and market trends." },
@@ -222,14 +223,14 @@ export default function HomeValuation() {
                 </p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── Valuation Form ── */}
       <section style={{ backgroundColor: "#FFFFFF", padding: "96px 24px" }}>
         <div className="container mx-auto" style={{ maxWidth: "900px" }}>
-          <div className="text-center mb-14">
+          <Reveal className="text-center mb-14">
             <p
               style={{
                 fontFamily: "'Inter', sans-serif",
@@ -254,7 +255,7 @@ export default function HomeValuation() {
             >
               Request Your Free Valuation
             </h2>
-          </div>
+          </Reveal>
 
           {isSubmitted ? (
             <div
@@ -593,7 +594,7 @@ export default function HomeValuation() {
       {/* ── Why Choose Us ── */}
       <section style={{ backgroundColor: CREAM, padding: "96px 24px" }}>
         <div className="container mx-auto" style={{ maxWidth: "1100px" }}>
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <p
               style={{
                 fontFamily: "'Inter', sans-serif",
@@ -618,8 +619,8 @@ export default function HomeValuation() {
             >
               Why Choose Us for Your Valuation
             </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          </Reveal>
+          <Reveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { icon: <BarChart2 className="h-6 w-6" />, title: "Local Market Expert", desc: "Deep knowledge of Austin and Central Texas neighborhoods, trends, and comparable sales." },
               { icon: <CheckCircle2 className="h-6 w-6" />, title: "Data-Driven Analysis", desc: "Every valuation is backed by real MLS data, not generic estimates or algorithms." },
@@ -674,14 +675,14 @@ export default function HomeValuation() {
                 </p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── Agent CTA ── */}
       <section style={{ backgroundColor: CHARCOAL, padding: "96px 24px" }}>
         <div className="container mx-auto" style={{ maxWidth: "900px" }}>
-          <div className="text-center mb-14">
+          <Reveal className="text-center mb-14">
             <p
               style={{
                 fontFamily: "'Inter', sans-serif",
@@ -706,7 +707,7 @@ export default function HomeValuation() {
             >
               Speak Directly With An Agent
             </h2>
-          </div>
+          </Reveal>
 
           <div className={`grid gap-8 ${agents.length === 1 ? "grid-cols-1 max-w-sm mx-auto" : "grid-cols-1 md:grid-cols-2"}`}>
             {agents.length > 0 ? agents.map((agent) => (

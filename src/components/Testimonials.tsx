@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import ReviewModal from "@/components/ReviewModal";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import Reveal from "@/components/Reveal";
 
 const GOLD = "#C07A4A";
 
@@ -15,7 +15,6 @@ const staticTestimonials = [
 
 const Testimonials = () => {
   const [reviewOpen, setReviewOpen] = useState(false);
-  const sectionRef = useScrollAnimation();
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
@@ -67,8 +66,7 @@ const Testimonials = () => {
     <section
       id="testimonials"
       className="py-16 md:py-24"
-      ref={sectionRef}
-      style={{ backgroundColor: "#1E2A44", opacity: 0, scrollMarginTop: "84px" }}
+      style={{ backgroundColor: "#1E2A44", scrollMarginTop: "84px" }}
     >
       <style>{`
         @keyframes scrollLeft {
@@ -84,17 +82,18 @@ const Testimonials = () => {
       `}</style>
 
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <Reveal className="text-center mb-16">
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)", marginBottom: "16px" }}>
             Client Stories
           </p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 400, color: "#fff", letterSpacing: "-0.01em" }}>
             What Our Clients Say
           </h2>
-        </div>
+        </Reveal>
       </div>
 
       {/* Scrolling carousel */}
+      <Reveal>
       <div ref={containerRef} style={{ overflow: "hidden", width: "100%" }}>
         <div
           ref={trackRef}
@@ -138,6 +137,7 @@ const Testimonials = () => {
         </div>
       </div>
 
+      </Reveal>
       {/* Leave a Review — static, below the carousel */}
       <div className="text-center mt-14">
         <button

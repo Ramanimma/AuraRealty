@@ -1,3 +1,4 @@
+import Reveal from "@/components/Reveal";
 import { useQuery } from "@tanstack/react-query";
 import { Phone, Mail, Shield, MapPin, Heart, BookOpen, Trophy } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
@@ -206,7 +207,9 @@ export default function About() {
           {agents && agents.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {agents.map((agent) => (
-                <AgentCard key={agent.id} agent={agent} />
+                <Reveal key={agent.id} style={{ display: "grid" }}>
+                  <AgentCard agent={agent} />
+                </Reveal>
               ))}
             </div>
           )}
@@ -217,15 +220,15 @@ export default function About() {
       {/* ── Why Work With Us ── */}
       <section className="py-16 px-6 bg-[#F7F8FA] md:py-20">
         <div className="container mx-auto max-w-5xl">
-          <div className="text-center mb-12">
+          <Reveal className="text-center mb-12">
             <p className="font-sans text-sm font-semibold text-[#4B5563] uppercase tracking-widest mb-2">
               Our Difference
             </p>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary">
               Why Work With Us
             </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          </Reveal>
+          <Reveal className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {features.map((f) => (
               <Card
                 key={f.title}
@@ -247,13 +250,13 @@ export default function About() {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── CTA ── */}
       <section className="bg-primary text-primary-foreground py-20 px-6">
-        <div className="container mx-auto max-w-2xl text-center">
+        <Reveal className="container mx-auto max-w-2xl text-center">
           <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
             Ready to Find Your Dream Home?
           </h2>
@@ -281,7 +284,7 @@ export default function About() {
               </a>
             </Button>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <MailingList />

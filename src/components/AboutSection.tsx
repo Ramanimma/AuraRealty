@@ -1,5 +1,5 @@
 import { MapPin, Users, TrendingUp, Award } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import Reveal from "@/components/Reveal";
 
 const features = [
   { icon: MapPin, title: "Local Expertise", desc: "Deep knowledge of Austin's neighborhoods, schools, and market trends." },
@@ -9,19 +9,16 @@ const features = [
 ];
 
 const AboutSection = () => {
-  const sectionRef = useScrollAnimation();
-
   return (
     <section
       id="about"
       className="py-16 md:py-24"
-      ref={sectionRef}
-      style={{ backgroundColor: "#F7F8FA", opacity: 0, scrollMarginTop: "84px" }}
+      style={{ backgroundColor: "#F7F8FA", scrollMarginTop: "84px" }}
     >
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           {/* Image */}
-          <div className="relative">
+          <Reveal className="relative">
             <div style={{ position: "relative" }}>
               <img
                 src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop"
@@ -32,10 +29,10 @@ const AboutSection = () => {
               />
               <div style={{ position: "absolute", inset: 0, background: "rgba(30,42,68,0.08)", borderRadius: 12 }} />
             </div>
-          </div>
+          </Reveal>
 
           {/* Content */}
-          <div>
+          <Reveal>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "#4B5563", marginBottom: "16px" }}>
               Why Choose Us
             </p>
@@ -66,7 +63,7 @@ const AboutSection = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

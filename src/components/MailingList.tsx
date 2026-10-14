@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { api } from "@/lib/api";
+import Reveal from "@/components/Reveal";
 
 const GOLD = "#C07A4A";
 
@@ -69,7 +70,7 @@ const MailingList = () => {
           </div>
         ) : (
           <>
-            <div className="text-center mb-14">
+            <Reveal className="text-center mb-14">
               <h2
                 style={{
                   fontFamily: "'Cormorant Garamond', serif",
@@ -97,7 +98,7 @@ const MailingList = () => {
               >
                 Stay up-to-date with exclusive listings and market updates in DFW.
               </p>
-            </div>
+            </Reveal>
 
             <form onSubmit={handleSubmit}>
               <div

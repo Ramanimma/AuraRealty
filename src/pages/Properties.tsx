@@ -1,3 +1,4 @@
+import Reveal from "@/components/Reveal";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -332,7 +333,9 @@ const Properties = () => {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {visible.map((listing, i) => (
-                    <PropertyCard key={listing.id} listing={listing} idx={i} />
+                    <Reveal key={listing.id} delay={(i % 4) * 80} style={{ display: "grid" }}>
+                      <PropertyCard listing={listing} idx={i} />
+                    </Reveal>
                 ))}
               </div>
               {hasMore && (
@@ -364,7 +367,7 @@ const Properties = () => {
 
       {/* Coming Soon banner */}
       <section style={{ backgroundColor: "#1E2A44", borderTop: "1px solid rgba(255,255,255,0.10)", padding: "64px 0", textAlign: "center" }}>
-        <div className="container mx-auto px-6">
+        <Reveal className="container mx-auto px-6">
           <div style={{ width: "40px", height: "1px", backgroundColor: GOLD, margin: "0 auto 20px" }} />
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "16px" }}>
             Exclusive Inventory
@@ -393,7 +396,7 @@ const Properties = () => {
           >
             Get Notified
           </button>
-        </div>
+        </Reveal>
       </section>
 
       <Footer />
