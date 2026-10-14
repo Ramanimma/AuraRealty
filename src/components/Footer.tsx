@@ -23,7 +23,7 @@ import realtorLogo from "@/assets/realtor-logo.png";
 import equalHousingLogo from "@/assets/equal-housing-logo.png";
 import fullCircleLogo from "@/assets/full-circle-logo.jpeg";
 
-const BG = "#050505";
+const BG = "#141C2E";
 const GOLD = "#C07A4A";
 
 const Footer = () => {
