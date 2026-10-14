@@ -4,15 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 
 const GOLD = "#C07A4A";
-let heroEntrancePlayed = false;
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const playEntrance = useRef(!heroEntrancePlayed);
-
-  useEffect(() => {
-    heroEntrancePlayed = true;
-  }, []);
 
   const { data: videos = [] } = useQuery({
     queryKey: ["hero-videos"],
@@ -263,14 +257,14 @@ const HeroSection = () => {
           to { opacity: 1; transform: translateY(0); }
         }
         .hero-word { display: inline-block; }
-        .hero-entrance { animation: aura-hero-fade 400ms ease-out both; }
-        .hero-entrance .hero-eyebrow { animation: aura-hero-fade 300ms ease-out 200ms both; }
+        .hero-entrance { animation: aura-hero-fade 400ms ease-out 0ms both; }
+        .hero-entrance .hero-eyebrow { animation: aura-hero-fade 300ms ease-out 300ms both; }
         .hero-entrance .hero-word {
           animation: aura-hero-word 500ms ease-out both;
-          animation-delay: calc(350ms + var(--hero-word-index) * 120ms);
+          animation-delay: calc(450ms + var(--hero-word-index) * 120ms);
         }
-        .hero-entrance .hero-subtitle { animation: aura-hero-rise 350ms ease-out 950ms both; }
-        .hero-entrance .hero-buttons { animation: aura-hero-rise 350ms ease-out 1100ms both; }
+        .hero-entrance .hero-subtitle { animation: aura-hero-rise 350ms ease-out 1050ms both; }
+        .hero-entrance .hero-buttons { animation: aura-hero-rise 350ms ease-out 1200ms both; }
         .hero-entrance:focus-within,
         .hero-entrance:focus-within .hero-eyebrow,
         .hero-entrance:focus-within .hero-word,
@@ -319,7 +313,7 @@ const HeroSection = () => {
         }}
       >
         <div
-          className={`hero-content-panel${playEntrance.current ? " hero-entrance" : ""}`}
+          className="hero-content-panel hero-entrance"
           style={{
             width: "100%",
             maxWidth: "640px",
@@ -351,6 +345,7 @@ const HeroSection = () => {
 
         {/* Headline */}
         <h1
+          aria-label="Discover Your Perfect Home"
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(38px, 6.3vw, 65px)",
@@ -362,11 +357,11 @@ const HeroSection = () => {
             margin: 0,
           }}
         >
-          <span className="hero-word" style={{ "--hero-word-index": 0 } as React.CSSProperties}>Discover</span>{" "}
-          <span className="hero-word" style={{ "--hero-word-index": 1 } as React.CSSProperties}>Your</span>{" "}
+          <span className="hero-word" aria-hidden="true" style={{ "--hero-word-index": 0 } as React.CSSProperties}>Discover</span>{" "}
+          <span className="hero-word" aria-hidden="true" style={{ "--hero-word-index": 1 } as React.CSSProperties}>Your</span>{" "}
           <br />
-          <span className="hero-word" style={{ "--hero-word-index": 2 } as React.CSSProperties}>Perfect</span>{" "}
-          <span className="hero-word" style={{ "--hero-word-index": 3 } as React.CSSProperties}>
+          <span className="hero-word" aria-hidden="true" style={{ "--hero-word-index": 2 } as React.CSSProperties}>Perfect</span>{" "}
+          <span className="hero-word" aria-hidden="true" style={{ "--hero-word-index": 3 } as React.CSSProperties}>
             <em style={{ color: "#FFFFFF", fontStyle: "italic" }}>Home</em>
           </span>
         </h1>
