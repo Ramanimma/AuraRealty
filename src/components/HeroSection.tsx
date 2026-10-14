@@ -243,6 +243,28 @@ const HeroSection = () => {
         />
       )}
 
+      <style>{`
+        @media (max-width: 640px) {
+          .hero-content-panel {
+            padding: 24px 20px !important;
+          }
+        }
+      `}</style>
+
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "120px",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.35), transparent)",
+          zIndex: 2,
+          pointerEvents: "none",
+        }}
+      />
+
       {/* Centered content */}
       <div
         style={{
@@ -257,6 +279,20 @@ const HeroSection = () => {
           padding: "0 24px",
         }}
       >
+        <div
+          className="hero-content-panel"
+          style={{
+            width: "100%",
+            maxWidth: "760px",
+            boxSizing: "border-box",
+            background: "rgba(20,28,46,0.35)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.18)",
+            borderRadius: "16px",
+            padding: "40px 48px",
+          }}
+        >
         {/* Gold label */}
         <p
           style={{
@@ -297,8 +333,8 @@ const HeroSection = () => {
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "15px",
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.75)",
+            fontWeight: 500,
+            color: "#FFFFFF",
             textShadow: "0 2px 12px rgba(0,0,0,0.45)",
             letterSpacing: "0.06em",
             maxWidth: "380px",
@@ -374,6 +410,7 @@ const HeroSection = () => {
           >
             Free Home Valuation
           </button>
+        </div>
         </div>
       </div>
 
