@@ -246,7 +246,7 @@ const HeroSection = () => {
       <style>{`
         @media (max-width: 640px) {
           .hero-content-panel {
-            padding: 24px 20px !important;
+            padding: 20px 18px !important;
           }
         }
       `}</style>
@@ -283,14 +283,14 @@ const HeroSection = () => {
           className="hero-content-panel"
           style={{
             width: "100%",
-            maxWidth: "760px",
+            maxWidth: "640px",
             boxSizing: "border-box",
-            background: "rgba(20,28,46,0.35)",
-            backdropFilter: "blur(10px)",
-            WebkitBackdropFilter: "blur(10px)",
+            background: "rgba(20,28,46,0.28)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
             border: "1px solid rgba(255,255,255,0.18)",
             borderRadius: "16px",
-            padding: "40px 48px",
+            padding: "32px 40px",
           }}
         >
         {/* Gold label */}
@@ -313,7 +313,7 @@ const HeroSection = () => {
         <h1
           style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(42px, 7vw, 72px)",
+            fontSize: "clamp(38px, 6.3vw, 65px)",
             fontWeight: 300,
             lineHeight: 1.05,
             letterSpacing: "-0.01em",
