@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import { api } from "@/lib/api";
 import type { Agent } from "@/lib/api";
 import SEOHead from "@/components/SEOHead";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 const CHARCOAL = "#1E2A44";
 const GOLD = "#C07A4A";
@@ -126,7 +125,12 @@ export default function HomeValuation() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <PublicPageHeader eyebrow="Free Market Analysis" title="What Is Your Home Worth?" subtitle="Get a free, no-obligation market analysis from our local experts" />
+      <header className="public-page-header">
+        <p className="public-page-eyebrow">Free Market Analysis</p>
+        <h1 className="public-page-title">What Is Your Home Worth?</h1>
+        <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+        <p className="public-page-subtitle">Get a free, no-obligation market analysis from our local experts</p>
+      </header>
       <div className="flex flex-wrap gap-3 justify-center bg-white py-6">
           {["Free Analysis", "No Obligation", "Local Experts"].map((badge) => (
             <div
@@ -139,7 +143,7 @@ export default function HomeValuation() {
                 fontWeight: 500,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: GOLD,
+                color: "#A8653A",
                 borderRadius: 8,
               }}
             >
@@ -159,7 +163,7 @@ export default function HomeValuation() {
                 fontWeight: 500,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: GOLD,
+                color: "#4B5563",
                 marginBottom: "12px",
               }}
             >
@@ -189,9 +193,8 @@ export default function HomeValuation() {
                     fontFamily: "'Cormorant Garamond', serif",
                     fontSize: "56px",
                     fontWeight: 300,
-                    color: GOLD,
+                    color: "#A8653A",
                     lineHeight: 1,
-                    opacity: 0.7,
                   }}
                 >
                   {step.num}
@@ -234,7 +237,7 @@ export default function HomeValuation() {
                 fontWeight: 500,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: GOLD,
+                color: "#A8653A",
                 marginBottom: "12px",
               }}
             >
@@ -297,7 +300,7 @@ export default function HomeValuation() {
                   color: CHARCOAL,
                   border: `1px solid ${CHARCOAL}`,
                   cursor: "pointer",
-                  transition: "all 0.3s ease",
+                  transition: "all 0.2s ease",
                   borderRadius: 8,
                 }}
                 onMouseEnter={(e) => {
@@ -315,6 +318,7 @@ export default function HomeValuation() {
           ) : (
             <form
               onSubmit={handleSubmit}
+              className="public-tool-inputs"
               style={{ border: "1px solid #E9EDF3", borderRadius: 12, padding: "clamp(22px, 4vw, 48px)", backgroundColor: "#fff", boxShadow: "0 12px 32px rgba(30,42,68,0.05)" }}
             >
               {/* Contact Info */}
@@ -583,7 +587,7 @@ export default function HomeValuation() {
                 fontWeight: 500,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: GOLD,
+                color: "#4B5563",
                 marginBottom: "12px",
               }}
             >
@@ -671,7 +675,7 @@ export default function HomeValuation() {
                 fontWeight: 500,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: GOLD,
+                color: "#FFFFFF",
                 marginBottom: "12px",
               }}
             >
@@ -713,7 +717,7 @@ export default function HomeValuation() {
                     />
                   ) : (
                     <div style={{ width: "64px", height: "64px", backgroundColor: "#1E2A44", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "26px", color: GOLD }}>
+                      <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "26px", color: "#FFFFFF" }}>
                         {agent.name.charAt(0)}
                       </span>
                     </div>
@@ -731,7 +735,7 @@ export default function HomeValuation() {
                       {agent.name}
                     </h3>
                     {agent.title && (
-                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: GOLD }}>
+                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>
                         {agent.title}
                       </p>
                     )}
@@ -753,12 +757,12 @@ export default function HomeValuation() {
                         fontFamily: "'Inter', sans-serif",
                         fontSize: "14px",
                         fontWeight: 400,
-                        color: "rgba(255,255,255,0.75)",
+                        color: "#FFFFFF",
                         textDecoration: "none",
-                        transition: "color 0.3s ease",
+                        transition: "color 0.2s ease",
                       }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = "underline"; (e.currentTarget as HTMLAnchorElement).style.textDecorationColor = GOLD; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = "none"; }}
                     >
                       <Phone className="h-4 w-4 flex-shrink-0" style={{ color: GOLD }} />
                       {agent.phone}
@@ -774,12 +778,12 @@ export default function HomeValuation() {
                         fontFamily: "'Inter', sans-serif",
                         fontSize: "14px",
                         fontWeight: 400,
-                        color: "rgba(255,255,255,0.75)",
+                        color: "#FFFFFF",
                         textDecoration: "none",
-                        transition: "color 0.3s ease",
+                        transition: "color 0.2s ease",
                       }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = "underline"; (e.currentTarget as HTMLAnchorElement).style.textDecorationColor = GOLD; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = "none"; }}
                     >
                       <Mail className="h-4 w-4 flex-shrink-0" style={{ color: GOLD }} />
                       {agent.email}
@@ -810,7 +814,7 @@ export default function HomeValuation() {
                     marginTop: "16px",
                     fontFamily: "'Inter', sans-serif",
                     fontSize: "14px",
-                    color: GOLD,
+                    color: "#FFFFFF",
                     textDecoration: "none",
                   }}
                 >

@@ -7,7 +7,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
 import { api, type Agent } from "@/lib/api";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 const stats = [
   { value: "15+", label: "Years Experience" },
@@ -56,7 +55,7 @@ function AgentCard({ agent }: { agent: Agent }) {
   return (
     <Card
       data-testid={`card-agent-${agent.id}`}
-      className="border border-border/60 shadow-sm overflow-hidden"
+      className="border border-[#E9EDF3] shadow-sm overflow-hidden"
     >
       <CardContent className="p-0 flex flex-col">
         {/* Photo */}
@@ -86,26 +85,26 @@ function AgentCard({ agent }: { agent: Agent }) {
             {agent.name}
           </h2>
           {(agent.title || agent.brokerage || agent.brokerage_name) && (
-            <p className="font-sans text-sm font-semibold text-accent mb-1">
+            <p className="font-sans text-sm font-semibold text-[#A8653A] mb-1">
               {[agent.title, agent.brokerage || agent.brokerage_name].filter(Boolean).join(" · ")}
             </p>
           )}
           {agent.license_number && (
-            <p className="font-sans text-xs text-muted-foreground flex items-center gap-1.5 mb-4">
-              <Shield className="h-3.5 w-3.5 text-accent" />
+            <p className="font-sans text-xs text-[#4B5563] flex items-center gap-1.5 mb-4">
+              <Shield className="h-3.5 w-3.5 text-[#A8653A]" />
               TX License #{agent.license_number}
             </p>
           )}
 
           {/* Contact */}
-          <div className="flex flex-col gap-1.5 text-sm font-sans text-muted-foreground mb-5 w-full items-center">
+          <div className="flex flex-col gap-1.5 text-sm font-sans text-[#4B5563] mb-5 w-full items-center">
             {agent.phone && (
               <a
                 href={`tel:${agent.phone.replace(/\D/g, "")}`}
                 data-testid={`link-phone-${agent.id}`}
-                className="flex items-center gap-2 hover:text-accent transition-colors"
+                className="flex items-center gap-2 hover:text-[#A8653A] transition-colors"
               >
-                <Phone className="h-3.5 w-3.5 text-accent" />
+                <Phone className="h-3.5 w-3.5 text-[#A8653A]" />
                 {agent.phone}
               </a>
             )}
@@ -113,9 +112,9 @@ function AgentCard({ agent }: { agent: Agent }) {
               <a
                 href={`mailto:${agent.email}`}
                 data-testid={`link-email-${agent.id}`}
-                className="flex items-center gap-2 hover:text-accent transition-colors"
+                className="flex items-center gap-2 hover:text-[#A8653A] transition-colors"
               >
-                <Mail className="h-3.5 w-3.5 text-accent" />
+                <Mail className="h-3.5 w-3.5 text-[#A8653A]" />
                 {agent.email}
               </a>
             )}
@@ -123,7 +122,7 @@ function AgentCard({ agent }: { agent: Agent }) {
 
           {/* Bio */}
           {agent.bio && (
-            <p className="font-sans text-sm text-foreground/75 leading-relaxed mb-6">
+            <p className="font-sans text-sm text-[#4B5563] leading-relaxed mb-6">
               {agent.bio}
             </p>
           )}
@@ -144,15 +143,15 @@ function AgentCard({ agent }: { agent: Agent }) {
 
 function AgentCardSkeleton() {
   return (
-    <Card className="border border-border/60 overflow-hidden animate-pulse">
+    <Card className="border border-[#E9EDF3] overflow-hidden animate-pulse">
       <CardContent className="p-0 flex flex-col items-center pt-8 pb-8 px-6 gap-3">
-        <div className="w-32 h-32 rounded-full bg-muted" />
-        <div className="h-6 w-40 bg-muted rounded" />
-        <div className="h-4 w-28 bg-muted rounded" />
-        <div className="h-3 w-36 bg-muted rounded" />
-        <div className="h-3 w-32 bg-muted rounded" />
-        <div className="h-16 w-full bg-muted rounded mt-2" />
-        <div className="h-9 w-44 bg-muted rounded mt-2" />
+        <div className="w-32 h-32 rounded-full bg-[#E9EDF3]" />
+        <div className="h-6 w-40 bg-[#E9EDF3] rounded" />
+        <div className="h-4 w-28 bg-[#E9EDF3] rounded" />
+        <div className="h-3 w-36 bg-[#E9EDF3] rounded" />
+        <div className="h-3 w-32 bg-[#E9EDF3] rounded" />
+        <div className="h-16 w-full bg-[#E9EDF3] rounded mt-2" />
+        <div className="h-9 w-44 bg-[#E9EDF3] rounded mt-2" />
       </CardContent>
     </Card>
   );
@@ -175,7 +174,12 @@ export default function About() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <PublicPageHeader eyebrow="Our Team" title="Meet Your DFW Real Estate Team" subtitle="Trusted advisors guiding families, investors, and first-time buyers through every step of the journey." />
+      <header className="public-page-header">
+        <p className="public-page-eyebrow">Our Team</p>
+        <h1 className="public-page-title">Meet Your DFW Real Estate Team</h1>
+        <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+        <p className="public-page-subtitle">Trusted advisors guiding families, investors, and first-time buyers through every step of the journey.</p>
+      </header>
 
       {/* ── Agent Cards ── */}
       <section className="bg-white py-16 px-6 md:py-20">
@@ -188,13 +192,13 @@ export default function About() {
           )}
 
           {isError && (
-            <p className="text-center text-muted-foreground font-sans py-12">
+            <p className="text-center text-[#4B5563] font-sans py-12">
               Unable to load agent information. Please try again later.
             </p>
           )}
 
           {agents && agents.length === 0 && (
-            <p className="text-center text-muted-foreground font-sans py-12">
+            <p className="text-center text-[#4B5563] font-sans py-12">
               No agents found.
             </p>
           )}
@@ -214,7 +218,7 @@ export default function About() {
       <section className="py-16 px-6 bg-[#F7F8FA] md:py-20">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-12">
-            <p className="font-sans text-sm font-semibold text-accent uppercase tracking-widest mb-2">
+            <p className="font-sans text-sm font-semibold text-[#4B5563] uppercase tracking-widest mb-2">
               Our Difference
             </p>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary">
@@ -226,17 +230,17 @@ export default function About() {
               <Card
                 key={f.title}
                 data-testid={`card-feature-${f.title.replace(/\s+/g, "-").toLowerCase()}`}
-                className="border border-border/60 shadow-sm hover:shadow-md transition-shadow"
+                className="border border-[#E9EDF3] shadow-sm hover:shadow-md transition-shadow"
               >
                 <CardContent className="pt-6 pb-6 flex gap-4">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-accent/15 flex items-center justify-center">
-                    <f.icon className="h-5 w-5 text-accent" />
+                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-[#E9EDF3] flex items-center justify-center">
+                    <f.icon className="h-5 w-5 text-[#A8653A]" />
                   </div>
                   <div>
                     <h3 className="font-serif text-lg font-semibold text-primary mb-1">
                       {f.title}
                     </h3>
-                    <p className="font-sans text-sm text-muted-foreground leading-relaxed">
+                    <p className="font-sans text-sm text-[#4B5563] leading-relaxed">
                       {f.description}
                     </p>
                   </div>

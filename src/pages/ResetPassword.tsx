@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { AlertCircle, KeyRound } from "lucide-react";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -51,9 +50,13 @@ const ResetPassword = () => {
   if (!isRecovery) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#F7F8FA] px-4">
-        <PublicPageHeader className="w-full" title="Reset Password" subtitle="Aura Realty" />
-        <Card className="w-full max-w-md border-border shadow-xl">
-          <CardContent className="pt-6 text-center text-muted-foreground">
+        <header className="public-page-header">
+          <h1 className="public-page-title">Reset Password</h1>
+          <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+          <p className="public-page-subtitle">Aura Realty</p>
+        </header>
+        <Card className="w-full max-w-md border-[#E9EDF3] shadow-xl">
+          <CardContent className="pt-6 text-center text-[#4B5563]">
             <p>Validating your reset link…</p>
             <p className="text-sm mt-2">If this page doesn't update, the link may have expired. <a href="/admin" className="text-primary underline">Return to login</a></p>
           </CardContent>
@@ -64,17 +67,21 @@ const ResetPassword = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#F7F8FA] px-4">
-      <PublicPageHeader className="w-full" title="Reset Password" subtitle="Enter your new password below" />
-      <Card className="w-full max-w-md border-border shadow-xl">
+      <header className="public-page-header">
+        <h1 className="public-page-title">Reset Password</h1>
+        <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+        <p className="public-page-subtitle">Enter your new password below</p>
+      </header>
+      <Card className="w-full max-w-md border-[#E9EDF3] shadow-xl">
         <CardHeader className="text-center space-y-2">
           <a href="/" className="font-serif text-2xl font-bold text-primary">Aura Realty</a>
           <CardTitle className="font-serif text-xl">Reset Password</CardTitle>
-          <CardDescription>Enter your new password below</CardDescription>
+          <CardDescription className="text-[#4B5563]">Enter your new password below</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleReset} className="space-y-4">
+          <form onSubmit={handleReset} className="public-tool-inputs space-y-4">
             {error && (
-              <div className="flex items-center gap-2 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+              <div className="flex items-center gap-2 rounded-md bg-[#F87171]/10 p-3 text-sm text-[#C0392B]">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 {error}
               </div>

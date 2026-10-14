@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { CalendarIcon, CheckCircle2, Mail, MapPin, Phone } from "lucide-react";
+import { CalendarIcon, CheckCircle2 } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
@@ -144,8 +144,8 @@ const ContactSection = () => {
               onClick={() => setIsSubmitted(false)}
               className="public-button-secondary"
               style={{ marginTop: "16px", padding: "10px 28px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", borderRadius: 8 }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.borderColor = "#1E2A44"; (e.currentTarget as HTMLButtonElement).style.color = "#1E2A44"; }}
             >
               Submit Another Request
             </button>
@@ -160,7 +160,7 @@ const ContactSection = () => {
 
             <form
               onSubmit={handleSubmit}
-              className="max-w-2xl mx-auto p-6 md:p-10 space-y-6"
+              className="public-tool-inputs max-w-2xl mx-auto p-6 md:p-10 space-y-6"
               style={{ backgroundColor: "#FFFFFF", border: "1px solid #E9EDF3", borderRadius: 12, boxShadow: "0 12px 32px rgba(30,42,68,0.05)" }}
             >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -274,7 +274,7 @@ const ContactSection = () => {
               disabled={isSubmitting}
               data-testid="button-submit-tour"
               className="public-button-primary"
-              style={{ width: "100%", padding: "14px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", cursor: isSubmitting ? "not-allowed" : "pointer", transition: "all 0.3s ease", borderRadius: 8, opacity: isSubmitting ? 0.7 : 1 }}
+              style={{ width: "100%", padding: "14px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", cursor: isSubmitting ? "not-allowed" : "pointer", transition: "all 0.2s ease", borderRadius: 8, opacity: isSubmitting ? 0.7 : 1 }}
               onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
             >
@@ -287,17 +287,6 @@ const ContactSection = () => {
             </form>
           </>
         )}
-        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-4 rounded-xl border border-[#E9EDF3] bg-[#F7F8FA] p-6 sm:grid-cols-3">
-          <a href="tel:5129001897" className="flex items-center gap-3 text-sm text-[#1E2A44] no-underline">
-            <Phone className="h-4 w-4 shrink-0 text-[#A8653A]" /><span>(512) 900-1897</span>
-          </a>
-          <a href="mailto:agent1@aurarealty.com" className="flex items-center gap-3 text-sm text-[#1E2A44] no-underline">
-            <Mail className="h-4 w-4 shrink-0 text-[#A8653A]" /><span>agent1@aurarealty.com</span>
-          </a>
-          <div className="flex items-center gap-3 text-sm text-[#1E2A44]">
-            <MapPin className="h-4 w-4 shrink-0 text-[#A8653A]" /><span>Austin, Texas</span>
-          </div>
-        </div>
       </div>
     </section>
   );

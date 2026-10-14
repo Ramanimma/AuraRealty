@@ -3,7 +3,6 @@ import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 const SellersNetsheet = () => {
   const [salePrice, setSalePrice] = useState(450000);
@@ -106,7 +105,7 @@ const SellersNetsheet = () => {
   }) => (
     <div className="flex justify-between items-center py-2 border-b border-[#E9EDF3]">
       <span className="text-sm font-sans text-[#4B5563]">{label}</span>
-      <span className={`text-sm font-sans ${isDeduction ? "text-[#C07A4A]" : "text-white"}`}>
+      <span className={`text-sm font-sans ${isDeduction ? "text-[#4B5563]" : "text-white"}`}>
         {isDeduction ? `-${fmt(amount)}` : fmt(amount)}
       </span>
     </div>
@@ -124,10 +123,15 @@ const SellersNetsheet = () => {
       <style>{`.seller-results [class*="text-white"] { color: #1E2A44 !important; } .seller-results [class*="border-white"] { border-color: #E9EDF3 !important; }`}</style>
 
       {/* Hero */}
-      <PublicPageHeader eyebrow="Seller Tools" title="How Much Will You Make?" subtitle="Get an instant estimate of your net proceeds after all closing costs" />
+      <header className="public-page-header">
+        <p className="public-page-eyebrow">Seller Tools</p>
+        <h1 className="public-page-title">How Much Will You Make?</h1>
+        <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+        <p className="public-page-subtitle">Get an instant estimate of your net proceeds after all closing costs</p>
+      </header>
 
       {/* Calculator */}
-      <section className="py-16 px-6">
+      <section className="public-tool-inputs py-16 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
 
           {/* Inputs */}
@@ -147,7 +151,7 @@ const SellersNetsheet = () => {
               <PctRow label="Buyer Agent %" value={buyerComm} onChange={setBuyerComm} />
               <div className="flex justify-between items-center py-3">
                 <span className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">Total Commission</span>
-                <span className="text-sm font-sans text-[#C07A4A] font-medium">{listingComm + buyerComm}%</span>
+                <span className="text-sm font-sans text-[#A8653A] font-medium">{listingComm + buyerComm}%</span>
               </div>
             </div>
 
@@ -182,7 +186,7 @@ const SellersNetsheet = () => {
               {/* Net Proceeds Hero */}
               <div className="text-center py-8 border-b border-[#E9EDF3] mb-8">
                 <p className="text-xs uppercase tracking-widest text-[#4B5563] font-sans mb-2">Estimated Net Proceeds</p>
-                <p className="font-serif text-5xl font-light mb-2 text-[#1E2A44]">
+                <p className={`font-serif text-5xl font-light mb-2 ${calc.netProceeds >= 0 ? "text-[#1E2A44]" : "text-[#1E2A44]"}`}>
                   {fmt(calc.netProceeds)}
                 </p>
                 <p className="text-[#4B5563] font-sans text-sm">{calc.netPct}% of sale price</p>
@@ -217,9 +221,9 @@ const SellersNetsheet = () => {
 
       {/* CTA */}
       <section className="bg-[#1E2A44] py-20 px-6 text-center">
-        <p className="text-[#C07A4A] text-xs uppercase tracking-widest font-sans mb-4">Ready to Sell?</p>
+        <p className="text-white text-xs uppercase tracking-widest font-sans mb-4">Ready to Sell?</p>
         <h2 className="font-serif text-4xl font-light text-white mb-4">Get Your Free Market Analysis</h2>
-        <p className="text-white/60 font-sans mb-10">Our agents will provide a personalized net sheet based on real market data</p>
+        <p className="text-white/75 font-sans mb-10">Our agents will provide a personalized net sheet based on real market data</p>
         <div className="flex gap-4 justify-center flex-wrap">
           <a href="/home-valuation"
             className="public-button-primary px-8 py-4 font-sans text-sm uppercase tracking-widest">

@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { BedDouble, Bath, Ruler } from "lucide-react";
 import { api } from "@/lib/api";
 
+const GOLD = "#C07A4A";
+
 function formatPrice(price: string | null | undefined, listingType: string | null | undefined): string | null {
   if (!price || price.trim() === "") return null;
   if (price.toLowerCase().includes("/mo")) return price;
@@ -53,7 +55,7 @@ interface PropertyCardProps {
   idx: number;
 }
 
-export const PropertyCard = ({ p, idx }: PropertyCardProps) => {
+const PropertyCard = ({ p, idx }: PropertyCardProps) => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const price = formatPrice(p.price, p.listing_type);
@@ -62,6 +64,7 @@ export const PropertyCard = ({ p, idx }: PropertyCardProps) => {
 
   return (
     <div
+      className="public-property-card"
       data-testid={`card-property-${p.id}`}
       onClick={() => navigate(`/property/${p.id}`)}
       onMouseEnter={() => setHovered(true)}
@@ -78,6 +81,10 @@ export const PropertyCard = ({ p, idx }: PropertyCardProps) => {
         />
 
         {/* Gradient overlay */}
+        {statusKey !== "sold" && price !== null && (
+          <div style={{ display: "none" }}>{price}</div>
+        )}
+
         {/* Status badge top-right */}
         {statusStyle && (
           <div style={{ position: "absolute", top: "16px", right: "16px", backgroundColor: statusStyle.bg, color: statusStyle.text, padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
@@ -104,6 +111,8 @@ export const PropertyCard = ({ p, idx }: PropertyCardProps) => {
               data-testid={`button-view-details-${p.id}`}
               onClick={e => { e.stopPropagation(); navigate(`/property/${p.id}`); }}
               className="public-button-secondary"
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.3)"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
               style={{ padding: "7px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0 }}
             >
               View Details
@@ -116,6 +125,7 @@ export const PropertyCard = ({ p, idx }: PropertyCardProps) => {
 
 const FeaturedProperties = () => {
   const navigate = useNavigate();
+  const [viewAllHovered, setViewAllHovered] = useState(false);
   const { data: properties = [], isLoading } = useQuery({
     queryKey: ["listings"],
     queryFn: () => api.listings.list(),
@@ -155,6 +165,8 @@ const FeaturedProperties = () => {
           <button
             data-testid="button-view-all-properties"
             onClick={() => navigate("/properties")}
+            onMouseEnter={() => setViewAllHovered(true)}
+            onMouseLeave={() => setViewAllHovered(false)}
             className="public-button-secondary"
             style={{ padding: "14px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer" }}
           >

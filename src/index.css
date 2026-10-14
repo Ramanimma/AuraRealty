@@ -190,3 +190,95 @@
 .animate-hero-fade-in {
   animation: hero-fade-in 1s ease-out forwards;
 }
+
+.public-page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 220px;
+  height: 220px;
+  padding: 20px;
+  background-color: #1E2A44;
+  text-align: center;
+}
+
+.public-page-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #FFFFFF;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+}
+
+.public-page-eyebrow {
+  margin-bottom: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  color: #FFFFFF;
+}
+
+.public-page-subtitle {
+  max-width: 672px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.75);
+}
+
+.public-page-glass {
+  width: 100%;
+  max-width: 640px;
+  padding: 20px 18px;
+  background: rgba(20,28,46,.80);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.public-property-card {
+  background: #FFFFFF;
+  border: 1px solid #E9EDF3;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.public-property-status:empty { display: none; }
+
+.public-tool-inputs input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+.public-tool-inputs select,
+.public-tool-inputs textarea,
+.public-tool-inputs [role="combobox"] {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E9EDF3 !important;
+  border-radius: 8px !important;
+  box-sizing: border-box;
+}
+
+.public-tool-inputs input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):focus,
+.public-tool-inputs select:focus,
+.public-tool-inputs textarea:focus,
+.public-tool-inputs [role="combobox"]:focus {
+  border-color: #1E2A44 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(30,42,68,.16) !important;
+}
+
+.public-tool-inputs input::placeholder,
+.public-tool-inputs textarea::placeholder {
+  color: #4B5563;
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .public-page-header { height: 320px; min-height: 320px; }
+  .public-page-title { font-size: 48px; }
+  .public-page-subtitle { font-size: 16px; }
+  .public-page-glass { padding: 32px 40px; }
+}

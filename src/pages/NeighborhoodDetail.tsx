@@ -2,14 +2,13 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import SEOHead from "@/components/SEOHead";
-import { ArrowLeft, Bed, Bath, Maximize, TrendingUp, CheckCircle, Home, School, Activity } from "lucide-react";
+import { ArrowLeft, Bed, Bath, Maximize, MapPin, TrendingUp, CheckCircle, Home, School, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
 import { api } from "@/lib/api";
 import type { Listing, Neighborhood } from "@/lib/api";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 const CITY_IMAGES: Record<string, string> = {
   "Austin": "https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=1200&h=600&fit=crop",
@@ -29,12 +28,12 @@ function getHeroImage(n: Neighborhood): string {
 
 function StatCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-white border border-border p-6 flex flex-col items-center text-center shadow-sm" style={{ borderRadius: 8 }}>
+    <div className="bg-white border border-[#E9EDF3] p-6 flex flex-col items-center text-center shadow-sm" style={{ borderRadius: 8 }}>
       <div className="w-12 h-12 flex items-center justify-center mb-3" style={{ backgroundColor: "#F7F8FA", borderRadius: 8 }}>
         <span style={{ color: "#1E2A44" }}>{icon}</span>
       </div>
       <p className="text-2xl font-bold font-serif text-foreground">{value}</p>
-      <p className="text-sm text-muted-foreground font-sans mt-1">{label}</p>
+      <p className="text-sm text-[#4B5563] font-sans mt-1">{label}</p>
     </div>
   );
 }
@@ -43,7 +42,7 @@ function ListingCard({ listing }: { listing: Listing }) {
   const navigate = useNavigate();
   return (
     <div
-      className="group bg-card overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+      className="group bg-white overflow-hidden border border-[#E9EDF3] shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
       style={{ borderRadius: 8 }}
       onClick={() => navigate(`/property/${listing.id}`)}
       data-testid={`card-listing-${listing.id}`}
@@ -61,7 +60,7 @@ function ListingCard({ listing }: { listing: Listing }) {
       </div>
       <div className="p-5">
         <h3 className="font-serif text-lg font-semibold text-card-foreground mb-2 truncate">{listing.address}</h3>
-        <div className="flex items-center gap-4 text-muted-foreground text-sm font-sans mb-4">
+        <div className="flex items-center gap-4 text-[#4B5563] text-sm font-sans mb-4">
           <span className="flex items-center gap-1"><Bed className="h-4 w-4" /> {listing.beds} Beds</span>
           <span className="flex items-center gap-1"><Bath className="h-4 w-4" /> {listing.baths} Baths</span>
           <span className="flex items-center gap-1"><Maximize className="h-4 w-4" /> {listing.sqft.toLocaleString()} sqft</span>
@@ -105,9 +104,9 @@ export default function NeighborhoodDetail() {
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1 flex items-center justify-center flex-col gap-4 px-6 text-center">
-          <Home className="w-16 h-16 text-muted-foreground/40" />
+          <Home className="w-16 h-16 text-[#4B5563]/40" />
           <h1 className="font-serif text-3xl font-bold text-foreground">Neighborhood Not Found</h1>
-          <p className="text-muted-foreground font-sans max-w-md">
+          <p className="text-[#4B5563] font-sans max-w-md">
             We couldn't find the neighborhood you're looking for. It may have been removed or the link may be incorrect.
           </p>
           <Button
@@ -129,14 +128,14 @@ export default function NeighborhoodDetail() {
       <div className="min-h-screen">
         <Navbar />
         <div className="animate-pulse">
-          <div className="h-[420px] bg-muted" />
+          <div className="h-[420px] bg-[#E9EDF3]" />
           <div className="container mx-auto px-6 py-16 space-y-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[1,2,3,4].map(i => <div key={i} className="h-32 bg-muted rounded-xl" />)}
+              {[1,2,3,4].map(i => <div key={i} className="h-32 bg-[#E9EDF3] rounded-xl" />)}
             </div>
-            <div className="h-48 bg-muted rounded-xl" />
+            <div className="h-48 bg-[#E9EDF3] rounded-xl" />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1,2,3].map(i => <div key={i} className="h-72 bg-muted rounded-xl" />)}
+              {[1,2,3].map(i => <div key={i} className="h-72 bg-[#E9EDF3] rounded-xl" />)}
             </div>
           </div>
         </div>
@@ -160,16 +159,27 @@ export default function NeighborhoodDetail() {
       <Navbar />
 
       {/* ── Hero ────────────────────────────────────────────────── */}
-      <div className="relative">
-        <PublicPageHeader
-          image={heroImage}
-          title={n.name}
-          subtitle={[n.city && `${n.city}${n.state ? `, ${n.state}` : ""}`, n.avg_price && `Avg. ${avgPriceDisplay}`].filter(Boolean).join(" · ")}
-        />
+      <section className="relative flex h-[220px] items-center justify-center overflow-hidden px-5 md:h-[320px]">
+        <img src={heroImage} alt={n.name} className="absolute inset-0 h-full w-full object-cover" />
         <a href="/#neighborhoods" className="absolute left-5 top-4 z-10 flex items-center gap-2 rounded-full border border-white/60 bg-[#1E2A44]/70 px-3 py-2 text-xs text-white transition-colors hover:bg-[#1E2A44]" data-testid="link-back-neighborhoods">
           <ArrowLeft className="w-4 h-4" />Back to Neighborhoods
         </a>
-      </div>
+        <div className="public-page-glass relative text-center">
+          {n.city && (
+            <p className="flex items-center justify-center gap-1.5 text-white/75 text-sm font-sans mb-2">
+              <MapPin className="w-4 h-4" />
+              {n.city}{n.state ? `, ${n.state}` : ""}
+            </p>
+          )}
+          <h1 className="public-page-title">{n.name}</h1>
+          <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+          {n.avg_price && (
+            <span className="inline-block text-sm font-semibold font-sans px-4 py-1.5 rounded-[6px]" style={{ backgroundColor: "#1E2A44", color: "#fff" }}>
+              Avg. {avgPriceDisplay}
+            </span>
+          )}
+        </div>
+      </section>
 
       <main>
         {/* ── Stat Cards ──────────────────────────────────────────── */}
@@ -202,7 +212,7 @@ export default function NeighborhoodDetail() {
 
         {/* ── About ───────────────────────────────────────────────── */}
         {(n.description || n.lifestyle || (n.highlights && n.highlights.length > 0)) && (
-          <section className="py-16 bg-background">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Left: description + lifestyle */}
@@ -211,10 +221,10 @@ export default function NeighborhoodDetail() {
                     About {n.name}
                   </h2>
                   {n.description && (
-                    <p className="text-muted-foreground font-sans leading-relaxed mb-4">{n.description}</p>
+                    <p className="text-[#4B5563] font-sans leading-relaxed mb-4">{n.description}</p>
                   )}
                   {n.lifestyle && (
-                    <p className="text-muted-foreground font-sans leading-relaxed">{n.lifestyle}</p>
+                    <p className="text-[#4B5563] font-sans leading-relaxed">{n.lifestyle}</p>
                   )}
                 </div>
 
@@ -240,10 +250,10 @@ export default function NeighborhoodDetail() {
         )}
 
         {/* ── Available Listings ──────────────────────────────────── */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-16 bg-[#F7F8FA]">
           <div className="container mx-auto px-6">
             <div className="mb-10">
-              <p className="text-accent font-semibold text-sm tracking-widest uppercase mb-2 font-sans">
+              <p className="text-[#4B5563] font-semibold text-sm tracking-widest uppercase mb-2 font-sans">
                 Available Now
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground">
@@ -254,12 +264,12 @@ export default function NeighborhoodDetail() {
             {loadingListings ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="bg-card rounded-xl overflow-hidden border border-border shadow-sm animate-pulse">
-                    <div className="aspect-[4/3] bg-muted" />
+                  <div key={i} className="bg-white rounded-xl overflow-hidden border border-[#E9EDF3] shadow-sm animate-pulse">
+                    <div className="aspect-[4/3] bg-[#E9EDF3]" />
                     <div className="p-5 space-y-3">
-                      <div className="h-5 bg-muted rounded w-3/4" />
-                      <div className="h-4 bg-muted rounded w-1/2" />
-                      <div className="h-9 bg-muted rounded" />
+                      <div className="h-5 bg-[#E9EDF3] rounded w-3/4" />
+                      <div className="h-4 bg-[#E9EDF3] rounded w-1/2" />
+                      <div className="h-9 bg-[#E9EDF3] rounded" />
                     </div>
                   </div>
                 ))}
@@ -271,12 +281,12 @@ export default function NeighborhoodDetail() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 bg-white rounded-2xl border border-border">
-                <Home className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+              <div className="text-center py-16 bg-white rounded-2xl border border-[#E9EDF3]">
+                <Home className="w-12 h-12 text-[#4B5563]/30 mx-auto mb-4" />
                 <h3 className="font-serif text-xl font-semibold text-foreground mb-2">
                   No current listings in {n.city || n.name}
                 </h3>
-                <p className="text-muted-foreground font-sans max-w-md mx-auto mb-6">
+                <p className="text-[#4B5563] font-sans max-w-md mx-auto mb-6">
                   New properties are coming soon. Contact us to be notified when listings become available in this area.
                 </p>
                 <a href="/#contact">
@@ -293,23 +303,23 @@ export default function NeighborhoodDetail() {
         <section className="py-16 bg-background">
           <div className="container mx-auto px-6">
             <div className="mb-8">
-              <p className="text-accent font-semibold text-sm tracking-widest uppercase mb-2 font-sans">Market Data</p>
+              <p className="text-[#A8653A] font-semibold text-sm tracking-widest uppercase mb-2 font-sans">Market Data</p>
               <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground">Market Snapshot</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
-                <p className="text-sm text-muted-foreground font-sans mb-1">Median List Price</p>
+              <div className="bg-white border border-[#E9EDF3] rounded-xl p-6 shadow-sm">
+                <p className="text-sm text-[#4B5563] font-sans mb-1">Median List Price</p>
                 <p className="text-2xl font-bold font-serif text-foreground">{avgPriceDisplay}</p>
               </div>
-              <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
-                <p className="text-sm text-muted-foreground font-sans mb-1">Active Listings</p>
+              <div className="bg-white border border-[#E9EDF3] rounded-xl p-6 shadow-sm">
+                <p className="text-sm text-[#4B5563] font-sans mb-1">Active Listings</p>
                 <p className="text-2xl font-bold font-serif text-foreground">
                   {loadingListings ? "…" : listings.length}
                 </p>
               </div>
-              <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
-                <p className="text-sm text-muted-foreground font-sans mb-1">Market Update</p>
-                <p className="text-sm font-sans text-muted-foreground leading-relaxed">
+              <div className="bg-white border border-[#E9EDF3] rounded-xl p-6 shadow-sm">
+                <p className="text-sm text-[#4B5563] font-sans mb-1">Market Update</p>
+                <p className="text-sm font-sans text-[#4B5563] leading-relaxed">
                   Market data updated regularly by our team. Contact an agent for a personalized report.
                 </p>
               </div>
@@ -323,7 +333,7 @@ export default function NeighborhoodDetail() {
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
               Interested in {n.name}?
             </h2>
-            <p className="text-white/70 font-sans max-w-xl mx-auto mb-10">
+            <p className="text-white/75 font-sans max-w-xl mx-auto mb-10">
               Our local experts know this neighborhood inside and out. Let's find your perfect home here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

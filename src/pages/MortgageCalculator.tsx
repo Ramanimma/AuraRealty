@@ -14,7 +14,6 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 type LoanType = "conventional" | "fha" | "va" | "usda";
 
@@ -161,8 +160,12 @@ export default function MortgageCalculator() {
       />
       <Navbar />
 
-      <PublicPageHeader title="Mortgage Calculator" subtitle="Estimate your monthly payment including taxes, insurance, PMI, and HOA." />
-      <main className="flex-1 container mx-auto px-4 sm:px-6 py-10">
+      <header className="public-page-header">
+        <h1 className="public-page-title">Mortgage Calculator</h1>
+        <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+        <p className="public-page-subtitle">Estimate your monthly payment including taxes, insurance, PMI, and HOA.</p>
+      </header>
+      <main className="public-tool-inputs flex-1 container mx-auto px-4 sm:px-6 py-10">
 
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* ── Inputs ── */}
@@ -182,7 +185,7 @@ export default function MortgageCalculator() {
                     <TabsTrigger value="usda">USDA</TabsTrigger>
                   </TabsList>
                 </Tabs>
-                <p className="text-xs text-muted-foreground mt-3 font-sans">
+                <p className="text-xs text-[#4B5563] mt-3 font-sans">
                   {loanType === "conventional" && "Standard loan. PMI required if down payment < 20%."}
                   {loanType === "fha" && "FHA loan. 1.75% upfront MIP + 0.85% annual MIP added to payment."}
                   {loanType === "va" && "VA loan. 2.15% funding fee added to loan. No PMI required."}
@@ -198,7 +201,7 @@ export default function MortgageCalculator() {
               </CardHeader>
               <CardContent>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">$</span>
                   <Input
                     data-testid="input-purchase-price"
                     className="pl-7 font-sans"
@@ -219,7 +222,7 @@ export default function MortgageCalculator() {
                 <CardContent className="space-y-3">
                   <div className="flex gap-3">
                     <div className="relative flex-1">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">$</span>
                       <Input
                         data-testid="input-down-payment-amount"
                         className="pl-7 font-sans"
@@ -236,7 +239,7 @@ export default function MortgageCalculator() {
                         onChange={(e) => syncFromPct(e.target.value)}
                         inputMode="decimal"
                       />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">%</span>
                     </div>
                   </div>
                   <div className="flex gap-2 flex-wrap">
@@ -264,7 +267,7 @@ export default function MortgageCalculator() {
               </CardHeader>
               <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-muted-foreground">Loan Term</label>
+                  <label className="text-xs font-sans text-[#4B5563]">Loan Term</label>
                   <Select value={loanTerm} onValueChange={setLoanTerm}>
                     <SelectTrigger data-testid="select-loan-term" className="font-sans">
                       <SelectValue />
@@ -277,7 +280,7 @@ export default function MortgageCalculator() {
                   </Select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-muted-foreground">Interest Rate</label>
+                  <label className="text-xs font-sans text-[#4B5563]">Interest Rate</label>
                   <div className="relative">
                     <Input
                       data-testid="input-interest-rate"
@@ -286,11 +289,11 @@ export default function MortgageCalculator() {
                       onChange={(e) => setInterestRate(e.target.value)}
                       inputMode="decimal"
                     />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">%</span>
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-muted-foreground">Credit Score Range</label>
+                  <label className="text-xs font-sans text-[#4B5563]">Credit Score Range</label>
                   <Select value={creditScore} onValueChange={setCreditScore}>
                     <SelectTrigger data-testid="select-credit-score" className="font-sans">
                       <SelectValue />
@@ -312,7 +315,7 @@ export default function MortgageCalculator() {
               </CardHeader>
               <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-muted-foreground">Property Tax Rate</label>
+                  <label className="text-xs font-sans text-[#4B5563]">Property Tax Rate</label>
                   <div className="relative">
                     <Input
                       data-testid="input-property-tax"
@@ -321,11 +324,11 @@ export default function MortgageCalculator() {
                       onChange={(e) => setPropertyTaxRate(e.target.value)}
                       inputMode="decimal"
                     />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">%</span>
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-muted-foreground">Home Insurance Rate</label>
+                  <label className="text-xs font-sans text-[#4B5563]">Home Insurance Rate</label>
                   <div className="relative">
                     <Input
                       data-testid="input-insurance-rate"
@@ -334,13 +337,13 @@ export default function MortgageCalculator() {
                       onChange={(e) => setInsuranceRate(e.target.value)}
                       inputMode="decimal"
                     />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">%</span>
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-muted-foreground">HOA (monthly)</label>
+                  <label className="text-xs font-sans text-[#4B5563]">HOA (monthly)</label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">$</span>
                     <Input
                       data-testid="input-hoa"
                       className="pl-7 font-sans"
@@ -358,16 +361,16 @@ export default function MortgageCalculator() {
           <div className="w-full lg:w-[45%] lg:sticky lg:top-24 space-y-5">
 
             {/* Total Monthly Payment */}
-            <Card className="border-accent/40 shadow-lg">
+            <Card className="border-[#E9EDF3] bg-[#F7F8FA] shadow-md">
               <CardContent className="pt-6 pb-5 text-center">
-                <p className="font-sans text-sm text-muted-foreground mb-1">Estimated Monthly Payment</p>
+                <p className="font-sans text-sm text-[#4B5563] mb-1">Estimated Monthly Payment</p>
                 <p
                   data-testid="text-total-monthly-payment"
                   className="font-serif text-5xl font-bold text-primary leading-none"
                 >
                   {fmtUSD(results.total)}
                 </p>
-                <p className="text-xs text-muted-foreground font-sans mt-2">per month</p>
+                <p className="text-xs text-[#4B5563] font-sans mt-2">per month</p>
               </CardContent>
             </Card>
 
@@ -393,15 +396,15 @@ export default function MortgageCalculator() {
                       <tr
                         key={row.label}
                         data-testid={`row-breakdown-${i}`}
-                        className={i < arr.length - 1 ? "border-b border-border/50" : ""}
+                        className={i < arr.length - 1 ? "border-b border-[#E9EDF3]" : ""}
                       >
-                        <td className="px-4 py-3 text-muted-foreground">{row.label}</td>
+                        <td className="px-4 py-3 text-[#4B5563]">{row.label}</td>
                         <td className="px-4 py-3 text-right font-medium text-foreground">
                           {fmtUSD(row.value)}
                         </td>
                       </tr>
                     ))}
-                    <tr className="bg-muted/40 font-semibold border-t border-border">
+                    <tr className="bg-[#F7F8FA] font-semibold border-t border-[#E9EDF3]">
                       <td className="px-4 py-3 text-foreground">Total Monthly</td>
                       <td className="px-4 py-3 text-right text-primary">{fmtUSD(results.total)}</td>
                     </tr>
@@ -428,9 +431,9 @@ export default function MortgageCalculator() {
                       <tr
                         key={row.label}
                         data-testid={`row-summary-${i}`}
-                        className={i < arr.length - 1 ? "border-b border-border/50" : ""}
+                        className={i < arr.length - 1 ? "border-b border-[#E9EDF3]" : ""}
                       >
-                        <td className="px-4 py-3 text-muted-foreground">{row.label}</td>
+                        <td className="px-4 py-3 text-[#4B5563]">{row.label}</td>
                         <td className="px-4 py-3 text-right font-medium text-foreground">{row.value}</td>
                       </tr>
                     ))}
@@ -447,9 +450,9 @@ export default function MortgageCalculator() {
               <CardContent className="p-0">
                 <table className="w-full text-sm font-sans">
                   <thead>
-                    <tr className="border-b border-border/50 bg-muted/30">
-                      <th className="px-4 py-2 text-left text-xs text-muted-foreground font-medium">Housing Ratio</th>
-                      <th className="px-4 py-2 text-right text-xs text-muted-foreground font-medium">Annual Income</th>
+                    <tr className="border-b border-[#E9EDF3] bg-[#F7F8FA]">
+                      <th className="px-4 py-2 text-left text-xs text-[#4B5563] font-medium">Housing Ratio</th>
+                      <th className="px-4 py-2 text-right text-xs text-[#4B5563] font-medium">Annual Income</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -462,9 +465,9 @@ export default function MortgageCalculator() {
                       <tr
                         key={row.ratio}
                         data-testid={`row-income-${i}`}
-                        className={i < arr.length - 1 ? "border-b border-border/50" : ""}
+                        className={i < arr.length - 1 ? "border-b border-[#E9EDF3]" : ""}
                       >
-                        <td className="px-4 py-3 text-muted-foreground">{row.ratio} ratio</td>
+                        <td className="px-4 py-3 text-[#4B5563]">{row.ratio} ratio</td>
                         <td className="px-4 py-3 text-right font-medium text-foreground">{fmtUSD(row.value)}</td>
                       </tr>
                     ))}

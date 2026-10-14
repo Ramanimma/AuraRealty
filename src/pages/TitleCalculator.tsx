@@ -3,7 +3,6 @@ import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 const CHARCOAL = "#1E2A44";
 const GOLD = "#C07A4A";
@@ -113,10 +112,15 @@ const TitleCalculator = () => {
       <Navbar />
       <style>{`.title-results [class*="text-white"] { color: #1E2A44 !important; } .title-results [class*="border-white"] { border-color: #E9EDF3 !important; }`}</style>
 
-      <PublicPageHeader eyebrow="Title Tools" title="Texas Title Premium Calculator" subtitle="Calculate Owner's and Loan title policy premiums based on official Texas Department of Insurance rates" />
+      <header className="public-page-header">
+        <p className="public-page-eyebrow">Title Tools</p>
+        <h1 className="public-page-title">Texas Title Premium Calculator</h1>
+        <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+        <p className="public-page-subtitle">Calculate Owner's and Loan title policy premiums based on official Texas Department of Insurance rates</p>
+      </header>
 
       {/* Calculator */}
-      <section className="py-16 px-6">
+      <section className="public-tool-inputs py-16 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
 
           {/* ── LEFT: Inputs ── */}
@@ -240,7 +244,7 @@ const TitleCalculator = () => {
                 >
                   <div>
                     <span className={labelClass}>{e.label}</span>
-                    <span className="block text-xs text-[#C07A4A] font-sans mt-0.5">
+                    <span className="block text-xs text-[#A8653A] font-sans mt-0.5">
                       +${e.fee}
                     </span>
                   </div>
@@ -323,13 +327,13 @@ const TitleCalculator = () => {
                 <div className="flex justify-between items-center">
                   <span
                     className="text-sm uppercase tracking-widest font-sans font-medium"
-                    style={{ color: GOLD }}
+                    style={{ color: "#1E2A44" }}
                   >
                     Total Title Premium
                   </span>
                   <span
                     className="font-serif text-2xl font-light"
-                    style={{ color: GOLD }}
+                    style={{ color: "#1E2A44" }}
                   >
                     {fmt(calc.titlePremium + calc.endorsementTotal)}
                   </span>
@@ -431,7 +435,7 @@ const TitleCalculator = () => {
         <h2 className="font-serif text-4xl font-light text-white mb-4">
           Need Help Understanding Your Title Costs?
         </h2>
-        <p className="text-white/60 font-sans mb-10">
+        <p className="text-white/75 font-sans mb-10">
           Our agents work with trusted title companies across Central Texas
         </p>
         <a

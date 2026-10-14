@@ -8,7 +8,6 @@ import { api, type Listing } from "@/lib/api";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 const GOLD = "#C07A4A";
 
@@ -69,7 +68,7 @@ const PropertyDetails = () => {
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1 flex items-center justify-center">
-          <div className="animate-pulse text-muted-foreground font-sans">Loading property...</div>
+          <div className="animate-pulse text-[#4B5563] font-sans">Loading property...</div>
         </main>
         <Footer />
       </div>
@@ -114,7 +113,13 @@ const PropertyDetails = () => {
         }}
       />
       <Navbar />
-      <PublicPageHeader title={property.address} subtitle={property.price} image={property.main_image} />
+      <header className="public-page-header" style={{ backgroundImage: `url("${mainSrc}")`, backgroundSize: "cover", backgroundPosition: "center" }}>
+        <div className="public-page-glass">
+          <h1 className="public-page-title">{property.address}</h1>
+          <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+          <p className="public-page-subtitle">{property.price}</p>
+        </div>
+      </header>
       <main className="flex-1">
 
         {/* ── Gallery ── */}
@@ -190,33 +195,36 @@ const PropertyDetails = () => {
           <div className="max-w-4xl mx-auto">
             {/* Price & Address */}
             <div className="mb-8">
+              <span className="public-property-status mb-3 inline-flex rounded-[6px] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.08em]" style={{ backgroundColor: ({ active: "#1E2A44", pending: "#F3E6DC", sold: "#141C2E", rented: "#E9EDF3", off_market: "#E9EDF3" } as Record<string, string>)[property.status], color: ({ active: "#FFFFFF", pending: "#8A4F2A", sold: "#FFFFFF", rented: "#1E2A44", off_market: "#4B5563" } as Record<string, string>)[property.status] }}>
+                {property.status}
+              </span>
               <p className="font-serif text-3xl md:text-4xl font-semibold text-[#1E2A44] mb-2">{property.price}</p>
-              <p className="font-sans text-muted-foreground text-lg">{property.address}</p>
+              <p className="font-sans text-[#4B5563] text-lg">{property.address}</p>
             </div>
 
             {/* Key Details */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 mb-10 pb-10 border-b border-[#E9EDF3]">
               <div className="flex items-center gap-2 rounded-lg bg-[#F7F8FA] px-4 py-4 text-[#1E2A44] font-sans">
-                <Bed className="h-5 w-5 text-accent" />
+                <Bed className="h-5 w-5 text-[#A8653A]" />
                 <span className="text-lg font-semibold">{property.beds}</span>
-                <span className="text-muted-foreground">Beds</span>
+                <span className="text-[#4B5563]">Beds</span>
               </div>
               <div className="flex items-center gap-2 rounded-lg bg-[#F7F8FA] px-4 py-4 text-[#1E2A44] font-sans">
-                <Bath className="h-5 w-5 text-accent" />
+                <Bath className="h-5 w-5 text-[#A8653A]" />
                 <span className="text-lg font-semibold">{property.baths}</span>
-                <span className="text-muted-foreground">Baths</span>
+                <span className="text-[#4B5563]">Baths</span>
               </div>
               <div className="flex items-center gap-2 rounded-lg bg-[#F7F8FA] px-4 py-4 text-[#1E2A44] font-sans">
-                <Maximize className="h-5 w-5 text-accent" />
+                <Maximize className="h-5 w-5 text-[#A8653A]" />
                 <span className="text-lg font-semibold">{property.sqft.toLocaleString()}</span>
-                <span className="text-muted-foreground">Sq Ft</span>
+                <span className="text-[#4B5563]">Sq Ft</span>
               </div>
             </div>
 
             {/* Description */}
             <div className="mb-12">
               <h2 className="font-serif text-2xl font-semibold text-foreground mb-4">About This Property</h2>
-              <p className="font-sans text-muted-foreground leading-relaxed text-base">{property.description}</p>
+              <p className="font-sans text-[#4B5563] leading-relaxed text-base">{property.description}</p>
             </div>
 
             {/* Actions */}

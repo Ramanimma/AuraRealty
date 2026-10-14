@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { api } from "@/lib/api";
-import { PropertyCard } from "@/components/FeaturedProperties";
-import PublicPageHeader from "@/components/PublicPageHeader";
 
 const GOLD = "#C07A4A";
+
+const UNSPLASH_FALLBACKS = [
+  "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+];
 
 interface Listing {
   id: string;
@@ -27,10 +33,109 @@ interface Listing {
   is_featured: boolean | null;
 }
 
+function getImage(img: string | null | undefined, idx: number): string {
+  if (!img || img.startsWith("/assets/")) return UNSPLASH_FALLBACKS[idx % UNSPLASH_FALLBACKS.length];
+  return img;
+}
+
+function formatPrice(price: string | null | undefined, listingType: string | null | undefined): string | null {
+  if (!price || price.trim() === "") return null;
+  if (price.toLowerCase().includes("/mo")) return price;
+  const num = parseFloat(price.replace(/[^0-9.]/g, ""));
+  if (!num) return price;
+  const formatted = "$" + num.toLocaleString();
+  if (listingType === "rent" || listingType === "lease") return formatted + "/mo";
+  return formatted;
+}
+
+function statusBadgeColor(status: string | null | undefined): string {
+  if (!status) return GOLD;
+  const s = status.toLowerCase();
+  if (s === "active" || s === "rented") return ({ active: "#1E2A44", rented: "#E9EDF3" } as Record<string, string>)[s];
+  if (s === "sold") return "#141C2E";
+  if (s === "pending") return "#F3E6DC";
+  if (s === "off_market") return "#E9EDF3";
+  return GOLD;
+}
+
+function statusBadgeTextColor(status: string | null | undefined): string {
+  if (!status) return "#fff";
+  return status.toLowerCase() === "sold" ? "#FFFFFF" : ({ rented: "#1E2A44", pending: "#8A4F2A", off_market: "#4B5563" } as Record<string, string>)[status.toLowerCase()] ?? "#fff";
+}
+
+function statusLabel(status: string | null | undefined): string {
+  if (!status) return "";
+  const s = status.toLowerCase();
+  if (s === "off_market") return "Off Market";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 const PAGE_SIZE = 9;
 
 type SortKey = "newest" | "price_asc" | "price_desc" | "beds_desc";
 type TypeFilter = "all" | "sale" | "rent" | "lease";
+
+interface CardProps {
+  listing: Listing;
+  idx: number;
+}
+
+const PropertyCard = ({ listing, idx }: CardProps) => {
+  const [hovered, setHovered] = useState(false);
+  const navigate = useNavigate();
+  const price = formatPrice(listing.price, listing.listing_type);
+
+  return (
+    <div
+      className="public-property-card"
+      data-testid={`card-property-${listing.id}`}
+      onClick={() => navigate(`/property/${listing.id}`)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#FFFFFF", border: "1px solid #E9EDF3", borderRadius: 12, cursor: "pointer", transition: "transform 200ms ease, box-shadow 200ms ease", transform: hovered ? "translateY(-3px)" : "translateY(0)", boxShadow: hovered ? "0 16px 36px rgba(30,42,68,0.12)" : "0 4px 14px rgba(30,42,68,0.04)" }}
+    >
+      <div style={{ position: "relative", paddingTop: "75%", overflow: "hidden", flexShrink: 0 }}>
+        <img
+          src={getImage(listing.main_image, idx)}
+          alt={listing.address}
+          loading="lazy"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.6s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }}
+        />
+        <div style={{ display: "none" }} />
+        {listing.status !== "sold" && price !== null && (
+          <div style={{ display: "none" }}>{price}</div>
+        )}
+        {listing.status && (
+          <div style={{ position: "absolute", top: "14px", right: "14px", backgroundColor: statusBadgeColor(listing.status), color: statusBadgeTextColor(listing.status), borderRadius: 6, padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            {statusLabel(listing.status)}
+          </div>
+        )}
+      </div>
+      <div style={{ padding: "18px 18px 14px" }}>
+        {listing.status !== "sold" && price !== null && (
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "24px", fontWeight: 500, color: "#1E2A44", marginBottom: "3px", lineHeight: 1.2 }}>
+            {price}
+          </p>
+        )}
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 400, color: "#4B5563", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{listing.address}</p>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, padding: "12px 18px", backgroundColor: "#FFFFFF" }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 400, letterSpacing: "0.09em", textTransform: "uppercase", color: "#4B5563", margin: 0 }}>
+          {listing.beds} Beds&nbsp;·&nbsp;{listing.baths} Baths&nbsp;·&nbsp;{Number(listing.sqft).toLocaleString()} sqft
+        </p>
+        <Link
+          to={`/property/${listing.id}`}
+          data-testid={`link-view-details-${listing.id}`}
+          onClick={e => e.stopPropagation()}
+          className="public-button-secondary"
+          style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", flexShrink: 0, padding: "6px 12px" }}
+        >
+          View Details →
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 const SkeletonCard = () => (
   <div className="animate-pulse rounded-xl" style={{ backgroundColor: "#E9EDF3", height: "380px" }} />
@@ -97,10 +202,16 @@ const Properties = () => {
       />
       <Navbar />
 
-      <PublicPageHeader eyebrow="DFW & DFW" title="All Properties" subtitle="Homes for sale, rent, and lease across our available communities." />
+      <header className="public-page-header">
+        <p className="public-page-eyebrow">DFW & DFW</p>
+        <h1 className="public-page-title">All Properties</h1>
+        <div className="mx-auto my-3 h-px w-10 bg-[#C07A4A]" />
+        <p className="public-page-subtitle">Homes for sale, rent, and lease across our available communities.</p>
+      </header>
 
       {/* Sticky filter bar */}
       <div
+        className="public-tool-inputs"
         style={{ backgroundColor: "#F7F8FA", borderBottom: "1px solid #E9EDF3", position: "sticky", top: "70px", zIndex: 30 }}
       >
         <div className="container mx-auto px-6" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", padding: "14px 24px" }}>
@@ -119,11 +230,25 @@ const Properties = () => {
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                   cursor: "pointer",
-                  border: `1px solid ${typeFilter === btn.key ? GOLD : "#E9EDF3"}`,
-                  backgroundColor: typeFilter === btn.key ? GOLD : "#FFFFFF",
+                  border: `1.5px solid ${typeFilter === btn.key ? "#A8653A" : "#1E2A44"}`,
+                  backgroundColor: typeFilter === btn.key ? "#A8653A" : "#FFFFFF",
                   color: typeFilter === btn.key ? "#FFFFFF" : "#1E2A44",
                   transition: "all 0.2s ease",
                   borderRadius: 8,
+                }}
+                onMouseEnter={e => {
+                  if (typeFilter !== btn.key) {
+                    e.currentTarget.style.backgroundColor = "#C07A4A";
+                    e.currentTarget.style.borderColor = "#C07A4A";
+                    e.currentTarget.style.color = "#FFFFFF";
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (typeFilter !== btn.key) {
+                    e.currentTarget.style.backgroundColor = "#FFFFFF";
+                    e.currentTarget.style.borderColor = "#1E2A44";
+                    e.currentTarget.style.color = "#1E2A44";
+                  }
                 }}
               >
                 {btn.label}
@@ -177,14 +302,24 @@ const Properties = () => {
             </div>
           ) : filtered.length === 0 ? (
             <div style={{ textAlign: "center", paddingTop: "80px", paddingBottom: "80px" }}>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.75)", marginBottom: "24px" }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "#4B5563", marginBottom: "24px" }}>
                 No properties match your filters
               </p>
               <button
                 data-testid="button-clear-filters"
                 onClick={clearFilters}
-                className="public-button-secondary public-button-secondary-dark"
-                style={{ padding: "12px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", borderRadius: 8 }}
+                className="public-button-secondary"
+                style={{ padding: "12px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: "#1E2A44", border: "1.5px solid #1E2A44", cursor: "pointer", transition: "all 0.2s ease", borderRadius: 8 }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = "#C07A4A";
+                  e.currentTarget.style.borderColor = "#C07A4A";
+                  e.currentTarget.style.color = "#FFFFFF";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.borderColor = "#1E2A44";
+                  e.currentTarget.style.color = "#1E2A44";
+                }}
               >
                 Clear Filters
               </button>
@@ -193,7 +328,7 @@ const Properties = () => {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {visible.map((listing, i) => (
-                  <PropertyCard key={listing.id} p={listing} idx={i} />
+                    <PropertyCard key={listing.id} listing={listing} idx={i} />
                 ))}
               </div>
               {hasMore && (
@@ -201,10 +336,18 @@ const Properties = () => {
                   <button
                     data-testid="button-load-more"
                     onClick={() => setVisibleCount(c => c + PAGE_SIZE)}
-                    className="public-button-secondary public-button-secondary-dark"
-                    style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: "rgba(255,255,255,0.75)", border: "0.5px solid rgba(255,255,255,0.25)", cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = GOLD; (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.75)"; (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)"; }}
+                    className="public-button-secondary"
+                    style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: "#1E2A44", border: "1.5px solid #1E2A44", cursor: "pointer", transition: "all 0.2s ease", borderRadius: 8 }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.backgroundColor = "#C07A4A";
+                      e.currentTarget.style.borderColor = "#C07A4A";
+                      e.currentTarget.style.color = "#FFFFFF";
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.borderColor = "#1E2A44";
+                      e.currentTarget.style.color = "#1E2A44";
+                    }}
                   >
                     Load More Properties
                   </button>
@@ -219,7 +362,7 @@ const Properties = () => {
       <section style={{ backgroundColor: "#1E2A44", borderTop: "1px solid rgba(255,255,255,0.10)", padding: "64px 0", textAlign: "center" }}>
         <div className="container mx-auto px-6">
           <div style={{ width: "40px", height: "1px", backgroundColor: GOLD, margin: "0 auto 20px" }} />
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "16px" }}>
             Exclusive Inventory
           </p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,44px)", fontWeight: 300, color: "#fff", marginBottom: "14px" }}>
@@ -231,10 +374,18 @@ const Properties = () => {
           <button
             data-testid="button-get-notified"
             onClick={() => navigate("/home-valuation")}
-            className="public-button-primary"
-            style={{ padding: "14px 40px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
+            className="public-button-secondary public-button-secondary-dark"
+            style={{ padding: "14px 40px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: "#FFFFFF", border: "1.5px solid #FFFFFF", cursor: "pointer", transition: "all 0.2s ease", borderRadius: 8 }}
+            onMouseEnter={e => {
+              e.currentTarget.style.backgroundColor = "#C07A4A";
+              e.currentTarget.style.borderColor = "#C07A4A";
+              e.currentTarget.style.color = "#FFFFFF";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.borderColor = "#FFFFFF";
+              e.currentTarget.style.color = "#FFFFFF";
+            }}
           >
             Get Notified
           </button>
