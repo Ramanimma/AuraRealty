@@ -243,17 +243,6 @@ const HeroSection = () => {
         />
       )}
 
-      {/* Dark gradient overlay */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(180deg, rgba(20,28,46,0.80) 0%, rgba(30,42,68,0.80) 42%, rgba(20,28,46,0.84) 100%)",
-          zIndex: 2,
-        }}
-      />
-
       {/* Centered content */}
       <div
         style={{
@@ -277,6 +266,7 @@ const HeroSection = () => {
             letterSpacing: "0.25em",
             textTransform: "uppercase",
             color: "#FFFFFF",
+            textShadow: "0 2px 12px rgba(0,0,0,0.45)",
             marginBottom: "20px",
           }}
         >
@@ -292,6 +282,7 @@ const HeroSection = () => {
             lineHeight: 1.05,
             letterSpacing: "-0.01em",
             color: "#fff",
+            textShadow: "0 2px 12px rgba(0,0,0,0.45)",
             margin: 0,
           }}
         >
@@ -308,6 +299,7 @@ const HeroSection = () => {
             fontSize: "15px",
             fontWeight: 300,
             color: "rgba(255,255,255,0.75)",
+            textShadow: "0 2px 12px rgba(0,0,0,0.45)",
             letterSpacing: "0.06em",
             maxWidth: "380px",
             margin: "16px auto 40px",
