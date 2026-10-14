@@ -285,7 +285,7 @@ const HeroSection = () => {
             width: "100%",
             maxWidth: "640px",
             boxSizing: "border-box",
-            background: "rgba(20,28,46,0.28)",
+            background: "rgba(20,28,46,0.80)",
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
             border: "1px solid rgba(255,255,255,0.18)",

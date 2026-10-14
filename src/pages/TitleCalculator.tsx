@@ -428,7 +428,7 @@ const TitleCalculator = () => {
       <section style={{ backgroundColor: CHARCOAL }} className="py-20 px-6 text-center">
         <p
           className="text-xs uppercase tracking-widest font-sans mb-4"
-          style={{ color: GOLD }}
+          style={{ color: "#FFFFFF" }}
         >
           Get Expert Guidance
         </p>

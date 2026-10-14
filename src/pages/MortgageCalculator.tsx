@@ -178,7 +178,7 @@ export default function MortgageCalculator() {
               </CardHeader>
               <CardContent>
                 <Tabs value={loanType} onValueChange={(v) => setLoanType(v as LoanType)}>
-                  <TabsList className="grid grid-cols-4 w-full">
+                  <TabsList className="grid grid-cols-2 w-full h-auto">
                     <TabsTrigger value="conventional">Conventional</TabsTrigger>
                     <TabsTrigger value="fha">FHA</TabsTrigger>
                     <TabsTrigger value="va">VA</TabsTrigger>

@@ -201,7 +201,7 @@ const MailingList = () => {
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     fontSize: "13px",
-                    color: "#f87171",
+                    color: "#C0392B",
                     marginTop: "8px",
                   }}
                 >

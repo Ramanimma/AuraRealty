@@ -92,6 +92,25 @@
     @apply border-border;
   }
 
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [role="button"]:focus-visible,
+  [role="combobox"]:focus-visible {
+    outline: 3px solid #1E2A44 !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 3px #FFFFFF !important;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus,
+  [role="combobox"]:focus {
+    border-color: #1E2A44;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     color: #4B5563;
@@ -121,6 +140,10 @@
 
   .public-button-primary,
   .public-button-secondary {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px !important;
     border-radius: 8px !important;
     transition: all 200ms ease !important;
   }
@@ -151,7 +174,7 @@
   .public-button-secondary:hover:not(:disabled) {
     background-color: #C07A4A !important;
     border-color: #C07A4A !important;
-    color: #FFFFFF !important;
+    color: #141C2E !important;
   }
 }
 
@@ -196,7 +219,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   width: 100%;
+  min-width: 0;
   min-height: 220px;
   height: 220px;
   padding: 20px;
@@ -205,6 +230,8 @@
 }
 
 .public-page-title {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-family: "Cormorant Garamond", serif;
   font-size: 36px;
   font-weight: 500;
@@ -224,7 +251,9 @@
 }
 
 .public-page-subtitle {
+  width: 100%;
   max-width: 672px;
+  overflow-wrap: anywhere;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   line-height: 1.6;
@@ -232,8 +261,10 @@
 }
 
 .public-page-glass {
+  box-sizing: border-box;
   width: 100%;
   max-width: 640px;
+  min-width: 0;
   padding: 20px 18px;
   background: rgba(20,28,46,.80);
   border: 1px solid rgba(255,255,255,.18);
@@ -243,6 +274,9 @@
 }
 
 .public-property-card {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
   background: #FFFFFF;
   border: 1px solid #E9EDF3;
   border-radius: 12px;
@@ -251,10 +285,130 @@
 
 .public-property-status:empty { display: none; }
 
+:where(body:has(.public-page-header, .public-page-glass, #properties, [data-testid="button-hamburger"])) button {
+  min-height: 44px !important;
+  min-width: 44px;
+}
+
+[data-testid^="button-hero-dot-"] {
+  box-sizing: content-box;
+  min-height: 3px !important;
+  min-width: 3px !important;
+  border: 20.5px solid transparent !important;
+  background-clip: content-box;
+}
+
+footer a[aria-label] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+:where(body:has([data-testid="button-hamburger"])) input:not([type="checkbox"]):not([type="radio"]),
+:where(body:has([data-testid="button-hamburger"])) select {
+  min-height: 44px;
+}
+
+.public-tool-inputs:is(main, section) {
+  padding-top: 64px !important;
+  padding-bottom: 64px !important;
+}
+
+.public-tool-inputs .border:not(input):not(select):not(button) {
+  border-radius: 12px;
+}
+
+.public-tool-inputs button {
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .public-tool-inputs:is(main, section) {
+    padding-top: 96px !important;
+    padding-bottom: 96px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  :where(body:has([data-testid="button-hamburger"])) .container {
+    max-width: 1240px;
+  }
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-root {
+  position: relative;
+  box-sizing: border-box;
+  width: 332px;
+  max-width: calc(100vw - 16px);
+  color: #1E2A44;
+  font-family: "Inter", sans-serif;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-root nav {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  justify-content: space-between;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-month_caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 44px;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-month_grid {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-month_grid td {
+  display: table-cell !important;
+  width: calc(100% / 7);
+  height: 44px;
+  padding: 0;
+  vertical-align: middle;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-month_grid th {
+  width: calc(100% / 7);
+  height: 44px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-day_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0 !important;
+  min-height: 44px;
+  border-radius: 8px;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-day_button:hover:not(:disabled) {
+  background: #E9EDF3;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-month_grid [data-disabled="true"] button {
+  opacity: 0.45;
+}
+
+:where(body:has([data-testid="button-hamburger"])) .rdp-month_grid [data-selected="true"] button {
+  background: #1E2A44;
+  color: #FFFFFF;
+}
+
 .public-tool-inputs input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
 .public-tool-inputs select,
 .public-tool-inputs textarea,
 .public-tool-inputs [role="combobox"] {
+  max-width: 100%;
   background-color: #FFFFFF !important;
   border: 1px solid #E9EDF3 !important;
   border-radius: 8px !important;
@@ -266,7 +420,6 @@
 .public-tool-inputs textarea:focus,
 .public-tool-inputs [role="combobox"]:focus {
   border-color: #1E2A44 !important;
-  outline: none !important;
   box-shadow: 0 0 0 3px rgba(30,42,68,.16) !important;
 }
 

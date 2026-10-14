@@ -36,7 +36,7 @@ const AboutSection = () => {
 
           {/* Content */}
           <div>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "#A8653A", marginBottom: "16px" }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "#4B5563", marginBottom: "16px" }}>
               Why Choose Us
             </p>
             <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "24px" }}>

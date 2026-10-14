@@ -99,7 +99,7 @@ const ContactSection = () => {
 
   const fieldStyle = (name: string): React.CSSProperties => ({
     ...inputStyle,
-    borderColor: focused === name ? "#1E2A44" : errors[name] ? "#F87171" : "#E9EDF3",
+    borderColor: focused === name ? "#1E2A44" : errors[name] ? "#C0392B" : "#E9EDF3",
     boxShadow: focused === name ? "0 0 0 3px rgba(30,42,68,0.10)" : "none",
   });
 
@@ -144,7 +144,7 @@ const ContactSection = () => {
               onClick={() => setIsSubmitted(false)}
               className="public-button-secondary"
               style={{ marginTop: "16px", padding: "10px 28px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", borderRadius: 8 }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#141C2E"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.borderColor = "#1E2A44"; (e.currentTarget as HTMLButtonElement).style.color = "#1E2A44"; }}
             >
               Submit Another Request
@@ -165,7 +165,7 @@ const ContactSection = () => {
             >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label htmlFor="fullName" style={labelStyle}>Full Name <span style={{ color: "#f87171" }}>*</span></label>
+                <label htmlFor="fullName" style={labelStyle}>Full Name <span style={{ color: "#C0392B" }}>*</span></label>
                 <input
                   id="fullName"
                   name="fullName"
@@ -176,10 +176,10 @@ const ContactSection = () => {
                   onFocus={() => setFocused("fullName")}
                   onBlur={() => setFocused(null)}
                 />
-                {errors.fullName && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#f87171" }}>{errors.fullName}</p>}
+                {errors.fullName && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#C0392B" }}>{errors.fullName}</p>}
               </div>
               <div className="space-y-2">
-                <label htmlFor="email" style={labelStyle}>Email Address <span style={{ color: "#f87171" }}>*</span></label>
+                <label htmlFor="email" style={labelStyle}>Email Address <span style={{ color: "#C0392B" }}>*</span></label>
                 <input
                   id="email"
                   name="email"
@@ -191,10 +191,10 @@ const ContactSection = () => {
                   onFocus={() => setFocused("email")}
                   onBlur={() => setFocused(null)}
                 />
-                {errors.email && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#f87171" }}>{errors.email}</p>}
+                {errors.email && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#C0392B" }}>{errors.email}</p>}
               </div>
               <div className="space-y-2">
-                <label htmlFor="phone" style={labelStyle}>Phone Number <span style={{ color: "#f87171" }}>*</span></label>
+                <label htmlFor="phone" style={labelStyle}>Phone Number <span style={{ color: "#C0392B" }}>*</span></label>
                 <input
                   id="phone"
                   name="phone"
@@ -206,7 +206,7 @@ const ContactSection = () => {
                   onFocus={() => setFocused("phone")}
                   onBlur={() => setFocused(null)}
                 />
-                {errors.phone && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#f87171" }}>{errors.phone}</p>}
+                {errors.phone && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#C0392B" }}>{errors.phone}</p>}
               </div>
               <div className="space-y-2">
                 <label htmlFor="property" style={labelStyle}>Property of Interest</label>
@@ -225,13 +225,13 @@ const ContactSection = () => {
             </div>
 
             <div className="space-y-2">
-              <label style={labelStyle}>Preferred Tour Date <span style={{ color: "#f87171" }}>*</span></label>
+              <label style={labelStyle}>Preferred Tour Date <span style={{ color: "#C0392B" }}>*</span></label>
               <Popover>
                 <PopoverTrigger asChild>
                   <button
                     type="button"
                     className={cn("w-full flex items-center gap-2 dark-input", !date && "text-[#4B5563]")}
-                    style={{ ...inputStyle, borderColor: errors.date ? "#F87171" : "#E9EDF3", textAlign: "left", cursor: "pointer" }}
+                    style={{ ...inputStyle, borderColor: errors.date ? "#C0392B" : "#E9EDF3", textAlign: "left", cursor: "pointer" }}
                   >
                     <CalendarIcon className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
                     <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 400, color: date ? "#1E2A44" : "#4B5563" }}>
@@ -250,7 +250,7 @@ const ContactSection = () => {
                   />
                 </PopoverContent>
               </Popover>
-              {errors.date && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#f87171" }}>{errors.date}</p>}
+              {errors.date && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#C0392B" }}>{errors.date}</p>}
             </div>
 
             <div className="space-y-2">
@@ -282,7 +282,7 @@ const ContactSection = () => {
             </button>
 
             {submitError && (
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#f87171", textAlign: "center" }}>{submitError}</p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#C0392B", textAlign: "center" }}>{submitError}</p>
             )}
             </form>
           </>

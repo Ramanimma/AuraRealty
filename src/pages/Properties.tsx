@@ -240,7 +240,7 @@ const Properties = () => {
                   if (typeFilter !== btn.key) {
                     e.currentTarget.style.backgroundColor = "#C07A4A";
                     e.currentTarget.style.borderColor = "#C07A4A";
-                    e.currentTarget.style.color = "#FFFFFF";
+                    e.currentTarget.style.color = "#141C2E";
                   }
                 }}
                 onMouseLeave={e => {
@@ -313,7 +313,7 @@ const Properties = () => {
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = "#C07A4A";
                   e.currentTarget.style.borderColor = "#C07A4A";
-                  e.currentTarget.style.color = "#FFFFFF";
+                  e.currentTarget.style.color = "#141C2E";
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.backgroundColor = "transparent";
@@ -341,7 +341,7 @@ const Properties = () => {
                     onMouseEnter={e => {
                       e.currentTarget.style.backgroundColor = "#C07A4A";
                       e.currentTarget.style.borderColor = "#C07A4A";
-                      e.currentTarget.style.color = "#FFFFFF";
+                      e.currentTarget.style.color = "#141C2E";
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.backgroundColor = "transparent";
@@ -379,7 +379,7 @@ const Properties = () => {
             onMouseEnter={e => {
               e.currentTarget.style.backgroundColor = "#C07A4A";
               e.currentTarget.style.borderColor = "#C07A4A";
-              e.currentTarget.style.color = "#FFFFFF";
+              e.currentTarget.style.color = "#141C2E";
             }}
             onMouseLeave={e => {
               e.currentTarget.style.backgroundColor = "transparent";

@@ -96,7 +96,7 @@ const Navbar = () => {
           left: 0,
           right: 0,
           zIndex: 50,
-          backgroundColor: isOverlay ? "transparent" : "#FFFFFF",
+          backgroundColor: isOverlay ? "rgba(20,28,46,0.85)" : "#FFFFFF",
           borderBottom: isOverlay ? "1px solid transparent" : "1px solid #E9EDF3",
           boxShadow: isOverlay ? "none" : "0 4px 18px rgba(30,42,68,0.07)",
           transition: "background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease",
