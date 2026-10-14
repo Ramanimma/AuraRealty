@@ -260,6 +260,8 @@ const Properties = () => {
           <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
             {/* City dropdown */}
             <select
+              id="properties-city-filter"
+              aria-label="Filter properties by city"
               data-testid="filter-city"
               value={cityFilter}
               onChange={e => { setCityFilter(e.target.value); setVisibleCount(PAGE_SIZE); }}
@@ -272,6 +274,8 @@ const Properties = () => {
 
             {/* Sort dropdown */}
             <select
+              id="properties-sort-order"
+              aria-label="Sort properties"
               data-testid="filter-sort"
               value={sort}
               onChange={e => setSort(e.target.value as SortKey)}

@@ -225,10 +225,11 @@ const ContactSection = () => {
             </div>
 
             <div className="space-y-2">
-              <label style={labelStyle}>Preferred Tour Date <span style={{ color: "#C0392B" }}>*</span></label>
+              <label htmlFor="contact-tour-date" style={labelStyle}>Preferred Tour Date <span style={{ color: "#C0392B" }}>*</span></label>
               <Popover>
                 <PopoverTrigger asChild>
                   <button
+                    id="contact-tour-date"
                     type="button"
                     className={cn("w-full flex items-center gap-2 dark-input", !date && "text-[#4B5563]")}
                     style={{ ...inputStyle, borderColor: errors.date ? "#C0392B" : "#E9EDF3", textAlign: "left", cursor: "pointer" }}

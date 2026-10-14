@@ -104,10 +104,11 @@ const ReviewModal = ({ open, onOpenChange }: ReviewModalProps) => {
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4 mt-2">
               <div>
-                <label className="text-sm font-medium text-foreground mb-1 block">
+                <label htmlFor="review-name" className="text-sm font-medium text-foreground mb-1 block">
                   Name
                 </label>
                 <Input
+                  id="review-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your name"
@@ -117,12 +118,14 @@ const ReviewModal = ({ open, onOpenChange }: ReviewModalProps) => {
               </div>
 
               <div>
-                <label className="text-sm font-medium text-foreground mb-1 block">
+                <label htmlFor="review-rating-1" className="text-sm font-medium text-foreground mb-1 block">
                   Rating
                 </label>
                 <div className="flex gap-1">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
+                      id={`review-rating-${star}`}
+                      aria-label={`Rate ${star} out of 5 stars`}
                       key={star}
                       type="button"
                       onClick={() => setRating(star)}
@@ -143,10 +146,11 @@ const ReviewModal = ({ open, onOpenChange }: ReviewModalProps) => {
               </div>
 
               <div>
-                <label className="text-sm font-medium text-foreground mb-1 block">
+                <label htmlFor="review-comment" className="text-sm font-medium text-foreground mb-1 block">
                   Comment
                 </label>
                 <Textarea
+                  id="review-comment"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                   placeholder="Tell us about your experience..."

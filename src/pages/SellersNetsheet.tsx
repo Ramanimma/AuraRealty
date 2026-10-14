@@ -66,10 +66,11 @@ const SellersNetsheet = () => {
     label: string; value: number; onChange: (v: number) => void; prefix?: string; step?: number;
   }) => (
     <div className="flex justify-between items-center py-3 border-b border-[#E9EDF3]">
-      <label className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">{label}</label>
+      <label htmlFor={`netsheet-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">{label}</label>
       <div className="flex items-center gap-1">
         <span className="text-sm text-[#4B5563]">{prefix}</span>
         <input
+          id={`netsheet-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
           type="number"
           value={value}
           onChange={e => onChange(Number(e.target.value))}
@@ -84,9 +85,10 @@ const SellersNetsheet = () => {
     label: string; value: number; onChange: (v: number) => void;
   }) => (
     <div className="flex justify-between items-center py-3 border-b border-[#E9EDF3]">
-      <label className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">{label}</label>
+      <label htmlFor={`netsheet-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">{label}</label>
       <div className="flex items-center gap-1">
         <input
+          id={`netsheet-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
           type="number"
           value={value}
           onChange={e => onChange(Number(e.target.value))}

@@ -285,6 +285,8 @@ export default function ChatBot() {
         {/* Input bar */}
         <div className="bg-white border-t border-[#E9EDF3] flex gap-2 shrink-0" style={{ padding: "12px 12px 16px" }}>
           <input
+            id="chatbot-message"
+            aria-label="Message the Aura Realty assistant"
             ref={inputRef}
             data-testid="chatbot-input"
             type="text"

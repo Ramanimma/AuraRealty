@@ -57,7 +57,7 @@ const labelStyle: React.CSSProperties = {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
-      <label style={labelStyle}>
+      <label htmlFor={`valuation-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} style={labelStyle}>
         {label}
         {required && <span style={{ color: "#c0392b", marginLeft: "2px" }}>*</span>}
       </label>
@@ -338,6 +338,7 @@ export default function HomeValuation() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
                 <Field label="Full Name" required>
                   <input
+                    id="valuation-full-name"
                     data-testid="input-valuation-name"
                     style={{ ...inputStyle, borderColor: errors.full_name ? "#c0392b" : "#E9EDF3" }}
                     placeholder="John Smith"
@@ -349,6 +350,7 @@ export default function HomeValuation() {
                 </Field>
                 <Field label="Email Address" required>
                   <input
+                    id="valuation-email-address"
                     data-testid="input-valuation-email"
                     type="email"
                     style={{ ...inputStyle, borderColor: errors.email ? "#c0392b" : "#E9EDF3" }}
@@ -361,6 +363,7 @@ export default function HomeValuation() {
                 </Field>
                 <Field label="Phone Number" required>
                   <input
+                    id="valuation-phone-number"
                     data-testid="input-valuation-phone"
                     type="tel"
                     style={{ ...inputStyle, borderColor: errors.phone ? "#c0392b" : "#E9EDF3" }}
@@ -391,6 +394,7 @@ export default function HomeValuation() {
                 <div className="md:col-span-2">
                   <Field label="Property Address" required>
                     <input
+                      id="valuation-property-address"
                       data-testid="input-valuation-address"
                       style={{ ...inputStyle, borderColor: errors.address ? "#c0392b" : "#E9EDF3" }}
                       placeholder="123 Oak Lane"
@@ -404,6 +408,7 @@ export default function HomeValuation() {
                 <div className="md:col-span-2">
                   <Field label="City" required>
                     <input
+                      id="valuation-city"
                       data-testid="input-valuation-city"
                       style={{ ...inputStyle, borderColor: errors.city ? "#c0392b" : "#E9EDF3" }}
                       placeholder="e.g. Cedar Park, Leander, Austin"
@@ -416,6 +421,7 @@ export default function HomeValuation() {
                 </div>
                 <Field label="ZIP Code" required>
                   <input
+                    id="valuation-zip-code"
                     data-testid="input-valuation-zip"
                     style={{ ...inputStyle, borderColor: errors.zip_code ? "#c0392b" : "#E9EDF3" }}
                     placeholder="78641"
@@ -427,6 +433,7 @@ export default function HomeValuation() {
                 </Field>
                 <Field label="State">
                   <input
+                    id="valuation-state"
                     data-testid="input-valuation-state"
                     style={inputStyle}
                     placeholder="TX"
@@ -438,6 +445,7 @@ export default function HomeValuation() {
                 <Field label="Property Type">
                   <div style={{ position: "relative" }}>
                     <select
+                      id="valuation-property-type"
                       data-testid="select-valuation-type"
                       style={selectStyle}
                       value={form.property_type}
@@ -452,6 +460,7 @@ export default function HomeValuation() {
                 <Field label="Property Condition">
                   <div style={{ position: "relative" }}>
                     <select
+                      id="valuation-property-condition"
                       data-testid="select-valuation-condition"
                       style={selectStyle}
                       value={form.condition}
@@ -465,6 +474,7 @@ export default function HomeValuation() {
                 </Field>
                 <Field label="Bedrooms">
                   <input
+                    id="valuation-bedrooms"
                     data-testid="input-valuation-beds"
                     type="number"
                     min={0}
@@ -477,6 +487,7 @@ export default function HomeValuation() {
                 </Field>
                 <Field label="Bathrooms">
                   <input
+                    id="valuation-bathrooms"
                     data-testid="input-valuation-baths"
                     type="number"
                     min={0}
@@ -490,6 +501,7 @@ export default function HomeValuation() {
                 </Field>
                 <Field label="Square Footage">
                   <input
+                    id="valuation-square-footage"
                     data-testid="input-valuation-sqft"
                     type="number"
                     min={0}
@@ -501,6 +513,7 @@ export default function HomeValuation() {
                 </Field>
                 <Field label="Year Built">
                   <input
+                    id="valuation-year-built"
                     data-testid="input-valuation-year"
                     type="number"
                     min={1800}
@@ -514,6 +527,7 @@ export default function HomeValuation() {
                 <div className="md:col-span-2">
                   <Field label="Additional Notes">
                     <textarea
+                      id="valuation-additional-notes"
                       data-testid="input-valuation-notes"
                       style={{ ...inputStyle, height: "100px", resize: "vertical" }}
                       placeholder="Any renovations, upgrades, or special features?"

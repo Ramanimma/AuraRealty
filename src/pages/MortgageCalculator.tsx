@@ -203,6 +203,8 @@ export default function MortgageCalculator() {
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">$</span>
                   <Input
+                    id="mortgage-purchase-price"
+                    aria-label="Purchase price"
                     data-testid="input-purchase-price"
                     className="pl-7 font-sans"
                     value={purchasePrice}
@@ -224,6 +226,8 @@ export default function MortgageCalculator() {
                     <div className="relative flex-1">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">$</span>
                       <Input
+                        id="mortgage-down-payment-amount"
+                        aria-label="Down payment amount"
                         data-testid="input-down-payment-amount"
                         className="pl-7 font-sans"
                         value={downPaymentAmt}
@@ -233,6 +237,8 @@ export default function MortgageCalculator() {
                     </div>
                     <div className="relative w-28">
                       <Input
+                        id="mortgage-down-payment-percentage"
+                        aria-label="Down payment percentage"
                         data-testid="input-down-payment-pct"
                         className="pr-7 font-sans"
                         value={downPaymentPct}
@@ -267,9 +273,9 @@ export default function MortgageCalculator() {
               </CardHeader>
               <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-[#4B5563]">Loan Term</label>
+                  <label htmlFor="mortgage-loan-term" className="text-xs font-sans text-[#4B5563]">Loan Term</label>
                   <Select value={loanTerm} onValueChange={setLoanTerm}>
-                    <SelectTrigger data-testid="select-loan-term" className="font-sans">
+                    <SelectTrigger id="mortgage-loan-term" data-testid="select-loan-term" className="font-sans">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -280,9 +286,10 @@ export default function MortgageCalculator() {
                   </Select>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-[#4B5563]">Interest Rate</label>
+                  <label htmlFor="mortgage-interest-rate" className="text-xs font-sans text-[#4B5563]">Interest Rate</label>
                   <div className="relative">
                     <Input
+                      id="mortgage-interest-rate"
                       data-testid="input-interest-rate"
                       className="pr-7 font-sans"
                       value={interestRate}
@@ -293,9 +300,9 @@ export default function MortgageCalculator() {
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-[#4B5563]">Credit Score Range</label>
+                  <label htmlFor="mortgage-credit-score" className="text-xs font-sans text-[#4B5563]">Credit Score Range</label>
                   <Select value={creditScore} onValueChange={setCreditScore}>
-                    <SelectTrigger data-testid="select-credit-score" className="font-sans">
+                    <SelectTrigger id="mortgage-credit-score" data-testid="select-credit-score" className="font-sans">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -315,9 +322,10 @@ export default function MortgageCalculator() {
               </CardHeader>
               <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-[#4B5563]">Property Tax Rate</label>
+                  <label htmlFor="mortgage-property-tax-rate" className="text-xs font-sans text-[#4B5563]">Property Tax Rate</label>
                   <div className="relative">
                     <Input
+                      id="mortgage-property-tax-rate"
                       data-testid="input-property-tax"
                       className="pr-7 font-sans"
                       value={propertyTaxRate}
@@ -328,9 +336,10 @@ export default function MortgageCalculator() {
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-[#4B5563]">Home Insurance Rate</label>
+                  <label htmlFor="mortgage-home-insurance-rate" className="text-xs font-sans text-[#4B5563]">Home Insurance Rate</label>
                   <div className="relative">
                     <Input
+                      id="mortgage-home-insurance-rate"
                       data-testid="input-insurance-rate"
                       className="pr-7 font-sans"
                       value={insuranceRate}
@@ -341,10 +350,11 @@ export default function MortgageCalculator() {
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans text-[#4B5563]">HOA (monthly)</label>
+                  <label htmlFor="mortgage-hoa-monthly" className="text-xs font-sans text-[#4B5563]">HOA (monthly)</label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4B5563] text-sm">$</span>
                     <Input
+                      id="mortgage-hoa-monthly"
                       data-testid="input-hoa"
                       className="pl-7 font-sans"
                       value={hoaFee}

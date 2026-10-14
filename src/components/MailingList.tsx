@@ -106,6 +106,8 @@ const MailingList = () => {
               >
                 <div style={{ flex: 1 }}>
                   <input
+                    id="mailing-list-name"
+                    aria-label="Your name"
                     type="text"
                     placeholder="Your Name"
                     value={fullName}
@@ -117,6 +119,8 @@ const MailingList = () => {
                 </div>
                 <div style={{ flex: 1 }}>
                   <input
+                    id="mailing-list-email"
+                    aria-label="Email address"
                     type="email"
                     placeholder="Email Address"
                     value={email}

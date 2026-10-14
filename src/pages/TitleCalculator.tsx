@@ -160,12 +160,13 @@ const TitleCalculator = () => {
               </h2>
 
               <div className={rowClass}>
-                <label className={labelClass}>
+                <label htmlFor="title-property-value" className={labelClass}>
                   {txType === "purchase" ? "Sale / Property Value" : "Property Value"}
                 </label>
                 <div className="flex items-center gap-1">
                   <span className="text-sm text-[#4B5563]">$</span>
                   <input
+                    id="title-property-value"
                     type="number"
                     value={propertyValue}
                     onChange={e => setPropertyValue(Number(e.target.value))}
@@ -178,10 +179,11 @@ const TitleCalculator = () => {
 
               {loanPolicy && (
                 <div className={rowClass}>
-                  <label className={labelClass}>Loan Amount</label>
+                  <label htmlFor="title-loan-amount" className={labelClass}>Loan Amount</label>
                   <div className="flex items-center gap-1">
                     <span className="text-sm text-[#4B5563]">$</span>
                     <input
+                      id="title-loan-amount"
                       type="number"
                       value={loanAmount}
                       onChange={e => setLoanAmount(Number(e.target.value))}
@@ -201,9 +203,10 @@ const TitleCalculator = () => {
               </h2>
 
               {txType === "purchase" && (
-                <label className={`${rowClass} cursor-pointer select-none`}>
+                <label htmlFor="title-owners-policy" className={`${rowClass} cursor-pointer select-none`}>
                   <span className={labelClass}>Owner's Title Policy</span>
                   <input
+                    id="title-owners-policy"
                     type="checkbox"
                     checked={ownerPolicy}
                     onChange={e => setOwnerPolicy(e.target.checked)}
@@ -212,9 +215,10 @@ const TitleCalculator = () => {
                 </label>
               )}
 
-              <label className={`${rowClass} cursor-pointer select-none`}>
+              <label htmlFor="title-loan-policy" className={`${rowClass} cursor-pointer select-none`}>
                 <span className={labelClass}>Loan / Mortgagee Policy</span>
                 <input
+                  id="title-loan-policy"
                   type="checkbox"
                   checked={loanPolicy}
                   onChange={e => setLoanPolicy(e.target.checked)}
@@ -239,6 +243,7 @@ const TitleCalculator = () => {
               </p>
               {ENDORSEMENTS.map(e => (
                 <label
+                  htmlFor={`title-endorsement-${e.id}`}
                   key={e.id}
                   className={`${rowClass} cursor-pointer select-none`}
                 >
@@ -249,6 +254,7 @@ const TitleCalculator = () => {
                     </span>
                   </div>
                   <input
+                    id={`title-endorsement-${e.id}`}
                     type="checkbox"
                     checked={!!endorsements[e.id]}
                     onChange={() => toggleEndorsement(e.id)}
