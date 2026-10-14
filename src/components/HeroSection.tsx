@@ -4,9 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 
 const GOLD = "#C07A4A";
+let heroEntrancePlayed = false;
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const playEntrance = useRef(!heroEntrancePlayed);
+
+  useEffect(() => {
+    heroEntrancePlayed = true;
+  }, []);
 
   const { data: videos = [] } = useQuery({
     queryKey: ["hero-videos"],
@@ -244,6 +250,39 @@ const HeroSection = () => {
       )}
 
       <style>{`
+        @keyframes aura-hero-fade {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes aura-hero-word {
+          from { opacity: 0; transform: translateY(16px) scale(0.95); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes aura-hero-rise {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-word { display: inline-block; }
+        .hero-entrance { animation: aura-hero-fade 400ms ease-out both; }
+        .hero-entrance .hero-eyebrow { animation: aura-hero-fade 300ms ease-out 200ms both; }
+        .hero-entrance .hero-word {
+          animation: aura-hero-word 500ms ease-out both;
+          animation-delay: calc(350ms + var(--hero-word-index) * 120ms);
+        }
+        .hero-entrance .hero-subtitle { animation: aura-hero-rise 350ms ease-out 950ms both; }
+        .hero-entrance .hero-buttons { animation: aura-hero-rise 350ms ease-out 1100ms both; }
+        .hero-entrance:focus-within,
+        .hero-entrance:focus-within .hero-eyebrow,
+        .hero-entrance:focus-within .hero-word,
+        .hero-entrance:focus-within .hero-subtitle,
+        .hero-entrance:focus-within .hero-buttons { animation: none; }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-entrance,
+          .hero-entrance .hero-eyebrow,
+          .hero-entrance .hero-word,
+          .hero-entrance .hero-subtitle,
+          .hero-entrance .hero-buttons { animation: none; }
+        }
         @media (max-width: 640px) {
           .hero-content-panel {
             padding: 20px 18px !important;
@@ -280,7 +319,7 @@ const HeroSection = () => {
         }}
       >
         <div
-          className="hero-content-panel"
+          className={`hero-content-panel${playEntrance.current ? " hero-entrance" : ""}`}
           style={{
             width: "100%",
             maxWidth: "640px",
@@ -295,6 +334,7 @@ const HeroSection = () => {
         >
         {/* Gold label */}
         <p
+          className="hero-eyebrow"
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "11px",
@@ -322,14 +362,18 @@ const HeroSection = () => {
             margin: 0,
           }}
         >
-          Discover Your
+          <span className="hero-word" style={{ "--hero-word-index": 0 } as React.CSSProperties}>Discover</span>{" "}
+          <span className="hero-word" style={{ "--hero-word-index": 1 } as React.CSSProperties}>Your</span>{" "}
           <br />
-          Perfect{" "}
-          <em style={{ color: "#FFFFFF", fontStyle: "italic" }}>Home</em>
+          <span className="hero-word" style={{ "--hero-word-index": 2 } as React.CSSProperties}>Perfect</span>{" "}
+          <span className="hero-word" style={{ "--hero-word-index": 3 } as React.CSSProperties}>
+            <em style={{ color: "#FFFFFF", fontStyle: "italic" }}>Home</em>
+          </span>
         </h1>
 
         {/* Subheadline */}
         <p
+          className="hero-subtitle"
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "15px",
@@ -346,6 +390,7 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div
+          className="hero-buttons"
           style={{
             display: "flex",
             gap: "16px",
