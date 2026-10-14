@@ -249,7 +249,7 @@ const HeroSection = () => {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, rgba(20,28,46,0.62) 0%, rgba(30,42,68,0.58) 42%, rgba(20,28,46,0.78) 100%)",
+            "linear-gradient(180deg, rgba(20,28,46,0.80) 0%, rgba(30,42,68,0.80) 42%, rgba(20,28,46,0.84) 100%)",
           zIndex: 2,
         }}
       />
@@ -276,7 +276,7 @@ const HeroSection = () => {
             fontWeight: 400,
             letterSpacing: "0.25em",
             textTransform: "uppercase",
-            color: GOLD,
+            color: "#FFFFFF",
             marginBottom: "20px",
           }}
         >
@@ -298,7 +298,7 @@ const HeroSection = () => {
           Discover Your
           <br />
           Perfect{" "}
-          <em style={{ color: GOLD, fontStyle: "italic" }}>Home</em>
+          <em style={{ color: "#FFFFFF", fontStyle: "italic" }}>Home</em>
         </h1>
 
         {/* Subheadline */}

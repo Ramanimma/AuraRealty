@@ -117,7 +117,7 @@ const Footer = () => {
                     href={l.href}
                     style={linkStyle}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}
                   >
                     {l.label}
                   </a>
@@ -136,7 +136,7 @@ const Footer = () => {
                   href="/mortgage-calculator"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}
                 >
                   Mortgage Calculator
                 </a>
@@ -146,7 +146,7 @@ const Footer = () => {
                   href="/sellers-netsheet"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}
                 >
                   Sellers Netsheet
                 </a>
@@ -156,7 +156,7 @@ const Footer = () => {
                   href="/title-calculator"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}
                 >
                   Title Calculators
                 </a>
@@ -184,7 +184,7 @@ const Footer = () => {
                   href="mailto:agent1@aurarealty.com"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}
                 >
                   agent1@aurarealty.com
                 </a>
@@ -195,7 +195,7 @@ const Footer = () => {
                   href={`mailto:${email}`}
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}
                 >
                   {email}
                 </a>
@@ -216,10 +216,10 @@ const Footer = () => {
           <div className="flex items-center gap-4 lg:col-span-2">
             <div className="flex flex-col items-center gap-1">
               <img src={fullCircleLogo} alt="Full Circle RE" className="h-10 w-auto object-contain" />
-              <p className="font-bold" style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "1.5px", color: "rgba(229,229,229,0.7)", marginTop: "2px", textTransform: "uppercase" }}>
+              <p className="font-bold" style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "1.5px", color: "rgba(255,255,255,0.7)", marginTop: "2px", textTransform: "uppercase" }}>
                 Real Estate
               </p>
-              <p className="text-white/50 text-xs mt-1">Designated Broker: Chak Karri</p>
+              <p className="text-white/70 text-xs mt-1">Designated Broker: Chak Karri</p>
             </div>
           </div>
 

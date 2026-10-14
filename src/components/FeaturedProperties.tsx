@@ -4,8 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import { BedDouble, Bath, Ruler } from "lucide-react";
 import { api } from "@/lib/api";
 
-const GOLD = "#C07A4A";
-
 function formatPrice(price: string | null | undefined, listingType: string | null | undefined): string | null {
   if (!price || price.trim() === "") return null;
   if (price.toLowerCase().includes("/mo")) return price;
@@ -105,9 +103,8 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
             <button
               data-testid={`button-view-details-${p.id}`}
               onClick={e => { e.stopPropagation(); navigate(`/property/${p.id}`); }}
-              style={{ padding: "7px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", backgroundColor: "transparent", color: "#1E2A44", border: "1px solid #E9EDF3", cursor: "pointer", transition: "border-color 0.2s, color 0.2s", borderRadius: 8, whiteSpace: "nowrap", flexShrink: 0 }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#E9EDF3"; (e.currentTarget as HTMLButtonElement).style.color = "#1E2A44"; }}
+              className="public-button-secondary"
+              style={{ padding: "7px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0 }}
             >
               View Details
             </button>
@@ -119,20 +116,18 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
 
 const FeaturedProperties = () => {
   const navigate = useNavigate();
-  const [viewAllHovered, setViewAllHovered] = useState(false);
-
   const { data: properties = [], isLoading } = useQuery({
     queryKey: ["listings"],
     queryFn: () => api.listings.list(),
   });
 
   return (
-    <section id="properties" className="py-16 md:py-24" style={{ backgroundColor: "#FFFFFF" }}>
+    <section id="properties" className="py-16 md:py-24" style={{ backgroundColor: "#FFFFFF", scrollMarginTop: "84px" }}>
       <div className="container mx-auto px-6">
 
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "56px" }}>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: "#A8653A", marginBottom: "16px" }}>
             Featured Listings
           </p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em" }}>
@@ -161,9 +156,7 @@ const FeaturedProperties = () => {
             data-testid="button-view-all-properties"
             onClick={() => navigate("/properties")}
             className="public-button-secondary"
-            onMouseEnter={() => setViewAllHovered(true)}
-            onMouseLeave={() => setViewAllHovered(false)}
-            style={{ padding: "14px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: viewAllHovered ? "#A8653A" : GOLD, color: "#FFFFFF", border: "none", cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
+            style={{ padding: "14px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer" }}
           >
             View All Properties
           </button>

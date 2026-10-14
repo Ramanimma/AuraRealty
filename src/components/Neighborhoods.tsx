@@ -4,8 +4,6 @@ import { api } from "@/lib/api";
 import type { Neighborhood } from "@/lib/api";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const GOLD = "#C07A4A";
-
 const CITY_IMAGES: Record<string, string> = {
   "Austin": "https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=600&h=600&fit=crop",
   "Leander": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=600&fit=crop",
@@ -36,11 +34,11 @@ const CtaCard = () => (
     className="aspect-square flex flex-col items-center justify-center text-center px-8"
     style={{ backgroundColor: "#E9EDF3", borderRadius: 12 }}
   >
-    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontStyle: "italic", fontWeight: 400, color: GOLD, lineHeight: 1.3, marginBottom: "12px" }}>
+    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontStyle: "italic", fontWeight: 400, color: "#A8653A", lineHeight: 1.3, marginBottom: "12px" }}>
       More Areas
       <br />Coming Soon
     </p>
-    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>
+    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", color: "#4B5563" }}>
       Expanding across Central Texas
     </p>
   </div>
@@ -64,11 +62,11 @@ const Neighborhoods = () => {
       id="neighborhoods"
       className="py-16 md:py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#FFFFFF", opacity: 0 }}
+      style={{ backgroundColor: "#FFFFFF", opacity: 0, scrollMarginTop: "84px" }}
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "#A8653A", marginBottom: "16px" }}>
             Explore Austin
           </p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em" }}>
@@ -106,7 +104,7 @@ const Neighborhoods = () => {
                       style={{ transition: "transform 0.7s ease" }}
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A44]/70 via-[#1E2A44]/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A44]/80 via-[#1E2A44]/20 to-transparent" />
                     <div className="absolute inset-0 bg-[#1E2A44]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div
                       className="absolute inset-0"
@@ -138,7 +136,7 @@ const Neighborhoods = () => {
                       {clickable && (
                         <p
                           className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-2"
-                          style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: GOLD }}
+                          style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "#FFFFFF" }}
                         >
                           Explore →
                         </p>

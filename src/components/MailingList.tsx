@@ -45,13 +45,13 @@ const MailingList = () => {
 
   return (
     <section
+      className="py-16 md:py-24"
       style={{
         backgroundColor: "#F7F8FA",
-        padding: "96px 24px",
         minHeight: "300px",
       }}
     >
-      <div className="container mx-auto" style={{ maxWidth: "800px" }}>
+      <div className="container mx-auto px-6" style={{ maxWidth: "800px" }}>
         {isSubmitted ? (
           <div className="text-center">
             <p
@@ -110,9 +110,8 @@ const MailingList = () => {
                     placeholder="Your Name"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    style={{
-                      ...inputStyle,
-                    }}
+                    className="placeholder:text-[#4B5563]"
+                    style={inputStyle}
                     data-testid="input-mailing-name"
                   />
                 </div>
@@ -123,6 +122,7 @@ const MailingList = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="placeholder:text-[#4B5563]"
                     style={inputStyle}
                     data-testid="input-mailing-email"
                   />
@@ -177,7 +177,7 @@ const MailingList = () => {
                     accentColor: GOLD,
                     flexShrink: 0,
                     cursor: "pointer",
-                    border: "1px solid rgba(255,255,255,0.4)",
+                    border: "1px solid #E9EDF3",
                   }}
                 />
                 <label

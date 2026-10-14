@@ -51,7 +51,7 @@ const Testimonials = () => {
             card.style.opacity = "1";
           } else {
             card.style.transform = "scale(0.93)";
-            card.style.opacity = "0.55";
+            card.style.opacity = "0.85";
           }
         });
       }
@@ -68,7 +68,7 @@ const Testimonials = () => {
       id="testimonials"
       className="py-16 md:py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#1E2A44", opacity: 0 }}
+      style={{ backgroundColor: "#1E2A44", opacity: 0, scrollMarginTop: "84px" }}
     >
       <style>{`
         @keyframes scrollLeft {
@@ -85,7 +85,7 @@ const Testimonials = () => {
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)", marginBottom: "16px" }}>
             Client Stories
           </p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 400, color: "#fff", letterSpacing: "-0.01em" }}>
@@ -129,7 +129,7 @@ const Testimonials = () => {
                 >
                   "{t.comment}"
                 </p>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: GOLD }}>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>
                   {t.client_name}
                 </p>
               </div>

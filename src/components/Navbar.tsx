@@ -97,7 +97,7 @@ const Navbar = () => {
           right: 0,
           zIndex: 50,
           backgroundColor: isOverlay ? "transparent" : "#FFFFFF",
-          borderBottom: isOverlay ? "1px solid rgba(255,255,255,0.12)" : "1px solid #E9EDF3",
+          borderBottom: isOverlay ? "1px solid transparent" : "1px solid #E9EDF3",
           boxShadow: isOverlay ? "none" : "0 4px 18px rgba(30,42,68,0.07)",
           transition: "background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease",
         }}
@@ -141,9 +141,9 @@ const Navbar = () => {
                         navigate(link.href);
                       }
                     }}
-                    style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: active && !isOverlay ? GOLD : textColor, transition: "color 200ms ease", textDecoration: "none", position: "relative", paddingBottom: "5px", borderBottom: active && isOverlay ? `1px solid ${GOLD}` : "1px solid transparent" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = active && !isOverlay ? GOLD : textColor; }}
+                    style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: active && !isOverlay ? "#A8653A" : textColor, transition: "color 200ms ease", textDecoration: "none", position: "relative", paddingBottom: "5px", borderBottom: active && isOverlay ? `1px solid ${GOLD}` : "1px solid transparent" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = isOverlay ? "#FFFFFF" : "#A8653A"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = active && !isOverlay ? "#A8653A" : textColor; }}
                   >
                     {link.label}
                   </a>
@@ -206,7 +206,7 @@ const Navbar = () => {
                   onClick={() => handleMobileNav(link.href)}
                   onMouseEnter={() => setHoveredLink(link.label)}
                   onMouseLeave={() => setHoveredLink(null)}
-                  style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontSize: "36px", fontWeight: 300, letterSpacing: "0.03em", color: active ? GOLD : "#fff", padding: "10px 24px", position: "relative", transition: "color 0.25s ease", textTransform: "uppercase" }}
+                  style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond', serif", fontSize: "36px", fontWeight: 300, letterSpacing: "0.03em", color: "#fff", padding: "10px 24px", position: "relative", transition: "color 0.25s ease", textTransform: "uppercase" }}
                 >
                   <span style={{ position: "relative", display: "inline-block" }}>
                     {link.label}
@@ -218,7 +218,7 @@ const Navbar = () => {
           </nav>
 
           <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", alignItems: "center", gap: "14px" }}>
-            <a href="tel:5129001897" style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 400, color: GOLD, textDecoration: "none", letterSpacing: "0.04em" }}>
+            <a href="tel:5129001897" style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 400, color: "rgba(255,255,255,0.75)", textDecoration: "none", letterSpacing: "0.04em" }}>
               <Phone className="h-4 w-4" />
               (512) 900-1897
             </a>

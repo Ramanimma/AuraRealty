@@ -1,8 +1,6 @@
 import { MapPin, Users, TrendingUp, Award } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const GOLD = "#C07A4A";
-
 const features = [
   { icon: MapPin, title: "Local Expertise", desc: "Deep knowledge of Austin's neighborhoods, schools, and market trends." },
   { icon: Users, title: "Personalized Service", desc: "Tailored guidance for every client, from first-time buyers to investors." },
@@ -18,7 +16,7 @@ const AboutSection = () => {
       id="about"
       className="py-16 md:py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#F7F8FA", opacity: 0 }}
+      style={{ backgroundColor: "#F7F8FA", opacity: 0, scrollMarginTop: "84px" }}
     >
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -38,7 +36,7 @@ const AboutSection = () => {
 
           {/* Content */}
           <div>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "#A8653A", marginBottom: "16px" }}>
               Why Choose Us
             </p>
             <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "24px" }}>
@@ -55,7 +53,7 @@ const AboutSection = () => {
                     className="flex-shrink-0 w-11 h-11 flex items-center justify-center"
                     style={{ backgroundColor: "rgba(192,122,74,0.10)", borderRadius: 8 }}
                   >
-                    <f.icon className="h-5 w-5" style={{ color: GOLD }} />
+                    <f.icon className="h-5 w-5" style={{ color: "#A8653A" }} />
                   </div>
                   <div>
                     <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "19px", fontWeight: 600, color: "#1E2A44", marginBottom: "4px" }}>

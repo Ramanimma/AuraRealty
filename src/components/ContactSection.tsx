@@ -99,7 +99,7 @@ const ContactSection = () => {
 
   const fieldStyle = (name: string): React.CSSProperties => ({
     ...inputStyle,
-    borderColor: focused === name ? "#1E2A44" : errors[name] ? "#f87171" : "#E9EDF3",
+    borderColor: focused === name ? "#1E2A44" : errors[name] ? "#F87171" : "#E9EDF3",
     boxShadow: focused === name ? "0 0 0 3px rgba(30,42,68,0.10)" : "none",
   });
 
@@ -108,16 +108,16 @@ const ContactSection = () => {
       id="contact"
       className="py-16 md:py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#FFFFFF", opacity: 0 }}
+      style={{ backgroundColor: "#FFFFFF", opacity: 0, scrollMarginTop: "84px" }}
     >
       <style>{`
-        .dark-input::placeholder { color: #9AA3B2; }
+        .dark-input::placeholder { color: #4B5563; }
         .dark-input:focus { border-color: #1E2A44 !important; box-shadow: 0 0 0 3px rgba(30,42,68,0.10); }
       `}</style>
 
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mx-auto text-center mb-14">
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "#A8653A", marginBottom: "16px" }}>
             Get In Touch
           </p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em", marginBottom: "16px" }}>
@@ -142,8 +142,8 @@ const ContactSection = () => {
             </p>
             <button
               onClick={() => setIsSubmitted(false)}
-              className="public-button-secondary public-button-secondary-dark"
-              style={{ marginTop: "16px", padding: "10px 28px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `1px solid ${GOLD}`, cursor: "pointer", transition: "all 0.3s ease", borderRadius: 8 }}
+              className="public-button-secondary"
+              style={{ marginTop: "16px", padding: "10px 28px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", borderRadius: 8 }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
             >
@@ -153,7 +153,7 @@ const ContactSection = () => {
         ) : (
           <>
             {prefill.propertyAddress && (
-              <p style={{ color: "#C07A4A", fontSize: "14px", marginBottom: "16px" }}>
+                <p style={{ color: "#A8653A", fontSize: "14px", marginBottom: "16px" }}>
                 🏠 Scheduling a tour for: <strong>{prefill.propertyAddress}</strong>
               </p>
             )}
@@ -230,11 +230,11 @@ const ContactSection = () => {
                 <PopoverTrigger asChild>
                   <button
                     type="button"
-                    className={cn("w-full flex items-center gap-2 dark-input", !date && "text-white/30")}
-                    style={{ ...inputStyle, borderColor: errors.date ? "#f87171" : "rgba(255,255,255,0.15)", textAlign: "left", cursor: "pointer" }}
+                    className={cn("w-full flex items-center gap-2 dark-input", !date && "text-[#4B5563]")}
+                    style={{ ...inputStyle, borderColor: errors.date ? "#F87171" : "#E9EDF3", textAlign: "left", cursor: "pointer" }}
                   >
-                    <CalendarIcon className="h-4 w-4 flex-shrink-0" style={{ color: "#667085" }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 400, color: date ? "#1E2A44" : "#8A94A3" }}>
+                    <CalendarIcon className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 400, color: date ? "#1E2A44" : "#4B5563" }}>
                       {date ? format(date, "PPP") : "Pick a date"}
                     </span>
                   </button>
