@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { CalendarIcon, CheckCircle2 } from "lucide-react";
+import { CalendarIcon, CheckCircle2, Mail, MapPin, Phone } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
@@ -287,6 +287,17 @@ const ContactSection = () => {
             </form>
           </>
         )}
+        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-4 rounded-xl border border-[#E9EDF3] bg-[#F7F8FA] p-6 sm:grid-cols-3">
+          <a href="tel:5129001897" className="flex items-center gap-3 text-sm text-[#1E2A44] no-underline">
+            <Phone className="h-4 w-4 shrink-0 text-[#A8653A]" /><span>(512) 900-1897</span>
+          </a>
+          <a href="mailto:agent1@aurarealty.com" className="flex items-center gap-3 text-sm text-[#1E2A44] no-underline">
+            <Mail className="h-4 w-4 shrink-0 text-[#A8653A]" /><span>agent1@aurarealty.com</span>
+          </a>
+          <div className="flex items-center gap-3 text-sm text-[#1E2A44]">
+            <MapPin className="h-4 w-4 shrink-0 text-[#A8653A]" /><span>Austin, Texas</span>
+          </div>
+        </div>
       </div>
     </section>
   );

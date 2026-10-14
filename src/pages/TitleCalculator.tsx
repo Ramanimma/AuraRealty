@@ -3,6 +3,7 @@ import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 const CHARCOAL = "#1E2A44";
 const GOLD = "#C07A4A";
@@ -110,23 +111,9 @@ const TitleCalculator = () => {
         ogUrl="https://aurarealty.com/title-calculator"
       />
       <Navbar />
+      <style>{`.title-results [class*="text-white"] { color: #1E2A44 !important; } .title-results [class*="border-white"] { border-color: #E9EDF3 !important; }`}</style>
 
-      {/* Hero */}
-      <section style={{ backgroundColor: CHARCOAL }} className="py-24 px-6 text-center">
-        <p
-          className="text-xs uppercase tracking-[0.2em] mb-4 font-sans"
-          style={{ color: GOLD }}
-        >
-          Title Tools
-        </p>
-        <h1 className="font-serif text-4xl md:text-6xl font-light text-white mb-4">
-          Texas Title Premium Calculator
-        </h1>
-        <p className="text-white/60 font-sans text-lg max-w-2xl mx-auto">
-          Calculate Owner's and Loan title policy premiums based on official Texas
-          Department of Insurance rates
-        </p>
-      </section>
+      <PublicPageHeader eyebrow="Title Tools" title="Texas Title Premium Calculator" subtitle="Calculate Owner's and Loan title policy premiums based on official Texas Department of Insurance rates" />
 
       {/* Calculator */}
       <section className="py-16 px-6">
@@ -270,13 +257,13 @@ const TitleCalculator = () => {
 
           {/* ── RIGHT: Results ── */}
           <div className="lg:sticky lg:top-8 h-fit">
-            <div style={{ backgroundColor: CHARCOAL }} className="p-8">
-              <h2 className="font-serif text-2xl text-white mb-8">
+            <div style={{ backgroundColor: "#F7F8FA", border: "1px solid #E9EDF3", borderRadius: 12 }} className="title-results p-8">
+              <h2 className="font-serif text-2xl text-[#1E2A44] mb-8">
                 Premium Breakdown
               </h2>
 
               {/* Summary values */}
-              <div className="border-b border-white/15 pb-4 mb-4 space-y-2">
+              <div className="border-b border-[#E9EDF3] pb-4 mb-4 space-y-2">
                 <div className="flex justify-between text-sm font-sans">
                   <span className="text-white/50 uppercase tracking-widest text-xs">
                     Property Value

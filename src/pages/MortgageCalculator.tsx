@@ -14,6 +14,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 type LoanType = "conventional" | "fha" | "va" | "usda";
 
@@ -160,15 +161,8 @@ export default function MortgageCalculator() {
       />
       <Navbar />
 
-      <main className="flex-1 container mx-auto px-4 sm:px-6 py-10 mt-16">
-        <div className="mb-8">
-          <h1 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-2">
-            Mortgage Calculator
-          </h1>
-          <p className="text-muted-foreground font-sans text-sm">
-            Estimate your monthly payment including taxes, insurance, PMI, and HOA.
-          </p>
-        </div>
+      <PublicPageHeader title="Mortgage Calculator" subtitle="Estimate your monthly payment including taxes, insurance, PMI, and HOA." />
+      <main className="flex-1 container mx-auto px-4 sm:px-6 py-10">
 
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* ── Inputs ── */}

@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import SEOHead from "@/components/SEOHead";
-import { ArrowLeft, Bed, Bath, Maximize, MapPin, TrendingUp, CheckCircle, Home, School, Activity } from "lucide-react";
+import { ArrowLeft, Bed, Bath, Maximize, TrendingUp, CheckCircle, Home, School, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
 import { api } from "@/lib/api";
 import type { Listing, Neighborhood } from "@/lib/api";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 const CITY_IMAGES: Record<string, string> = {
   "Austin": "https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=1200&h=600&fit=crop",
@@ -159,45 +160,20 @@ export default function NeighborhoodDetail() {
       <Navbar />
 
       {/* ── Hero ────────────────────────────────────────────────── */}
-      <section className="relative h-[420px] md:h-[520px] overflow-hidden">
-        <img
-          src={heroImage}
-          alt={n.name}
-          className="w-full h-full object-cover"
+      <div className="relative">
+        <PublicPageHeader
+          image={heroImage}
+          title={n.name}
+          subtitle={[n.city && `${n.city}${n.state ? `, ${n.state}` : ""}`, n.avg_price && `Avg. ${avgPriceDisplay}`].filter(Boolean).join(" · ")}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A44]/75 via-[#1E2A44]/40 to-[#1E2A44]/20" />
-
-        {/* Back link */}
-        <a
-          href="/#neighborhoods"
-          className="absolute top-6 left-6 flex items-center gap-2 text-white/80 hover:text-white text-sm font-sans transition-colors"
-          data-testid="link-back-neighborhoods"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Neighborhoods
+        <a href="/#neighborhoods" className="absolute left-5 top-4 z-10 flex items-center gap-2 rounded-full border border-white/60 bg-[#1E2A44]/70 px-3 py-2 text-xs text-white transition-colors hover:bg-[#1E2A44]" data-testid="link-back-neighborhoods">
+          <ArrowLeft className="w-4 h-4" />Back to Neighborhoods
         </a>
-
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-          <div className="container mx-auto">
-            {n.city && (
-              <p className="flex items-center gap-1.5 text-white/70 text-sm font-sans mb-2">
-                <MapPin className="w-4 h-4" />
-                {n.city}{n.state ? `, ${n.state}` : ""}
-              </p>
-            )}
-            <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-4">{n.name}</h1>
-            {n.avg_price && (
-              <span className="inline-block text-sm font-semibold font-sans px-4 py-1.5 rounded-full" style={{ backgroundColor: "#C07A4A", color: "#fff" }}>
-                Avg. {avgPriceDisplay}
-              </span>
-            )}
-          </div>
-        </div>
-      </section>
+      </div>
 
       <main>
         {/* ── Stat Cards ──────────────────────────────────────────── */}
-        <section className="py-12 bg-muted/30">
+        <section className="py-12 bg-[#F7F8FA]">
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               <StatCard
@@ -250,9 +226,9 @@ export default function NeighborhoodDetail() {
                     </h3>
                     <ul className="space-y-3">
                       {n.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-3">
+                        <li key={i} className="flex items-start gap-3 rounded-lg border border-[#1E2A44] px-4 py-3">
                           <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "#C07A4A" }} />
-                          <span className="text-muted-foreground font-sans">{h}</span>
+                          <span className="text-[#4B5563] font-sans">{h}</span>
                         </li>
                       ))}
                     </ul>

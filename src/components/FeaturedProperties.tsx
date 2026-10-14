@@ -53,7 +53,7 @@ interface PropertyCardProps {
   idx: number;
 }
 
-const PropertyCard = ({ p, idx }: PropertyCardProps) => {
+export const PropertyCard = ({ p, idx }: PropertyCardProps) => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const price = formatPrice(p.price, p.listing_type);

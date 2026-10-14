@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
 import { api, type Agent } from "@/lib/api";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 const stats = [
   { value: "15+", label: "Years Experience" },
@@ -174,23 +175,10 @@ export default function About() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="bg-primary text-primary-foreground pt-32 pb-20 px-6">
-        <div className="container mx-auto max-w-3xl text-center">
-          <p className="font-sans text-sm font-semibold text-accent uppercase tracking-widest mb-3">
-            Our Team
-          </p>
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-5">
-            Meet Your DFW Real Estate Team
-          </h1>
-          <p className="font-sans text-primary-foreground/75 text-lg md:text-xl leading-relaxed">
-            Trusted advisors guiding families, investors, and first-time buyers
-            through every step of the journey.
-          </p>
-        </div>
-      </section>
+      <PublicPageHeader eyebrow="Our Team" title="Meet Your DFW Real Estate Team" subtitle="Trusted advisors guiding families, investors, and first-time buyers through every step of the journey." />
 
       {/* ── Agent Cards ── */}
-      <section className="py-20 px-6">
+      <section className="bg-white py-16 px-6 md:py-20">
         <div className="container mx-auto max-w-5xl">
           {isLoading && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -223,7 +211,7 @@ export default function About() {
 
 
       {/* ── Why Work With Us ── */}
-      <section className="py-20 px-6 bg-muted/40">
+      <section className="py-16 px-6 bg-[#F7F8FA] md:py-20">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-12">
             <p className="font-sans text-sm font-semibold text-accent uppercase tracking-widest mb-2">

@@ -8,6 +8,7 @@ import { api, type Listing } from "@/lib/api";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 const GOLD = "#C07A4A";
 
@@ -113,13 +114,14 @@ const PropertyDetails = () => {
         }}
       />
       <Navbar />
+      <PublicPageHeader title={property.address} subtitle={property.price} image={property.main_image} />
       <main className="flex-1">
 
         {/* ── Gallery ── */}
-        <div style={{ backgroundColor: "#1E2A44" }}>
+        <div className="mx-auto mt-6 max-w-7xl overflow-hidden rounded-xl border border-[#E9EDF3] bg-white">
           {/* Main image */}
           <div
-            style={{ position: "relative", width: "100%", height: "clamp(300px, 45vw, 500px)", overflow: "hidden", cursor: imgs.length > 0 ? "zoom-in" : "default" }}
+              style={{ position: "relative", width: "100%", height: "clamp(300px, 45vw, 500px)", overflow: "hidden", cursor: imgs.length > 0 ? "zoom-in" : "default" }}
             onClick={() => imgs.length > 0 && setLightboxOpen(true)}
           >
             <img
@@ -188,23 +190,23 @@ const PropertyDetails = () => {
           <div className="max-w-4xl mx-auto">
             {/* Price & Address */}
             <div className="mb-8">
-              <p className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-2">{property.price}</p>
+              <p className="font-serif text-3xl md:text-4xl font-semibold text-[#1E2A44] mb-2">{property.price}</p>
               <p className="font-sans text-muted-foreground text-lg">{property.address}</p>
             </div>
 
             {/* Key Details */}
-            <div className="flex flex-wrap gap-6 mb-10 pb-10 border-b border-border">
-              <div className="flex items-center gap-2 text-foreground font-sans">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 mb-10 pb-10 border-b border-[#E9EDF3]">
+              <div className="flex items-center gap-2 rounded-lg bg-[#F7F8FA] px-4 py-4 text-[#1E2A44] font-sans">
                 <Bed className="h-5 w-5 text-accent" />
                 <span className="text-lg font-semibold">{property.beds}</span>
                 <span className="text-muted-foreground">Beds</span>
               </div>
-              <div className="flex items-center gap-2 text-foreground font-sans">
+              <div className="flex items-center gap-2 rounded-lg bg-[#F7F8FA] px-4 py-4 text-[#1E2A44] font-sans">
                 <Bath className="h-5 w-5 text-accent" />
                 <span className="text-lg font-semibold">{property.baths}</span>
                 <span className="text-muted-foreground">Baths</span>
               </div>
-              <div className="flex items-center gap-2 text-foreground font-sans">
+              <div className="flex items-center gap-2 rounded-lg bg-[#F7F8FA] px-4 py-4 text-[#1E2A44] font-sans">
                 <Maximize className="h-5 w-5 text-accent" />
                 <span className="text-lg font-semibold">{property.sqft.toLocaleString()}</span>
                 <span className="text-muted-foreground">Sq Ft</span>
@@ -218,7 +220,7 @@ const PropertyDetails = () => {
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-4 rounded-xl border border-[#E9EDF3] bg-white p-5 shadow-[0_12px_32px_rgba(30,42,68,.07)] lg:sticky lg:top-24">
               <button
                 onClick={() => navigate("/contact", {
                   state: {

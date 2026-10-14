@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { AlertCircle, KeyRound } from "lucide-react";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -49,7 +50,8 @@ const ResetPassword = () => {
 
   if (!isRecovery) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-secondary px-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F7F8FA] px-4">
+        <PublicPageHeader className="w-full" title="Reset Password" subtitle="Aura Realty" />
         <Card className="w-full max-w-md border-border shadow-xl">
           <CardContent className="pt-6 text-center text-muted-foreground">
             <p>Validating your reset link…</p>
@@ -61,7 +63,8 @@ const ResetPassword = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-secondary px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#F7F8FA] px-4">
+      <PublicPageHeader className="w-full" title="Reset Password" subtitle="Enter your new password below" />
       <Card className="w-full max-w-md border-border shadow-xl">
         <CardHeader className="text-center space-y-2">
           <a href="/" className="font-serif text-2xl font-bold text-primary">Aura Realty</a>

@@ -1,0 +1,15 @@
+Continue on branch "redesign". Same rules: styling only. Do NOT modify server/, Supabase queries, API calls, filters' logic, form handlers, routes, props, or data logic. Use only the Phase 1 color system and the components/styles already created in Phases 1–2 (buttons, badges, property cards, inputs, section spacing). Reuse the homepage property card on the Properties page instead of a second card style.
+
+PHASE 3 – All other public pages. Stop when done.
+
+Shared page header (use on every page below): a compact banner 320px tall desktop / 220px mobile. Use the page's existing image/video if it has one with the same frosted-glass text panel as the homepage hero; otherwise navy #1E2A44 background with white serif title, short subtitle, and a small copper divider line.
+
+1. Properties (src/pages/Properties.tsx): page background white. Filter bar on light gray #F7F8FA with white inputs (#E9EDF3 border, 8px radius, navy focus ring), copper primary button. Results grid uses the homepage property card. Keep all filters, sorting, counts, and empty state working. Closing CTA band: navy.
+2. Property detail (src/pages/PropertyDetails.tsx): white background; image gallery with 12px radius; price in serif navy; facts (beds/baths/sqft/year) in a light gray #F7F8FA box with icons; status badge from Phase 1; tour/contact form card white with #E9EDF3 border and soft shadow, sticky on desktop.
+3. About (src/pages/About.tsx): alternate white / light gray sections; agent cards white with 12px radius and round photos; closing CTA navy.
+4. Home Valuation (src/pages/HomeValuation.tsx): form section white, form card with #E9EDF3 border; "How it works" steps on light gray with copper step numbers; keep red only for error messages.
+5. Contact page: white background, form styled like the homepage contact form, contact details in a light gray card.
+6. Neighborhood detail (src/pages/NeighborhoodDetail.tsx): image header with glass panel; stat tiles (avg price, walk score, schools) white cards with #E9EDF3 border; highlights as small navy-outline chips.
+7. Tools pages (MortgageCalculator, SellersNetsheet, TitleCalculator) and Unsubscribe / ResetPassword: white/light gray backgrounds, same inputs and buttons, results in a light gray card with navy figures.
+
+Check each page at 375px, 768px, 1440px. Verify every text/background pair meets WCAG AA. Commit and list the files changed. Do not start Phase 4.

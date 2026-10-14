@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 type Status = "loading" | "success" | "error" | "missing";
 
@@ -30,8 +31,9 @@ export default function Unsubscribe() {
   return (
     <div
       style={{ minHeight: "100vh", backgroundColor: "#F7F8FA" }}
-      className="flex items-center justify-center px-6"
+      className="flex min-h-[100dvh] flex-col items-center justify-center px-6"
     >
+      <PublicPageHeader className="w-full" title="Email Preferences" subtitle="Aura Realty" />
       <div className="max-w-md w-full bg-white rounded-lg shadow-sm border border-border p-10 text-center">
         <img
           src="https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png"

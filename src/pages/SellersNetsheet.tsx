@@ -3,6 +3,7 @@ import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MailingList from "@/components/MailingList";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 const SellersNetsheet = () => {
   const [salePrice, setSalePrice] = useState(450000);
@@ -103,8 +104,8 @@ const SellersNetsheet = () => {
   const ResultRow = ({ label, amount, isDeduction = false }: {
     label: string; amount: number; isDeduction?: boolean;
   }) => (
-    <div className="flex justify-between items-center py-2 border-b border-white/15">
-      <span className="text-sm font-sans text-white/70">{label}</span>
+    <div className="flex justify-between items-center py-2 border-b border-[#E9EDF3]">
+      <span className="text-sm font-sans text-[#4B5563]">{label}</span>
       <span className={`text-sm font-sans ${isDeduction ? "text-[#C07A4A]" : "text-white"}`}>
         {isDeduction ? `-${fmt(amount)}` : fmt(amount)}
       </span>
@@ -120,17 +121,10 @@ const SellersNetsheet = () => {
         ogUrl="https://aurarealty.com/sellers-netsheet"
       />
       <Navbar />
+      <style>{`.seller-results [class*="text-white"] { color: #1E2A44 !important; } .seller-results [class*="border-white"] { border-color: #E9EDF3 !important; }`}</style>
 
       {/* Hero */}
-      <section className="bg-[#1E2A44] py-24 px-6 text-center">
-        <p className="text-[#C07A4A] text-xs uppercase tracking-[0.2em] mb-4 font-sans">Seller Tools</p>
-        <h1 className="font-serif text-4xl md:text-6xl font-light text-white mb-4">
-          How Much Will You Make?
-        </h1>
-        <p className="text-white/60 font-sans text-lg max-w-2xl mx-auto">
-          Get an instant estimate of your net proceeds after all closing costs
-        </p>
-      </section>
+      <PublicPageHeader eyebrow="Seller Tools" title="How Much Will You Make?" subtitle="Get an instant estimate of your net proceeds after all closing costs" />
 
       {/* Calculator */}
       <section className="py-16 px-6">
@@ -182,23 +176,23 @@ const SellersNetsheet = () => {
 
           {/* Results */}
           <div className="lg:sticky lg:top-8 h-fit">
-            <div className="bg-[#1E2A44] p-8">
-              <h2 className="font-serif text-2xl text-white mb-8">Your Net Proceeds</h2>
+            <div className="seller-results rounded-xl border border-[#E9EDF3] bg-[#F7F8FA] p-8">
+              <h2 className="font-serif text-2xl text-[#1E2A44] mb-8">Your Net Proceeds</h2>
 
               {/* Net Proceeds Hero */}
-              <div className="text-center py-8 border-b border-white/15 mb-8">
-                <p className="text-xs uppercase tracking-widest text-white/40 font-sans mb-2">Estimated Net Proceeds</p>
-                <p className={`font-serif text-5xl font-light mb-2 ${calc.netProceeds >= 0 ? "text-[#C07A4A]" : "text-white"}`}>
+              <div className="text-center py-8 border-b border-[#E9EDF3] mb-8">
+                <p className="text-xs uppercase tracking-widest text-[#4B5563] font-sans mb-2">Estimated Net Proceeds</p>
+                <p className="font-serif text-5xl font-light mb-2 text-[#1E2A44]">
                   {fmt(calc.netProceeds)}
                 </p>
-                <p className="text-white/40 font-sans text-sm">{calc.netPct}% of sale price</p>
+                <p className="text-[#4B5563] font-sans text-sm">{calc.netPct}% of sale price</p>
               </div>
 
               {/* Breakdown */}
               <div className="space-y-0">
-                <div className="flex justify-between items-center py-2 border-b border-white/15">
-                  <span className="text-sm font-sans text-white font-medium">Sale Price</span>
-                  <span className="text-sm font-sans text-white font-medium">{fmt(salePrice)}</span>
+                <div className="flex justify-between items-center py-2 border-b border-[#E9EDF3]">
+                  <span className="text-sm font-sans text-[#1E2A44] font-medium">Sale Price</span>
+                  <span className="text-sm font-sans text-[#1E2A44] font-medium">{fmt(salePrice)}</span>
                 </div>
                 <ResultRow label="Mortgage Payoff" amount={mortgage} isDeduction />
                 <ResultRow label={`Listing Commission (${listingComm}%)`} amount={calc.listingCommAmt} isDeduction />
@@ -213,7 +207,7 @@ const SellersNetsheet = () => {
                 <ResultRow label={`Prorated Tax (${calc.daysLeft} days)`} amount={calc.proratedTax} isDeduction />
               </div>
 
-              <p className="text-white/30 text-xs font-sans mt-8 text-center">
+              <p className="text-[#4B5563] text-xs font-sans mt-8 text-center">
                 This is an estimate only. Actual closing costs may vary. Contact your agent for a detailed analysis.
               </p>
             </div>

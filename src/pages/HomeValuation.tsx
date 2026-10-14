@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { api } from "@/lib/api";
 import type { Agent } from "@/lib/api";
 import SEOHead from "@/components/SEOHead";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 const CHARCOAL = "#1E2A44";
 const GOLD = "#C07A4A";
@@ -125,51 +126,8 @@ export default function HomeValuation() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section
-        className="flex flex-col items-center justify-center text-center px-6"
-        style={{ backgroundColor: CHARCOAL, paddingTop: "140px", paddingBottom: "100px" }}
-      >
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "11px",
-            fontWeight: 500,
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: GOLD,
-            marginBottom: "20px",
-          }}
-        >
-          Free Market Analysis
-        </p>
-        <h1
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(42px, 6vw, 72px)",
-            fontWeight: 300,
-            color: "#fff",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            marginBottom: "20px",
-            maxWidth: "800px",
-          }}
-        >
-          What Is Your Home Worth?
-        </h1>
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "16px",
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.75)",
-            lineHeight: 1.7,
-            maxWidth: "520px",
-            marginBottom: "48px",
-          }}
-        >
-          Get a free, no-obligation market analysis from our local experts
-        </p>
-        <div className="flex flex-wrap gap-4 justify-center">
+      <PublicPageHeader eyebrow="Free Market Analysis" title="What Is Your Home Worth?" subtitle="Get a free, no-obligation market analysis from our local experts" />
+      <div className="flex flex-wrap gap-3 justify-center bg-white py-6">
           {["Free Analysis", "No Obligation", "Local Experts"].map((badge) => (
             <div
               key={badge}
@@ -188,8 +146,7 @@ export default function HomeValuation() {
               {badge}
             </div>
           ))}
-        </div>
-      </section>
+      </div>
 
       {/* ── How It Works ── */}
       <section style={{ backgroundColor: CREAM, padding: "96px 24px" }}>
@@ -226,7 +183,7 @@ export default function HomeValuation() {
               { num: "02", title: "We Analyze The Market", desc: "Our agents research comparable sales, current inventory, and market trends." },
               { num: "03", title: "Receive Your Report", desc: "Get a detailed valuation within 24 hours with no strings attached." },
             ].map((step) => (
-              <div key={step.num} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <div key={step.num} style={{ display: "flex", flexDirection: "column", gap: "16px", backgroundColor: "#FFFFFF", border: "1px solid #E9EDF3", borderRadius: 12, padding: "28px" }}>
                 <p
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
@@ -358,7 +315,7 @@ export default function HomeValuation() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              style={{ border: "1px solid #E9EDF3", padding: "48px", backgroundColor: "#fff" }}
+              style={{ border: "1px solid #E9EDF3", borderRadius: 12, padding: "clamp(22px, 4vw, 48px)", backgroundColor: "#fff", boxShadow: "0 12px 32px rgba(30,42,68,0.05)" }}
             >
               {/* Contact Info */}
               <h3

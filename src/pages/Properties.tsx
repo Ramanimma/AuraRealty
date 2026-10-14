@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { api } from "@/lib/api";
+import { PropertyCard } from "@/components/FeaturedProperties";
+import PublicPageHeader from "@/components/PublicPageHeader";
 
 const GOLD = "#C07A4A";
-
-const UNSPLASH_FALLBACKS = [
-  "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-];
 
 interface Listing {
   id: string;
@@ -33,128 +27,13 @@ interface Listing {
   is_featured: boolean | null;
 }
 
-function getImage(img: string | null | undefined, idx: number): string {
-  if (!img || img.startsWith("/assets/")) return UNSPLASH_FALLBACKS[idx % UNSPLASH_FALLBACKS.length];
-  return img;
-}
-
-function formatPrice(price: string | null | undefined, listingType: string | null | undefined): string | null {
-  if (!price || price.trim() === "") return null;
-  if (price.toLowerCase().includes("/mo")) return price;
-  const num = parseFloat(price.replace(/[^0-9.]/g, ""));
-  if (!num) return price;
-  const formatted = "$" + num.toLocaleString();
-  if (listingType === "rent" || listingType === "lease") return formatted + "/mo";
-  return formatted;
-}
-
-function statusBadgeColor(status: string | null | undefined): string {
-  if (!status) return "#1E2A44";
-  const s = status.toLowerCase();
-  if (s === "active") return "#1E2A44";
-  if (s === "sold") return "#141C2E";
-  if (s === "pending") return "#F3E6DC";
-  if (s === "rented") return "#E9EDF3";
-  if (s === "off_market") return "#E9EDF3";
-  return "#1E2A44";
-}
-
-function statusBadgeTextColor(status: string | null | undefined): string {
-  if (!status) return "#FFFFFF";
-  const s = status.toLowerCase();
-  if (s === "pending") return "#8A4F2A";
-  if (s === "rented") return "#1E2A44";
-  if (s === "off_market") return "#4B5563";
-  return "#FFFFFF";
-}
-
-function statusLabel(status: string | null | undefined): string {
-  if (!status) return "";
-  const s = status.toLowerCase();
-  if (s === "off_market") return "Off Market";
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
 const PAGE_SIZE = 9;
 
 type SortKey = "newest" | "price_asc" | "price_desc" | "beds_desc";
 type TypeFilter = "all" | "sale" | "rent" | "lease";
 
-interface CardProps {
-  listing: Listing;
-  idx: number;
-}
-
-const PropertyCard = ({ listing, idx }: CardProps) => {
-  const [hovered, setHovered] = useState(false);
-  const navigate = useNavigate();
-  const price = formatPrice(listing.price, listing.listing_type);
-
-  return (
-    <div
-      data-testid={`card-property-${listing.id}`}
-      onClick={() => navigate(`/property/${listing.id}`)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#1E2A44", cursor: "pointer" }}
-    >
-      <div style={{ position: "relative", height: "240px", overflow: "hidden", flexShrink: 0 }}>
-        <img
-          src={getImage(listing.main_image, idx)}
-          alt={listing.address}
-          loading="lazy"
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.6s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }}
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,42,68,0.92) 0%, rgba(30,42,68,0.3) 55%, transparent 100%)", transition: "background 0.4s ease" }} />
-
-        {/* Price badge top-left — hidden for sold or null price */}
-        {listing.status !== "sold" && price !== null && (
-          <div style={{ position: "absolute", top: "14px", left: "14px", backgroundColor: "#1E2A44", color: "#FFFFFF", padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
-            {price}
-          </div>
-        )}
-
-        {/* Status badge top-right */}
-        {listing.status && (
-          <div style={{ position: "absolute", top: "14px", right: "14px", backgroundColor: statusBadgeColor(listing.status), color: statusBadgeTextColor(listing.status), padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
-            {statusLabel(listing.status)}
-          </div>
-        )}
-
-        {/* Content overlay bottom */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "18px 18px 14px" }}>
-          {listing.status !== "sold" && price !== null && (
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "21px", fontWeight: 300, color: GOLD, marginBottom: "3px", lineHeight: 1.2 }}>
-              {price}
-            </p>
-          )}
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 400, color: "rgba(255,255,255,0.75)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-            {listing.address}
-          </p>
-        </div>
-      </div>
-
-      {/* Footer bar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 18px", backgroundColor: "#1E2A44", borderTop: "0.5px solid rgba(255,255,255,0.06)" }}>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 400, letterSpacing: "0.09em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)", margin: 0 }}>
-          {listing.beds} Beds&nbsp;·&nbsp;{listing.baths} Baths&nbsp;·&nbsp;{Number(listing.sqft).toLocaleString()} sqft
-        </p>
-        <Link
-          to={`/property/${listing.id}`}
-          data-testid={`link-view-details-${listing.id}`}
-          onClick={e => e.stopPropagation()}
-          className="public-button-secondary public-button-secondary-dark"
-          style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", flexShrink: 0, padding: "6px 12px" }}
-        >
-          View Details →
-        </Link>
-      </div>
-    </div>
-  );
-};
-
 const SkeletonCard = () => (
-  <div className="animate-pulse" style={{ backgroundColor: "#1E2A44", height: "380px" }} />
+  <div className="animate-pulse rounded-xl" style={{ backgroundColor: "#E9EDF3", height: "380px" }} />
 );
 
 const Properties = () => {
@@ -218,20 +97,11 @@ const Properties = () => {
       />
       <Navbar />
 
-      {/* Dark cinematic header */}
-      <section style={{ backgroundColor: "#1E2A44", paddingTop: "128px", paddingBottom: "48px", textAlign: "center" }}>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "18px" }}>
-          DFW &amp; DFW
-        </p>
-        <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(40px,6vw,72px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em", margin: 0 }}>
-          All Properties
-        </h1>
-        <div style={{ width: "48px", height: "1px", backgroundColor: GOLD, margin: "24px auto 0" }} />
-      </section>
+      <PublicPageHeader eyebrow="DFW & DFW" title="All Properties" subtitle="Homes for sale, rent, and lease across our available communities." />
 
       {/* Sticky filter bar */}
       <div
-        style={{ backgroundColor: "#1E2A44", borderBottom: "0.5px solid rgba(255,255,255,0.10)", position: "sticky", top: "70px", zIndex: 30 }}
+        style={{ backgroundColor: "#F7F8FA", borderBottom: "1px solid #E9EDF3", position: "sticky", top: "70px", zIndex: 30 }}
       >
         <div className="container mx-auto px-6" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", padding: "14px 24px" }}>
           {/* Type filter buttons */}
@@ -249,9 +119,9 @@ const Properties = () => {
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                   cursor: "pointer",
-                  border: `0.5px solid ${typeFilter === btn.key ? GOLD : "rgba(255,255,255,0.20)"}`,
-                  backgroundColor: typeFilter === btn.key ? GOLD : "transparent",
-                  color: typeFilter === btn.key ? "#FFFFFF" : "rgba(255,255,255,0.75)",
+                  border: `1px solid ${typeFilter === btn.key ? GOLD : "#E9EDF3"}`,
+                  backgroundColor: typeFilter === btn.key ? GOLD : "#FFFFFF",
+                  color: typeFilter === btn.key ? "#FFFFFF" : "#1E2A44",
                   transition: "all 0.2s ease",
                   borderRadius: 8,
                 }}
@@ -268,7 +138,7 @@ const Properties = () => {
               data-testid="filter-city"
               value={cityFilter}
               onChange={e => { setCityFilter(e.target.value); setVisibleCount(PAGE_SIZE); }}
-              style={{ backgroundColor: "#1E2A44", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.75)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
+              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E9EDF3", color: "#1E2A44", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "8px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
             >
               {cities.map(c => (
                 <option key={c} value={c}>{c === "all" ? "All Cities" : c}</option>
@@ -280,7 +150,7 @@ const Properties = () => {
               data-testid="filter-sort"
               value={sort}
               onChange={e => setSort(e.target.value as SortKey)}
-              style={{ backgroundColor: "#1E2A44", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.75)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
+              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E9EDF3", color: "#1E2A44", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "8px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
             >
               <option value="newest">Newest First</option>
               <option value="price_asc">Price: Low → High</option>
@@ -290,7 +160,7 @@ const Properties = () => {
 
             {/* Count label */}
             {!loading && (
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", letterSpacing: "0.06em" }}>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "#4B5563", letterSpacing: "0.06em" }}>
                 {filtered.length} {filtered.length === 1 ? "property" : "properties"}
               </span>
             )}
@@ -299,7 +169,7 @@ const Properties = () => {
       </div>
 
       {/* Listings grid */}
-      <main style={{ backgroundColor: "#1E2A44", minHeight: "60vh", padding: "48px 0 80px" }}>
+      <main style={{ backgroundColor: "#FFFFFF", minHeight: "60vh", padding: "48px 0 80px" }}>
         <div className="container mx-auto px-6">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -322,8 +192,8 @@ const Properties = () => {
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {visible.map((listing, i) => (
-                  <PropertyCard key={listing.id} listing={listing} idx={i} />
+                  {visible.map((listing, i) => (
+                  <PropertyCard key={listing.id} p={listing} idx={i} />
                 ))}
               </div>
               {hasMore && (
@@ -346,7 +216,7 @@ const Properties = () => {
       </main>
 
       {/* Coming Soon banner */}
-      <section style={{ backgroundColor: "#1E2A44", borderTop: "0.5px solid rgba(255,255,255,0.10)", padding: "64px 0", textAlign: "center" }}>
+      <section style={{ backgroundColor: "#1E2A44", borderTop: "1px solid rgba(255,255,255,0.10)", padding: "64px 0", textAlign: "center" }}>
         <div className="container mx-auto px-6">
           <div style={{ width: "40px", height: "1px", backgroundColor: GOLD, margin: "0 auto 20px" }} />
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
