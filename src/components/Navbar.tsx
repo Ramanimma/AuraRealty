@@ -158,9 +158,9 @@ const Navbar = () => {
               onClick={() => navigate("/home-valuation")}
               data-testid="button-get-started"
               className="public-button-primary"
-              style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "10px 24px", cursor: "pointer", transition: "all 0.3s ease", borderRadius: 8 }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)"; }}
+              style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: "#A8653A", color: "#fff", border: "none", padding: "10px 24px", cursor: "pointer", transition: "all 0.3s ease", borderRadius: 8 }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#8F5530"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)"; }}
             >
               Get Started
             </button>
@@ -232,9 +232,9 @@ const Navbar = () => {
             onClick={() => handleMobileNav("/home-valuation")}
             data-testid="mobile-button-get-started"
             className="public-button-primary"
-            style={{ marginTop: "36px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "16px 48px", cursor: "pointer", transition: "background-color 0.3s ease", borderRadius: 8 }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
+            style={{ marginTop: "36px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "#A8653A", color: "#fff", border: "none", padding: "16px 48px", cursor: "pointer", transition: "background-color 0.3s ease", borderRadius: 8 }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#8F5530"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
           >
             Get Started
           </button>

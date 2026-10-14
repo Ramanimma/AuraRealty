@@ -538,7 +538,7 @@ export default function HomeValuation() {
                   fontWeight: 500,
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
-                  backgroundColor: GOLD,
+                  backgroundColor: "#A8653A",
                   color: "#fff",
                   border: "none",
                   cursor: isSubmitting ? "not-allowed" : "pointer",
@@ -546,8 +546,8 @@ export default function HomeValuation() {
                   borderRadius: 8,
                   opacity: isSubmitting ? 0.7 : 1,
                 }}
-                onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
+                onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#8F5530"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
               >
                 {isSubmitting ? "Submitting…" : "Request Free Valuation"}
               </button>

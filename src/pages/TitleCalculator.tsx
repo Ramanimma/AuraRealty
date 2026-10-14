@@ -441,8 +441,8 @@ const TitleCalculator = () => {
         <a
           href="/#contact"
           className="public-button-primary inline-block px-10 py-4 font-sans text-sm uppercase tracking-widest"
-          onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#A8653A")}
-          onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = GOLD)}
+          onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#8F5530")}
+          onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#A8653A")}
         >
           Contact an Agent
         </a>

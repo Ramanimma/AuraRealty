@@ -274,9 +274,9 @@ const ContactSection = () => {
               disabled={isSubmitting}
               data-testid="button-submit-tour"
               className="public-button-primary"
-              style={{ width: "100%", padding: "14px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", cursor: isSubmitting ? "not-allowed" : "pointer", transition: "all 0.2s ease", borderRadius: 8, opacity: isSubmitting ? 0.7 : 1 }}
-              onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}
+              style={{ width: "100%", padding: "14px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "#A8653A", color: "#fff", border: "none", cursor: isSubmitting ? "not-allowed" : "pointer", transition: "all 0.2s ease", borderRadius: 8, opacity: isSubmitting ? 0.7 : 1 }}
+              onMouseEnter={(e) => { if (!isSubmitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#8F5530"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
             >
               {isSubmitting ? "Submitting..." : "Submit Request"}
             </button>

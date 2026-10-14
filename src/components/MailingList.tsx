@@ -140,9 +140,9 @@ const MailingList = () => {
                       fontWeight: 500,
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
-                      backgroundColor: GOLD,
+                      backgroundColor: "#A8653A",
                       color: "#fff",
-                      border: "1px solid #C07A4A",
+                      border: "1px solid #A8653A",
                       cursor: isSubmitting ? "not-allowed" : "pointer",
                       transition: "all 0.3s ease",
                       borderRadius: 8,
@@ -152,11 +152,11 @@ const MailingList = () => {
                     }}
                     onMouseEnter={(e) => {
                       if (!isSubmitting) {
-                        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A";
+                        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#8F5530";
                       }
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD;
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A";
                       (e.currentTarget as HTMLButtonElement).style.color = "#fff";
                     }}
                   >

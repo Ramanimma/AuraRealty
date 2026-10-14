@@ -364,7 +364,7 @@ const HeroSection = () => {
               fontWeight: 500,
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              backgroundColor: GOLD,
+              backgroundColor: "#A8653A",
               color: "#fff",
               border: "none",
               cursor: "pointer",
@@ -372,10 +372,10 @@ const HeroSection = () => {
               borderRadius: 8,
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A";
+              (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#8F5530";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD;
+              (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A";
             }}
           >
             Explore Properties

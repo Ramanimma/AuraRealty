@@ -126,14 +126,14 @@
   }
 
   .public-button-primary {
-    background-color: #C07A4A !important;
-    border: 1.5px solid #C07A4A !important;
+    background-color: #A8653A !important;
+    border: 1.5px solid #A8653A !important;
     color: #FFFFFF !important;
   }
 
   .public-button-primary:hover:not(:disabled) {
-    background-color: #A8653A !important;
-    border-color: #A8653A !important;
+    background-color: #8F5530 !important;
+    border-color: #8F5530 !important;
     color: #FFFFFF !important;
   }
 
