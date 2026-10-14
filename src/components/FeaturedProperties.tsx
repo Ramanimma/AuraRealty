@@ -67,7 +67,7 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
       onClick={() => navigate(`/property/${p.id}`)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#26324C", cursor: "pointer" }}
+      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#1E2A44", cursor: "pointer" }}
     >
       {/* Image — 4:3 aspect ratio via padding trick */}
       <div style={{ position: "relative", paddingTop: "75%", overflow: "hidden", flexShrink: 0 }}>
@@ -79,7 +79,7 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
         />
 
         {/* Gradient overlay */}
-        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, rgba(0,0,0,${hovered ? "0.97" : "0.92"}) 0%, rgba(0,0,0,0.3) 55%, transparent 100%)`, transition: "background 0.4s ease" }} />
+        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, rgba(30,42,68,${hovered ? "0.97" : "0.92"}) 0%, rgba(30,42,68,0.3) 55%, transparent 100%)`, transition: "background 0.4s ease" }} />
 
         {/* Price badge top-left — hidden for sold or null price */}
         {statusKey !== "sold" && price !== null && (
@@ -102,16 +102,17 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
               {price}
             </p>
           )}
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 400, color: "rgba(255,255,255,0.85)", marginBottom: "10px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 400, color: "rgba(255,255,255,0.75)", marginBottom: "10px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             {p.address}
           </p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.50)" }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>
               {p.beds} Beds&nbsp;·&nbsp;{p.baths} Baths&nbsp;·&nbsp;{Number(p.sqft).toLocaleString()} sqft
             </p>
             <button
               data-testid={`button-view-details-${p.id}`}
               onClick={e => { e.stopPropagation(); navigate(`/property/${p.id}`); }}
+              className="public-button-secondary"
               style={{ padding: "6px 14px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: "transparent", color: "#fff", border: "0.5px solid rgba(255,255,255,0.3)", cursor: "pointer", transition: "border-color 0.2s, color 0.2s", borderRadius: 8, whiteSpace: "nowrap", flexShrink: 0 }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.3)"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
@@ -135,7 +136,7 @@ const FeaturedProperties = () => {
   });
 
   return (
-    <section id="properties" style={{ backgroundColor: "#141C2E", padding: "80px 0 80px" }}>
+    <section id="properties" style={{ backgroundColor: "#1E2A44", padding: "80px 0 80px" }}>
       <div className="container mx-auto px-6">
 
         {/* Header */}
@@ -152,7 +153,7 @@ const FeaturedProperties = () => {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map(i => (
-              <div key={i} className="animate-pulse" style={{ paddingTop: "75%", backgroundColor: "#26324C", position: "relative" }} />
+              <div key={i} className="animate-pulse" style={{ paddingTop: "75%", backgroundColor: "#1E2A44", position: "relative" }} />
             ))}
           </div>
         ) : properties.length === 0 ? null : (
@@ -168,9 +169,10 @@ const FeaturedProperties = () => {
           <button
             data-testid="button-view-all-properties"
             onClick={() => navigate("/properties")}
+            className="public-button-secondary"
             onMouseEnter={() => setViewAllHovered(true)}
             onMouseLeave={() => setViewAllHovered(false)}
-            style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: viewAllHovered ? GOLD : "rgba(255,255,255,0.70)", border: `0.5px solid ${viewAllHovered ? GOLD : "rgba(255,255,255,0.25)"}`, cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
+            style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: viewAllHovered ? GOLD : "rgba(255,255,255,0.75)", border: `0.5px solid ${viewAllHovered ? GOLD : "rgba(255,255,255,0.25)"}`, cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
           >
             View All Properties
           </button>

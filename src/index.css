@@ -11,7 +11,7 @@
 
     --card: 0 0% 100%;
     --card-foreground: 221 39% 19%;
-    --surface: 216 29.4% 93.3%;
+    --surface: 216 29.4118% 93.3333%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 221 39% 19%;
@@ -100,7 +100,6 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', serif;
-    color: #1E2A44;
   }
 }
 
@@ -110,14 +109,14 @@
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #C07A4A;
+    color: #A8653A;
   }
 
   .section-cream { background-color: #F7F8FA; }
   .section-white { background-color: #FFFFFF; }
   .section-dark { background-color: #1E2A44; }
   .section-darkest { background-color: #141C2E; }
-  .text-gold { color: #C07A4A; }
+  .text-gold { color: #A8653A; }
   .border-gold { border-color: #C07A4A; }
 
   .public-button-primary,
@@ -139,7 +138,7 @@
   }
 
   .public-button-secondary {
-    background-color: transparent !important;
+    background-color: #FFFFFF !important;
     border: 1.5px solid #1E2A44 !important;
     color: #1E2A44 !important;
   }

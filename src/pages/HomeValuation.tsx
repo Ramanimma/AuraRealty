@@ -24,7 +24,7 @@ const selectStyle: React.CSSProperties = {
   fontSize: "14px",
   color: CHARCOAL,
   backgroundColor: "#fff",
-  border: "1px solid #E5E7EB",
+  border: "1px solid #E9EDF3",
   borderRadius: 8,
   outline: "none",
   appearance: "none",
@@ -38,7 +38,7 @@ const inputStyle: React.CSSProperties = {
   fontSize: "14px",
   color: CHARCOAL,
   backgroundColor: "#fff",
-  border: "1px solid #E5E7EB",
+  border: "1px solid #E9EDF3",
   borderRadius: 8,
   outline: "none",
 };
@@ -50,7 +50,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 500,
   letterSpacing: "0.06em",
   textTransform: "uppercase",
-  color: "#6B6B6B",
+  color: "#4B5563",
   marginBottom: "6px",
 };
 
@@ -161,7 +161,7 @@ export default function HomeValuation() {
             fontFamily: "'Inter', sans-serif",
             fontSize: "16px",
             fontWeight: 300,
-            color: "rgba(255,255,255,0.65)",
+            color: "rgba(255,255,255,0.75)",
             lineHeight: 1.7,
             maxWidth: "520px",
             marginBottom: "48px",
@@ -255,7 +255,7 @@ export default function HomeValuation() {
                     fontSize: "14px",
                     fontWeight: 300,
                     lineHeight: 1.7,
-                    color: "#6B6B6B",
+                    color: "#4B5563",
                   }}
                 >
                   {step.desc}
@@ -299,7 +299,7 @@ export default function HomeValuation() {
           {isSubmitted ? (
             <div
               className="text-center p-12 md:p-16"
-              style={{ border: "1px solid #E5E7EB", backgroundColor: "#fff" }}
+              style={{ border: "1px solid #E9EDF3", backgroundColor: "#fff" }}
             >
               <CheckCircle2 className="mx-auto mb-6 h-14 w-14" style={{ color: GOLD }} />
               <h3
@@ -318,7 +318,7 @@ export default function HomeValuation() {
                   fontFamily: "'Inter', sans-serif",
                   fontSize: "15px",
                   fontWeight: 300,
-                  color: "#6B6B6B",
+                  color: "#4B5563",
                   lineHeight: 1.7,
                   maxWidth: "480px",
                   margin: "0 auto 32px",
@@ -328,6 +328,7 @@ export default function HomeValuation() {
               </p>
               <button
                 onClick={() => navigate("/#properties")}
+                className="public-button-secondary"
                 style={{
                   padding: "13px 36px",
                   fontFamily: "'Inter', sans-serif",
@@ -357,7 +358,7 @@ export default function HomeValuation() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              style={{ border: "1px solid #E5E7EB", padding: "48px", backgroundColor: "#fff" }}
+              style={{ border: "1px solid #E9EDF3", padding: "48px", backgroundColor: "#fff" }}
             >
               {/* Contact Info */}
               <h3
@@ -368,7 +369,7 @@ export default function HomeValuation() {
                   color: CHARCOAL,
                   marginBottom: "24px",
                   paddingBottom: "12px",
-                  borderBottom: "1px solid #E5E7EB",
+                  borderBottom: "1px solid #E9EDF3",
                 }}
               >
                 Your Contact Information
@@ -377,7 +378,7 @@ export default function HomeValuation() {
                 <Field label="Full Name" required>
                   <input
                     data-testid="input-valuation-name"
-                    style={{ ...inputStyle, borderColor: errors.full_name ? "#c0392b" : "#E5E7EB" }}
+                    style={{ ...inputStyle, borderColor: errors.full_name ? "#c0392b" : "#E9EDF3" }}
                     placeholder="John Smith"
                     value={form.full_name}
                     onChange={set("full_name")}
@@ -389,7 +390,7 @@ export default function HomeValuation() {
                   <input
                     data-testid="input-valuation-email"
                     type="email"
-                    style={{ ...inputStyle, borderColor: errors.email ? "#c0392b" : "#E5E7EB" }}
+                    style={{ ...inputStyle, borderColor: errors.email ? "#c0392b" : "#E9EDF3" }}
                     placeholder="john@example.com"
                     value={form.email}
                     onChange={set("email")}
@@ -401,7 +402,7 @@ export default function HomeValuation() {
                   <input
                     data-testid="input-valuation-phone"
                     type="tel"
-                    style={{ ...inputStyle, borderColor: errors.phone ? "#c0392b" : "#E5E7EB" }}
+                    style={{ ...inputStyle, borderColor: errors.phone ? "#c0392b" : "#E9EDF3" }}
                     placeholder="(512) 555-0123"
                     value={form.phone}
                     onChange={set("phone")}
@@ -420,7 +421,7 @@ export default function HomeValuation() {
                   color: CHARCOAL,
                   marginBottom: "24px",
                   paddingBottom: "12px",
-                  borderBottom: "1px solid #E5E7EB",
+                  borderBottom: "1px solid #E9EDF3",
                 }}
               >
                 Property Details
@@ -430,7 +431,7 @@ export default function HomeValuation() {
                   <Field label="Property Address" required>
                     <input
                       data-testid="input-valuation-address"
-                      style={{ ...inputStyle, borderColor: errors.address ? "#c0392b" : "#E5E7EB" }}
+                      style={{ ...inputStyle, borderColor: errors.address ? "#c0392b" : "#E9EDF3" }}
                       placeholder="123 Oak Lane"
                       value={form.address}
                       onChange={set("address")}
@@ -443,7 +444,7 @@ export default function HomeValuation() {
                   <Field label="City" required>
                     <input
                       data-testid="input-valuation-city"
-                      style={{ ...inputStyle, borderColor: errors.city ? "#c0392b" : "#E5E7EB" }}
+                      style={{ ...inputStyle, borderColor: errors.city ? "#c0392b" : "#E9EDF3" }}
                       placeholder="e.g. Cedar Park, Leander, Austin"
                       value={form.city}
                       onChange={set("city")}
@@ -455,7 +456,7 @@ export default function HomeValuation() {
                 <Field label="ZIP Code" required>
                   <input
                     data-testid="input-valuation-zip"
-                    style={{ ...inputStyle, borderColor: errors.zip_code ? "#c0392b" : "#E5E7EB" }}
+                    style={{ ...inputStyle, borderColor: errors.zip_code ? "#c0392b" : "#E9EDF3" }}
                     placeholder="78641"
                     value={form.zip_code}
                     onChange={set("zip_code")}
@@ -484,7 +485,7 @@ export default function HomeValuation() {
                       <option value="">Select type…</option>
                       {PROPERTY_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
                     </select>
-                    <span style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B6B6B", fontSize: "12px" }}>▾</span>
+                    <span style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#4B5563", fontSize: "12px" }}>▾</span>
                   </div>
                 </Field>
                 <Field label="Property Condition">
@@ -498,7 +499,7 @@ export default function HomeValuation() {
                       <option value="">Select condition…</option>
                       {CONDITIONS.map((c) => <option key={c} value={c}>{c}</option>)}
                     </select>
-                    <span style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#6B6B6B", fontSize: "12px" }}>▾</span>
+                    <span style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#4B5563", fontSize: "12px" }}>▾</span>
                   </div>
                 </Field>
                 <Field label="Bedrooms">
@@ -567,6 +568,7 @@ export default function HomeValuation() {
                 type="submit"
                 disabled={isSubmitting}
                 data-testid="button-submit-valuation"
+                className="public-button-primary"
                 style={{
                   width: "100%",
                   padding: "16px",
@@ -596,7 +598,7 @@ export default function HomeValuation() {
                   fontFamily: "'Inter', sans-serif",
                   fontSize: "11px",
                   fontWeight: 300,
-                  color: "#9B9B9B",
+                  color: "#4B5563",
                   letterSpacing: "0.03em",
                 }}
               >
@@ -653,7 +655,7 @@ export default function HomeValuation() {
                 key={card.title}
                 style={{
                   backgroundColor: "#fff",
-                  border: "1px solid #E5E7EB",
+                  border: "1px solid #E9EDF3",
                   padding: "36px 28px",
                   borderRadius: 8,
                 }}
@@ -690,7 +692,7 @@ export default function HomeValuation() {
                     fontSize: "13px",
                     fontWeight: 300,
                     lineHeight: 1.7,
-                    color: "#6B6B6B",
+                    color: "#4B5563",
                   }}
                 >
                   {card.desc}
@@ -736,8 +738,8 @@ export default function HomeValuation() {
               <div
                 key={agent.id}
                 style={{
-                  backgroundColor: "#26324C",
-                  border: "1px solid #333333",
+                  backgroundColor: "#1E2A44",
+                  border: "1px solid rgba(255,255,255,0.15)",
                   padding: "36px",
                   borderRadius: 8,
                   display: "flex",
@@ -753,7 +755,7 @@ export default function HomeValuation() {
                       style={{ width: "64px", height: "64px", objectFit: "cover", borderRadius: 8, flexShrink: 0 }}
                     />
                   ) : (
-                    <div style={{ width: "64px", height: "64px", backgroundColor: "#3A3A3A", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "64px", height: "64px", backgroundColor: "#1E2A44", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "26px", color: GOLD }}>
                         {agent.name.charAt(0)}
                       </span>
@@ -777,7 +779,7 @@ export default function HomeValuation() {
                       </p>
                     )}
                     {(agent.brokerage || agent.brokerage_name) && (
-                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#9CA3AF" }}>
+                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.75)" }}>
                         🏢 {agent.brokerage || agent.brokerage_name}
                       </p>
                     )}
@@ -794,12 +796,12 @@ export default function HomeValuation() {
                         fontFamily: "'Inter', sans-serif",
                         fontSize: "14px",
                         fontWeight: 400,
-                        color: "rgba(255,255,255,0.7)",
+                        color: "rgba(255,255,255,0.75)",
                         textDecoration: "none",
                         transition: "color 0.3s ease",
                       }}
                       onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
                     >
                       <Phone className="h-4 w-4 flex-shrink-0" style={{ color: GOLD }} />
                       {agent.phone}
@@ -815,12 +817,12 @@ export default function HomeValuation() {
                         fontFamily: "'Inter', sans-serif",
                         fontSize: "14px",
                         fontWeight: 400,
-                        color: "rgba(255,255,255,0.7)",
+                        color: "rgba(255,255,255,0.75)",
                         textDecoration: "none",
                         transition: "color 0.3s ease",
                       }}
                       onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
                     >
                       <Mail className="h-4 w-4 flex-shrink-0" style={{ color: GOLD }} />
                       {agent.email}
@@ -832,14 +834,14 @@ export default function HomeValuation() {
               <div
                 style={{
                   gridColumn: "1 / -1",
-                  backgroundColor: "#26324C",
-                  border: "1px solid #333333",
+                  backgroundColor: "#1E2A44",
+                  border: "1px solid rgba(255,255,255,0.15)",
                   padding: "48px",
                   borderRadius: 8,
                   textAlign: "center",
                 }}
               >
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontStyle: "italic", color: "rgba(255,255,255,0.6)" }}>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontStyle: "italic", color: "rgba(255,255,255,0.75)" }}>
                   Our agents are ready to assist you.
                 </p>
                 <a

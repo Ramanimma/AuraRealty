@@ -18,7 +18,7 @@ const AboutSection = () => {
       id="about"
       className="py-32"
       ref={sectionRef}
-      style={{ backgroundColor: "#141C2E", opacity: 0 }}
+      style={{ backgroundColor: "#1E2A44", opacity: 0 }}
     >
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -32,7 +32,7 @@ const AboutSection = () => {
                 style={{ borderRadius: 8, display: "block" }}
                 loading="lazy"
               />
-              <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.15)" }} />
+              <div style={{ position: "absolute", inset: 0, background: "rgba(30,42,68,0.15)" }} />
             </div>
           </div>
 
@@ -44,7 +44,7 @@ const AboutSection = () => {
             <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "24px" }}>
               Your Trusted DFW<br />Real Estate Partner
             </h2>
-            <p className="mb-12 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, lineHeight: 1.75, color: "rgba(255,255,255,0.60)" }}>
+            <p className="mb-12 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, lineHeight: 1.75, color: "rgba(255,255,255,0.75)" }}>
               At Aura Realty, we combine deep local knowledge with a commitment to exceptional service. Whether you're buying your first home or building an investment portfolio, our team delivers personalized guidance every step of the way.
             </p>
 
@@ -61,7 +61,7 @@ const AboutSection = () => {
                     <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "18px", fontWeight: 500, color: "#fff", marginBottom: "4px" }}>
                       {f.title}
                     </h3>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 300, lineHeight: 1.6, color: "rgba(255,255,255,0.50)" }}>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 300, lineHeight: 1.6, color: "rgba(255,255,255,0.75)" }}>
                       {f.desc}
                     </p>
                   </div>

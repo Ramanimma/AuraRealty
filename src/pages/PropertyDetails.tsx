@@ -82,7 +82,7 @@ const PropertyDetails = () => {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="font-serif text-3xl font-bold text-foreground mb-4">Property Not Found</h1>
-            <Button onClick={() => navigate("/properties")} variant="outline" className="font-sans">
+            <Button onClick={() => navigate("/properties")} variant="publicSecondary" className="font-sans">
               <ArrowLeft className="h-4 w-4 mr-2" /> Back to Listings
             </Button>
           </div>
@@ -128,16 +128,16 @@ const PropertyDetails = () => {
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
             {/* Bottom gradient */}
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,42,68,0.55) 0%, transparent 50%)", pointerEvents: "none" }} />
 
             {/* Left arrow */}
             {imgs.length > 1 && activeIdx > 0 && (
               <button
                 onClick={(e) => { e.stopPropagation(); prev(); }}
                 data-testid="button-gallery-prev"
-                style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.55)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", transition: "background-color 0.2s" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,0,0,0.8)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,0,0,0.55)"; }}
+                style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "rgba(30,42,68,0.55)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", transition: "background-color 0.2s" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(30,42,68,0.8)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(30,42,68,0.55)"; }}
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -148,9 +148,9 @@ const PropertyDetails = () => {
               <button
                 onClick={(e) => { e.stopPropagation(); next(); }}
                 data-testid="button-gallery-next"
-                style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.55)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", transition: "background-color 0.2s" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,0,0,0.8)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,0,0,0.55)"; }}
+                style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "rgba(30,42,68,0.55)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", transition: "background-color 0.2s" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(30,42,68,0.8)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(30,42,68,0.55)"; }}
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -158,7 +158,7 @@ const PropertyDetails = () => {
 
             {/* Counter */}
             {imgs.length > 1 && (
-              <div style={{ position: "absolute", bottom: "14px", right: "16px", fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#fff", backgroundColor: "rgba(0,0,0,0.55)", padding: "3px 10px", borderRadius: "20px", pointerEvents: "none" }}>
+              <div style={{ position: "absolute", bottom: "14px", right: "16px", fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#fff", backgroundColor: "rgba(30,42,68,0.55)", padding: "3px 10px", borderRadius: "20px", pointerEvents: "none" }}>
                 {activeIdx + 1} / {imgs.length}
               </div>
             )}
@@ -226,7 +226,7 @@ const PropertyDetails = () => {
                     propertyTitle: property.title || property.address,
                   },
                 })}
-                className="inline-flex items-center gap-2 bg-[#C07A4A] text-black px-6 py-3 text-sm font-medium hover:bg-[#b8963d] transition-colors"
+                className="public-button-primary inline-flex items-center gap-2 px-6 py-3 text-sm font-medium"
               >
                 📅 Schedule a Tour
               </button>
@@ -234,17 +234,17 @@ const PropertyDetails = () => {
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(property.address)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-[#C07A4A] text-[#C07A4A] px-6 py-3 text-sm font-medium hover:bg-[#C07A4A] hover:text-black transition-colors"
+                className="public-button-secondary inline-flex items-center gap-2 px-6 py-3 text-sm font-medium"
               >
                 📍 View on Map
               </a>
               <button
                 onClick={handleShare}
-                className="inline-flex items-center gap-2 border border-[#C07A4A] text-[#C07A4A] px-6 py-3 text-sm font-medium hover:bg-[#C07A4A] hover:text-black transition-colors"
+                className="public-button-secondary inline-flex items-center gap-2 px-6 py-3 text-sm font-medium"
               >
                 🔗 Share
               </button>
-              <Button variant="outline" size="lg" className="font-sans font-semibold border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => navigate("/properties")}>
+              <Button variant="publicSecondary" size="lg" className="font-sans font-semibold" onClick={() => navigate("/properties")}>
                 <ArrowLeft className="h-4 w-4 mr-2" />Back to Listings
               </Button>
             </div>
@@ -257,7 +257,7 @@ const PropertyDetails = () => {
       {lightboxOpen && imgs.length > 0 && (
         <div
           onClick={() => setLightboxOpen(false)}
-          style={{ position: "fixed", inset: 0, zIndex: 100, backgroundColor: "rgba(0,0,0,0.92)", display: "flex", alignItems: "center", justifyContent: "center" }}
+          style={{ position: "fixed", inset: 0, zIndex: 100, backgroundColor: "rgba(30,42,68,0.92)", display: "flex", alignItems: "center", justifyContent: "center" }}
         >
           {/* Close */}
           <button
@@ -302,7 +302,7 @@ const PropertyDetails = () => {
           {imgs.length > 1 && (
             <div
               onClick={(e) => e.stopPropagation()}
-              style={{ position: "absolute", bottom: "20px", left: "50%", transform: "translateX(-50%)", fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#fff", backgroundColor: "rgba(0,0,0,0.55)", padding: "4px 14px", borderRadius: "20px" }}
+              style={{ position: "absolute", bottom: "20px", left: "50%", transform: "translateX(-50%)", fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#fff", backgroundColor: "rgba(30,42,68,0.55)", padding: "4px 14px", borderRadius: "20px" }}
             >
               {activeIdx + 1} / {imgs.length}
             </div>

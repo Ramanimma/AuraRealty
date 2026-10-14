@@ -29,7 +29,7 @@ export default function Unsubscribe() {
 
   return (
     <div
-      style={{ minHeight: "100vh", backgroundColor: "#F5F3EF" }}
+      style={{ minHeight: "100vh", backgroundColor: "#F7F8FA" }}
       className="flex items-center justify-center px-6"
     >
       <div className="max-w-md w-full bg-white rounded-lg shadow-sm border border-border p-10 text-center">

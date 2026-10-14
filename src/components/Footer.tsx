@@ -51,7 +51,7 @@ const Footer = () => {
     fontWeight: 400,
     letterSpacing: "0.06em",
     textTransform: "uppercase" as const,
-    color: "rgba(255,255,255,0.55)",
+    color: "rgba(255,255,255,0.75)",
     textDecoration: "none",
     transition: "color 0.3s ease",
     display: "inline-block",
@@ -93,7 +93,7 @@ const Footer = () => {
                 fontSize: "13px",
                 fontWeight: 300,
                 lineHeight: 1.7,
-                color: "rgba(255,255,255,0.55)",
+                color: "rgba(255,255,255,0.75)",
               }}
             >
               Premium real estate services in Austin and Central Texas. Helping families find their perfect home.
@@ -117,7 +117,7 @@ const Footer = () => {
                     href={l.href}
                     style={linkStyle}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
                   >
                     {l.label}
                   </a>
@@ -136,7 +136,7 @@ const Footer = () => {
                   href="/mortgage-calculator"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
                 >
                   Mortgage Calculator
                 </a>
@@ -146,7 +146,7 @@ const Footer = () => {
                   href="/sellers-netsheet"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
                 >
                   Sellers Netsheet
                 </a>
@@ -156,7 +156,7 @@ const Footer = () => {
                   href="/title-calculator"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
                 >
                   Title Calculators
                 </a>
@@ -184,7 +184,7 @@ const Footer = () => {
                   href="mailto:agent1@aurarealty.com"
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
                 >
                   agent1@aurarealty.com
                 </a>
@@ -195,7 +195,7 @@ const Footer = () => {
                   href={`mailto:${email}`}
                   style={linkStyle}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
                 >
                   {email}
                 </a>
@@ -263,31 +263,31 @@ const Footer = () => {
         </div>
 
         {/* Bottom divider */}
-        <div style={{ height: "1px", backgroundColor: "#26324C", marginBottom: "28px" }} />
+        <div style={{ height: "1px", backgroundColor: "#1E2A44", marginBottom: "28px" }} />
 
         {/* Compliance */}
         <div className="flex flex-col items-center gap-2 mb-6">
           <a href={consumerNoticeUrl} target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.35)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.35)"; }}>
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}>
             Texas Real Estate Commission Consumer Protection Notice
           </a>
           <a href={iabsUrl} target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.35)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.35)"; }}>
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}>
             Texas Real Estate Commission Information About Brokerage Services
           </a>
           <a href="/docs/TREC_Disclaimer.pdf" target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.35)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.35)"; }}>
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}>
             TREC Disclaimer
           </a>
         </div>
 
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.3)", textAlign: "center", marginBottom: "24px" }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textAlign: "center", marginBottom: "24px" }}>
           All information is deemed reliable but not guaranteed and should be independently reviewed and verified.
         </p>
 
@@ -296,7 +296,7 @@ const Footer = () => {
           <img src={equalHousingLogo} alt="Equal Housing Opportunity" className="h-12 w-auto object-contain brightness-0 invert opacity-50" />
         </div>
 
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.25)", textAlign: "center" }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textAlign: "center" }}>
           © {new Date().getFullYear()} Aura Realty. All rights reserved.
         </p>
       </div>

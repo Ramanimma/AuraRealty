@@ -41,7 +41,7 @@ const Navbar = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const isHomepage = location.pathname === "/";
-  const textColor = isHomepage ? "rgba(255,255,255,0.85)" : CHARCOAL;
+  const textColor = isHomepage ? "rgba(255,255,255,0.75)" : CHARCOAL;
 
   const openMenu = () => {
     setMobileOpen(true);
@@ -85,8 +85,8 @@ const Navbar = () => {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          backgroundColor: isHomepage ? "#141C2E" : "#FFFFFF",
-          borderBottom: isHomepage ? "0.5px solid rgba(255,255,255,0.08)" : "0.5px solid #EFEFEB",
+          backgroundColor: isHomepage ? "#1E2A44" : "#FFFFFF",
+          borderBottom: isHomepage ? "0.5px solid rgba(255,255,255,0.08)" : "0.5px solid #E9EDF3",
         }}
       >
         <nav
@@ -144,6 +144,7 @@ const Navbar = () => {
             <button
               onClick={() => navigate("/home-valuation")}
               data-testid="button-get-started"
+              className="public-button-primary"
               style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "10px 24px", cursor: "pointer", transition: "all 0.3s ease", borderRadius: 8 }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)"; }}
@@ -208,7 +209,7 @@ const Navbar = () => {
               <Phone className="h-4 w-4" />
               (512) 900-1897
             </a>
-            <a href="mailto:agent1@aurarealty.com" style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.6)", textDecoration: "none", letterSpacing: "0.02em" }}>
+            <a href="mailto:agent1@aurarealty.com" style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.75)", textDecoration: "none", letterSpacing: "0.02em" }}>
               <Mail className="h-4 w-4" />
               agent1@aurarealty.com
             </a>
@@ -217,6 +218,7 @@ const Navbar = () => {
           <button
             onClick={() => handleMobileNav("/home-valuation")}
             data-testid="mobile-button-get-started"
+            className="public-button-primary"
             style={{ marginTop: "36px", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: GOLD, color: "#fff", border: "none", padding: "16px 48px", cursor: "pointer", transition: "background-color 0.3s ease", borderRadius: 8 }}
             onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; }}

@@ -65,10 +65,10 @@ const SellersNetsheet = () => {
   const InputRow = ({ label, value, onChange, prefix = "$", step = 1000 }: {
     label: string; value: number; onChange: (v: number) => void; prefix?: string; step?: number;
   }) => (
-    <div className="flex justify-between items-center py-3 border-b border-[#E5E7EB]">
-      <label className="text-sm uppercase tracking-widest text-[#6B6B6B] font-sans">{label}</label>
+    <div className="flex justify-between items-center py-3 border-b border-[#E9EDF3]">
+      <label className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">{label}</label>
       <div className="flex items-center gap-1">
-        <span className="text-sm text-[#6B6B6B]">{prefix}</span>
+        <span className="text-sm text-[#4B5563]">{prefix}</span>
         <input
           type="number"
           value={value}
@@ -83,8 +83,8 @@ const SellersNetsheet = () => {
   const PctRow = ({ label, value, onChange }: {
     label: string; value: number; onChange: (v: number) => void;
   }) => (
-    <div className="flex justify-between items-center py-3 border-b border-[#E5E7EB]">
-      <label className="text-sm uppercase tracking-widest text-[#6B6B6B] font-sans">{label}</label>
+    <div className="flex justify-between items-center py-3 border-b border-[#E9EDF3]">
+      <label className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">{label}</label>
       <div className="flex items-center gap-1">
         <input
           type="number"
@@ -95,7 +95,7 @@ const SellersNetsheet = () => {
           min={0}
           max={10}
         />
-        <span className="text-sm text-[#6B6B6B]">%</span>
+        <span className="text-sm text-[#4B5563]">%</span>
       </div>
     </div>
   );
@@ -103,9 +103,9 @@ const SellersNetsheet = () => {
   const ResultRow = ({ label, amount, isDeduction = false }: {
     label: string; amount: number; isDeduction?: boolean;
   }) => (
-    <div className="flex justify-between items-center py-2 border-b border-[#26324C]">
+    <div className="flex justify-between items-center py-2 border-b border-white/15">
       <span className="text-sm font-sans text-white/70">{label}</span>
-      <span className={`text-sm font-sans ${isDeduction ? "text-red-400" : "text-white"}`}>
+      <span className={`text-sm font-sans ${isDeduction ? "text-[#C07A4A]" : "text-white"}`}>
         {isDeduction ? `-${fmt(amount)}` : fmt(amount)}
       </span>
     </div>
@@ -139,7 +139,7 @@ const SellersNetsheet = () => {
           {/* Inputs */}
           <div className="space-y-8">
             {/* Property Info */}
-            <div className="bg-white p-8 border border-[#E5E7EB]">
+            <div className="bg-white p-8 border border-[#E9EDF3]">
               <h2 className="font-serif text-2xl text-[#1E2A44] mb-6">Property Information</h2>
               <InputRow label="Sale Price" value={salePrice} onChange={setSalePrice} step={5000} />
               <InputRow label="Mortgage Balance" value={mortgage} onChange={setMortgage} step={5000} />
@@ -147,22 +147,22 @@ const SellersNetsheet = () => {
             </div>
 
             {/* Commission */}
-            <div className="bg-white p-8 border border-[#E5E7EB]">
+            <div className="bg-white p-8 border border-[#E9EDF3]">
               <h2 className="font-serif text-2xl text-[#1E2A44] mb-6">Agent Commission</h2>
               <PctRow label="Listing Agent %" value={listingComm} onChange={setListingComm} />
               <PctRow label="Buyer Agent %" value={buyerComm} onChange={setBuyerComm} />
               <div className="flex justify-between items-center py-3">
-                <span className="text-sm uppercase tracking-widest text-[#6B6B6B] font-sans">Total Commission</span>
+                <span className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">Total Commission</span>
                 <span className="text-sm font-sans text-[#C07A4A] font-medium">{listingComm + buyerComm}%</span>
               </div>
             </div>
 
             {/* Closing Costs */}
-            <div className="bg-white p-8 border border-[#E5E7EB]">
+            <div className="bg-white p-8 border border-[#E9EDF3]">
               <h2 className="font-serif text-2xl text-[#1E2A44] mb-2">Title & Closing Costs</h2>
-              <p className="text-xs text-[#6B6B6B] font-sans mb-6">Owner title policy auto-calculated per Texas rate table</p>
-              <div className="flex justify-between items-center py-3 border-b border-[#E5E7EB]">
-                <span className="text-sm uppercase tracking-widest text-[#6B6B6B] font-sans">Owner Title Policy</span>
+              <p className="text-xs text-[#4B5563] font-sans mb-6">Owner title policy auto-calculated per Texas rate table</p>
+              <div className="flex justify-between items-center py-3 border-b border-[#E9EDF3]">
+                <span className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">Owner Title Policy</span>
                 <span className="text-sm font-sans text-[#1E2A44]">{fmt(calc.titlePolicy)}</span>
               </div>
               <InputRow label="Title Search" value={titleSearch} onChange={setTitleSearch} step={50} />
@@ -172,7 +172,7 @@ const SellersNetsheet = () => {
               <InputRow label="Home Warranty" value={warranty} onChange={setWarranty} step={100} />
               <InputRow label="Repairs / Concessions" value={repairs} onChange={setRepairs} step={500} />
               <div className="flex justify-between items-center py-3">
-                <span className="text-sm uppercase tracking-widest text-[#6B6B6B] font-sans">
+                <span className="text-sm uppercase tracking-widest text-[#4B5563] font-sans">
                   Prorated Tax ({calc.daysLeft} days)
                 </span>
                 <span className="text-sm font-sans text-[#1E2A44]">{fmt(calc.proratedTax)}</span>
@@ -186,9 +186,9 @@ const SellersNetsheet = () => {
               <h2 className="font-serif text-2xl text-white mb-8">Your Net Proceeds</h2>
 
               {/* Net Proceeds Hero */}
-              <div className="text-center py-8 border-b border-[#26324C] mb-8">
+              <div className="text-center py-8 border-b border-white/15 mb-8">
                 <p className="text-xs uppercase tracking-widest text-white/40 font-sans mb-2">Estimated Net Proceeds</p>
-                <p className={`font-serif text-5xl font-light mb-2 ${calc.netProceeds >= 0 ? "text-[#C07A4A]" : "text-red-400"}`}>
+                <p className={`font-serif text-5xl font-light mb-2 ${calc.netProceeds >= 0 ? "text-[#C07A4A]" : "text-white"}`}>
                   {fmt(calc.netProceeds)}
                 </p>
                 <p className="text-white/40 font-sans text-sm">{calc.netPct}% of sale price</p>
@@ -196,7 +196,7 @@ const SellersNetsheet = () => {
 
               {/* Breakdown */}
               <div className="space-y-0">
-                <div className="flex justify-between items-center py-2 border-b border-[#26324C]">
+                <div className="flex justify-between items-center py-2 border-b border-white/15">
                   <span className="text-sm font-sans text-white font-medium">Sale Price</span>
                   <span className="text-sm font-sans text-white font-medium">{fmt(salePrice)}</span>
                 </div>
@@ -228,11 +228,11 @@ const SellersNetsheet = () => {
         <p className="text-white/60 font-sans mb-10">Our agents will provide a personalized net sheet based on real market data</p>
         <div className="flex gap-4 justify-center flex-wrap">
           <a href="/home-valuation"
-            className="px-8 py-4 bg-[#C07A4A] text-white font-sans text-sm uppercase tracking-widest hover:bg-[#b8943d] transition-colors">
+            className="public-button-primary px-8 py-4 font-sans text-sm uppercase tracking-widest">
             Request Free Valuation
           </a>
           <a href="/#contact"
-            className="px-8 py-4 border border-white text-white font-sans text-sm uppercase tracking-widest hover:bg-white hover:text-[#1E2A44] transition-colors">
+            className="public-button-secondary px-8 py-4 font-sans text-sm uppercase tracking-widest">
             Contact an Agent
           </a>
         </div>

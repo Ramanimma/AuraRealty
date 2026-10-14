@@ -105,7 +105,7 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
           loading="lazy"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.6s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }}
         />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 55%, transparent 100%)", transition: "background 0.4s ease" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,42,68,0.92) 0%, rgba(30,42,68,0.3) 55%, transparent 100%)", transition: "background 0.4s ease" }} />
 
         {/* Price badge top-left — hidden for sold or null price */}
         {listing.status !== "sold" && price !== null && (
@@ -128,22 +128,23 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
               {price}
             </p>
           )}
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 400, color: "rgba(255,255,255,0.85)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 400, color: "rgba(255,255,255,0.75)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             {listing.address}
           </p>
         </div>
       </div>
 
       {/* Footer bar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 18px", backgroundColor: "#1A2438", borderTop: "0.5px solid rgba(255,255,255,0.06)" }}>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 400, letterSpacing: "0.09em", textTransform: "uppercase", color: "rgba(255,255,255,0.50)", margin: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 18px", backgroundColor: "#1E2A44", borderTop: "0.5px solid rgba(255,255,255,0.06)" }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 400, letterSpacing: "0.09em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)", margin: 0 }}>
           {listing.beds} Beds&nbsp;·&nbsp;{listing.baths} Baths&nbsp;·&nbsp;{Number(listing.sqft).toLocaleString()} sqft
         </p>
         <Link
           to={`/property/${listing.id}`}
           data-testid={`link-view-details-${listing.id}`}
           onClick={e => e.stopPropagation()}
-          style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: GOLD, textDecoration: "none", flexShrink: 0 }}
+          className="public-button-secondary"
+          style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", flexShrink: 0, padding: "6px 12px" }}
         >
           View Details →
         </Link>
@@ -153,7 +154,7 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
 };
 
 const SkeletonCard = () => (
-  <div className="animate-pulse" style={{ backgroundColor: "#1A2438", height: "380px" }} />
+  <div className="animate-pulse" style={{ backgroundColor: "#1E2A44", height: "380px" }} />
 );
 
 const Properties = () => {
@@ -218,7 +219,7 @@ const Properties = () => {
       <Navbar />
 
       {/* Dark cinematic header */}
-      <section style={{ backgroundColor: "#141C2E", paddingTop: "128px", paddingBottom: "48px", textAlign: "center" }}>
+      <section style={{ backgroundColor: "#1E2A44", paddingTop: "128px", paddingBottom: "48px", textAlign: "center" }}>
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "18px" }}>
           DFW &amp; DFW
         </p>
@@ -230,7 +231,7 @@ const Properties = () => {
 
       {/* Sticky filter bar */}
       <div
-        style={{ backgroundColor: "#1A2438", borderBottom: "0.5px solid rgba(255,255,255,0.10)", position: "sticky", top: "70px", zIndex: 30 }}
+        style={{ backgroundColor: "#1E2A44", borderBottom: "0.5px solid rgba(255,255,255,0.10)", position: "sticky", top: "70px", zIndex: 30 }}
       >
         <div className="container mx-auto px-6" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", padding: "14px 24px" }}>
           {/* Type filter buttons */}
@@ -250,7 +251,7 @@ const Properties = () => {
                   cursor: "pointer",
                   border: `0.5px solid ${typeFilter === btn.key ? GOLD : "rgba(255,255,255,0.20)"}`,
                   backgroundColor: typeFilter === btn.key ? GOLD : "transparent",
-                  color: typeFilter === btn.key ? "#111" : "rgba(255,255,255,0.60)",
+                  color: typeFilter === btn.key ? "#FFFFFF" : "rgba(255,255,255,0.75)",
                   transition: "all 0.2s ease",
                   borderRadius: 8,
                 }}
@@ -267,7 +268,7 @@ const Properties = () => {
               data-testid="filter-city"
               value={cityFilter}
               onChange={e => { setCityFilter(e.target.value); setVisibleCount(PAGE_SIZE); }}
-              style={{ backgroundColor: "#26324C", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.70)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
+              style={{ backgroundColor: "#1E2A44", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.75)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
             >
               {cities.map(c => (
                 <option key={c} value={c}>{c === "all" ? "All Cities" : c}</option>
@@ -279,7 +280,7 @@ const Properties = () => {
               data-testid="filter-sort"
               value={sort}
               onChange={e => setSort(e.target.value as SortKey)}
-              style={{ backgroundColor: "#26324C", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.70)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
+              style={{ backgroundColor: "#1E2A44", border: "0.5px solid rgba(255,255,255,0.20)", color: "rgba(255,255,255,0.75)", fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.06em", padding: "7px 12px", cursor: "pointer", outline: "none", borderRadius: 8 }}
             >
               <option value="newest">Newest First</option>
               <option value="price_asc">Price: Low → High</option>
@@ -289,7 +290,7 @@ const Properties = () => {
 
             {/* Count label */}
             {!loading && (
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.30)", letterSpacing: "0.06em" }}>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", letterSpacing: "0.06em" }}>
                 {filtered.length} {filtered.length === 1 ? "property" : "properties"}
               </span>
             )}
@@ -298,7 +299,7 @@ const Properties = () => {
       </div>
 
       {/* Listings grid */}
-      <main style={{ backgroundColor: "#141C2E", minHeight: "60vh", padding: "48px 0 80px" }}>
+      <main style={{ backgroundColor: "#1E2A44", minHeight: "60vh", padding: "48px 0 80px" }}>
         <div className="container mx-auto px-6">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -306,12 +307,13 @@ const Properties = () => {
             </div>
           ) : filtered.length === 0 ? (
             <div style={{ textAlign: "center", paddingTop: "80px", paddingBottom: "80px" }}>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.30)", marginBottom: "24px" }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.75)", marginBottom: "24px" }}>
                 No properties match your filters
               </p>
               <button
                 data-testid="button-clear-filters"
                 onClick={clearFilters}
+                className="public-button-secondary"
                 style={{ padding: "12px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", borderRadius: 8 }}
               >
                 Clear Filters
@@ -329,9 +331,10 @@ const Properties = () => {
                   <button
                     data-testid="button-load-more"
                     onClick={() => setVisibleCount(c => c + PAGE_SIZE)}
-                    style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: "rgba(255,255,255,0.70)", border: "0.5px solid rgba(255,255,255,0.25)", cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
+                    className="public-button-secondary"
+                    style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: "rgba(255,255,255,0.75)", border: "0.5px solid rgba(255,255,255,0.25)", cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
                     onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = GOLD; (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.70)"; (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.75)"; (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)"; }}
                   >
                     Load More Properties
                   </button>
@@ -343,7 +346,7 @@ const Properties = () => {
       </main>
 
       {/* Coming Soon banner */}
-      <section style={{ backgroundColor: "#1A2438", borderTop: "0.5px solid rgba(255,255,255,0.10)", padding: "64px 0", textAlign: "center" }}>
+      <section style={{ backgroundColor: "#1E2A44", borderTop: "0.5px solid rgba(255,255,255,0.10)", padding: "64px 0", textAlign: "center" }}>
         <div className="container mx-auto px-6">
           <div style={{ width: "40px", height: "1px", backgroundColor: GOLD, margin: "0 auto 20px" }} />
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
@@ -352,14 +355,15 @@ const Properties = () => {
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px,4vw,44px)", fontWeight: 300, color: "#fff", marginBottom: "14px" }}>
             More Exceptional Properties Coming Soon
           </h2>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.50)", marginBottom: "32px", maxWidth: "480px", margin: "0 auto 32px" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.75)", marginBottom: "32px", maxWidth: "480px", margin: "0 auto 32px" }}>
             We have exclusive listings not yet on the market. Be the first to know when they're available.
           </p>
           <button
             data-testid="button-get-notified"
             onClick={() => navigate("/home-valuation")}
+            className="public-button-primary"
             style={{ padding: "14px 40px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#111"; }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
           >
             Get Notified

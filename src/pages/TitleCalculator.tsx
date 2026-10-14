@@ -96,10 +96,10 @@ const TitleCalculator = () => {
   const inputClass =
     "w-full text-right text-sm bg-transparent border-b border-[#C07A4A] focus:outline-none text-[#1E2A44] py-1 font-sans";
 
-  const labelClass = "text-xs uppercase tracking-widest text-[#6B6B6B] font-sans";
+  const labelClass = "text-xs uppercase tracking-widest text-[#4B5563] font-sans";
 
   const rowClass =
-    "flex justify-between items-center py-3 border-b border-[#E5E7EB]";
+    "flex justify-between items-center py-3 border-b border-[#E9EDF3]";
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: CREAM }}>
@@ -136,7 +136,7 @@ const TitleCalculator = () => {
           <div className="space-y-8">
 
             {/* Transaction Type */}
-            <div className="bg-white p-8 border border-[#E5E7EB]">
+            <div className="bg-white p-8 border border-[#E9EDF3]">
               <h2 className="font-serif text-2xl text-[#1E2A44] mb-6">
                 Transaction Type
               </h2>
@@ -152,8 +152,8 @@ const TitleCalculator = () => {
                     className="flex-1 py-3 text-sm uppercase tracking-widest font-sans transition-colors"
                     style={{
                       backgroundColor: txType === type ? CHARCOAL : "transparent",
-                      color: txType === type ? "#fff" : "#6B6B6B",
-                      border: `1px solid ${txType === type ? CHARCOAL : "#E5E7EB"}`,
+                      color: txType === type ? "#fff" : "#4B5563",
+                      border: `1px solid ${txType === type ? CHARCOAL : "#E9EDF3"}`,
                     }}
                   >
                     {type === "purchase" ? "Purchase" : "Refinance"}
@@ -163,7 +163,7 @@ const TitleCalculator = () => {
             </div>
 
             {/* Property Information */}
-            <div className="bg-white p-8 border border-[#E5E7EB]">
+            <div className="bg-white p-8 border border-[#E9EDF3]">
               <h2 className="font-serif text-2xl text-[#1E2A44] mb-6">
                 Property Information
               </h2>
@@ -173,7 +173,7 @@ const TitleCalculator = () => {
                   {txType === "purchase" ? "Sale / Property Value" : "Property Value"}
                 </label>
                 <div className="flex items-center gap-1">
-                  <span className="text-sm text-[#6B6B6B]">$</span>
+                  <span className="text-sm text-[#4B5563]">$</span>
                   <input
                     type="number"
                     value={propertyValue}
@@ -189,7 +189,7 @@ const TitleCalculator = () => {
                 <div className={rowClass}>
                   <label className={labelClass}>Loan Amount</label>
                   <div className="flex items-center gap-1">
-                    <span className="text-sm text-[#6B6B6B]">$</span>
+                    <span className="text-sm text-[#4B5563]">$</span>
                     <input
                       type="number"
                       value={loanAmount}
@@ -204,7 +204,7 @@ const TitleCalculator = () => {
             </div>
 
             {/* Policy Selection */}
-            <div className="bg-white p-8 border border-[#E5E7EB]">
+            <div className="bg-white p-8 border border-[#E9EDF3]">
               <h2 className="font-serif text-2xl text-[#1E2A44] mb-6">
                 Policy Selection
               </h2>
@@ -232,18 +232,18 @@ const TitleCalculator = () => {
               </label>
 
               {calc.simultaneous && (
-                <p className="text-xs text-[#6B6B6B] font-sans mt-3">
+                <p className="text-xs text-[#4B5563] font-sans mt-3">
                   Simultaneous issue discount applied — loan policy rate is significantly reduced.
                 </p>
               )}
             </div>
 
             {/* Endorsements */}
-            <div className="bg-white p-8 border border-[#E5E7EB]">
+            <div className="bg-white p-8 border border-[#E9EDF3]">
               <h2 className="font-serif text-2xl text-[#1E2A44] mb-2">
                 Endorsements
               </h2>
-              <p className="text-xs text-[#6B6B6B] font-sans mb-6">
+              <p className="text-xs text-[#4B5563] font-sans mb-6">
                 Each endorsement adds a fixed fee to the total premium
               </p>
               {ENDORSEMENTS.map(e => (
@@ -276,7 +276,7 @@ const TitleCalculator = () => {
               </h2>
 
               {/* Summary values */}
-              <div className="border-b border-[#26324C] pb-4 mb-4 space-y-2">
+              <div className="border-b border-white/15 pb-4 mb-4 space-y-2">
                 <div className="flex justify-between text-sm font-sans">
                   <span className="text-white/50 uppercase tracking-widest text-xs">
                     Property Value
@@ -294,7 +294,7 @@ const TitleCalculator = () => {
               </div>
 
               {/* Title premiums */}
-              <div className="border-b border-[#26324C] pb-4 mb-4 space-y-2">
+              <div className="border-b border-white/15 pb-4 mb-4 space-y-2">
                 {calc.showOwner && (
                   <div className="flex justify-between text-sm font-sans">
                     <span className="text-white/70">Owner's Title Policy</span>
@@ -318,7 +318,7 @@ const TitleCalculator = () => {
 
               {/* Endorsements */}
               {calc.endorsementTotal > 0 && (
-                <div className="border-b border-[#26324C] pb-4 mb-4 space-y-2">
+                <div className="border-b border-white/15 pb-4 mb-4 space-y-2">
                   <p className="text-white/50 uppercase tracking-widest text-xs font-sans mb-2">
                     Endorsements
                   </p>
@@ -332,7 +332,7 @@ const TitleCalculator = () => {
               )}
 
               {/* Total title premium */}
-              <div className="border-b border-[#26324C] pb-4 mb-4">
+              <div className="border-b border-white/15 pb-4 mb-4">
                 <div className="flex justify-between items-center">
                   <span
                     className="text-sm uppercase tracking-widest font-sans font-medium"
@@ -350,7 +350,7 @@ const TitleCalculator = () => {
               </div>
 
               {/* Additional fees */}
-              <div className="border-b border-[#26324C] pb-4 mb-4 space-y-2">
+              <div className="border-b border-white/15 pb-4 mb-4 space-y-2">
                 <p className="text-white/50 uppercase tracking-widest text-xs font-sans mb-2">
                   Additional Fees (estimates)
                 </p>
@@ -416,7 +416,7 @@ const TitleCalculator = () => {
           ].map(card => (
             <div
               key={card.title}
-              className="bg-white p-8 border border-[#E5E7EB]"
+              className="bg-white p-8 border border-[#E9EDF3]"
             >
               <div
                 className="w-8 mb-5"
@@ -425,7 +425,7 @@ const TitleCalculator = () => {
               <h3 className="font-serif text-xl text-[#1E2A44] mb-4">
                 {card.title}
               </h3>
-              <p className="text-sm text-[#6B6B6B] font-sans leading-relaxed">
+              <p className="text-sm text-[#4B5563] font-sans leading-relaxed">
                 {card.body}
               </p>
             </div>
@@ -449,9 +449,8 @@ const TitleCalculator = () => {
         </p>
         <a
           href="/#contact"
-          className="inline-block px-10 py-4 font-sans text-sm uppercase tracking-widest transition-colors"
-          style={{ backgroundColor: GOLD, color: "#fff" }}
-          onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#b8943d")}
+          className="public-button-primary inline-block px-10 py-4 font-sans text-sm uppercase tracking-widest"
+          onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#A8653A")}
           onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = GOLD)}
         >
           Contact an Agent

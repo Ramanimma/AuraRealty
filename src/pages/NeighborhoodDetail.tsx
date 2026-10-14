@@ -66,9 +66,9 @@ function ListingCard({ listing }: { listing: Listing }) {
           <span className="flex items-center gap-1"><Maximize className="h-4 w-4" /> {listing.sqft.toLocaleString()} sqft</span>
         </div>
         <Button
-          variant="outline"
+          variant="publicSecondary"
           size="sm"
-          className="w-full font-sans font-semibold border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+          className="w-full font-sans font-semibold transition-colors"
         >
           View Details
         </Button>
@@ -111,7 +111,8 @@ export default function NeighborhoodDetail() {
           </p>
           <Button
             onClick={() => navigate("/#neighborhoods")}
-            className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90 font-sans font-semibold"
+            variant="publicPrimary"
+            className="mt-2 font-sans font-semibold"
           >
             ← Back to Neighborhoods
           </Button>
@@ -164,7 +165,7 @@ export default function NeighborhoodDetail() {
           alt={n.name}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A44]/75 via-[#1E2A44]/40 to-[#1E2A44]/20" />
 
         {/* Back link */}
         <a
@@ -303,7 +304,7 @@ export default function NeighborhoodDetail() {
                   New properties are coming soon. Contact us to be notified when listings become available in this area.
                 </p>
                 <a href="/#contact">
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-sans font-semibold">
+                  <Button variant="publicPrimary" className="font-sans font-semibold">
                     Contact an Agent
                   </Button>
                 </a>
@@ -353,8 +354,8 @@ export default function NeighborhoodDetail() {
               <a href="/#contact" data-testid="button-schedule-consultation">
                 <Button
                   size="lg"
+                  variant="publicPrimary"
                   className="font-sans font-semibold w-full sm:w-auto"
-                  style={{ backgroundColor: "#C07A4A", color: "#fff" }}
                 >
                   Schedule a Consultation
                 </Button>
@@ -362,8 +363,8 @@ export default function NeighborhoodDetail() {
               <a href="/mortgage-calculator" data-testid="button-mortgage-calculator">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="font-sans font-semibold w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary"
+                  variant="publicSecondary"
+                  className="font-sans font-semibold w-full sm:w-auto"
                 >
                   Calculate Mortgage
                 </Button>

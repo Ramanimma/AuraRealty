@@ -90,7 +90,7 @@ const ReviewModal = ({ open, onOpenChange }: ReviewModalProps) => {
             <p className="text-muted-foreground">
               Your feedback means the world to us.
             </p>
-            <Button className="mt-6" onClick={() => handleClose(false)}>
+            <Button variant="publicSecondary" className="mt-6" onClick={() => handleClose(false)}>
               Close
             </Button>
           </div>
@@ -156,7 +156,7 @@ const ReviewModal = ({ open, onOpenChange }: ReviewModalProps) => {
                 />
               </div>
 
-              <Button type="submit" className="w-full" disabled={submitting}>
+              <Button type="submit" variant="publicPrimary" className="w-full" disabled={submitting}>
                 {submitting ? "Submitting..." : "Submit Review"}
               </Button>
             </form>

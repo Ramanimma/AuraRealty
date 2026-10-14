@@ -40,7 +40,7 @@ const CtaCard = () => (
       More Areas
       <br />Coming Soon
     </p>
-    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>
+    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>
       Expanding across Central Texas
     </p>
   </div>
@@ -79,7 +79,7 @@ const Neighborhoods = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5">
           {isLoading
             ? [1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="aspect-square animate-pulse" style={{ backgroundColor: "#26324C" }} />
+                <div key={i} className="aspect-square animate-pulse" style={{ backgroundColor: "#1E2A44" }} />
               ))
             : items.map((n, idx) => {
                 const isNeighborhood = "id" in n;
@@ -106,8 +106,8 @@ const Neighborhoods = () => {
                       style={{ transition: "transform 0.7s ease" }}
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A44]/70 via-[#1E2A44]/20 to-transparent" />
+                    <div className="absolute inset-0 bg-[#1E2A44]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div
                       className="absolute inset-0"
                       onMouseEnter={(e) => {
@@ -131,7 +131,7 @@ const Neighborhoods = () => {
                         {name}
                       </h3>
                       {(city || avgPrice) && (
-                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>
+                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>
                           {city}{avgPrice ? ` · ${avgPrice}` : ""}
                         </p>
                       )}

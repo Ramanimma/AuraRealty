@@ -249,10 +249,10 @@ export default function MortgageCalculator() {
                     {[3, 5, 10, 20].map((pct) => (
                       <Button
                         key={pct}
-                        variant="outline"
+                        variant="publicSecondary"
                         size="sm"
                         data-testid={`button-down-pct-${pct}`}
-                        className="font-sans text-xs border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+                        className="font-sans text-xs"
                         onClick={() => applyQuickPct(pct)}
                       >
                         {pct}%

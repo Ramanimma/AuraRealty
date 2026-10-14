@@ -90,7 +90,7 @@ const MailingList = () => {
                   fontSize: "14px",
                   fontWeight: 300,
                   letterSpacing: "0.05em",
-                  color: "rgba(255,255,255,0.6)",
+                  color: "rgba(255,255,255,0.75)",
                   maxWidth: "480px",
                   margin: "0 auto",
                   lineHeight: 1.7,
@@ -113,7 +113,7 @@ const MailingList = () => {
                     onChange={(e) => setFullName(e.target.value)}
                     style={{
                       ...inputStyle,
-                      "::placeholder": { color: "rgba(255,255,255,0.4)" },
+                      "::placeholder": { color: "rgba(255,255,255,0.75)" },
                     } as React.CSSProperties}
                     data-testid="input-mailing-name"
                   />
@@ -134,6 +134,7 @@ const MailingList = () => {
                     type="submit"
                     disabled={isSubmitting}
                     data-testid="button-mailing-subscribe"
+                    className="public-button-primary"
                     style={{
                       padding: "12px 32px",
                       fontFamily: "'Inter', sans-serif",
@@ -189,7 +190,7 @@ const MailingList = () => {
                     fontSize: "11px",
                     fontWeight: 300,
                     lineHeight: 1.6,
-                    color: "rgba(255,255,255,0.4)",
+                    color: "rgba(255,255,255,0.75)",
                     cursor: "pointer",
                     letterSpacing: "0.02em",
                   }}

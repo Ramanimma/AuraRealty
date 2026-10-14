@@ -307,7 +307,7 @@ const HeroSection = () => {
             fontFamily: "'Inter', sans-serif",
             fontSize: "15px",
             fontWeight: 300,
-            color: "rgba(255,255,255,0.55)",
+            color: "rgba(255,255,255,0.75)",
             letterSpacing: "0.06em",
             maxWidth: "380px",
             margin: "16px auto 40px",
@@ -328,6 +328,7 @@ const HeroSection = () => {
           <button
             onClick={scrollToProperties}
             data-testid="button-explore-properties"
+            className="public-button-primary"
             style={{
               padding: "16px 32px",
               fontFamily: "'Inter', sans-serif",
@@ -355,6 +356,7 @@ const HeroSection = () => {
           <button
             onClick={() => navigate("/home-valuation")}
             data-testid="button-free-home-valuation"
+            className="public-button-secondary"
             style={{
               padding: "16px 32px",
               fontFamily: "'Inter', sans-serif",

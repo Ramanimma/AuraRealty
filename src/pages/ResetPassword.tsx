@@ -87,7 +87,7 @@ const ResetPassword = () => {
               <label className="text-sm font-medium text-foreground">Confirm Password</label>
               <Input type="password" placeholder="••••••••" value={confirm} onChange={(e) => setConfirm(e.target.value)} required />
             </div>
-            <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90" disabled={loading}>
+            <Button type="submit" variant="publicPrimary" className="w-full" disabled={loading}>
               <KeyRound className="h-4 w-4 mr-2" />
               {loading ? "Updating…" : "Update Password"}
             </Button>

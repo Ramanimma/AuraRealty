@@ -129,7 +129,8 @@ function AgentCard({ agent }: { agent: Agent }) {
 
           <Button
             asChild
-            className="bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold mt-auto"
+            variant="publicPrimary"
+            className="font-sans font-semibold mt-auto"
             data-testid={`button-schedule-${agent.id}`}
           >
             <a href="/#contact">Schedule a Consultation</a>
@@ -271,7 +272,8 @@ export default function About() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild
-              className="bg-accent text-accent-foreground hover:bg-accent/90 font-sans font-semibold px-8 py-3 text-base"
+              variant="publicPrimary"
+              className="font-sans font-semibold px-8 py-3 text-base"
             >
               <a href="/#properties" data-testid="button-view-properties">
                 View Properties
@@ -279,8 +281,8 @@ export default function About() {
             </Button>
             <Button
               asChild
-              variant="outline"
-              className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 font-sans font-semibold px-8 py-3 text-base"
+              variant="publicSecondary"
+              className="font-sans font-semibold px-8 py-3 text-base"
             >
               <a href="/#contact" data-testid="button-contact-us">
                 Contact Us

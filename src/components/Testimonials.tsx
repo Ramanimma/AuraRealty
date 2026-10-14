@@ -120,12 +120,12 @@ const Testimonials = () => {
                 </div>
                 <div className="flex gap-1 mb-5 relative z-10">
                   {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                    <Star key={i} className="h-4 w-4 fill-[#C07A4A] text-[#C07A4A]" />
                   ))}
                 </div>
                 <p
                   className="flex-1 mb-6 relative z-10"
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontStyle: "italic", fontWeight: 400, lineHeight: 1.6, color: "rgba(255,255,255,0.80)" }}
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontStyle: "italic", fontWeight: 400, lineHeight: 1.6, color: "rgba(255,255,255,0.75)" }}
                 >
                   "{t.comment}"
                 </p>
@@ -143,7 +143,7 @@ const Testimonials = () => {
         <button
           onClick={() => setReviewOpen(true)}
           data-testid="button-leave-review"
-          className="border border-[#C07A4A] text-[#C07A4A] px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#C07A4A] hover:text-black transition-all"
+          className="public-button-secondary px-8 py-3 text-xs tracking-widest uppercase"
         >
           Leave a Review
         </button>

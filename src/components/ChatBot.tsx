@@ -260,7 +260,7 @@ export default function ChatBot() {
         </div>
 
         {/* Message thread */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#F7F8FA]">
           {messages.map((msg) => (
             <MessageBubble key={msg.id} message={msg} />
           ))}
@@ -270,7 +270,7 @@ export default function ChatBot() {
               <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: "#1E2A44" }}>
                 <Home className="w-3.5 h-3.5 text-white" />
               </div>
-              <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
+              <div className="bg-white border border-[#E9EDF3] rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
                 <div className="flex gap-1 items-center h-4">
                   <span className="w-2 h-2 rounded-full animate-bounce [animation-delay:0ms]" style={{ backgroundColor: "#1E2A44" }} />
                   <span className="w-2 h-2 rounded-full animate-bounce [animation-delay:150ms]" style={{ backgroundColor: "#1E2A44" }} />
@@ -283,7 +283,7 @@ export default function ChatBot() {
         </div>
 
         {/* Input bar */}
-        <div className="bg-white border-t border-gray-200 flex gap-2 shrink-0" style={{ padding: "12px 12px 16px" }}>
+        <div className="bg-white border-t border-[#E9EDF3] flex gap-2 shrink-0" style={{ padding: "12px 12px 16px" }}>
           <input
             ref={inputRef}
             data-testid="chatbot-input"
@@ -292,7 +292,7 @@ export default function ChatBot() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask about properties..."
-            className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-1 transition-colors"
+            className="flex-1 rounded-full border border-[#E9EDF3] px-4 py-2 text-sm focus:outline-none focus:ring-1 transition-colors"
             style={{ "--tw-ring-color": "#1E2A44" } as React.CSSProperties}
           />
           <button
@@ -327,7 +327,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
           className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-line ${
             isUser
               ? "text-white rounded-br-sm"
-              : "bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm"
+              : "bg-white border border-[#E9EDF3] text-[#4B5563] rounded-bl-sm shadow-sm"
           }`}
           style={isUser ? { backgroundColor: "#C07A4A" } : undefined}
         >
@@ -335,22 +335,22 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         </div>
 
         {!isUser && message.intent === "contact" && (
-          <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1E2A44" }}>
+          <a href="/#contact" className="public-button-secondary inline-block text-xs px-3 py-1.5">
             Contact an Agent
           </a>
         )}
         {!isUser && message.intent === "valuation" && (
-          <a href="/home-valuation" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1E2A44" }}>
+          <a href="/home-valuation" className="public-button-secondary inline-block text-xs px-3 py-1.5">
             Get Free Valuation →
           </a>
         )}
         {!isUser && message.intent === "mortgage" && (
-          <a href="/mortgage-calculator" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1E2A44" }}>
+          <a href="/mortgage-calculator" className="public-button-secondary inline-block text-xs px-3 py-1.5">
             Open Calculator →
           </a>
         )}
         {!isUser && message.intent === "property_search_empty" && (
-          <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#1E2A44" }}>
+          <a href="/#contact" className="public-button-secondary inline-block text-xs px-3 py-1.5">
             Contact an Agent
           </a>
         )}
@@ -361,12 +361,12 @@ function MessageBubble({ message }: { message: ChatMessage }) {
               <PropertyCard key={l.id} listing={l} />
             ))}
             {message.listings.length > 3 && (
-              <p className="text-xs text-gray-500 pl-1">
+              <p className="text-xs text-[#4B5563] pl-1">
                 +{message.listings.length - 3} more.{" "}
                 <a href="/" className="underline" style={{ color: "#1E2A44" }}>View all listings</a>
               </p>
             )}
-            <a href="/#contact" className="inline-block text-xs text-white px-3 py-1.5 rounded-full transition-opacity hover:opacity-90" style={{ backgroundColor: "#C07A4A" }}>
+            <a href="/#contact" className="public-button-primary inline-block text-xs px-3 py-1.5">
               Want to schedule a tour? Click here
             </a>
           </div>
@@ -378,7 +378,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
 
 function PropertyCard({ listing }: { listing: Listing }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white border border-[#E9EDF3] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       {listing.main_image && (
         <img
           src={listing.main_image}
@@ -390,7 +390,7 @@ function PropertyCard({ listing }: { listing: Listing }) {
       <div className="p-3">
         <p className="font-semibold text-sm leading-tight truncate" style={{ color: "#1E2A44" }}>{listing.address}</p>
         <p className="font-bold text-sm mt-0.5" style={{ color: "#C07A4A" }}>{listing.price}</p>
-        <div className="flex gap-3 text-xs text-gray-500 mt-1">
+        <div className="flex gap-3 text-xs text-[#4B5563] mt-1">
           <span>{listing.beds} bd</span>
           <span>{listing.baths} ba</span>
           {listing.sqft > 0 && <span>{listing.sqft.toLocaleString()} sqft</span>}
@@ -398,8 +398,7 @@ function PropertyCard({ listing }: { listing: Listing }) {
         <a
           href={`/property/${listing.id}`}
           data-testid={`chatbot-view-property-${listing.id}`}
-          className="mt-2 block text-center text-xs text-white px-3 py-1.5 rounded-lg transition-colors hover:opacity-90"
-          style={{ backgroundColor: "#1E2A44" }}
+          className="public-button-secondary mt-2 block text-center text-xs px-3 py-1.5"
         >
           View Details
         </a>
