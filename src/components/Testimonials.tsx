@@ -66,7 +66,7 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="py-32"
+      className="py-16 md:py-24"
       ref={sectionRef}
       style={{ backgroundColor: "#1E2A44", opacity: 0 }}
     >
@@ -88,7 +88,7 @@ const Testimonials = () => {
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
             Client Stories
           </p>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em" }}>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 400, color: "#fff", letterSpacing: "-0.01em" }}>
             What Our Clients Say
           </h2>
         </div>
@@ -106,14 +106,14 @@ const Testimonials = () => {
               key={`${t.client_name}-${idx}`}
               data-card=""
               style={{
-                width: "360px",
+                width: "min(360px, 82vw)",
                 flexShrink: 0,
                 transition: "transform 0.3s ease, opacity 0.3s ease",
               }}
             >
               <div
                 className="h-full flex flex-col p-10"
-                style={{ backgroundColor: "#1E2A44", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 8, position: "relative" }}
+                style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 12, position: "relative" }}
               >
                 <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "80px", lineHeight: 1, color: GOLD, opacity: 0.2, position: "absolute", top: "20px", left: "28px", userSelect: "none" }}>
                   "

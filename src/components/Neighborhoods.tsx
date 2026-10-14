@@ -34,7 +34,7 @@ const FALLBACK_CARDS = [
 const CtaCard = () => (
   <div
     className="aspect-square flex flex-col items-center justify-center text-center px-8"
-    style={{ backgroundColor: "#1E2A44" }}
+    style={{ backgroundColor: "#E9EDF3", borderRadius: 12 }}
   >
     <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontStyle: "italic", fontWeight: 400, color: GOLD, lineHeight: 1.3, marginBottom: "12px" }}>
       More Areas
@@ -62,24 +62,24 @@ const Neighborhoods = () => {
   return (
     <section
       id="neighborhoods"
-      className="py-32"
+      className="py-16 md:py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#1E2A44", opacity: 0 }}
+      style={{ backgroundColor: "#FFFFFF", opacity: 0 }}
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
             Explore Austin
           </p>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em" }}>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em" }}>
             Neighborhood Spotlight
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {isLoading
             ? [1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="aspect-square animate-pulse" style={{ backgroundColor: "#1E2A44" }} />
+                <div key={i} className="aspect-square animate-pulse" style={{ backgroundColor: "#E9EDF3", borderRadius: 12 }} />
               ))
             : items.map((n, idx) => {
                 const isNeighborhood = "id" in n;
@@ -97,7 +97,7 @@ const Neighborhoods = () => {
                     key={isNeighborhood ? (n as Neighborhood).id : idx}
                     data-testid={`card-neighborhood-${slug ?? idx}`}
                     className="group relative aspect-square overflow-hidden"
-                    style={{ cursor: clickable ? "pointer" : "default" }}
+                    style={{ cursor: clickable ? "pointer" : "default", borderRadius: 12 }}
                   >
                     <img
                       src={image}

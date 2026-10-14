@@ -30,15 +30,14 @@ const MailingList = () => {
   };
 
   const inputStyle: React.CSSProperties = {
-    background: "transparent",
-    border: "none",
-    borderBottom: "1px solid rgba(255,255,255,0.3)",
-    color: "#fff",
+    background: "#FFFFFF",
+    border: "1px solid #E9EDF3",
+    color: "#1E2A44",
     fontFamily: "'Inter', sans-serif",
     fontSize: "14px",
     fontWeight: 300,
     letterSpacing: "0.03em",
-    padding: "10px 0",
+    padding: "12px 14px",
     outline: "none",
     width: "100%",
     borderRadius: 8,
@@ -47,8 +46,8 @@ const MailingList = () => {
   return (
     <section
       style={{
-        backgroundColor: "#1E2A44",
-        padding: "100px 24px",
+        backgroundColor: "#F7F8FA",
+        padding: "96px 24px",
         minHeight: "300px",
       }}
     >
@@ -60,8 +59,8 @@ const MailingList = () => {
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "clamp(28px, 4vw, 42px)",
                 fontStyle: "italic",
-                fontWeight: 300,
-                color: "#fff",
+                fontWeight: 500,
+                color: "#1E2A44",
                 lineHeight: 1.3,
               }}
             >
@@ -75,8 +74,8 @@ const MailingList = () => {
                 style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: "clamp(36px, 5vw, 60px)",
-                  fontWeight: 300,
-                  color: "#fff",
+                  fontWeight: 500,
+                  color: "#1E2A44",
                   lineHeight: 1.1,
                   letterSpacing: "-0.02em",
                   marginBottom: "16px",
@@ -90,7 +89,7 @@ const MailingList = () => {
                   fontSize: "14px",
                   fontWeight: 300,
                   letterSpacing: "0.05em",
-                  color: "rgba(255,255,255,0.75)",
+                  color: "#4B5563",
                   maxWidth: "480px",
                   margin: "0 auto",
                   lineHeight: 1.7,
@@ -113,8 +112,7 @@ const MailingList = () => {
                     onChange={(e) => setFullName(e.target.value)}
                     style={{
                       ...inputStyle,
-                      "::placeholder": { color: "rgba(255,255,255,0.75)" },
-                    } as React.CSSProperties}
+                    }}
                     data-testid="input-mailing-name"
                   />
                 </div>
@@ -142,9 +140,9 @@ const MailingList = () => {
                       fontWeight: 500,
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
-                      backgroundColor: "transparent",
+                      backgroundColor: GOLD,
                       color: "#fff",
-                      border: "1px solid rgba(255,255,255,0.6)",
+                      border: "1px solid #C07A4A",
                       cursor: isSubmitting ? "not-allowed" : "pointer",
                       transition: "all 0.3s ease",
                       borderRadius: 8,
@@ -154,12 +152,11 @@ const MailingList = () => {
                     }}
                     onMouseEnter={(e) => {
                       if (!isSubmitting) {
-                        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#fff";
-                        (e.currentTarget as HTMLButtonElement).style.color = "#1E2A44";
+                        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#A8653A";
                       }
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent";
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD;
                       (e.currentTarget as HTMLButtonElement).style.color = "#fff";
                     }}
                   >
@@ -190,7 +187,7 @@ const MailingList = () => {
                     fontSize: "11px",
                     fontWeight: 300,
                     lineHeight: 1.6,
-                    color: "rgba(255,255,255,0.75)",
+                    color: "#4B5563",
                     cursor: "pointer",
                     letterSpacing: "0.02em",
                   }}

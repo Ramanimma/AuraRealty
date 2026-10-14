@@ -16,9 +16,9 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className="py-32"
+      className="py-16 md:py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#1E2A44", opacity: 0 }}
+      style={{ backgroundColor: "#F7F8FA", opacity: 0 }}
     >
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -29,10 +29,10 @@ const AboutSection = () => {
                 src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop"
                 alt="Luxury Austin home exterior"
                 className="w-full object-cover aspect-[4/5]"
-                style={{ borderRadius: 8, display: "block" }}
+                style={{ borderRadius: 12, display: "block" }}
                 loading="lazy"
               />
-              <div style={{ position: "absolute", inset: 0, background: "rgba(30,42,68,0.15)" }} />
+              <div style={{ position: "absolute", inset: 0, background: "rgba(30,42,68,0.08)", borderRadius: 12 }} />
             </div>
           </div>
 
@@ -41,10 +41,10 @@ const AboutSection = () => {
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
               Why Choose Us
             </p>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "24px" }}>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "24px" }}>
               Your Trusted DFW<br />Real Estate Partner
             </h2>
-            <p className="mb-12 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, lineHeight: 1.75, color: "rgba(255,255,255,0.75)" }}>
+            <p className="mb-12 leading-relaxed" style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 400, lineHeight: 1.75, color: "#4B5563" }}>
               At Aura Realty, we combine deep local knowledge with a commitment to exceptional service. Whether you're buying your first home or building an investment portfolio, our team delivers personalized guidance every step of the way.
             </p>
 
@@ -58,10 +58,10 @@ const AboutSection = () => {
                     <f.icon className="h-5 w-5" style={{ color: GOLD }} />
                   </div>
                   <div>
-                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "18px", fontWeight: 500, color: "#fff", marginBottom: "4px" }}>
+                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "19px", fontWeight: 600, color: "#1E2A44", marginBottom: "4px" }}>
                       {f.title}
                     </h3>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 300, lineHeight: 1.6, color: "rgba(255,255,255,0.75)" }}>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 400, lineHeight: 1.6, color: "#4B5563" }}>
                       {f.desc}
                     </p>
                   </div>

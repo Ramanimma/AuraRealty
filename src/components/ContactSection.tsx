@@ -17,9 +17,9 @@ const GOLD = "#C07A4A";
 const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: "10px 14px",
-  background: "rgba(255,255,255,0.06)",
-  border: "0.5px solid rgba(255,255,255,0.15)",
-  color: "#fff",
+  background: "#FFFFFF",
+  border: "1px solid #E9EDF3",
+  color: "#1E2A44",
   fontFamily: "'Inter', sans-serif",
   fontSize: "14px",
   fontWeight: 300,
@@ -35,7 +35,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 500,
   letterSpacing: "0.14em",
   textTransform: "uppercase",
-  color: "rgba(255,255,255,0.75)",
+  color: "#4B5563",
   marginBottom: "8px",
 };
 
@@ -99,19 +99,20 @@ const ContactSection = () => {
 
   const fieldStyle = (name: string): React.CSSProperties => ({
     ...inputStyle,
-    borderColor: focused === name ? GOLD : errors[name] ? "#f87171" : "rgba(255,255,255,0.15)",
+    borderColor: focused === name ? "#1E2A44" : errors[name] ? "#f87171" : "#E9EDF3",
+    boxShadow: focused === name ? "0 0 0 3px rgba(30,42,68,0.10)" : "none",
   });
 
   return (
     <section
       id="contact"
-      className="py-24"
+      className="py-16 md:py-24"
       ref={sectionRef}
-      style={{ backgroundColor: "#1E2A44", opacity: 0 }}
+      style={{ backgroundColor: "#FFFFFF", opacity: 0 }}
     >
       <style>{`
-        .dark-input::placeholder { color: rgba(255,255,255,0.75); }
-        .dark-input:focus { border-color: ${GOLD} !important; }
+        .dark-input::placeholder { color: #9AA3B2; }
+        .dark-input:focus { border-color: #1E2A44 !important; box-shadow: 0 0 0 3px rgba(30,42,68,0.10); }
       `}</style>
 
       <div className="container mx-auto px-6">
@@ -119,10 +120,10 @@ const ContactSection = () => {
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
             Get In Touch
           </p>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em", marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em", marginBottom: "16px" }}>
             Schedule a Tour
           </h2>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 400, color: "#4B5563", lineHeight: 1.7 }}>
             Interested in a property? Fill out the form below and one of our agents will reach out to arrange a private showing at your convenience.
           </p>
         </div>
@@ -130,13 +131,13 @@ const ContactSection = () => {
         {isSubmitted ? (
           <div
             className="max-w-2xl mx-auto p-8 md:p-12 text-center space-y-4"
-            style={{ backgroundColor: "#1E2A44", border: "0.5px solid rgba(255,255,255,0.10)" }}
+            style={{ backgroundColor: "#FFFFFF", border: "1px solid #E9EDF3", borderRadius: 12 }}
           >
             <CheckCircle2 className="h-12 w-12 mx-auto" style={{ color: GOLD }} />
-            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontWeight: 400, color: "#fff" }}>
+            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontWeight: 500, color: "#1E2A44" }}>
               Thank You!
             </h3>
-            <p style={{ fontFamily: "'Inter', sans-serif", color: "rgba(255,255,255,0.75)", fontSize: "15px" }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", color: "#4B5563", fontSize: "15px" }}>
               Thank you for your request. Our team will contact you shortly.
             </p>
             <button
@@ -159,8 +160,8 @@ const ContactSection = () => {
 
             <form
               onSubmit={handleSubmit}
-              className="max-w-2xl mx-auto p-8 md:p-12 space-y-6"
-              style={{ backgroundColor: "#1E2A44", border: "0.5px solid rgba(255,255,255,0.10)" }}
+              className="max-w-2xl mx-auto p-6 md:p-10 space-y-6"
+              style={{ backgroundColor: "#FFFFFF", border: "1px solid #E9EDF3", borderRadius: 12, boxShadow: "0 12px 32px rgba(30,42,68,0.05)" }}
             >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
@@ -232,8 +233,8 @@ const ContactSection = () => {
                     className={cn("w-full flex items-center gap-2 dark-input", !date && "text-white/30")}
                     style={{ ...inputStyle, borderColor: errors.date ? "#f87171" : "rgba(255,255,255,0.15)", textAlign: "left", cursor: "pointer" }}
                   >
-                    <CalendarIcon className="h-4 w-4 flex-shrink-0" style={{ color: "rgba(255,255,255,0.40)" }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 300, color: date ? "#fff" : "rgba(255,255,255,0.75)" }}>
+                    <CalendarIcon className="h-4 w-4 flex-shrink-0" style={{ color: "#667085" }} />
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 400, color: date ? "#1E2A44" : "#8A94A3" }}>
                       {date ? format(date, "PPP") : "Pick a date"}
                     </span>
                   </button>

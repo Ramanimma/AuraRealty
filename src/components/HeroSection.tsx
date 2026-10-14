@@ -249,7 +249,7 @@ const HeroSection = () => {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(to bottom, rgba(30,42,68,0.35) 0%, rgba(30,42,68,0.55) 50%, rgba(30,42,68,0.75) 100%)",
+            "linear-gradient(180deg, rgba(20,28,46,0.62) 0%, rgba(30,42,68,0.58) 42%, rgba(20,28,46,0.78) 100%)",
           zIndex: 2,
         }}
       />

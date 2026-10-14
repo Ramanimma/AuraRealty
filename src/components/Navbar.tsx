@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
 
@@ -36,12 +36,21 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const isHomepage = location.pathname === "/";
-  const textColor = isHomepage ? "rgba(255,255,255,0.75)" : CHARCOAL;
+  const isOverlay = isHomepage && !scrolled;
+  const textColor = isOverlay ? "#FFFFFF" : CHARCOAL;
+
+  useEffect(() => {
+    const updateScroll = () => setScrolled(window.scrollY > 40);
+    updateScroll();
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    return () => window.removeEventListener("scroll", updateScroll);
+  }, []);
 
   const openMenu = () => {
     setMobileOpen(true);
@@ -82,11 +91,15 @@ const Navbar = () => {
     <>
       <header
         style={{
-          position: "sticky",
+          position: isHomepage ? "fixed" : "sticky",
           top: 0,
+          left: 0,
+          right: 0,
           zIndex: 50,
-          backgroundColor: isHomepage ? "#1E2A44" : "#FFFFFF",
-          borderBottom: isHomepage ? "0.5px solid rgba(255,255,255,0.08)" : "0.5px solid #E9EDF3",
+          backgroundColor: isOverlay ? "transparent" : "#FFFFFF",
+          borderBottom: isOverlay ? "1px solid rgba(255,255,255,0.12)" : "1px solid #E9EDF3",
+          boxShadow: isOverlay ? "none" : "0 4px 18px rgba(30,42,68,0.07)",
+          transition: "background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease",
         }}
       >
         <nav
@@ -105,7 +118,7 @@ const Navbar = () => {
               style={{ height: "48px", width: "48px", objectFit: "contain" }}
             />
             <span
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, letterSpacing: "0.02em", whiteSpace: "nowrap", color: isHomepage ? "#ffffff" : "#1E2A44" }}
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, letterSpacing: "0.02em", whiteSpace: "nowrap", color: isOverlay ? "#ffffff" : "#1E2A44", transition: "color 200ms ease" }}
             >
               Aura Realty
             </span>
@@ -128,9 +141,9 @@ const Navbar = () => {
                         navigate(link.href);
                       }
                     }}
-                    style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: active ? GOLD : textColor, transition: "color 0.3s ease", textDecoration: "none" }}
+                    style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: active && !isOverlay ? GOLD : textColor, transition: "color 200ms ease", textDecoration: "none", position: "relative", paddingBottom: "5px", borderBottom: active && isOverlay ? `1px solid ${GOLD}` : "1px solid transparent" }}
                     onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = active ? GOLD : textColor; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = active && !isOverlay ? GOLD : textColor; }}
                   >
                     {link.label}
                   </a>
@@ -159,7 +172,7 @@ const Navbar = () => {
             onClick={mobileOpen ? closeMenu : openMenu}
             aria-label="Toggle navigation menu"
             data-testid="button-hamburger"
-            style={{ color: isHomepage ? "#fff" : CHARCOAL, background: "none", border: "none", cursor: "pointer", padding: "4px" }}
+            style={{ color: isOverlay ? "#fff" : CHARCOAL, background: "none", border: "none", cursor: "pointer", padding: "4px" }}
           >
             <Menu className="h-6 w-6" />
           </button>

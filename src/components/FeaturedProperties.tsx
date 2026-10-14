@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { BedDouble, Bath, Ruler } from "lucide-react";
 import { api } from "@/lib/api";
 
 const GOLD = "#C07A4A";
@@ -67,7 +68,7 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
       onClick={() => navigate(`/property/${p.id}`)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#1E2A44", cursor: "pointer" }}
+      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#FFFFFF", border: "1px solid #E9EDF3", borderRadius: 12, cursor: "pointer", transition: "transform 200ms ease, box-shadow 200ms ease", transform: hovered ? "translateY(-3px)" : "translateY(0)", boxShadow: hovered ? "0 16px 36px rgba(30,42,68,0.12)" : "0 4px 14px rgba(30,42,68,0.04)" }}
     >
       {/* Image — 4:3 aspect ratio via padding trick */}
       <div style={{ position: "relative", paddingTop: "75%", overflow: "hidden", flexShrink: 0 }}>
@@ -79,48 +80,38 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
         />
 
         {/* Gradient overlay */}
-        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, rgba(30,42,68,${hovered ? "0.97" : "0.92"}) 0%, rgba(30,42,68,0.3) 55%, transparent 100%)`, transition: "background 0.4s ease" }} />
-
-        {/* Price badge top-left — hidden for sold or null price */}
-        {statusKey !== "sold" && price !== null && (
-          <div style={{ position: "absolute", top: "16px", left: "16px", backgroundColor: "#1E2A44", color: "#FFFFFF", padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
-            {price}
-          </div>
-        )}
-
         {/* Status badge top-right */}
         {statusStyle && (
           <div style={{ position: "absolute", top: "16px", right: "16px", backgroundColor: statusStyle.bg, color: statusStyle.text, padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
             {statusStyle.label}
           </div>
         )}
-
-        {/* Content bottom */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 20px 16px" }}>
+      </div>
+      <div style={{ padding: "20px 20px 18px" }}>
           {statusKey !== "sold" && price !== null && (
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "22px", fontWeight: 300, color: GOLD, marginBottom: "4px", lineHeight: 1.2 }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "25px", fontWeight: 500, color: "#1E2A44", marginBottom: "5px", lineHeight: 1.2 }}>
               {price}
             </p>
           )}
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 400, color: "rgba(255,255,255,0.75)", marginBottom: "10px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 500, color: "#1E2A44", marginBottom: "14px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             {p.address}
           </p>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.75)" }}>
-              {p.beds} Beds&nbsp;·&nbsp;{p.baths} Baths&nbsp;·&nbsp;{Number(p.sqft).toLocaleString()} sqft
-            </p>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", flex: "1 1 190px", minWidth: 0 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "#4B5563", whiteSpace: "nowrap" }}><BedDouble size={14} />{p.beds} Beds</span>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "#4B5563", whiteSpace: "nowrap" }}><Bath size={14} />{p.baths} Baths</span>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "#4B5563", whiteSpace: "nowrap" }}><Ruler size={14} />{Number(p.sqft).toLocaleString()} sqft</span>
+            </div>
             <button
               data-testid={`button-view-details-${p.id}`}
               onClick={e => { e.stopPropagation(); navigate(`/property/${p.id}`); }}
-              className="public-button-secondary public-button-secondary-dark"
-              style={{ padding: "6px 14px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: "transparent", color: "#fff", border: "0.5px solid rgba(255,255,255,0.3)", cursor: "pointer", transition: "border-color 0.2s, color 0.2s", borderRadius: 8, whiteSpace: "nowrap", flexShrink: 0 }}
+              style={{ padding: "7px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", backgroundColor: "transparent", color: "#1E2A44", border: "1px solid #E9EDF3", cursor: "pointer", transition: "border-color 0.2s, color 0.2s", borderRadius: 8, whiteSpace: "nowrap", flexShrink: 0 }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.3)"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#E9EDF3"; (e.currentTarget as HTMLButtonElement).style.color = "#1E2A44"; }}
             >
               View Details
             </button>
           </div>
-        </div>
       </div>
     </div>
   );
@@ -136,7 +127,7 @@ const FeaturedProperties = () => {
   });
 
   return (
-    <section id="properties" style={{ backgroundColor: "#1E2A44", padding: "80px 0 80px" }}>
+    <section id="properties" className="py-16 md:py-24" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="container mx-auto px-6">
 
         {/* Header */}
@@ -144,7 +135,7 @@ const FeaturedProperties = () => {
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: "16px" }}>
             Featured Listings
           </p>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 300, color: "#fff", letterSpacing: "-0.01em" }}>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px,4vw,48px)", fontWeight: 500, color: "#1E2A44", letterSpacing: "-0.01em" }}>
             Explore Austin's Finest Properties
           </h2>
         </div>
@@ -153,7 +144,7 @@ const FeaturedProperties = () => {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map(i => (
-              <div key={i} className="animate-pulse" style={{ paddingTop: "75%", backgroundColor: "#1E2A44", position: "relative" }} />
+              <div key={i} className="animate-pulse" style={{ paddingTop: "75%", backgroundColor: "#E9EDF3", position: "relative", borderRadius: 12 }} />
             ))}
           </div>
         ) : properties.length === 0 ? null : (
@@ -169,10 +160,10 @@ const FeaturedProperties = () => {
           <button
             data-testid="button-view-all-properties"
             onClick={() => navigate("/properties")}
-            className="public-button-secondary public-button-secondary-dark"
+            className="public-button-secondary"
             onMouseEnter={() => setViewAllHovered(true)}
             onMouseLeave={() => setViewAllHovered(false)}
-            style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: viewAllHovered ? GOLD : "rgba(255,255,255,0.75)", border: `0.5px solid ${viewAllHovered ? GOLD : "rgba(255,255,255,0.25)"}`, cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
+            style={{ padding: "14px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: viewAllHovered ? "#A8653A" : GOLD, color: "#FFFFFF", border: "none", cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
           >
             View All Properties
           </button>

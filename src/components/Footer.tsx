@@ -51,7 +51,7 @@ const Footer = () => {
     fontWeight: 400,
     letterSpacing: "0.06em",
     textTransform: "uppercase" as const,
-    color: "rgba(255,255,255,0.75)",
+    color: "rgba(255,255,255,0.7)",
     textDecoration: "none",
     transition: "color 0.3s ease",
     display: "inline-block",
@@ -71,7 +71,7 @@ const Footer = () => {
       {/* Gold top divider */}
       <div style={{ height: "1px", backgroundColor: GOLD, opacity: 0.5 }} />
 
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-6 py-16 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14">
           {/* Brand */}
           <div>
@@ -93,7 +93,7 @@ const Footer = () => {
                 fontSize: "13px",
                 fontWeight: 300,
                 lineHeight: 1.7,
-                color: "rgba(255,255,255,0.75)",
+                color: "rgba(255,255,255,0.7)",
               }}
             >
               Premium real estate services in Austin and Central Texas. Helping families find their perfect home.
@@ -173,7 +173,7 @@ const Footer = () => {
                 <Phone className="h-3.5 w-3.5 flex-shrink-0" style={{ color: GOLD }} />
                 <a
                   href="tel:5129001897"
-                  style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.95rem' }}
+                    style={{ fontWeight: 600, color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem', textDecoration: "none" }}
                 >
                   512-900-1897
                 </a>
@@ -242,7 +242,7 @@ const Footer = () => {
                   className="w-10 h-10 flex items-center justify-center"
                   style={{
                     border: "1px solid rgba(255,255,255,0.15)",
-                    color: "rgba(255,255,255,0.55)",
+                    color: "rgba(255,255,255,0.7)",
                     borderRadius: 8,
                     transition: "all 0.3s ease",
                   }}
@@ -252,7 +252,7 @@ const Footer = () => {
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.15)";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)";
                   }}
                 >
                   <Icon className="h-4 w-4" />
@@ -268,26 +268,26 @@ const Footer = () => {
         {/* Compliance */}
         <div className="flex flex-col items-center gap-2 mb-6">
           <a href={consumerNoticeUrl} target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.7)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}>
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}>
             Texas Real Estate Commission Consumer Protection Notice
           </a>
           <a href={iabsUrl} target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.7)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}>
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}>
             Texas Real Estate Commission Information About Brokerage Services
           </a>
           <a href="/docs/TREC_Disclaimer.pdf" target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.7)", textDecoration: "underline", textUnderlineOffset: "3px", transition: "color 0.3s ease" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = GOLD; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}>
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)"; }}>
             TREC Disclaimer
           </a>
         </div>
 
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textAlign: "center", marginBottom: "24px" }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.7)", textAlign: "center", marginBottom: "24px" }}>
           All information is deemed reliable but not guaranteed and should be independently reviewed and verified.
         </p>
 
@@ -296,7 +296,7 @@ const Footer = () => {
           <img src={equalHousingLogo} alt="Equal Housing Opportunity" className="h-12 w-auto object-contain brightness-0 invert opacity-50" />
         </div>
 
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.75)", textAlign: "center" }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.7)", textAlign: "center" }}>
           © {new Date().getFullYear()} Aura Realty. All rights reserved.
         </p>
       </div>
