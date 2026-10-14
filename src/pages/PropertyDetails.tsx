@@ -116,7 +116,7 @@ const PropertyDetails = () => {
       <main className="flex-1">
 
         {/* ── Gallery ── */}
-        <div style={{ backgroundColor: "#111" }}>
+        <div style={{ backgroundColor: "#1E2A44" }}>
           {/* Main image */}
           <div
             style={{ position: "relative", width: "100%", height: "clamp(300px, 45vw, 500px)", overflow: "hidden", cursor: imgs.length > 0 ? "zoom-in" : "default" }}
@@ -166,7 +166,7 @@ const PropertyDetails = () => {
 
           {/* Thumbnail strip */}
           {imgs.length > 1 && (
-            <div style={{ display: "flex", gap: "6px", padding: "10px 16px", overflowX: "auto", backgroundColor: "#0d0d0d" }}>
+            <div style={{ display: "flex", gap: "6px", padding: "10px 16px", overflowX: "auto", backgroundColor: "#1E2A44" }}>
               {imgs.map((src, i) => (
                 <button
                   key={i}

@@ -11,6 +11,7 @@
 
     --card: 0 0% 100%;
     --card-foreground: 221 39% 19%;
+    --surface: 216 29.4% 93.3%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 221 39% 19%;
@@ -93,11 +94,13 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+    color: #4B5563;
     letter-spacing: 0.01em;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', serif;
+    color: #1E2A44;
   }
 }
 
@@ -107,15 +110,45 @@
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #C9A84C;
+    color: #C07A4A;
   }
 
-  .section-cream { background-color: #F8F5F0; }
+  .section-cream { background-color: #F7F8FA; }
   .section-white { background-color: #FFFFFF; }
-  .section-dark { background-color: #1C1C1C; }
-  .section-darkest { background-color: #141414; }
-  .text-gold { color: #C9A84C; }
-  .border-gold { border-color: #C9A84C; }
+  .section-dark { background-color: #1E2A44; }
+  .section-darkest { background-color: #141C2E; }
+  .text-gold { color: #C07A4A; }
+  .border-gold { border-color: #C07A4A; }
+
+  .public-button-primary,
+  .public-button-secondary {
+    border-radius: 8px !important;
+    transition: all 200ms ease !important;
+  }
+
+  .public-button-primary {
+    background-color: #C07A4A !important;
+    border: 1.5px solid #C07A4A !important;
+    color: #FFFFFF !important;
+  }
+
+  .public-button-primary:hover:not(:disabled) {
+    background-color: #A8653A !important;
+    border-color: #A8653A !important;
+    color: #FFFFFF !important;
+  }
+
+  .public-button-secondary {
+    background-color: transparent !important;
+    border: 1.5px solid #1E2A44 !important;
+    color: #1E2A44 !important;
+  }
+
+  .public-button-secondary:hover:not(:disabled) {
+    background-color: #1E2A44 !important;
+    border-color: #1E2A44 !important;
+    color: #FFFFFF !important;
+  }
 }
 
 @keyframes fadeInUp {

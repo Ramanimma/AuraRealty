@@ -200,7 +200,7 @@ const HeroSection = () => {
         minHeight: "600px",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#1A2438",
+        backgroundColor: "#1E2A44",
       }}
     >
       {/* Video slot A */}
@@ -249,7 +249,7 @@ const HeroSection = () => {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.75) 100%)",
+            "linear-gradient(to bottom, rgba(30,42,68,0.35) 0%, rgba(30,42,68,0.55) 50%, rgba(30,42,68,0.75) 100%)",
           zIndex: 2,
         }}
       />

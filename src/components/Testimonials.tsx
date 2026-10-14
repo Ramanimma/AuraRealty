@@ -68,7 +68,7 @@ const Testimonials = () => {
       id="testimonials"
       className="py-32"
       ref={sectionRef}
-      style={{ backgroundColor: "#0D0D0D", opacity: 0 }}
+      style={{ backgroundColor: "#1E2A44", opacity: 0 }}
     >
       <style>{`
         @keyframes scrollLeft {
@@ -113,7 +113,7 @@ const Testimonials = () => {
             >
               <div
                 className="h-full flex flex-col p-10"
-                style={{ backgroundColor: "#1A2438", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 8, position: "relative" }}
+                style={{ backgroundColor: "#1E2A44", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 8, position: "relative" }}
               >
                 <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "80px", lineHeight: 1, color: GOLD, opacity: 0.2, position: "absolute", top: "20px", left: "28px", userSelect: "none" }}>
                   "

@@ -16,11 +16,11 @@ function formatPrice(price: string | null | undefined, listingType: string | nul
 }
 
 const STATUS_STYLES: Record<string, { label: string; bg: string; text: string }> = {
-  active: { label: "ACTIVE", bg: "#16a34a", text: "#fff" },
-  pending: { label: "PENDING", bg: "#EA580C", text: "#fff" },
-  sold: { label: "SOLD", bg: GOLD, text: "#111" },
-  rented: { label: "RENTED", bg: "#16a34a", text: "#fff" },
-  off_market: { label: "OFF MARKET", bg: "#525252", text: "#fff" },
+  active: { label: "ACTIVE", bg: "#1E2A44", text: "#FFFFFF" },
+  pending: { label: "PENDING", bg: "#F3E6DC", text: "#8A4F2A" },
+  sold: { label: "SOLD", bg: "#141C2E", text: "#FFFFFF" },
+  rented: { label: "RENTED", bg: "#E9EDF3", text: "#1E2A44" },
+  off_market: { label: "OFF MARKET", bg: "#E9EDF3", text: "#4B5563" },
 };
 
 const UNSPLASH_FALLBACKS = [
@@ -83,14 +83,14 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
 
         {/* Price badge top-left — hidden for sold or null price */}
         {statusKey !== "sold" && price !== null && (
-          <div style={{ position: "absolute", top: "16px", left: "16px", backgroundColor: "#16a34a", color: "#fff", padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div style={{ position: "absolute", top: "16px", left: "16px", backgroundColor: "#1E2A44", color: "#FFFFFF", padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
             {price}
           </div>
         )}
 
         {/* Status badge top-right */}
         {statusStyle && (
-          <div style={{ position: "absolute", top: "16px", right: "16px", backgroundColor: statusStyle.bg, color: statusStyle.text, padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div style={{ position: "absolute", top: "16px", right: "16px", backgroundColor: statusStyle.bg, color: statusStyle.text, padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
             {statusStyle.label}
           </div>
         )}

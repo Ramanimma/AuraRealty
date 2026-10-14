@@ -49,18 +49,23 @@ function formatPrice(price: string | null | undefined, listingType: string | nul
 }
 
 function statusBadgeColor(status: string | null | undefined): string {
-  if (!status) return GOLD;
+  if (!status) return "#1E2A44";
   const s = status.toLowerCase();
-  if (s === "active" || s === "rented") return "#16a34a";
-  if (s === "sold") return GOLD;
-  if (s === "pending") return "#EA580C";
-  if (s === "off_market") return "#525252";
-  return GOLD;
+  if (s === "active") return "#1E2A44";
+  if (s === "sold") return "#141C2E";
+  if (s === "pending") return "#F3E6DC";
+  if (s === "rented") return "#E9EDF3";
+  if (s === "off_market") return "#E9EDF3";
+  return "#1E2A44";
 }
 
 function statusBadgeTextColor(status: string | null | undefined): string {
-  if (!status) return "#fff";
-  return status.toLowerCase() === "sold" ? "#111" : "#fff";
+  if (!status) return "#FFFFFF";
+  const s = status.toLowerCase();
+  if (s === "pending") return "#8A4F2A";
+  if (s === "rented") return "#1E2A44";
+  if (s === "off_market") return "#4B5563";
+  return "#FFFFFF";
 }
 
 function statusLabel(status: string | null | undefined): string {
@@ -91,7 +96,7 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
       onClick={() => navigate(`/property/${listing.id}`)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#1A2438", cursor: "pointer" }}
+      style={{ display: "flex", flexDirection: "column", overflow: "hidden", backgroundColor: "#1E2A44", cursor: "pointer" }}
     >
       <div style={{ position: "relative", height: "240px", overflow: "hidden", flexShrink: 0 }}>
         <img
@@ -104,14 +109,14 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
 
         {/* Price badge top-left — hidden for sold or null price */}
         {listing.status !== "sold" && price !== null && (
-          <div style={{ position: "absolute", top: "14px", left: "14px", backgroundColor: "#16a34a", color: "#fff", padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div style={{ position: "absolute", top: "14px", left: "14px", backgroundColor: "#1E2A44", color: "#FFFFFF", padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
             {price}
           </div>
         )}
 
         {/* Status badge top-right */}
         {listing.status && (
-          <div style={{ position: "absolute", top: "14px", right: "14px", backgroundColor: statusBadgeColor(listing.status), color: statusBadgeTextColor(listing.status), padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div style={{ position: "absolute", top: "14px", right: "14px", backgroundColor: statusBadgeColor(listing.status), color: statusBadgeTextColor(listing.status), padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 6 }}>
             {statusLabel(listing.status)}
           </div>
         )}

@@ -34,7 +34,7 @@ const FALLBACK_CARDS = [
 const CtaCard = () => (
   <div
     className="aspect-square flex flex-col items-center justify-center text-center px-8"
-    style={{ backgroundColor: "#0D0D0D" }}
+    style={{ backgroundColor: "#1E2A44" }}
   >
     <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", fontStyle: "italic", fontWeight: 400, color: GOLD, lineHeight: 1.3, marginBottom: "12px" }}>
       More Areas
@@ -64,7 +64,7 @@ const Neighborhoods = () => {
       id="neighborhoods"
       className="py-32"
       ref={sectionRef}
-      style={{ backgroundColor: "#1A2438", opacity: 0 }}
+      style={{ backgroundColor: "#1E2A44", opacity: 0 }}
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
