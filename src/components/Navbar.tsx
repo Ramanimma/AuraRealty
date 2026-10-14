@@ -5,7 +5,6 @@ import AuraLogoMark from "@/components/AuraLogoMark";
 
 const CHARCOAL = "#1E2A44";
 const GOLD = "#C07A4A";
-let brandAnimationClaimed = false;
 
 const navLinks = [
   { label: "Home", href: "/", path: "/" },
@@ -35,22 +34,6 @@ function isLinkActive(path: string, href: string): boolean {
 }
 
 const Navbar = () => {
-  const [animateBrand] = useState(() => {
-    if (brandAnimationClaimed) return false;
-    try {
-      return sessionStorage.getItem("aura-brand-animation-played") !== "true";
-    } catch {
-      return true;
-    }
-  });
-  useEffect(() => {
-    brandAnimationClaimed = true;
-    try {
-      sessionStorage.setItem("aura-brand-animation-played", "true");
-    } catch {
-      // Keep navigation usable when browser storage is blocked.
-    }
-  }, []);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
@@ -126,6 +109,7 @@ const Navbar = () => {
         >
           {/* Logo */}
           <a
+            className="brand-link"
             href="/"
             onClick={e => { e.preventDefault(); navigate("/"); }}
             style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none", flexShrink: 0 }}
@@ -133,14 +117,14 @@ const Navbar = () => {
             <AuraLogoMark
               size={44}
               tone={isOverlay ? "dark" : "light"}
-              animate={animateBrand}
+              animate={true}
               className="aura-brand-mark aura-navbar-mark"
             />
             <span className="aura-brand-name aura-brand-name-slot">
               <span className="aura-brand-name-measure" aria-hidden="true">AURA REALTY</span>
-              <span className={`aura-brand-name-copy${animateBrand ? " aura-brand-name-animated" : ""}`}>
-                <span style={{ color: isOverlay ? "#C07A4A" : "#A8653A" }}>AURA</span>{" "}
-                <span style={{ color: isOverlay ? "#FFFFFF" : "#1E2A44" }}>REALTY</span>
+              <span className="aura-brand-name-copy">
+                <span className="brand-aura" style={{ color: isOverlay ? "#C07A4A" : "#A8653A" }}>AURA</span>{" "}
+                <span className="brand-realty" style={{ color: isOverlay ? "#FFFFFF" : "#1E2A44" }}>REALTY</span>
               </span>
             </span>
           </a>

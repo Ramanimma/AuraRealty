@@ -19,12 +19,11 @@
 .aura-brand-name-copy { position: absolute; inset: 0; }
 .aura-brand-name-measure { visibility: hidden; }
 
-@keyframes aura-brand-arrive {
-  from { opacity: 0; letter-spacing: 0.3em; }
-  to { opacity: 1; letter-spacing: 0.08em; }
-}
-
-.aura-brand-name-animated { animation: aura-brand-arrive 800ms ease-out 1100ms both; }
+@keyframes aura-in   { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform:none; } }
+@keyframes realty-in { from { opacity:0; transform: translateX(40px);  } to { opacity:1; transform:none; } }
+.brand-aura   { display:inline-block; opacity:0; animation: aura-in   .9s cubic-bezier(.2,.8,.2,1) 1.1s forwards; }
+.brand-realty { display:inline-block; opacity:0; animation: realty-in .9s cubic-bezier(.2,.8,.2,1) 1.1s forwards; }
+.brand-link:hover .roofgroup { transform: translateY(-1.5px); }
 .aura-footer-brand .arl:hover .roofgroup { transform: none; }
 
 @media (max-width: 767px) {
@@ -33,7 +32,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aura-brand-name-animated { animation: none; }
+  .brand-aura, .brand-realty { opacity: 1; transform: none; animation: none; }
+  .brand-link:hover .roofgroup { transform: none; }
 }
 
 @layer base {
