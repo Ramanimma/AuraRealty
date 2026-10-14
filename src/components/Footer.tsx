@@ -22,6 +22,7 @@ import { supabase } from "@/integrations/supabase/client";
 import realtorLogo from "@/assets/realtor-logo.png";
 import equalHousingLogo from "@/assets/equal-housing-logo.png";
 import fullCircleLogo from "@/assets/full-circle-logo.jpeg";
+import AuraLogoMark from "@/components/AuraLogoMark";
 
 const BG = "#141C2E";
 const GOLD = "#C07A4A";
@@ -72,20 +73,18 @@ const Footer = () => {
       <div style={{ height: "1px", backgroundColor: GOLD, opacity: 0.5 }} />
 
       <div className="container mx-auto px-6 py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr] gap-8 xl:gap-14">
           {/* Brand */}
           <div>
             <h3
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "26px",
-                fontWeight: 500,
-                color: "#fff",
-                marginBottom: "16px",
-                letterSpacing: "0.01em",
-              }}
+              className="aura-footer-brand"
+              style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}
             >
-              Aura Realty
+              <AuraLogoMark size={44} tone="dark" animate={false} className="aura-brand-mark" />
+              <span className="aura-brand-name">
+                <span style={{ color: "#C07A4A" }}>AURA</span>{" "}
+                <span style={{ color: "#FFFFFF" }}>REALTY</span>
+              </span>
             </h3>
             <p
               style={{

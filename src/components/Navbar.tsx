@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
+import AuraLogoMark from "@/components/AuraLogoMark";
 
 const CHARCOAL = "#1E2A44";
 const GOLD = "#C07A4A";
+let brandAnimationClaimed = false;
 
 const navLinks = [
   { label: "Home", href: "/", path: "/" },
@@ -33,6 +35,22 @@ function isLinkActive(path: string, href: string): boolean {
 }
 
 const Navbar = () => {
+  const [animateBrand] = useState(() => {
+    if (brandAnimationClaimed) return false;
+    try {
+      return sessionStorage.getItem("aura-brand-animation-played") !== "true";
+    } catch {
+      return true;
+    }
+  });
+  useEffect(() => {
+    brandAnimationClaimed = true;
+    try {
+      sessionStorage.setItem("aura-brand-animation-played", "true");
+    } catch {
+      // Keep navigation usable when browser storage is blocked.
+    }
+  }, []);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
@@ -110,22 +128,25 @@ const Navbar = () => {
           <a
             href="/"
             onClick={e => { e.preventDefault(); navigate("/"); }}
-            style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}
+            style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none", flexShrink: 0 }}
           >
-            <img
-              src="https://xxiwznuuaouwsugtgsut.supabase.co/storage/v1/object/public/agent-photos/LogoWithTransBackgrnd%20(1).png"
-              alt="Aura Realty"
-              style={{ height: "48px", width: "48px", objectFit: "contain" }}
+            <AuraLogoMark
+              size={44}
+              tone={isOverlay ? "dark" : "light"}
+              animate={animateBrand}
+              className="aura-brand-mark aura-navbar-mark"
             />
-            <span
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "20px", fontWeight: 400, letterSpacing: "0.02em", whiteSpace: "nowrap", color: isOverlay ? "#ffffff" : "#1E2A44", transition: "color 200ms ease" }}
-            >
-              Aura Realty
+            <span className="aura-brand-name aura-brand-name-slot">
+              <span className="aura-brand-name-measure" aria-hidden="true">AURA REALTY</span>
+              <span className={`aura-brand-name-copy${animateBrand ? " aura-brand-name-animated" : ""}`}>
+                <span style={{ color: isOverlay ? "#C07A4A" : "#A8653A" }}>AURA</span>{" "}
+                <span style={{ color: isOverlay ? "#FFFFFF" : "#1E2A44" }}>REALTY</span>
+              </span>
             </span>
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden lg:flex items-center gap-7">
+          <ul className="hidden lg:flex items-center gap-3 xl:gap-7">
             {navLinks.map(link => {
               const active = isLinkActive(location.pathname, link.path);
               return (

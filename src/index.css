@@ -1,8 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.aura-brand-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.aura-brand-name span { transition: color 200ms ease; }
+.aura-brand-mark .ltrA, .aura-brand-mark .ltrR { transition: fill 200ms ease; }
+.aura-brand-name-slot { position: relative; overflow: hidden; flex-shrink: 0; }
+.aura-brand-name-copy { position: absolute; inset: 0; }
+.aura-brand-name-measure { visibility: hidden; }
+
+@keyframes aura-brand-arrive {
+  from { opacity: 0; letter-spacing: 0.3em; }
+  to { opacity: 1; letter-spacing: 0.08em; }
+}
+
+.aura-brand-name-animated { animation: aura-brand-arrive 800ms ease-out 1100ms both; }
+.aura-footer-brand .arl:hover .roofgroup { transform: none; }
+
+@media (max-width: 767px) {
+  .aura-brand-name { font-size: 22px; }
+  .aura-navbar-mark { width: 36px; height: 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-brand-name-animated { animation: none; }
+}
 
 @layer base {
   :root {
