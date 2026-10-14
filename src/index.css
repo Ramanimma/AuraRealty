@@ -138,14 +138,19 @@
   }
 
   .public-button-secondary {
-    background-color: #FFFFFF !important;
+    background-color: transparent !important;
     border: 1.5px solid #1E2A44 !important;
     color: #1E2A44 !important;
   }
 
+  .public-button-secondary-dark {
+    border-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+  }
+
   .public-button-secondary:hover:not(:disabled) {
-    background-color: #1E2A44 !important;
-    border-color: #1E2A44 !important;
+    background-color: #C07A4A !important;
+    border-color: #C07A4A !important;
     color: #FFFFFF !important;
   }
 }

@@ -112,7 +112,7 @@ const PropertyCard = ({ p, idx }: PropertyCardProps) => {
             <button
               data-testid={`button-view-details-${p.id}`}
               onClick={e => { e.stopPropagation(); navigate(`/property/${p.id}`); }}
-              className="public-button-secondary"
+              className="public-button-secondary public-button-secondary-dark"
               style={{ padding: "6px 14px", fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", backgroundColor: "transparent", color: "#fff", border: "0.5px solid rgba(255,255,255,0.3)", cursor: "pointer", transition: "border-color 0.2s, color 0.2s", borderRadius: 8, whiteSpace: "nowrap", flexShrink: 0 }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.3)"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
@@ -169,7 +169,7 @@ const FeaturedProperties = () => {
           <button
             data-testid="button-view-all-properties"
             onClick={() => navigate("/properties")}
-            className="public-button-secondary"
+            className="public-button-secondary public-button-secondary-dark"
             onMouseEnter={() => setViewAllHovered(true)}
             onMouseLeave={() => setViewAllHovered(false)}
             style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: viewAllHovered ? GOLD : "rgba(255,255,255,0.75)", border: `0.5px solid ${viewAllHovered ? GOLD : "rgba(255,255,255,0.25)"}`, cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}

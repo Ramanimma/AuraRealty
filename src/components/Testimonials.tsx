@@ -143,7 +143,7 @@ const Testimonials = () => {
         <button
           onClick={() => setReviewOpen(true)}
           data-testid="button-leave-review"
-          className="public-button-secondary px-8 py-3 text-xs tracking-widest uppercase"
+          className="public-button-secondary public-button-secondary-dark px-8 py-3 text-xs tracking-widest uppercase"
         >
           Leave a Review
         </button>

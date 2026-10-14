@@ -282,7 +282,7 @@ export default function About() {
             <Button
               asChild
               variant="publicSecondary"
-              className="font-sans font-semibold px-8 py-3 text-base"
+              className="public-button-secondary-dark font-sans font-semibold px-8 py-3 text-base"
             >
               <a href="/#contact" data-testid="button-contact-us">
                 Contact Us

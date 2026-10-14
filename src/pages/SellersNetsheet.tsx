@@ -232,7 +232,7 @@ const SellersNetsheet = () => {
             Request Free Valuation
           </a>
           <a href="/#contact"
-            className="public-button-secondary px-8 py-4 font-sans text-sm uppercase tracking-widest">
+            className="public-button-secondary public-button-secondary-dark px-8 py-4 font-sans text-sm uppercase tracking-widest">
             Contact an Agent
           </a>
         </div>

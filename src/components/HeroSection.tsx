@@ -356,7 +356,7 @@ const HeroSection = () => {
           <button
             onClick={() => navigate("/home-valuation")}
             data-testid="button-free-home-valuation"
-            className="public-button-secondary"
+            className="public-button-secondary public-button-secondary-dark"
             style={{
               padding: "16px 32px",
               fontFamily: "'Inter', sans-serif",

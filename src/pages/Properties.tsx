@@ -143,7 +143,7 @@ const PropertyCard = ({ listing, idx }: CardProps) => {
           to={`/property/${listing.id}`}
           data-testid={`link-view-details-${listing.id}`}
           onClick={e => e.stopPropagation()}
-          className="public-button-secondary"
+          className="public-button-secondary public-button-secondary-dark"
           style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", flexShrink: 0, padding: "6px 12px" }}
         >
           View Details →
@@ -313,7 +313,7 @@ const Properties = () => {
               <button
                 data-testid="button-clear-filters"
                 onClick={clearFilters}
-                className="public-button-secondary"
+                className="public-button-secondary public-button-secondary-dark"
                 style={{ padding: "12px 32px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `0.5px solid ${GOLD}`, cursor: "pointer", borderRadius: 8 }}
               >
                 Clear Filters
@@ -331,7 +331,7 @@ const Properties = () => {
                   <button
                     data-testid="button-load-more"
                     onClick={() => setVisibleCount(c => c + PAGE_SIZE)}
-                    className="public-button-secondary"
+                    className="public-button-secondary public-button-secondary-dark"
                     style={{ padding: "14px 48px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", backgroundColor: "transparent", color: "rgba(255,255,255,0.75)", border: "0.5px solid rgba(255,255,255,0.25)", cursor: "pointer", transition: "all 0.25s ease", borderRadius: 8 }}
                     onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = GOLD; (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.75)"; (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)"; }}

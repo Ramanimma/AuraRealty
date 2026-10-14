@@ -364,7 +364,7 @@ export default function NeighborhoodDetail() {
                 <Button
                   size="lg"
                   variant="publicSecondary"
-                  className="font-sans font-semibold w-full sm:w-auto"
+                  className="public-button-secondary-dark font-sans font-semibold w-full sm:w-auto"
                 >
                   Calculate Mortgage
                 </Button>

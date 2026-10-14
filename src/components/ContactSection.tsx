@@ -141,7 +141,7 @@ const ContactSection = () => {
             </p>
             <button
               onClick={() => setIsSubmitted(false)}
-              className="public-button-secondary"
+              className="public-button-secondary public-button-secondary-dark"
               style={{ marginTop: "16px", padding: "10px 28px", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", backgroundColor: "transparent", color: GOLD, border: `1px solid ${GOLD}`, cursor: "pointer", transition: "all 0.3s ease", borderRadius: 8 }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLButtonElement).style.color = GOLD; }}
